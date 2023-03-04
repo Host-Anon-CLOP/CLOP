@@ -1,0 +1,23 @@
+PASSWORD CHANGE:
+----------------
+create new user with password you want
+log into database
+select password from users where user_id = <new user created with correct password>;
+update users set password = "<response from previous query>" where user_id = <user whose pass is being changed>;
+
+
+DELETE USER & NATION:
+--------------------
+# UPDATE THESE FOR NATION & USER ID
+set @nation_id = <NATION_ID_TO_DELETE>;
+set @user_id = <USER_ID_TO_DELETE>;
+
+delete from resources where nation_id = @nation_id; delete from nations where nation_id = @nation_id; delete from users where user_id = @user_id;
+
+
+RESTORE DATABASE
+----------------
+# get the container id from 'docker ps'
+docker cp ./backups/<WHICH FILE>.sql <MARIADB_CONTAINER_ID>:/
+docker exec -it clop-mariadb-1 bash
+mysql -uroot -p<MYSQL PASS> < ./<WHICH FILE>.sql

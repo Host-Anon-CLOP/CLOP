@@ -1,0 +1,72 @@
+version: "3"
+networks:
+  default:
+  internal:
+    # no internet access
+    internal: true
+
+services:
+  mariadb:
+    image: mariadb:10.0.20
+    networks:
+      - internal
+    environment:
+      - MYSQL_DATABASE=clopus_clop
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASS}
+    volumes:
+      - ./docker/mariadb:/var/lib/mysql
+      - ./dbs.sql:/docker-entrypoint-initdb.d/01-dbs.sql
+      - "./clop/tables with data.sql:/docker-entrypoint-initdb.d/02-clop.sql"
+      - "./clop/tables without data.sql:/docker-entrypoint-initdb.d/03-clop.sql"
+      - "./elements/tables with data.sql:/docker-entrypoint-initdb.d/04-elements.sql"
+      - "./elements/tables without data.sql:/docker-entrypoint-initdb.d/05-elements.sql"
+
+    # NOTE: mariadb image 10.0.20 doesn't support initdb, so manually connect to the container and run the following:
+    # mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/01-dbs.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/02-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/03-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/04-elements.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/05-elements.sql
+
+  adminer:
+    image: adminer:4.8.1-standalone
+    networks:
+      - default
+      - internal
+    ports:
+      - 127.0.0.1:8080:8080
+
+  apache-php:
+    image: php:5.4-apache
+    networks:
+      - internal
+      - default
+    volumes:
+      - ./clop:/var/www/html:ro
+    command: |
+      bash -c "
+      docker-php-ext-install mysqli &&
+      docker-php-ext-enable mysqli &&
+      exec apache2-foreground"
+    environment:
+      MYSQL_PASS: ${MYSQL_PASS}
+
+  caddy:
+    image: caddy:2-alpine
+    networks:
+      - internal
+      - default
+    volumes:
+      - ./data/Caddyfile:/etc/caddy/Caddyfile
+      - ./data/caddy:/data # certificates storage
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      DOMAIN_URL: ${DOMAIN_URL}
+
+  #socat:
+  #  image: alpine/socat
+  #  networks:
+  #    - default
+  #    - internal
+  #  ports:
+  #    - 0.0.0.0:443:8081
+  #    - 0.0.0.0:80:8081
+  #  command: tcp-listen:8081,fork,reuseaddr tcp-connect:apache-php:80

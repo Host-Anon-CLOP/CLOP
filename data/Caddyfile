@@ -1,0 +1,3 @@
+# passed in as environment variable on the EC2 instance in .bash_profile add the line: export DOMAIN_URL="4clop.com"
+{$DOMAIN_URL}
+reverse_proxy apache-php:80
