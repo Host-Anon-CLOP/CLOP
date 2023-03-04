@@ -6,7 +6,7 @@ function ReverseIPOctets($inputip){
 }
     # since run on docker this is getting the container ip 
     #$mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);
-    $mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X-Real-IP']);
+    $mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X-REAL-IP']);
     
     $mysql['forwarded'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED']);
     $mysql['forwarded_for'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED_FOR']);
