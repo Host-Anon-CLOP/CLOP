@@ -3,5 +3,5 @@
 DOMAIN_URL="4clop.com"
 MYSQL_PASS="<REDACTED>"
 
-0 7 * * * docker exec clop-mariadb-1 mysqldump -uroot -p<REDACTED> --all-databases > ./backups/mariadb-dump-$(date + \%F_\%H-\%M-\%S).sql && cd clop && /usr/local/bin/docker-compose down --volumes && /usr/local/bin/docker-compose rm -v && /usr/local/bin/docker-compose up
-0 19 * * * docker exec clop-mariadb-1 mysqldump -uroot -p<REDACTED> --all-databases > ./backups/mariadb-dump-$(date + \%F_\%H-\%M-\%S).sql && cd clop && /usr/local/bin/docker-compose down --volumes && /usr/local/bin/docker-compose rm -v && /usr/local/bin/docker-compose up
+0 7 * * * docker exec clop-mariadb-1 mysqldump -uroot -p<REDACTED> --all-databases > ./backups/mariadb-dump-$(date +\%F_\%H-\%M-\%S).sql && cd clop && /usr/local/bin/docker-compose down --volumes && /usr/local/bin/docker-compose rm -v && /usr/local/bin/docker-compose up
+0 19 * * * docker exec clop-mariadb-1 mysqldump -uroot -p<REDACTED> --all-databases > ./backups/mariadb-dump-$(date +\%F_\%H-\%M-\%S).sql && cd clop && /usr/local/bin/docker-compose down --volumes && /usr/local/bin/docker-compose rm -v && /usr/local/bin/docker-compose up

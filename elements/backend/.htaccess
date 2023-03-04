@@ -1,4 +1,0 @@
-AuthName "Backend Only"
-AuthType Basic
-AuthUserFile /.htpasswd
-require valid-user
