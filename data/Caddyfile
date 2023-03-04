@@ -2,4 +2,6 @@
 {$DOMAIN_URL}
 reverse_proxy apache-php:80 {
 header_up X-Real-IP {remote_host}
+header_up X-Forwarded {remote_host}
+header_up X-Forwarded-For {remote_host}
 }
