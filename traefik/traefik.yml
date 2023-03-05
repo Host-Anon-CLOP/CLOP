@@ -40,7 +40,7 @@ providers:
 certificatesResolvers:
   letsencrypt:
     acme:
-      email: your-email@example.com
+      email: 4clop@gmail.com
       storage: acme.json
       keyType: EC384
       httpChallenge:
@@ -48,7 +48,7 @@ certificatesResolvers:
 
   letsencrypt-test: # for testing and development
     acme:
-      email: your-email@example.com
+      email: 4clop@gmail.com
       storage: acme.json
       keyType: EC384
       caServer: "https://acme-staging-v02.api.letsencrypt.org/directory" # for testing
