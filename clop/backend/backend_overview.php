@@ -203,9 +203,9 @@ if ($nationinfo['government'] == "Democracy") {
 if ($nationinfo['economy'] == "Free Market") {
 	$requiredresources["Coffee"] += 6;
 } else if ($nationinfo['economy'] == "State Controlled") {
-	$requiredresources["Vodka"] += 6;
+	$requiredresources["Cider"] += 6;
 }
-$milsugar = 0;
+$milapples = 0;
 $milgems = 0;
 $milgasoline = 0;
 $milcoffee = 0;
@@ -215,7 +215,7 @@ EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     if ($rs['type'] == 1) {
-        $milsugar += ($rs['totalsize'] * 5);
+        $milapples += ($rs['totalsize'] * 5);
     } else if ($rs['type'] == 2 || $rs['type'] == 5) {
         $milgasoline += ($rs['totalsize'] * 5);
     } else if ($rs['type'] == 3) {

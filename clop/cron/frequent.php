@@ -383,18 +383,18 @@ EOSQL;
     while ($rs2 = mysqli_fetch_array($sth2)) {
 		switch ($rs2['type']) {
 		case 1:
-			if ($ownedresources['3'] < ($rs2['size'] * 5)) { //sugar
+			if ($ownedresources['3'] < ($rs2['size'] * 5)) { //apples
 				$sql=<<<EOSQL
 				DELETE FROM forces WHERE force_id = '{$rs2['force_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$messages[] = "You couldn't pay the upkeep for your {$rs2['name']} and it's gone!";
 			} else {
-                $usedsugar = $rs2['size'] * 5;
-				$sql = "UPDATE resources SET amount = amount - {$usedsugar} WHERE nation_id = '{$rs['nation_id']}' AND resource_id = '3'";
+                $usedapples = $rs2['size'] * 5;
+				$sql = "UPDATE resources SET amount = amount - {$usedapples} WHERE nation_id = '{$rs['nation_id']}' AND resource_id = '3'";
 				$GLOBALS['mysqli']->query($sql);
-				$ownedresources['3'] -= $usedsugar;
-				$messages[] = "Your {$rs2['name']} used up {$usedsugar} sugar.";
+				$ownedresources['3'] -= $usedapples;
+				$messages[] = "Your {$rs2['name']} used up {$usedapples} apples.";
 			}
 			break;
 		case 2:
@@ -611,14 +611,14 @@ EOSQL;
         $rs['se_relation'] += 60;
     }
     if ($rs['economy'] == "State Controlled") {
-        if ($ownedresources['18'] < 6) { // vodka
-            $messages[] = "Your economy lacks the vodka to function properly! (-25 sat, unable to make deals)";
+        if ($ownedresources['18'] < 6) { // cider
+            $messages[] = "Your economy lacks the cider to function properly! (-25 sat, unable to make deals)";
             $sql ="UPDATE nations SET satisfaction = satisfaction - 25, active_economy = 0 WHERE nation_id = '{$rs['nation_id']}'";
             $GLOBALS['mysqli']->query($sql);
         } else {
             $sql = "UPDATE resources SET amount = amount - 6 WHERE nation_id = '{$rs['nation_id']}' AND resource_id = '18'";
             $GLOBALS['mysqli']->query($sql);
-            $messages[] = "Your State Controllers drank 6 vodka.";
+            $messages[] = "Your State Controllers drank 6 cider.";
             $sql = "UPDATE nations SET active_economy = 1 WHERE nation_id = '{$rs['nation_id']}'";
             $GLOBALS['mysqli']->query($sql);
         }

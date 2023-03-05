@@ -788,7 +788,7 @@ EOSQL;
             $name = "Free Market";
         }
         if ($_POST['statecontrolled']) {
-            $resource_id = 18; //vodka
+            $resource_id = 18; //cider
             $name = "State Controlled";
         }
         $sql =<<<EOSQL
@@ -809,7 +809,7 @@ EOSQL;
         if (($rs['amount'] < 25) && $_POST['freemarket']) {
             $errors[] = "We're not doing this without enough coffee, boss!";
         } else if (($rs['amount'] < 25) && $_POST['statecontrolled']) {
-            $errors[] = "You will need more vodka for us to do this, comrade!";
+            $errors[] = "You will need more cider for us to do this, comrade!";
         }
         if (empty($errors)) {
             $sql="UPDATE nations SET active_economy = 1, economy = '{$name}', funds = funds - 1000000 WHERE nation_id = '{$_SESSION['nation_id']}'";

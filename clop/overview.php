@@ -200,14 +200,14 @@ EOFORM;
     </tr>
 EOFORM;
 }
-$dmilsugar = commas($milsugar);
+$dmilapples = commas($milapples);
 $dmilgems = commas($milgems);
 $dmilcoffee = commas($milcoffee);
 $dmilgasoline = commas($milgasoline);
 echo <<<EOFORM
        </tbody>
      </table>
-     <center>Your military also uses <b>{$dmilsugar} sugar, {$dmilgems} gems, {$dmilcoffee} coffee, and {$dmilgasoline} gasoline</b> every 12 hours.</center>
+     <center>Your military also uses <b>{$dmilapples} apples, {$dmilgems} gems, {$dmilcoffee} coffee, and {$dmilgasoline} gasoline</b> every 12 hours.</center>
    </div>
   </div>
   <div class="col-md-6">

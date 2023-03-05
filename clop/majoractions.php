@@ -52,7 +52,7 @@ if ($nationinfo['seesecrets'] && $nationinfo['government'] != "Alicorn Elite" &&
     Such powerful elites may trade with anyone, and their empire satisfaction loss is a third of what it would be otherwise.
     Additionally, your nations will have a satisfaction cap of 5,000, although they always produce bits at six times their ordinary GDP.<br/>
     Building the Alicornification Facility requires 1,000 tungsten, 1,000 precision parts, and 1,000 machinery parts.
-    It produces one vital Apotheosis Serum per turn and requires 100 energy and 50 sugar per turn.<br/>
+    It produces one vital Apotheosis Serum per turn and requires 100 energy and 50 apples per turn.<br/>
     However, the moment you go down this road, the <b>maximum</b> of your reputations with both the Solar Empire and the New Lunar Republic will be -10,
     and this maximum will decrease by 1 every turn. Therefore, you <b>will</b> be attacked and eventually destroyed unless you ascend. A new military option will present itself to you.<br/>
     <b>There is no going back from this point, there are no brakes on the ascension train (can't enter stasis mode), and future steps only get worse.</b><br/>
@@ -80,7 +80,7 @@ echo <<<EOFORM
 	<div class="col-md-6"><p>
     With 30 Apotheosis Serum, you begin alicornifying your middle classes in all your nations, and with 2,000 tungsten, 2,000 precision parts, and 2,000 machinery parts, you
     build two more Alicornification Facilities.<br/><br/>
-    As before, each Alicornification Facility requires 100 energy and 50 sugar a turn; therefore, the total requirement is 300 energy and 150 sugar.<br/>
+    As before, each Alicornification Facility requires 100 energy and 50 apples a turn; therefore, the total requirement is 300 energy and 150 apples.<br/>
     Your nations will have a satisfaction cap of 7,000, although they will always produce bits at eight times their ordinary GDP.<br/>
     This is the next step to ascension.<br/>
     Of course, once one of your nations goes Transpony, they all do.
@@ -544,8 +544,8 @@ echo <<<EOFORM
     By hiring drunken ponies to make friends and grease palms, you become able to initiate deals. Making a deal costs you, the originator, 100 bits per item transferred each way, no matter what
     item it is. Additionally, you can transfer money through deals for free.<br/>
     However, you will pay 20% when buying and 15% when selling on the marketplace, as the corrupt bureaucrats skim a little off the top.<br/>
-    Performing this action requires a whopping 500 copper to build the infrastructure and 25 vodka to get started along with the 1,000,000 bit cost.<br/>
-    If you cannot provide your ponies with 6 vodka each turn, they will become sober and surly; the resulting confusion will lower your nation's satisfaction
+    Performing this action requires a whopping 500 copper to build the infrastructure and 25 cider to get started along with the 1,000,000 bit cost.<br/>
+    If you cannot provide your ponies with 6 cider each turn, they will become sober and surly; the resulting confusion will lower your nation's satisfaction
     by a seriously threatening 25 every turn that they are sober. Furthermore, you will not be able to make deals.<br/>
     Transferring bits and items between empires is free with this economy.<br/>
     Having this government type raises your relations with the Solar Empire by 1 and lowers them with the New Lunar Republic by 3 every turn.<br/>
