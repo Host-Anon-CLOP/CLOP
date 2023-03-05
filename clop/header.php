@@ -139,7 +139,7 @@ color: #FFFFFF;
 EOFORM;
 if (!$_SESSION['hidebanners']) {
 echo <<<EOFORM
-<center><img src="images/{$headernumber}.{$headerextension}"/></center>
+<center><img src="images/{$headernumber}.{$headerextension}" height="250"/></center>
 EOFORM;
 }
 echo <<<EOFORM
