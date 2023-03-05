@@ -29,8 +29,18 @@ services:
     networks:
       - default
       - internal
-    ports:
-      - 127.0.0.1:8080:8080
+    expose:
+      - 8080
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.adminer.service=adminer
+      - traefik.http.routers.adminer.rule=Host(`adminer.$DOMAIN_NAME`)
+      - traefik.http.routers.adminer.entrypoints=websecure
+      - traefik.http.routers.adminer.tls=true
+      - traefik.http.routers.adminer.tls.certresolver=$CERT_RESOLVER
+      - traefik.http.services.adminer.loadbalancer.server.port=8080
+      # Enable auth
+      - traefik.http.routers.adminer.middlewares=internal-auth
 
   apache-php:
     image: php:5.4-apache
@@ -46,20 +56,61 @@ services:
       exec apache2-foreground"
     environment:
       MYSQL_PASS: ${MYSQL_PASS}
+    expose:
+      - 80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.apache.service=apache-php
+      - traefik.http.routers.apache.rule=Host(`$DOMAIN_NAME`)
+      - traefik.http.routers.apache.entrypoints=websecure
+      - traefik.http.routers.apache.tls=true
+      - traefik.http.routers.apache.tls.certresolver=$CERT_RESOLVER
+      - traefik.http.services.apache-php.loadbalancer.server.port=80
 
-  caddy:
-    image: caddy:2-alpine
+  traefik:
+    image: traefik:v2.9.8
+    container_name: traefik
+    restart: always
+    security_opt:
+      - no-new-privileges:true
     networks:
       - internal
       - default
-    volumes:
-      - ./data/Caddyfile:/etc/caddy/Caddyfile
-      - ./data/caddy:/data # certificates storage
     ports:
-      - 80:80
-      - 443:443
-    environment:
-      DOMAIN_URL: ${DOMAIN_URL}
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik/traefik.yml:/traefik.yml:ro
+      - ./traefik/acme.json:/acme.json
+      - ./traefik/log/access.log:/log/access.log
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.traefik.rule=Host(`traefik.$DOMAIN_NAME`)
+      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.tls.certresolver=$CERT_RESOLVER
+      # Add internal auth middleware
+      - traefik.http.middlewares.internal-auth.basicauth.users=$TRAEFIC_USERS
+      # Enable auth
+      - traefik.http.routers.traefik.middlewares=internal-auth
+  
+
+  #caddy:
+  #  image: caddy:2-alpine
+  #  networks:
+  #    - internal
+  #    - default
+  #  volumes:
+  #    - ./data/Caddyfile:/etc/caddy/Caddyfile
+  #    - ./data/caddy:/data # certificates storage
+  #  ports:
+  #    - 80:80
+  #    - 443:443
+  #  environment:
+  #    DOMAIN_URL: ${DOMAIN_URL}
 
   #socat:
   #  image: alpine/socat
