@@ -21,3 +21,23 @@ RESTORE DATABASE
 docker cp ./backups/<WHICH FILE>.sql <MARIADB_CONTAINER_ID>:/
 docker exec -it clop-mariadb-1 bash
 mysql -uroot -p<MYSQL PASS> < ./<WHICH FILE>.sql
+
+
+UPDATING FLAVOR TEXT TABLES ON LIVE DATABASE:
+-------------------------------------
+docker cp ./clop/tables with data.sql <CONTAINER ID>:/
+docker exec -it clop-mariadb-1 bash
+mysql -h 127.0.0.1 -u root -p<MYSQL PASSWORD> clopus_clop < "./tables with data.sql"
+
+drop table armordefs;
+drop table armorrecipeitems;
+drop table armorrecipes;
+drop table recipegroups;
+drop table recipeitems;
+drop table recipes;
+drop table resourcedefs;
+drop table resourceeffects;
+drop table resourcerequirements;
+drop table weapondefs;
+drop table weaponrecipeitems;
+drop table weaponrecipes;
