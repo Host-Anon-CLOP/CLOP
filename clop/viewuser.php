@@ -23,7 +23,9 @@ $display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
 $flaghtml =<<<EOFORM
 <img src="{$display['flag']}" height="150" width="250">
 EOFORM;
-{$flaghtml}
+echo <<<EOFORM
+<center>{$flaghtml}</center>
+EOFORM;
 }
 echo <<<EOFORM
 <center>{$userinfo['username']}</center>
