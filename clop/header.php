@@ -1,6 +1,6 @@
 <?php
 include("backend/backend_header.php");
-$headernumber = rand(1, 13);
+$headernumber = rand(1, 14);
 if ($headernumber == 4 || $headernumber == 2) {
     $headerextension = "gif";
 } else {
