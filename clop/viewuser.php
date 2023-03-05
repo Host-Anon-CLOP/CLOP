@@ -18,18 +18,18 @@ if ($userinfo['stasismode']) {
 <center><b>This user is in stasis.</b></center>
 EOFORM;
 }
-if ($userinfo['flag']) {
-$display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
-$flaghtml =<<<EOFORM
-<img src="{$display['flag']}" height="150" width="250">
-EOFORM;
-echo <<<EOFORM
-<center>{$flaghtml}</center>
-EOFORM;
-}
 echo <<<EOFORM
 <center>{$userinfo['username']}</center>
 EOFORM;
+if ($userinfo['flag']) {
+    $display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
+    $flaghtml =<<<EOFORM
+    <img src="{$display['flag']}" height="150" width="250">
+    EOFORM;
+    echo <<<EOFORM
+    <center>{$flaghtml}</center>
+    EOFORM;
+    }
 if ($userinfo['alliancename']) {
 echo <<<EOFORM
 <center><a href="viewalliance.php?alliance_id={$userinfo['alliance_id']}">{$userinfo['alliancename']}</a></center>
