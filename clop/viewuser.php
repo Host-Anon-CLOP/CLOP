@@ -27,6 +27,9 @@ EOFORM;
 echo <<<EOFORM
 <center>{$flaghtml}{$userinfo['username']}</center>
 EOFORM;
+echo <<<EOFORM
+<center>{$flaghtml}{$userinfo['username']}</center>
+EOFORM;
 if ($userinfo['alliancename']) {
 echo <<<EOFORM
 <center><a href="viewalliance.php?alliance_id={$userinfo['alliance_id']}">{$userinfo['alliancename']}</a></center>
