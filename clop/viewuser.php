@@ -31,7 +31,7 @@ echo <<<EOFORM
 <center>{$leaderportraithtml}{$userinfo['username']}</center>
 EOFORM;
 echo <<<EOFORM
-<center>{$flaghtml}{$flaghtml}</center>
+<center>{$flaghtml}\n{$flaghtml}</center>
 EOFORM;
 if ($userinfo['alliancename']) {
 echo <<<EOFORM
