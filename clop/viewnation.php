@@ -1,6 +1,5 @@
 <?php
 include("backend/backend_viewnation.php");
-include("backend/backend_userinfo.php");
 $extratitle = "View Nation - ";
 include("header.php");
 if ($nationinfo) {
