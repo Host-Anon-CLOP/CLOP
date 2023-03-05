@@ -25,7 +25,7 @@ $flaghtml =<<<EOFORM
 EOFORM;
 }
 echo <<<EOFORM
-<center>{$flaghtml}\n{$userinfo['username']}</center>
+<center>{$flaghtml}\n\n{$userinfo['username']}</center>
 EOFORM;
 if ($userinfo['alliancename']) {
 echo <<<EOFORM
