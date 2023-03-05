@@ -8,6 +8,7 @@ echo <<<EOFORM
 <center><h4>{$nationinfo['subregionname']}{$nationinfo['regionname']}</h4></center>
 <center><h4>Government: {$nationinfo['government']}</h4></center>
 <center><h4>Economy: {$nationinfo['economy']}</h4></center>
+<center><h4>Alliance: <center><a href="viewalliance.php?alliance_id={$userinfo['alliance_id']}">{$userinfo['alliancename']}</a></center>    
 <center><h4>Leader: <a href="viewuser.php?user_id={$nationinfo['user_id']}">{$nationinfo['username']}</a></h4></center>
 <center><h4>Created: {$nationinfo['creationdate']}</h4></center>
 <center>{$display['description']}</center><br/>
