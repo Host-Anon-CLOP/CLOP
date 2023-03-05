@@ -21,7 +21,7 @@ EOFORM;
 if ($userinfo['flag']) {
 $display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
 $flaghtml =<<<EOFORM
-<img src="{$display['flag']}" height="20" width="20">
+<img src="{$display['flag']}" height="52" width="82">
 EOFORM;
 }
 echo <<<EOFORM
