@@ -9,6 +9,8 @@ if ($mode == "weapons") {
 }
 include("header.php");
 $token = $_SESSION["token_{$marketplace}"];
+$regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
+$icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
 echo <<<EOFORM
 <div class="alert alert-info">Due to your economic type, you will pay {$displaybuyingmultiplier}% more than these listed prices
 and receive {$displaysellingmultiplier}% less than your listed price when selling.</div>
@@ -71,7 +73,7 @@ EOFORM;
 <tr><td><div class="row">
   <div class="col-md-1"><p class="text-danger">{$display['price']}</p></div>
   <div class="col-md-1"><p class="text-success">{$deal['amount']}</p></div>
-  <div class="col-md-5"><p><a href="viewnation.php?nation_id={$deal['nation_id']}">{$displayname}</a></p></div>
+  <div class="col-md-5"><p><a href="viewnation.php?nation_id={$deal['nation_id']}">{$displayname} (<img src="images/icons/{$icontypes[$deal['region']]}.png"/>{$regiontypes[$deal['region']]})</a></p></div>
   <div class="col-md-5">
 EOFORM;
         if ($deal['nation_id'] != $_SESSION['nation_id']) {
