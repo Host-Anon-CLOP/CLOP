@@ -53,7 +53,7 @@ EOFORM;
 EOFORM;
         }
         echo <<<EOFORM
-          <td style="text-align: center;">Resource</td>
+          <td style="text-align: right;">Resource</td>
           <td>Generated</td>
           <td>Used</td>
           <td>Net</td>
