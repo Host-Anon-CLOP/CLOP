@@ -9,6 +9,7 @@ echo <<<EOFORM
 <center><h4>Government: {$nationinfo['government']}</h4></center>
 <center><h4>Economy: {$nationinfo['economy']}</h4></center>
 <center><h4>Leader: <a href="viewuser.php?user_id={$nationinfo['user_id']}">{$nationinfo['username']}</a></h4></center>
+<center><h4>Alliance: {$nationinfo['alliance']}</h4></center>
 <center><h4>Created: {$nationinfo['creationdate']}</h4></center>
 <center>{$display['description']}</center><br/>
 <center>GDP: {$displaygdp} bits every 2 hours</center>
