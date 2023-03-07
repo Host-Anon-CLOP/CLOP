@@ -12,5 +12,15 @@ echo <<<EOFORM
 </table>
 EOFORM;
 
+echo <<<EOFORM
+<center>Census</center>
+<table class="table table-striped table-bordered">
+<tr><th>Burrozil:</th><th>$census_burrozil</th></tr>
+<tr><th>Zebrica:</th><th>$census_zebrica</th></tr>
+<tr><th>Saddle Arabia:</th><th>$census_saddle</th></tr>
+<tr><th>Przewalskia :</th><th>$census_prze</th></tr>
+</table>
+EOFORM;
+
 include("footer.php");
 ?>
