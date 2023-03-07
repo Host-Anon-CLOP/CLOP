@@ -7,5 +7,5 @@ EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 #$rs = onelinequery($sth);
 #$players_active_24h = $rs['COUNT(*)'];
-$players_active_24h = "test"
+$players_active_24h = $sth
 ?>
