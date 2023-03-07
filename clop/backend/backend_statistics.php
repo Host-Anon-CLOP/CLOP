@@ -74,6 +74,4 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $requiredresources[$rs['name']] = $rs['required'];
 }
-
 ?>
-
