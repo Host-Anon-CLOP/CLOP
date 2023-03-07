@@ -54,7 +54,6 @@ EOFORM;
         }
         echo <<<EOFORM
           <td style="text-align: right;">Resource</td>
-          <td>Qty</td>
           <td>Generated</td>
           <td>Used</td>
           <td>Net</td>
@@ -76,16 +75,11 @@ foreach($resources as $name => $amount) {
   if (!$requiredresources[$name]) {
     $requiredresources[$name] = 0;
   }
-  if($amount >= $requiredresources[$name]) $amountClass = "text-success";
-  elseif($amount >= ($affectedresources[$name] - $requiredresources[$name])) $amountClass = "text-warning";
-  else $amountClass = "text-danger";
-
   $amountNet = ($affectedresources[$name] - $requiredresources[$name]);
 
   if($amountNet > 0) $amountNetClass = "text-success";
   elseif($amountNet == 0) $amountNetClass = "text-warning";
   else $amountNetClass = "text-danger";
-  $displayamount = commas($amount);
   $displayaffected = commas($affectedresources[$name]);
   $displayrequired = commas($requiredresources[$name]);
   if ($amountNet < 0) {
@@ -104,7 +98,6 @@ EOFORM;
     }
     echo <<<EOFORM
     <td style="text-align: right;">{$name}</td>
-    <td><span class="{$amountClass}">{$displayamount}</span></td>
     <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
     <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
     <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
