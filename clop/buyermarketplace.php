@@ -70,9 +70,9 @@ EOFORM;
 EOFORM;
         } else {
             $displayname = $deal['name'];
+            $displayregion = $regiontypes[$deal['region']];
         }
         $display['price'] = commas($deal['price']);
-        $displayregion = $regiontypes[$deal['region']];
         echo <<<EOFORM
 <tr><td><div class="row">
   <div class="col-md-1"><p class="text-danger">{$display['price']}</p></div>
