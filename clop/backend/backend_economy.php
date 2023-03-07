@@ -1,6 +1,20 @@
 <?php
 include_once("allfunctions.php");
 
+# New Players
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations WHERE creationdate >= NOW() - INTERVAL 1 DAY;
+EOSQL;
+$nations_new_24h = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations WHERE creationdate >= NOW() - INTERVAL 7 DAY;
+EOSQL;
+$nations_new_week = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations WHERE creationdate >= NOW() - INTERVAL 30 DAY;
+EOSQL;
+$nations_new_month = onelinequery($sql)['COUNT(*)'];
+
 # Players Activity
 $sql=<<<EOSQL
 SELECT COUNT(*) FROM users WHERE lastactive >= NOW() - INTERVAL 1 DAY
