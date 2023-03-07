@@ -1,5 +1,5 @@
 <?php
-include("backend/backend_stats.php");
+include("backend/backend_statistics.php");
 $extratitle = "Statistics - ";
 include("header.php");
 
