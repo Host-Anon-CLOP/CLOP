@@ -57,7 +57,6 @@ EOFORM;
           <td>Qty</td>
           <td>Generated</td>
           <td>Used</td>
-		      <td>Loss</td>
           <td>Net</td>
         </tr>
       </thead>
