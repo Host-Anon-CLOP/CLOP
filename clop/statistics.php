@@ -14,7 +14,7 @@ echo <<<EOFORM
 EOFORM;
 
 
-# Players Activity
+# Active Players
 echo <<<EOFORM
 <center>Players Active</center>
 <table class="table table-striped table-bordered">
@@ -59,7 +59,6 @@ EOFORM;
           <td>Used</td>
 		      <td>Loss</td>
           <td>Net</td>
-          <td>Ticks-Worth</td>
         </tr>
       </thead>
       <tbody>
@@ -101,19 +100,6 @@ foreach($resources as $name => $amount) {
     $taxclass = "text-danger";
   }
 
-  $displayamount_nocomma = str_replace(',', '', $displayamount);
-  $displayrequired_nocomma = str_replace(',', '', $displayrequired);
-  $amountNet_nocomma = str_replace(',', '', $amountNet);
-  if($displayamount_nocomma < $displayrequired_nocomma) {
-    $amountReservesClass = "text-danger";
-    $displayreserves = "NONE";
-  } else if ($amountNet >= 0) {
-    $amountReservesClass = "text-success";
-    $displayreserves = "N/A";
-  } else {
-    $amountReservesClass = "text-warning";
-    $displayreserves = floor(($displayamount_nocomma-$displayrequired_nocomma)/abs($amountNet_nocomma));
-  }
   echo <<<EOFORM
     <tr>
 EOFORM;
@@ -129,7 +115,6 @@ EOFORM;
     <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
 	  <td style="text-align: center;"><span class="{$taxclass}">{$displaythistax}</span></td>
     <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
-    <td style="text-align: center;"><span class="{$amountReservesClass}">{$displayreserves}</span></td>
     </tr>
 EOFORM;
 }
