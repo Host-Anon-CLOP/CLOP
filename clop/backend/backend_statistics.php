@@ -52,6 +52,9 @@ $census_prze = onelinequery($sql)['COUNT(*)'];
 
 # Global Resources
 $affectedresources = array();
+$requiredresources = array();
+$resources = array();
+
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
 FROM resourceeffects rr
 INNER JOIN resources r ON r.resource_id = rr.resource_id
@@ -62,7 +65,6 @@ while ($rs = mysqli_fetch_array($sth)) {
     $affectedresources[$rs['name']] = $rs['affected'];
 }
 
-$requiredresources = array();
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
 FROM resourcerequirements rr
 INNER JOIN resources r ON r.resource_id = rr.resource_id
