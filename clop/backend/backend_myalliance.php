@@ -195,7 +195,7 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $alliancemembers[] = $rs;
     $sql=<<<EOSQL
-	SELECT nation_id, name FROM nations WHERE user_id = {$rs['user_id']} ORDER BY name
+	SELECT nation_id, name, region FROM nations WHERE user_id = {$rs['user_id']} ORDER BY name
 EOSQL;
 	$sth2 = $GLOBALS['mysqli']->query($sql);
 	while ($rs2 = mysqli_fetch_array($sth2)) {
