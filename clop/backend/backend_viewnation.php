@@ -16,8 +16,7 @@ $nationinfo['subregionname'] = $subregiontypes[$nationinfo['subregion']];
 $display['description'] = nl2br(htmlentities($nationinfo['description'], ENT_SUBSTITUTE, "UTF-8"));
 
 $sql = "SELECT name FROM alliances WHERE alliance_id = '{$nationinfo['alliance_id']}'";
-$sth = $GLOBALS['mysqli']->query($sql);
-$nationinfo['alliance_name'] = $sth;
+$nationinfo['alliance_name'] = onelinequery($sql);
 
 $gdp = getgdp($mysql['nation_id']);
 $sql = "SELECT r.amount, rd.name, rd.is_building FROM resources r INNER JOIN resourcedefs rd ON r.resource_id = rd.resource_id WHERE r.nation_id = '{$nationinfo['nation_id']}' ORDER BY rd.name";
