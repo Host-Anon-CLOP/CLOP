@@ -2,6 +2,7 @@
 include("backend/backend_economy.php");
 $extratitle = "Economy - ";
 include("header.php");
+
 echo <<<EOFORM
 <center>Players Active</center>
 <table class="table table-striped table-bordered">
@@ -10,5 +11,6 @@ echo <<<EOFORM
 <tr><th>Last 30 Days:</th><th>$players_active_month</th></tr>
 </table>
 EOFORM;
-#include("footer.php");
+
+include("footer.php");
 ?>
