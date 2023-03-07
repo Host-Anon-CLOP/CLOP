@@ -62,5 +62,16 @@ while ($rs = mysqli_fetch_array($sth)) {
     $affectedresources[$rs['name']] = $rs['affected'];
 }
 
+$requiredresources = array();
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
+FROM resourcerequirements rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
+WHERE r.nation_id = '{$_SESSION['nation_id']}' GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $requiredresources[$rs['name']] = $rs['required'];
+}
+
 ?>
 
