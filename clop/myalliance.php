@@ -102,10 +102,11 @@ echo <<<EOFORM
 <td>{$stasis}</td><td>
 EOFORM;
     if ($nations[$member['user_id']]) {
+        $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
         $displaynations = array();
         foreach ($nations[$member['user_id']] as $nation) {
             $displaynations[] =<<<EOFORM
-<a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}({$nation['regionname']})</a>
+<a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}({$regiontypes[$nation['region']]})</a>
 EOFORM;
         }
         echo implode(", ", $displaynations);
