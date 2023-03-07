@@ -9,6 +9,8 @@ if ($mode == "weapons") {
 }
 include("header.php");
 $token = $_SESSION["token_{$buyermarketplace}"];
+$regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
+$icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
 echo <<<EOFORM
 <div class="alert alert-info">Due to your economic type, you will pay {$displaybuyingmultiplier}% extra when offering to buy these items
 and receive {$displaysellingmultiplier}% less than their listed price when selling.</div>
@@ -63,15 +65,19 @@ EOFORM;
             $displayname =<<<EOFORM
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
+            $displayregion =<<<EOFORM
+<span class="text-success">{$regiontypes[$deal['region']]}</span>
+EOFORM;
         } else {
             $displayname = $deal['name'];
         }
         $display['price'] = commas($deal['price']);
+        $displayregion = $regiontypes[$deal['region']];
         echo <<<EOFORM
 <tr><td><div class="row">
   <div class="col-md-1"><p class="text-danger">{$display['price']}</p></div>
   <div class="col-md-1"><p class="text-success">{$deal['amount']}</p></div>
-  <div class="col-md-5"><p><a href="viewnation.php?nation_id={$deal['nation_id']}">{$displayname}</a></p></div>
+  <div class="col-md-5"><p><a href="viewnation.php?nation_id={$deal['nation_id']}">{$displayname} (<img src="images/icons/{$icontypes[$deal['region']]}.png"/>{$displayregion})</a></p></div>
   <div class="col-md-5">
 EOFORM;
         if ($deal['nation_id'] != $_SESSION['nation_id']) {

@@ -244,7 +244,7 @@ EOFORM;
     }
 }
 if ($_POST) {
-    $sql = "SELECT m.*, n.nation_id, n.name, u.user_id, u.alliance_id FROM {$buyermarketplace} m INNER JOIN nations n ON n.nation_id = m.nation_id
+    $sql = "SELECT m.*, n.nation_id, n.name, n.region, u.user_id, u.alliance_id FROM {$buyermarketplace} m INNER JOIN nations n ON n.nation_id = m.nation_id
     INNER JOIN users u ON u.user_id = n.user_id WHERE m.{$resource_id} = '{$mysql['resource_id']}' ORDER BY m.price DESC, n.nation_id DESC";
     $sth = $GLOBALS['mysqli']->query($sql);
     if ($sth) {
