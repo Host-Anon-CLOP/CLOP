@@ -15,6 +15,7 @@ SELECT COUNT(*) FROM nations WHERE creationdate >= NOW() - INTERVAL 30 DAY;
 EOSQL;
 $nations_new_month = onelinequery($sql)['COUNT(*)'];
 
+
 # Players Activity
 $sql=<<<EOSQL
 SELECT COUNT(*) FROM users WHERE lastactive >= NOW() - INTERVAL 1 DAY
@@ -28,6 +29,7 @@ $sql=<<<EOSQL
 SELECT COUNT(*) FROM users WHERE lastactive >= NOW() - INTERVAL 30 DAY
 EOSQL;
 $players_active_month = onelinequery($sql)['COUNT(*)'];
+
 
 # Census
 $sql=<<<EOSQL
@@ -46,4 +48,21 @@ $sql=<<<EOSQL
 SELECT COUNT(*) FROM nations WHERE region = "4"
 EOSQL;
 $census_prze = onelinequery($sql)['COUNT(*)'];
+
+
+# Global Resources
+$requiredresources = array();
+$affectedresources = array();
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
+FROM resourceeffects rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
+WHERE r.nation_id = '{$_SESSION['nation_id']}' GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $affectedresources[$rs['name']] = $rs['affected'];
+}
+
 ?>
+
