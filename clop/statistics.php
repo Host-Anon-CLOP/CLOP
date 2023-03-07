@@ -1,6 +1,6 @@
 <?php
-include("backend/backend_economy.php");
-$extratitle = "Economy - ";
+include("backend/backend_stats.php");
+$extratitle = "Statistics - ";
 include("header.php");
 
 echo <<<EOFORM
