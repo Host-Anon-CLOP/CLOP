@@ -12,7 +12,7 @@ EOSQL;
 $userinfo = onelinequery($sql);
 $display['description'] = $userinfo['description'];
 $sql=<<<EOSQL
-SELECT nation_id, name FROM nations WHERE user_id = '{$mysql['user_id']}'
+SELECT nation_id, name, region FROM nations WHERE user_id = '{$mysql['user_id']}'
 EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 $nations = array();

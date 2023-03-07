@@ -54,9 +54,11 @@ echo <<<EOFORM
 <center>Nations</center>
 <center><table>
 EOFORM;
+$regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
+$icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
 foreach ($nations as $nation) {
 echo <<<EOFORM
-<tr><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}</a></td></tr>
+<tr><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a></td></tr>
 EOFORM;
 }
 echo <<<EOFORM
