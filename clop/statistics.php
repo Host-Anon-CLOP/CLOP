@@ -98,9 +98,9 @@ EOFORM;
     }
     echo <<<EOFORM
     <td style="text-align: right;">{$name}</td>
-    <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
-    <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
-    <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
+    <td style="text-align: right;"><span class="text-success">{$displayaffected}</span></td>
+    <td style="text-align: right;"><span class="text-danger">{$displayrequired}</span></td>
+    <td style="text-align: right;"><span class="{$amountNetClass}">{$displaynet}</span></td>
     </tr>
 EOFORM;
 }
