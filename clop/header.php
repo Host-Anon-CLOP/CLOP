@@ -264,6 +264,7 @@ echo <<<EOFORM
   <li><a>Server time: {$currenttime}</a></li>
   <li><a>Next tick: <span class="text-danger" id="countdown">{$countdowntimer}</span></a></li>
   <li><a href="search.php">Search</a></li>
+  <li><a href="statistics.php">Stats</a></li>
   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Rankings <b class="caret"></b></a>
   <ul class="dropdown-menu">
       <li><a href="rankings.php?mode=gdp">GDP Per Turn</a></li>
