@@ -66,18 +66,18 @@ EOFORM;
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
             $displayregion =<<<EOFORM
-            <span class="text-success"><img src="images/icons/{$icontypes[$deal['region']]}.png"/>{$regiontypes[$deal['region']]}</span>
+            <span class="text-success">$regiontypes[$deal['region']]</span>
 EOFORM;
         } else {
             $displayname = $deal['name'];
-            $displayregion = <img src="images/icons/{$icontypes[$deal['region']]}.png"/>{$regiontypes[$deal['region']]}
+            $displayregion = $regiontypes[$deal['region']]
         }
         $display['price'] = commas($deal['price']);
         echo <<<EOFORM
 <tr><td><div class="row">
   <div class="col-md-1"><p class="text-danger">{$display['price']}</p></div>
   <div class="col-md-1"><p class="text-success">{$deal['amount']}</p></div>
-  <div class="col-md-5"><p><a href="viewnation.php?nation_id={$deal['nation_id']}">{$displayname} ({$displayregion})</a></p></div>
+  <div class="col-md-5"><p><a href="viewnation.php?nation_id={$deal['nation_id']}">{$displayname} (<img src="images/icons/{$icontypes[$deal['region']]}.png"/>{$displayregion})</a></p></div>
   <div class="col-md-5">
 EOFORM;
         if ($deal['nation_id'] != $_SESSION['nation_id']) {
