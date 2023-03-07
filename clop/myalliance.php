@@ -107,7 +107,7 @@ EOFORM;
         $displaynations = array();
         foreach ($nations[$member['user_id']] as $nation) {
             $displaynations[] =<<<EOFORM
-<a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}(<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a>
+<a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a>
 EOFORM;
         }
         echo implode(", ", $displaynations);
