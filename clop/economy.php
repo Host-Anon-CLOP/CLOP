@@ -33,6 +33,7 @@ EOFORM;
 
 echo <<<EOFORM
 <center>Global Production</center>
+EOFORM;
 
 include("footer.php");
 ?>
