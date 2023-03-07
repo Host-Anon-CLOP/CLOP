@@ -66,7 +66,7 @@ EOFORM;
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
             $displayregion =<<<EOFORM
-            <span class="text-success">{$regiontypes[$deal['region']]}</span>
+<span class="text-success">{$regiontypes[$deal['region']]}</span>
 EOFORM;
         } else {
             $displayname = $deal['name'];
