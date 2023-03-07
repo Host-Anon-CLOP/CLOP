@@ -1,5 +1,6 @@
 <?php
 include_once("allfunctions.php");
+
 $sql=<<<EOSQL
 SELECT COUNT(*) FROM users WHERE lastactive >= NOW() - INTERVAL 1 DAY
 EOSQL;
