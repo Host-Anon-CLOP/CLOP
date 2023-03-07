@@ -1,7 +1,7 @@
 <?php
 include("backend/backend_statistics.php");
 $extratitle = "Statistics - ";
-#include("header.php");
+include("header.php");
 
 # New Players
 echo <<<EOFORM
