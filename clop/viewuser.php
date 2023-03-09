@@ -30,11 +30,6 @@ EOFORM;
     <center>{$flaghtml}</center>
 EOFORM;
     }
-
-echo <<<EOFORM
-test: {$userinfo['hideflags']}
-EOFORM;
-
 if ($userinfo['alliancename']) {
 echo <<<EOFORM
 <center><a href="viewalliance.php?alliance_id={$userinfo['alliance_id']}">{$userinfo['alliancename']}</a></center>
