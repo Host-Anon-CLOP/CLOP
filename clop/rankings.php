@@ -26,7 +26,7 @@ echo <<<EOFORM
 <tr><th style="width:25px"></th><th>Name</th><th>{$secondcolumn}</th><th>Government</th><th>Economy</th></tr>
 EOFORM;
 foreach ($nations as $nation) {
-if ($nation['flag']) {
+if ($nation['flag'] && ($_SESSION['hideflags'] == 0)) {
 $display['flag'] = htmlentities($nation['flag'], ENT_SUBSTITUTE, "UTF-8");
 $flaghtml =<<<EOFORM
 <img src="{$display['flag']}" height="20" width="20">

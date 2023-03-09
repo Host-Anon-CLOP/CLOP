@@ -37,7 +37,7 @@ if (gethostbyname(ReverseIPOctets($_SERVER['REMOTE_ADDR']).".".$_SERVER['SERVER_
 }
     if (!$errors) {
     $passwordhash = sha1($mysql['password'] . "saltlick"); //SURE IS SHIT-HA1 IN HERE AIN'T IT
-    $sql = "SELECT user_id, alliance_id, stasisdate, stasismode, css, hidebanners, hidereports, alliance_messages_last_checked FROM users WHERE username = '{$mysql['username']}' AND password = '{$passwordhash}'";
+    $sql = "SELECT user_id, alliance_id, stasisdate, stasismode, css, hidebanners, hidereports, hideflags, alliance_messages_last_checked FROM users WHERE username = '{$mysql['username']}' AND password = '{$passwordhash}'";
     $rs = onelinequery($sql);
         if ($rs) {
             if ((strtotime($rs['stasisdate']) > (time() - 86400)) && $rs['stasismode']) {
@@ -51,6 +51,7 @@ EOSQL;
             $_SESSION['css'] = $rs['css'];
             $_SESSION['hidebanners'] = $rs['hidebanners'];
             $_SESSION['hidereports'] = $rs['hidereports'];
+            $_SESSION['hideflags'] = $rs['hideflags'];
             $_SESSION['user_id'] = $rs['user_id'];
             $_SESSION['alliance_id'] = $rs['alliance_id'];
             $_SESSION['alliance_messages_last_checked'] = $rs['alliance_messages_last_checked'];

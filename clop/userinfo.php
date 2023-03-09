@@ -98,6 +98,15 @@ echo <<<EOFORM
 <center><input type="submit" name="showicons" value="Show Overview Icons" class="btn btn-success"/></center>
 EOFORM;
 }
+if (!$userinfo['hideflags']) {
+echo <<<EOFORM
+<center><input type="submit" name="hideflags" value="Hide Flags" class="btn btn-success"/></center>
+EOFORM;
+} else {
+echo <<<EOFORM
+<center><input type="submit" name="showflags" value="Show Flags" class="btn btn-success"/></center>
+EOFORM;
+}
 echo <<<EOFORM
 </form>
 <form name="stasis" method="post" action="userinfo.php">

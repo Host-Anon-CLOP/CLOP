@@ -22,7 +22,7 @@ $subregionlist .=<<<EOFORM
 EOFORM;
 }
 echo <<<EOFORM
-Hold it! Have you read the <a href="rules.php">Rules</a> and the <a href="guide.php">Guide</a>?
+Hold it! Have you read the <a href="rules.php">Rules</a> and the <a href="https://docs.google.com/document/u/0/d/1jSinNyYJCHkoDvQgaJkD_z2g9SV5G6v9gsKI-nwmrYM/mobilebasic">Guide</a>?
 <form name="newuser" method="post" action="newuser.php" role="form">
 <input type="hidden" name="token_newuser" value="{$_SESSION['token_newuser']}"/>
 Leave this field blank (stops crawler spambots) <input name="username" maxlength="25"/>

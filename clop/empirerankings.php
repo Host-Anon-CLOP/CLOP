@@ -8,7 +8,7 @@ echo <<<EOFORM
 <tr><th style="width:25px"></th><th>User</th><th>Nations</th><th>Total GDP</th></tr>
 EOFORM;
 foreach ($users as $user) {
-if ($user['flag']) {
+if ($user['flag'] && ($_SESSION['hideflags'] == 0)) {
 $display['flag'] = htmlentities($user['flag'], ENT_SUBSTITUTE, "UTF-8");
 $flaghtml =<<<EOFORM
 <img src="{$display['flag']}" height="20" width="20">

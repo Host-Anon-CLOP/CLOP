@@ -35,7 +35,7 @@ echo <<<EOFORM
 <center><table class="table table-striped table-bordered">
 EOFORM;
 foreach ($alliancemembers as $member) {
-if ($member['flag']) {
+if ($member['flag'] && ($_SESSION['hideflags'] == 0)) {
 $display['flag'] = htmlentities($member['flag'], ENT_SUBSTITUTE, "UTF-8");
 $flaghtml =<<<EOFORM
 <img src="{$display['flag']}" height="20" width="20">

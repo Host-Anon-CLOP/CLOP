@@ -6,7 +6,7 @@ if ($_POST['user_id']) {
 	$mysql['user_id'] = (int)$_GET['user_id'];
 }
 $sql =<<<EOSQL
-SELECT u.username, u.user_id, u.email, u.flag, u.donator, u.stasismode, u.description, u.hidebanners, u.hideicons, u.hidereports, u.alliance_id, a.name AS alliancename
+SELECT u.username, u.user_id, u.email, u.flag, u.donator, u.stasismode, u.description, u.hidebanners, u.hideicons, u.hideflags, u.hidereports, u.alliance_id, a.name AS alliancename
 FROM users u LEFT JOIN alliances a ON u.alliance_id = a.alliance_id WHERE u.user_id = '{$mysql['user_id']}'
 EOSQL;
 $userinfo = onelinequery($sql);

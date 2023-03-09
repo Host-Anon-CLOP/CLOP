@@ -279,7 +279,9 @@ echo <<<EOFORM
   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><font color="orange">Guides </font><b class="caret"></b></a>
   <ul class="dropdown-menu">
     <li><a href="rules.php">Rules</a></li>
-    <li><a href="guide.php">Guide</a></li>
+    <li><a href="https://docs.google.com/document/u/0/d/1jSinNyYJCHkoDvQgaJkD_z2g9SV5G6v9gsKI-nwmrYM/mobilebasic" target="_new_win">Recommended Guide</a></li>
+    <li><a href="https://test.4clop.com/images/the_chart.png" target="_new_win">Enviro Loss Chart</a></li>
+    <li><a href="guide.php">Another Guide</a></li>
     <li><a href="warguide.php">War Guide</a></li>
   </ul>
 </ul>

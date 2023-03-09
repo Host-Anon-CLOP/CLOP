@@ -43,7 +43,7 @@ function needsnation() {
     exit;
     } else {
         $sql=<<<EOSQL
-        SELECT n.*, u.alliance_id, u.seesecrets, u.stasismode, u.hideicons FROM nations n INNER JOIN users u ON u.user_id = n.user_id
+        SELECT n.*, u.alliance_id, u.seesecrets, u.stasismode, u.hideicons, u.hideflags FROM nations n INNER JOIN users u ON u.user_id = n.user_id
         WHERE u.user_id = {$_SESSION['user_id']} AND n.nation_id = {$_SESSION['nation_id']}
 EOSQL;
         $rs = onelinequery($sql);

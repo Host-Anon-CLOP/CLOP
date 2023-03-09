@@ -8,7 +8,7 @@ $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle 
 $subregiontypes = array(0 => "", 1 => "North ", 2 => "Central ", 3 => "South ");
 $forcetypes = array(1 => "Cavalry", 2 => "Tanks", 3 => "Pegasi", 4 => "Unicorns", 5 => "Naval", 6 => "Alicorns");
 $buildings = array();
-$sql = "SELECT n.*, u.user_id, u.username, u.donator, u.alliance_id from nations n INNER JOIN users u ON u.user_id = n.user_id WHERE n.nation_id = '{$mysql['nation_id']}'";
+$sql = "SELECT n.*, u.user_id, u.username, u.donator, u.alliance_id, u.flag from nations n INNER JOIN users u ON u.user_id = n.user_id WHERE n.nation_id = '{$mysql['nation_id']}'";
 $nationinfo = onelinequery($sql);
 if ($nationinfo) {
 $nationinfo['regionname'] = $regiontypes[$nationinfo['region']];
@@ -64,5 +64,65 @@ while ($rs = mysqli_fetch_array($sth)) {
         $defenders[] = $rs;
     }
 }
+
+# Nation Resources
+$affectedresources = array();
+$requiredresources = array();
+$resources = array();
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
+FROM resourceeffects rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
+WHERE r.nation_id = '{$mysql['nation_id']}'
+GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $affectedresources[$rs['name']] = $rs['affected'];
+}
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
+FROM resourcerequirements rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
+WHERE r.nation_id = '{$mysql['nation_id']}'
+GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $requiredresources[$rs['name']] = $rs['required'];
+}
+
+# Alliance Resources
+if ($nationinfo['alliance_id'] != 0) {
+    $allianceaffectedresources = array();
+    $alliancerequiredresources = array();
+    $allianceresources = array();
+
+    $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
+    FROM resourceeffects rr
+    INNER JOIN resources r ON r.resource_id = rr.resource_id
+    INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
+    INNER JOIN nations n ON r.nation_id = n.nation_id
+    INNER JOIN users u ON n.user_id = u.user_id
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}'
+    GROUP BY rd.name";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    while ($rs = mysqli_fetch_array($sth)) {
+        $allianceaffectedresources[$rs['name']] = $rs['affected'];
+    }
+
+    $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
+    FROM resourcerequirements rr
+    INNER JOIN resources r ON r.resource_id = rr.resource_id
+    INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
+    INNER JOIN nations n ON r.nation_id = n.nation_id
+    INNER JOIN users u ON n.user_id = u.user_id
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}'
+    GROUP BY rd.name";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    while ($rs = mysqli_fetch_array($sth)) {
+        $alliancerequiredresources[$rs['name']] = $rs['required'];
+    }
+    }
 }
 ?>

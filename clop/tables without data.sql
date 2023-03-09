@@ -567,10 +567,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `seesecrets` tinyint(1) NOT NULL DEFAULT '0',
   `empiremax` int(11) DEFAULT NULL,
   `hideicons` tinyint(1) NOT NULL DEFAULT '0',
+  `hideflags` tinyint(1) NOT NULL DEFAULT '0',
   `hidereports` tinyint(1) NOT NULL DEFAULT '0',
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `lastactive` datetime DEFAULT NULL,
   `flag` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `alliance_messages_last_checked` datetime DEFAULT NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
