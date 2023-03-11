@@ -235,6 +235,9 @@ $_SESSION['alliance_messages_last_checked'] = date("Y-m-d H:i:s");
 
 
 # Alliance Resources
+$sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
+$nationinfo = onelinequery($sql);
+
 $allianceaffectedresources = array();
 $alliancerequiredresources = array();
 $allianceresources = array();

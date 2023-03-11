@@ -153,75 +153,74 @@ EOFORM;
 }
 
 # Alliance Resources
-if ($nationinfo['alliance_id'] != 0) {
-    echo <<<EOFORM
-    </tbody>
-    </table>
-    </div>
-    </div>
-      <div class="col-md-6">
-       <div class="panel panel-default">
-         <div class="panel-heading">Alliance Resources</div>
-         <table class="table">
-          <thead>
-            <tr>
-    EOFORM;
-            if (!$nationinfo['hideicons']) {
-            echo <<<EOFORM
-              <td></td>
-    EOFORM;
-            }
-            echo <<<EOFORM
-              <td style="text-align: right;">Resource</td>
-              <td>Generated</td>
-              <td>Used</td>
-              <td>Net</td>
-            </tr>
-          </thead>
-          <tbody>
-    EOFORM;
-    foreach($allianceaffectedresources as $name => $amount) {
-    if (!$allianceresources[$name]) $allianceresources[$name] = 0;
-    }
-    foreach($alliancerequiredresources as $name => $amount) {
-    if (!$allianceresources[$name]) $allianceresources[$name] = 0;
-    }
-    ksort($allianceresources);
-    foreach($allianceresources as $name => $amount) {
-      if (!$allianceaffectedresources[$name]) {
-        $allianceaffectedresources[$name] = 0;
-      }
-      if (!$alliancerequiredresources[$name]) {
-        $alliancerequiredresources[$name] = 0;
-      }
-      $amountNet = ($allianceaffectedresources[$name] - $alliancerequiredresources[$name]);
-    
-      if($amountNet > 0) $amountNetClass = "text-success";
-      elseif($amountNet == 0) $amountNetClass = "text-warning";
-      else $amountNetClass = "text-danger";
-      $displayaffected = commas($allianceaffectedresources[$name]);
-      $displayrequired = commas($alliancerequiredresources[$name]);
-      if ($amountNet < 0) {
-      $displaynet = "-" . commas(abs($amountNet));
-      } else {
-      $displaynet = commas($amountNet);
-      }
-    
-      echo <<<EOFORM
+echo <<<EOFORM
+</tbody>
+</table>
+</div>
+</div>
+    <div class="col-md-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">Alliance Resources</div>
+        <table class="table">
+        <thead>
         <tr>
-    EOFORM;
+EOFORM;
         if (!$nationinfo['hideicons']) {
         echo <<<EOFORM
-        <td style="width: 16px;"><img src="images/icons/{$name}.png"/></td>
-    EOFORM;
+            <td></td>
+EOFORM;
         }
         echo <<<EOFORM
-        <td style="text-align: right;">{$name}</td>
-        <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
-        <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
-        <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
+            <td style="text-align: right;">Resource</td>
+            <td>Generated</td>
+            <td>Used</td>
+            <td>Net</td>
         </tr>
-    EOFORM;
+        </thead>
+        <tbody>
+EOFORM;
+foreach($allianceaffectedresources as $name => $amount) {
+if (!$allianceresources[$name]) $allianceresources[$name] = 0;
+}
+foreach($alliancerequiredresources as $name => $amount) {
+if (!$allianceresources[$name]) $allianceresources[$name] = 0;
+}
+ksort($allianceresources);
+foreach($allianceresources as $name => $amount) {
+    if (!$allianceaffectedresources[$name]) {
+    $allianceaffectedresources[$name] = 0;
     }
+    if (!$alliancerequiredresources[$name]) {
+    $alliancerequiredresources[$name] = 0;
     }
+    $amountNet = ($allianceaffectedresources[$name] - $alliancerequiredresources[$name]);
+
+    if($amountNet > 0) $amountNetClass = "text-success";
+    elseif($amountNet == 0) $amountNetClass = "text-warning";
+    else $amountNetClass = "text-danger";
+    $displayaffected = commas($allianceaffectedresources[$name]);
+    $displayrequired = commas($alliancerequiredresources[$name]);
+    if ($amountNet < 0) {
+    $displaynet = "-" . commas(abs($amountNet));
+    } else {
+    $displaynet = commas($amountNet);
+    }
+
+    echo <<<EOFORM
+    <tr>
+EOFORM;
+    if (!$nationinfo['hideicons']) {
+    echo <<<EOFORM
+    <td style="width: 16px;"><img src="images/icons/{$name}.png"/></td>
+EOFORM;
+    }
+    echo <<<EOFORM
+    <td style="text-align: right;">{$name}</td>
+    <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
+    <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
+    <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
+    </tr>
+EOFORM;
+}
+    
 ?>
