@@ -10,7 +10,10 @@ if (!$rs['alliance_id']) {
     header("Location: overview.php");
     exit;
 }
-foreach ($_POST as $key => $value) {
+# original doesn't get nation_id
+# foreach ($_POST as $key => $value) {
+$getpost = array_merge($_GET, $_POST);
+foreach ($getpost as $key => $value) {
     $mysql[$key] = $GLOBALS['mysqli']->real_escape_string($value);
     $display[$key] = htmlentities($value);
 }
