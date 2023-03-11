@@ -2,7 +2,7 @@
 include("backend/backend_userinfo.php");
 $extratitle = "User Info - ";
 include("header.php");
-$cssoptions = array(0 => "White", 1 => "Black", 2 => "Gray");
+$cssoptions = array(0 => "Grey", 1 => "Black", 2 => "White");
 if ($userinfo['donator']) {
     echo <<<EOFORM
 <center><b>Thank you for your donation!</b></center>
