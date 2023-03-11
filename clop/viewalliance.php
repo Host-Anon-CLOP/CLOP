@@ -74,7 +74,6 @@ echo <<<EOFORM
 </table>
 </div>
 </div>
-<center>
     <div class="col-md-6">
     <div class="panel panel-default">
         <div class="panel-heading">Alliance Resources</div>
@@ -137,7 +136,6 @@ EOFORM;
     <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
     <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
     </tr>
-    </center>
 EOFORM;
 }
 
