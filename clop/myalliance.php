@@ -154,6 +154,7 @@ EOFORM;
 
 # Alliance Resources
 echo <<<EOFORM
+<center>
 </tbody>
 </table>
 </div>
