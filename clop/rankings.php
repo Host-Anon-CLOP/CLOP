@@ -45,7 +45,9 @@ EOFORM;
         $sortby = $nation['gdp_last_turn'];
     }
     echo <<<EOFORM
-<tr><td style="width:25px">{$flaghtml}</td><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}</a></td><td>{$sortby}</td><td>{$nation['government']}</td><td>{$nation['economy']}</td></tr>
+    $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
+    $icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
+<tr><td style="width:25px">{$flaghtml}</td><td><a href="viewnation.php?nation_id={$nation['nation_id']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})">{$nation['name']}</a></td><td>{$sortby}</td><td>{$nation['government']}</td><td>{$nation['economy']}</td></tr>
 EOFORM;
 }
 echo "</table>";
