@@ -52,7 +52,8 @@ EOFORM;
 } else {
     # grey
     $stylesheets =<<<EOFORM
-    <link href="css/slate.min.css" rel="stylesheet" media="Screen">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="Screen">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 EOFORM;
     $internal = "";
 }
