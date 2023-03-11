@@ -233,12 +233,12 @@ EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 $_SESSION['alliance_messages_last_checked'] = date("Y-m-d H:i:s");
 
-# Get ShowFlags Details
+# Get HideIcons Details
 $sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
 $nationinfo = onelinequery($sql);
 
 # Nation Resources
-$affectedresources = array();
+$affectedresources = array(); 
 $requiredresources = array();
 $resources = array();
 
