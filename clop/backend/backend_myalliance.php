@@ -234,7 +234,7 @@ $sth = $GLOBALS['mysqli']->query($sql);
 $_SESSION['alliance_messages_last_checked'] = date("Y-m-d H:i:s");
 
 # Get HideIcons Details
-$sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
+$sql = "SELECT n.*, u.user_id, u.username, u.donator, u.alliance_id, u.flag from nations n INNER JOIN users u ON u.user_id = n.user_id WHERE n.nation_id = '{$mysql['nation_id']}'";
 $nationinfo = onelinequery($sql);
 
 # Nation Resources
