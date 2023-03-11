@@ -90,5 +90,40 @@ EOSQL;
 	}
     $displaypubdescription = nl2br(htmlentities($allianceinfo['public_description'], ENT_SUBSTITUTE, "UTF-8"));
     
+# Get HideIcons Details
+$sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
+$nationinfo = onelinequery($sql);
+
+# Alliance Resources
+$allianceaffectedresources = array();
+$alliancerequiredresources = array();
+$allianceresources = array();
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
+FROM resourceeffects rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
+INNER JOIN nations n ON r.nation_id = n.nation_id
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE u.alliance_id = '{$rs['alliance_id']}'
+GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $allianceaffectedresources[$rs['name']] = $rs['affected'];
+}
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
+FROM resourcerequirements rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
+INNER JOIN nations n ON r.nation_id = n.nation_id
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE u.alliance_id = '{$rs['alliance_id']}'
+GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $alliancerequiredresources[$rs['name']] = $rs['required'];
+}
+
 }
 ?>
