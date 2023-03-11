@@ -3,7 +3,6 @@ include("backend/backend_myalliance.php");
 $extratitle = "My Alliance - ";
 include("header.php");
 echo <<<EOFORM
-<h1>test {$allianceinfo['alliance_id']}</h1>
 <center><h3>{$allianceinfo['name']}</h3></center><br/>
 <center>{$displaydescription}</center>
 EOFORM;
