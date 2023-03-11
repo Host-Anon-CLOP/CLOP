@@ -69,12 +69,14 @@ EOFORM;
 
 
 # Alliance Resources
+# uncentered: <div class="col-md-6">
+# centered: <div class="col-md-6 col-md-offset-3">
 echo <<<EOFORM
 </tbody>
 </table>
 </div>
 </div>
-    <div class="col-md-6">
+    <div class="col-md-6 col-md-offset-3">
     <div class="panel panel-default">
         <div class="panel-heading">Alliance Resources</div>
         <table class="table">
