@@ -10,10 +10,7 @@ if (!$rs['alliance_id']) {
     header("Location: overview.php");
     exit;
 }
-# original doesn't get nation_id
-# foreach ($_POST as $key => $value) {
-$getpost = array_merge($_GET, $_POST);
-foreach ($getpost as $key => $value) {
+foreach ($_POST as $key => $value) {
     $mysql[$key] = $GLOBALS['mysqli']->real_escape_string($value);
     $display[$key] = htmlentities($value);
 }
@@ -239,34 +236,6 @@ $_SESSION['alliance_messages_last_checked'] = date("Y-m-d H:i:s");
 # Get HideIcons Details
 $sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
 $nationinfo = onelinequery($sql);
-
-# Nation Resources
-$affectedresources = array(); 
-$requiredresources = array();
-$resources = array();
-
-$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
-FROM resourceeffects rr
-INNER JOIN resources r ON r.resource_id = rr.resource_id
-INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
-WHERE r.nation_id = '{$mysql['nation_id']}'
-GROUP BY rd.name";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-    $affectedresources[$rs['name']] = $rs['affected'];
-}
-
-$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
-FROM resourcerequirements rr
-INNER JOIN resources r ON r.resource_id = rr.resource_id
-INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
-WHERE r.nation_id = '{$mysql['nation_id']}'
-GROUP BY rd.name";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-    $requiredresources[$rs['name']] = $rs['required'];
-}
-
 
 # Alliance Resources
 $allianceaffectedresources = array();
