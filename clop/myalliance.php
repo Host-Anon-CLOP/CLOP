@@ -160,8 +160,8 @@ echo <<<EOFORM
 </table>
 </div>
 </div>
-    <div class="col-md-6">
-    <div class="panel panel-default col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
         <div class="panel-heading">Alliance Resources</div>
         <table class="table">
         <thead>
