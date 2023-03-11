@@ -3,6 +3,7 @@ include("backend/backend_myalliance.php");
 $extratitle = "My Alliance - ";
 include("header.php");
 echo <<<EOFORM
+<h1>test {$rs['alliance_id']}</h1>
 <center><h3>{$allianceinfo['name']}</h3></center><br/>
 <center>{$displaydescription}</center>
 EOFORM;
@@ -220,10 +221,6 @@ EOFORM;
     <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
     <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
     </tr>
-EOFORM;
-
-echo <<<EOFORM
-test '{$rs['alliance_id']}'
 EOFORM;
 }
     
