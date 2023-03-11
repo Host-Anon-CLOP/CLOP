@@ -137,6 +137,7 @@ EOFORM;
     <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
     </tr>
 EOFORM;
+}
 
 } else {
     echo <<<EOFORM
