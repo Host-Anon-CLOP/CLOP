@@ -273,17 +273,17 @@ echo <<<EOFORM
       <li><a href="empirerankings.php">Empire Size</a></li>
       <li><a href="ascensions.php">Ascensions</a></li>
       <li><a href="graveyard.php">Graveyard</a></li>
-  </ul>
-  </li>
-  <li><a href="news.php">News</a></li>
-  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><font color="orange">Guides </font><b class="caret"></b></a>
-  <ul class="dropdown-menu">
-    <li><a href="rules.php">Rules</a></li>
-    <li><a href="https://docs.google.com/document/u/0/d/1jSinNyYJCHkoDvQgaJkD_z2g9SV5G6v9gsKI-nwmrYM/mobilebasic" target="_new_win">Recommended Guide</a></li>
-    <li><a href="https://test.4clop.com/images/the_chart.png" target="_new_win">Enviro Loss Chart</a></li>
-    <li><a href="guide.php">Another Guide</a></li>
-    <li><a href="warguide.php">War Guide</a></li>
-  </ul>
+      </ul>
+      </li>
+      <li><a href="news.php">News</a></li>
+      <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><font color="orange">Guides </font><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="rules.php">Rules</a></li>
+        <li><a href="https://docs.google.com/document/u/0/d/1jSinNyYJCHkoDvQgaJkD_z2g9SV5G6v9gsKI-nwmrYM/mobilebasic" target="_new_win">Recommended Guide</a></li>
+        <li><a href="https://test.4clop.com/images/the_chart.png" target="_new_win">Enviro Loss Chart</a></li>
+        <li><a href="guide.php">Another Guide</a></li>
+        <li><a href="warguide.php">War Guide</a></li>
+      </ul>
 </ul>
 <div class="navbar-header"></div>
 </nav>
@@ -307,15 +307,19 @@ EOFORM;
           <li><a href="rankings.php?mode=statues">Statues</a></li>
           <li><a href="rankings.php?mode=longevity">Longevity</a></li>
           <li><a href="empirerankings.php">Empire Size</a></li>
+          <li><a href="ascensions.php">Ascensions</a></li>
+          <li><a href="graveyard.php">Graveyard</a></li>
       </ul>
       </li>
       <li><a href="news.php">News</a></li>
-      <li><a href="graveyard.php">Graveyard</a></li>
-      <li><a href="ascensions.php">Ascensions</a></li>
-      <li><a href="rules.php">Rules</a></li>
-      <li><a href="guide.php"><font color="orange">Guide</font></a></li>
-      <li><a href="warguide.php">War Guide</a></li>
-    </ul>
+      <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><font color="orange">Guides </font><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="rules.php">Rules</a></li>
+        <li><a href="https://docs.google.com/document/u/0/d/1jSinNyYJCHkoDvQgaJkD_z2g9SV5G6v9gsKI-nwmrYM/mobilebasic" target="_new_win">Recommended Guide</a></li>
+        <li><a href="https://test.4clop.com/images/the_chart.png" target="_new_win">Enviro Loss Chart</a></li>
+        <li><a href="guide.php">Another Guide</a></li>
+        <li><a href="warguide.php">War Guide</a></li>
+      </ul>
   </nav>
   <div id="content"> 
     <p>
