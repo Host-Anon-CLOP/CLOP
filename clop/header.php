@@ -30,9 +30,12 @@ if ((date("H") % 2 == 0) && (date("i") == 0) && (date("s") == 0)) {
 }
 
 if (!$_SESSION['css']) {
+    # default css - white
+    #$stylesheets =<<<EOFORM
+    #<link href="css/bootstrap.min.css" rel="stylesheet" media="Screen">
+    #<link rel="stylesheet" href="css/bootstrap-theme.min.css">
     $stylesheets =<<<EOFORM
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="Screen">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link href="css/cyborg.min.css" rel="stylesheet" media="Screen">
 EOFORM;
     $internal = "";
 } else if ($_SESSION['css'] == 1) {
