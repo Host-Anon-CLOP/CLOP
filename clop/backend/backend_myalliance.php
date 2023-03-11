@@ -35,6 +35,7 @@ if ($_SESSION['user_id'] == $allianceinfo['owner_id']) {
     $owner = true;
 }
 if (!$errors) {
+    # Alliance Leader Stuff
     if ($owner) {
     if ($_POST['updatedescription']) {
         $sql=<<<EOSQL
@@ -186,6 +187,8 @@ EOSQL;
     }
 }
 }
+
+# Alliance Member Stuff
 $alliancemembers = array();
 $requestingmembers = array();
 $sql=<<<EOSQL
@@ -229,4 +232,37 @@ UPDATE users SET alliance_messages_last_checked = NOW() WHERE user_id = {$_SESSI
 EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 $_SESSION['alliance_messages_last_checked'] = date("Y-m-d H:i:s");
+
+
+# Alliance Resources
+$allianceaffectedresources = array();
+$alliancerequiredresources = array();
+$allianceresources = array();
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
+FROM resourceeffects rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
+INNER JOIN nations n ON r.nation_id = n.nation_id
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE u.alliance_id = '{$rs['alliance_id']}'
+GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $allianceaffectedresources[$rs['name']] = $rs['affected'];
+}
+
+$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
+FROM resourcerequirements rr
+INNER JOIN resources r ON r.resource_id = rr.resource_id
+INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
+INNER JOIN nations n ON r.nation_id = n.nation_id
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE u.alliance_id = '{$rs['alliance_id']}'
+GROUP BY rd.name";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    $alliancerequiredresources[$rs['name']] = $rs['required'];
+}
+    
 ?>
