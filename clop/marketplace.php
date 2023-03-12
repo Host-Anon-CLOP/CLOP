@@ -24,14 +24,6 @@ and receive {$displaysellingmultiplier}% less than your listed price when sellin
       <option value=""></option>
 EOFORM;
 
-# TEMP
-#foreach ($friends as $friend) {
-echo <<<EOFORM
-FRIENDS: {$friends}
-EOFORM;
-#}
-# TEMP END
-
 foreach($resourceoptions as $option) {
     echo <<<EOFORM
         <option value="{$option['resource_id']}"
@@ -50,7 +42,7 @@ echo <<<EOFORM
     <p>
       Place
       <input name="amount" class="form-control" placeholder="Qty" style="width:100px;"/>
-      of the selected item on the market for
+      FRIENDS: {$friends} of the selected item on the market for
       <input name="price" class="form-control" placeholder="Bits" style="width:100px;"/>
       <input type="submit" name="action" value="Place on Market" class="btn btn-success"/>
     </p>
