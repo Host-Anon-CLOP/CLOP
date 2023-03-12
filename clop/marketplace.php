@@ -62,7 +62,7 @@ echo <<<EOFORM
 EOFORM;
     foreach ($deals as $deal) {
         # FRIENDS
-        if ($deal['user_id'] == 20) {
+        if ($deal['user_id'] == "20") {
           $displayname =<<<EOFORM
   <span class="text-success">{$deal['name']}</span>
   EOFORM;
