@@ -27,7 +27,7 @@ EOFORM;
 # TEMP
 #foreach ($friends as $friend) {
 echo <<<EOFORM
-<span class="text-success">FRIENDS: {$friends}</span>
+FRIENDS: {$friends}
 EOFORM;
 #}
 # TEMP END
