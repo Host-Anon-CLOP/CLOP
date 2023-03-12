@@ -29,6 +29,7 @@ EOFORM;
 } else {
     echo <<<EOFORM
     <center>You have no friends.</center>
+    <br>
 EOFORM;
 }
 
