@@ -42,7 +42,13 @@ echo <<<EOFORM
     <p>
       Place
 EOFORM;
-#FRIENDS: print_r{$friends}
+
+foreach($friends as $friend) {
+  echo <<<EOFORM
+  friend {$friend}
+EOFORM;
+}
+
 echo <<<EOFORM
       <input name="amount" class="form-control" placeholder="Qty" style="width:100px;"/>
       of the selected item on the market for
