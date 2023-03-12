@@ -61,15 +61,17 @@ echo <<<EOFORM
 </div></td></tr></thead><tbody>
 EOFORM;
     foreach ($deals as $deal) {
-#        if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
-#          $displayname =<<<EOFORM
-#  <span class="text-success">{$deal['name']}</span>
-#  EOFORM;
-#          $displayregion =<<<EOFORM
-#  <span class="text-success">{$regiontypes[$deal['region']]}</span>
-#  EOFORM;
-#      }
-        if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
+        # FRIENDS
+        if ($deal['user_id'] == '20') {
+          $displayname =<<<EOFORM
+  <span class="text-success">{$deal['name']}</span>
+  EOFORM;
+          $displayregion =<<<EOFORM
+  <span class="text-success">{$regiontypes[$deal['region']]}</span>
+  EOFORM;
+      }
+        # ALLIANCE
+        else if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
