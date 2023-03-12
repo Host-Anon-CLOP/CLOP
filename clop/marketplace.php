@@ -25,11 +25,11 @@ and receive {$displaysellingmultiplier}% less than your listed price when sellin
 EOFORM;
 
 # TEMP
-foreach ($friends as $friend) {
-<<<EOFORM
-<span class="text-success">FRIENDS: {$friends}</span>
-EOFORM;
-}
+#foreach ($friends as $friend) {
+#<<<EOFORM
+#<span class="text-success">FRIENDS: {$friends}</span>
+#EOFORM;
+#}
 # TEMP END
 
 foreach($resourceoptions as $option) {
@@ -69,15 +69,15 @@ echo <<<EOFORM
 </div></td></tr></thead><tbody>
 EOFORM;
     foreach ($deals as $deal) {
+#        if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
+#          $displayname =<<<EOFORM
+#  <span class="text-success">{$deal['name']}</span>
+#  EOFORM;
+#          $displayregion =<<<EOFORM
+#  <span class="text-success">{$regiontypes[$deal['region']]}</span>
+#  EOFORM;
+#      }
         if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
-          $displayname =<<<EOFORM
-  <span class="text-success">{$deal['name']}</span>
-  EOFORM;
-          $displayregion =<<<EOFORM
-  <span class="text-success">{$regiontypes[$deal['region']]}</span>
-  EOFORM;
-      }
-        else if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
