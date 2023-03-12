@@ -23,6 +23,10 @@ EOFORM;
  <input type="submit" onclick="return confirm('Really add everyone in {$allianceinfo['name']} to your embargo list? (Depending on the alliance, a large portion of the market may disappear for you!)')"
 name="embargoalliance" value="Embargo Alliance" class="btn btn-danger btn-sm"/>
 <input type="submit" name="unembargoalliance" value="Unembargo Alliance" class="btn btn-success btn-sm"/>
+<input type="submit" name="enemyalliance" value="Enemy Alliance" class="btn btn-danger btn-sm"/>
+<input type="submit" name="unenemyalliance" value="UnEnemy Alliance" class="btn btn-success btn-sm"/>
+<input type="submit" name="friendalliance" value="Friend Alliance" class="btn btn-success btn-sm"/>
+<input type="submit" name="unfriendalliance" value="UnFriend Alliance" class="btn btn-danger btn-sm"/>
 </form>
 </center>
 </br>
