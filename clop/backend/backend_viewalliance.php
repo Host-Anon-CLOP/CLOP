@@ -123,7 +123,7 @@ EOSQL;
 		$sth = $GLOBALS['mysqli']->query($sql);
 		while ($rs = mysqli_fetch_array($sth)) {
 			$sql=<<<EOSQL
-			DELETE FROM enemies WHERE enemier = '{$_SESSION['user_id']}' AND eneimee = '{$rs['user_id']}'
+			DELETE FROM enemies WHERE enemier = '{$_SESSION['user_id']}' AND enemiee = '{$rs['user_id']}'
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 		}
