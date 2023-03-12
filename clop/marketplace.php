@@ -70,6 +70,15 @@ EOFORM;
   <span class="text-info">{$regiontypes[$deal['region']]}</span>
 EOFORM;
       }
+      # ENEMIES
+      elseif (in_array($deal['user_id'], $enemies)) {
+        $displayname =<<<EOFORM
+<span class="text-error">{$deal['name']}</span>
+EOFORM;
+        $displayregion =<<<EOFORM
+<span class="text-info">{$regiontypes[$deal['region']]}</span>
+EOFORM;
+    }
         # ALLIANCE
         elseif (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
