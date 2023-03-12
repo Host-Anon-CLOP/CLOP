@@ -113,6 +113,7 @@ if ($_POST) {
     while ($rs = mysqli_fetch_array($sth)) {
         $friends[$rs['user_id']] = $rs['user_id'];
     }
+    }
     $sql = "SELECT u.user_id FROM enemies e INNER JOIN users u ON e.enemiee = u.user_id WHERE e.enemier = '{$_SESSION['user_id']}'";
     $sth = $GLOBALS['mysqli']->query($sql);
     if ($sth) {
