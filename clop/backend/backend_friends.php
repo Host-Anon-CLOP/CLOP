@@ -9,6 +9,9 @@ if ($_POST && (($_POST['token_friends'] == "") || ($_POST['token_friends'] != $_
 if ($_POST || ($_SESSION['token_friends'] == "")) {
     $_SESSION['token_friends'] = sha1(rand() . $_SESSION['token_friends']);
 }
+elseif ($_POST || ($_SESSION['token_enemies'] == "")) {
+    $_SESSION['token_enemies'] = sha1(rand() . $_SESSION['token_enemies']);
+}
 if (!$errors) {
 # FRIENDS
 if ($_POST['action'] == "Friend") {
