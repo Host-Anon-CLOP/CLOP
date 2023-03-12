@@ -64,7 +64,7 @@ EOFORM;
         # FRIENDS
         if (in_array($deal['user_id'], $friends)) {
           $displayname =<<<EOFORM
-  <span class="text-info">friend {$deal['name']}</span>
+  <span class="text-info">{$deal['name']}</span>
 EOFORM;
           $displayregion =<<<EOFORM
   <span class="text-info">{$regiontypes[$deal['region']]}</span>
@@ -73,7 +73,7 @@ EOFORM;
       # ENEMIES
       elseif (in_array($deal['user_id'], $enemies)) {
         $displayname =<<<EOFORM
-<span class="text-danger">enemy {$deal['name']}</span>
+<span class="text-danger">{$deal['name']}</span>
 EOFORM;
         $displayregion =<<<EOFORM
 <span class="text-danger">{$regiontypes[$deal['region']]}</span>
@@ -82,7 +82,7 @@ EOFORM;
         # ALLIANCE
         elseif (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
-<span class="text-success">alliance {$deal['name']}</span>
+<span class="text-success">{$deal['name']}</span>
 EOFORM;
             $displayregion =<<<EOFORM
 <span class="text-success">{$regiontypes[$deal['region']]}</span>
