@@ -30,7 +30,7 @@ if ((date("H") % 2 == 0) && (date("i") == 0) && (date("s") == 0)) {
 }
 
 if (!$_SESSION['css']) {
-    # default css - white
+    # original default css - white
     #$stylesheets =<<<EOFORM
     #<link href="css/bootstrap.min.css" rel="stylesheet" media="Screen">
     #<link rel="stylesheet" href="css/bootstrap-theme.min.css">
