@@ -88,7 +88,7 @@ EOFORM;
 <span class="text-success">{$regiontypes[$deal['region']]}</span>
 EOFORM;
         } else {
-            $displayname = neutral $deal['name'];
+            $displayname = $deal['name'];
             $displayregion = $regiontypes[$deal['region']];
         }
         $display['price'] = commas($deal['price']);
