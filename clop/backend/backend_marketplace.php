@@ -107,6 +107,13 @@ if ($_POST) {
         $embargoed[$rs['user_id']] = $rs['user_id'];
     }
     }
+    $sql = "SELECT u.user_id FROM friends e INNER JOIN users u ON e.friendee = u.user_id WHERE e.friender = '{$_SESSION['user_id']}'";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    if ($sth) {
+    while ($rs = mysqli_fetch_array($sth)) {
+        $friends[$rs['user_id']] = $rs['user_id'];
+    }
+    }
 
 }
 if ($_POST['action'] == "Remove from Marketplace") {
