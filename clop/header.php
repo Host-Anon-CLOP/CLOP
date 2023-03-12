@@ -215,6 +215,7 @@ echo <<<EOFORM
       <li><a href="userinfo.php">User Info</a></li>
       <li><a href="transfer.php">Empire Transfers</a></li>
       <li><a href="blocklist.php">Blocklist</a></li>
+      <li><a href="friends.php">Friends</a></li>
       <li><a href="logout.php">Logout</a></li>
     </ul>
   </li>
