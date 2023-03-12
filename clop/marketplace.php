@@ -25,11 +25,11 @@ and receive {$displaysellingmultiplier}% less than your listed price when sellin
 EOFORM;
 
 # TEMP
-foreach ($friends as $friend) {
+#foreach ($friends as $friend) {
 echo <<<EOFORM
 <span class="text-success">FRIENDS: {$friends}</span>
 EOFORM;
-}
+#}
 # TEMP END
 
 foreach($resourceoptions as $option) {
