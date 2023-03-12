@@ -69,15 +69,7 @@ EOFORM;
           $displayregion =<<<EOFORM
   <span class="text-success">{$regiontypes[$deal['region']]}</span>
   EOFORM;
-#      }
-#        # ALLIANCE
-#        if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
-#            $displayname =<<<EOFORM
-#<span class="text-success">{$deal['name']}</span>
-#EOFORM;
-#            $displayregion =<<<EOFORM
-#<span class="text-success">{$regiontypes[$deal['region']]}</span>
-#EOFORM;
+
         } else {
             $displayname = $deal['name'];
             $displayregion = $regiontypes[$deal['region']];
