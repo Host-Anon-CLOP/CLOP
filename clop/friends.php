@@ -26,25 +26,7 @@ EOFORM;
 EOFORM;
 } else {
     echo <<<EOFORM
-    <center>You are not Friending any users.</center>
-EOFORM;
-}
-if (!empty($friendingyou)) {
-    echo <<<EOFORM
-    <center>Users Friending you:</center>
-    <center><table class="table table-striped table-bordered" style="width:250px">
-EOFORM;
-    foreach ($friendingyou as $id => $name) {
-        echo <<<EOFORM
-<tr><td><a href="viewuser.php?user_id={$id}">{$name}</a></td></tr>
-EOFORM;
-}
-    echo <<<EOFORM
-    </table></center>
-EOFORM;
-} else {
-    echo <<<EOFORM
-    <center>No users are Friending you.</center>
+    <center>You have no friends.</center>
 EOFORM;
 }
 include("footer.php");

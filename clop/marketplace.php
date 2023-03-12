@@ -24,6 +24,14 @@ and receive {$displaysellingmultiplier}% less than your listed price when sellin
       <option value=""></option>
 EOFORM;
 
+# TEMP
+foreach ($friends as $friend) {
+<<<EOFORM
+<span class="text-success">FRIENDS: {$friends}</span>
+EOFORM;
+}
+# TEMP END
+
 foreach($resourceoptions as $option) {
     echo <<<EOFORM
         <option value="{$option['resource_id']}"
@@ -62,6 +70,14 @@ echo <<<EOFORM
 EOFORM;
     foreach ($deals as $deal) {
         if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
+          $displayname =<<<EOFORM
+  <span class="text-success">{$deal['name']}</span>
+  EOFORM;
+          $displayregion =<<<EOFORM
+  <span class="text-success">{$regiontypes[$deal['region']]}</span>
+  EOFORM;
+      }
+        else if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
