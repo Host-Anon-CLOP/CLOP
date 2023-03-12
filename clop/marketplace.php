@@ -64,10 +64,10 @@ EOFORM;
         # FRIENDS
         if (in_array($deal['user_id'], $friends)) {
           $displayname =<<<EOFORM
-  <span class="text-success">{$deal['name']}</span>
+  <span class="text-info">{$deal['name']}</span>
 EOFORM;
           $displayregion =<<<EOFORM
-  <span class="text-success">{$regiontypes[$deal['region']]}</span>
+  <span class="text-info">{$regiontypes[$deal['region']]}</span>
 EOFORM;
       }
         # ALLIANCE
