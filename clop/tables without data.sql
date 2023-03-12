@@ -340,6 +340,32 @@ CREATE TABLE IF NOT EXISTS `embargoes` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `friends`
+--
+
+CREATE TABLE IF NOT EXISTS `friends` (
+  `friender` int(10) unsigned NOT NULL,
+  `friendee` int(10) unsigned NOT NULL,
+  KEY `friender` (`friender`),
+  KEY `friendee` (`friendee`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enemies`
+--
+
+CREATE TABLE IF NOT EXISTS `enemies` (
+  `enemier` int(10) unsigned NOT NULL,
+  `enemiee` int(10) unsigned NOT NULL,
+  KEY `enemier` (`enemier`),
+  KEY `enemiee` (`enemiee`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `forcegroups`
 --
 

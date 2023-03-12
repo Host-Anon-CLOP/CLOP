@@ -36,6 +36,8 @@ if ($getpost['mode'] == "weapons") {
 $resources = array();
 $deals = array();
 $embargoed = array();
+$friends = array();
+$enemies = array();
 $buyingmultiplier = getbuyingmultiplier($_SESSION['nation_id']);
 $displaybuyingmultiplier = ($buyingmultiplier - 1) * 100;
 $sellingmultiplier = getsellingmultiplier($_SESSION['nation_id']);
@@ -116,6 +118,21 @@ if ($_POST) {
     if ($sth) {
     while ($rs = mysqli_fetch_array($sth)) {
         $embargoed[$rs['user_id']] = $rs['user_id'];
+    }
+    }
+
+    $sql = "SELECT u.user_id FROM friends e INNER JOIN users u ON e.friendee = u.user_id WHERE e.friender = '{$_SESSION['user_id']}'";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    if ($sth) {
+    while ($rs = mysqli_fetch_array($sth)) {
+        $friends[$rs['user_id']] = $rs['user_id'];
+    }
+    }
+    $sql = "SELECT u.user_id FROM enemies e INNER JOIN users u ON e.enemiee = u.user_id WHERE e.enemier = '{$_SESSION['user_id']}'";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    if ($sth) {
+    while ($rs = mysqli_fetch_array($sth)) {
+        $enemies[$rs['user_id']] = $rs['user_id'];
     }
     }
 }

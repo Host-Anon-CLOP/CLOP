@@ -60,7 +60,39 @@ EOSQL;
 			}
 		}
 		$infos[] = "Alliance embargoed.";
-	} else if ($_POST['unembargoalliance']) {
+	} else if ($_POST['friendalliance']) {
+		$sql=<<<EOSQL
+		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
+EOSQL;
+		$sth = $GLOBALS['mysqli']->query($sql);
+		while ($rs = mysqli_fetch_array($sth)) {
+			if ($rs['user_id'] != $_SESSION['user_id']) {
+			$sql=<<<EOSQL
+			INSERT INTO friends SET friender = '{$_SESSION['user_id']}', friendee = '{$rs['user_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
+			} else {
+				$errors[] = "You can friend your own alliance if you like, but you can't friend yourself!";
+			}
+		}
+		$infos[] = "Alliance friended.";
+	} else if ($_POST['enemyalliance']) {
+		$sql=<<<EOSQL
+		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
+EOSQL;
+		$sth = $GLOBALS['mysqli']->query($sql);
+		while ($rs = mysqli_fetch_array($sth)) {
+			if ($rs['user_id'] != $_SESSION['user_id']) {
+			$sql=<<<EOSQL
+			INSERT INTO enemies SET enemier = '{$_SESSION['user_id']}', enemiee = '{$rs['user_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
+			} else {
+				$errors[] = "You can enemy your own alliance if you like, but you can't enemy yourself!";
+			}
+		}
+		$infos[] = "Alliance enemied.";
+	}	else if ($_POST['unembargoalliance']) {
 		$sql=<<<EOSQL
 		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
 EOSQL;
@@ -72,6 +104,30 @@ EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 		}
 		$infos[] = "Alliance unembargoed.";
+	}	else if ($_POST['unfriendalliance']) {
+		$sql=<<<EOSQL
+		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
+EOSQL;
+		$sth = $GLOBALS['mysqli']->query($sql);
+		while ($rs = mysqli_fetch_array($sth)) {
+			$sql=<<<EOSQL
+			DELETE FROM friends WHERE friender = '{$_SESSION['user_id']}' AND friendee = '{$rs['user_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
+		}
+		$infos[] = "Alliance unfriended.";
+	} else if ($_POST['unenemyalliance']) {
+		$sql=<<<EOSQL
+		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
+EOSQL;
+		$sth = $GLOBALS['mysqli']->query($sql);
+		while ($rs = mysqli_fetch_array($sth)) {
+			$sql=<<<EOSQL
+			DELETE FROM enemies WHERE enemier = '{$_SESSION['user_id']}' AND enemiee = '{$rs['user_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
+		}
+		$infos[] = "Alliance unenemied.";
 	}
 	}
     $sql=<<<EOSQL
