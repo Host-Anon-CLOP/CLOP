@@ -26,7 +26,7 @@ EOFORM;
 
 # TEMP
 foreach ($friends as $friend) {
-<<<EOFORM
+echo <<<EOFORM
 <span class="text-success">FRIENDS: {$friends}</span>
 EOFORM;
 }
