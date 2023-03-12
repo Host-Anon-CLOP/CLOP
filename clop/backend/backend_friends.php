@@ -82,12 +82,12 @@ $friendingyou[$rs['user_id']] = $rs['username'];
 }
 
 # ENEMIES
-$sql = "SELECT u.user_id, u.username FROM enemies e INNER JOIN users u ON e.enemyee = u.user_id WHERE e.enemyer = '{$_SESSION['user_id']}'";
+$sql = "SELECT u.user_id, u.username FROM enemies e INNER JOIN users u ON e.enemiee = u.user_id WHERE e.enemier = '{$_SESSION['user_id']}'";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 $youenemying[$rs['user_id']] = $rs['username'];
 }
-$sql = "SELECT u.user_id, u.username FROM enemies e INNER JOIN users u ON e.enemyer = u.user_id WHERE e.enemyee = '{$_SESSION['user_id']}'";
+$sql = "SELECT u.user_id, u.username FROM enemies e INNER JOIN users u ON e.enemier = u.user_id WHERE e.enemiee = '{$_SESSION['user_id']}'";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 $enemyingyou[$rs['user_id']] = $rs['username'];

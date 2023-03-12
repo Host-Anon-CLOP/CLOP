@@ -340,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `embargoes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friendlist`
+-- Table structure for table `friends`
 --
 
 CREATE TABLE IF NOT EXISTS `friends` (
@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enemylist`
+-- Table structure for table `enemies`
 --
 
 CREATE TABLE IF NOT EXISTS `enemies` (
