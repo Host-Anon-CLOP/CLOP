@@ -257,21 +257,6 @@ if ($_POST) {
             }
         }
     }
-
-    $sql = "SELECT u.user_id FROM friends e INNER JOIN users u ON e.friender = u.user_id WHERE e.friendee = '{$_SESSION['user_id']}'";
-    $sth = $GLOBALS['mysqli']->query($sql);
-    if ($sth) {
-    while ($rs = mysqli_fetch_array($sth)) {
-        $friends[$rs['user_id']] = $rs['user_id'];
-    }
-    }
-    $sql = "SELECT u.user_id FROM enemies e INNER JOIN users u ON e.enemier = u.user_id WHERE e.enemiee = '{$_SESSION['user_id']}'";
-    $sth = $GLOBALS['mysqli']->query($sql);
-    if ($sth) {
-    while ($rs = mysqli_fetch_array($sth)) {
-        $enemies[$rs['user_id']] = $rs['user_id'];
-    }
-    }
 }
 }
 if ($mode) {
