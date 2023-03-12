@@ -42,7 +42,7 @@ echo <<<EOFORM
     <p>
       Place
       <input name="amount" class="form-control" placeholder="Qty" style="width:100px;"/>
-      FRIENDS: {print_r($friends)} of the selected item on the market for
+      FRIENDS: print_r{$friends} of the selected item on the market for
       <input name="price" class="form-control" placeholder="Bits" style="width:100px;"/>
       <input type="submit" name="action" value="Place on Market" class="btn btn-success"/>
     </p>
