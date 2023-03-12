@@ -63,7 +63,7 @@ EOFORM;
     foreach ($deals as $deal) {
           # FRIENDS
           #if (in_array($deal['user_id'], $friends)) {
-          if ($deal['user_id'] == 20) {
+          if ($deal['user_id'] == 19) {
             $displayname =<<<EOFORM
 <span class="text-info">{$deal['name']}</span>
 EOFORM;
