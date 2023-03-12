@@ -73,10 +73,10 @@ EOFORM;
       # ENEMIES
       elseif (in_array($deal['user_id'], $enemies)) {
         $displayname =<<<EOFORM
-<span class="text-error">{$deal['name']}</span>
+<span class="text-danger">{$deal['name']}</span>
 EOFORM;
         $displayregion =<<<EOFORM
-<span class="text-error">{$regiontypes[$deal['region']]}</span>
+<span class="text-danger">{$regiontypes[$deal['region']]}</span>
 EOFORM;
     }
         # ALLIANCE
