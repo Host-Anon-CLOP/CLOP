@@ -114,7 +114,13 @@ if ($_POST) {
         $friends[$rs['user_id']] = $rs['user_id'];
     }
     }
-
+    $sql = "SELECT u.user_id FROM enemies e INNER JOIN users u ON e.enemiee = u.user_id WHERE e.enemier = '{$_SESSION['user_id']}'";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    if ($sth) {
+    while ($rs = mysqli_fetch_array($sth)) {
+        $enemies[$rs['user_id']] = $rs['user_id'];
+    }
+    }
 }
 if ($_POST['action'] == "Remove from Marketplace") {
     if ($mysql['buyingfrom_id'] != $_SESSION['nation_id']) {
