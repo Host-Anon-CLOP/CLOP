@@ -61,6 +61,25 @@ echo <<<EOFORM
 </div></td></tr></thead><tbody>
 EOFORM;
     foreach ($deals as $deal) {
+          # FRIENDS
+          if (in_array($deal['user_id'], $friends)) {
+            $displayname =<<<EOFORM
+  <span class="text-info">{$deal['name']}</span>
+  EOFORM;
+            $displayregion =<<<EOFORM
+  <span class="text-info">{$regiontypes[$deal['region']]}</span>
+  EOFORM;
+        }
+        # ENEMIES
+        elseif (in_array($deal['user_id'], $enemies)) {
+          $displayname =<<<EOFORM
+  <span class="text-danger">{$deal['name']}</span>
+  EOFORM;
+          $displayregion =<<<EOFORM
+  <span class="text-danger">{$regiontypes[$deal['region']]}</span>
+  EOFORM;
+      }
+        # ALLIANCE
         if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
 <span class="text-success">{$deal['name']}</span>
