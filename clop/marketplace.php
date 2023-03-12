@@ -71,7 +71,7 @@ EOFORM;
   EOFORM;
       }
         # ALLIANCE
-        else if (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
+        elseif (($deal['alliance_id'] == $nationinfo['alliance_id']) && $nationinfo['alliance_id']) {
             $displayname =<<<EOFORM
 <span class="text-success">{$deal['name']}</span>
 EOFORM;
