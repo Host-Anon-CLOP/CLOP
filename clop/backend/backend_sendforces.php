@@ -27,12 +27,6 @@ if (!$errors) {
 		WHERE fg.forcegroup_id = '{$mysql['forcegroup_id']}' AND fg.nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
 		$thisforce = onelinequery($sql);
-		$sql=<<<EOSQL
-		SELECT COUNT(*) AS count
-		FROM forcegroups 
-		WHERE nation_id = '{$nationinfo['nation_id']}' AND destination_id = '35'
-EOSQL;
-		$attackssent = onelinequery($sql); # destination_id = '{$targetnation['nation_id']}'
         $sql=<<<EOSQL
         SELECT n.*, u.stasismode, u.alliance_id FROM nations n INNER JOIN users u ON n.user_id = u.user_id WHERE n.name = '{$mysql['name']}'
 EOSQL;
