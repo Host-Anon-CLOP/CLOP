@@ -173,7 +173,8 @@ EOSQL;
             ('{$_SESSION['nation_id']}', '70', '1000000'),
             ('{$_SESSION['nation_id']}', '71', '1000000'),
             ('{$_SESSION['nation_id']}', '72', '1000000'),
-            ('{$_SESSION['nation_id']}', '73', '1000000')
+            ('{$_SESSION['nation_id']}', '73', '1000000'),
+            ('{$_SESSION['nation_id']}', '75', '1000000')
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
 
