@@ -47,7 +47,7 @@ echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE ATTACKERS IN YOUR NATION!</span></center>
 EOFORM;
 }
-if ($incomingnumber > 0) {
+if ($incomingnumber) {
 echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE {$incomingnumber} INCOMING ATTACKS!</span></center>
 EOFORM;
