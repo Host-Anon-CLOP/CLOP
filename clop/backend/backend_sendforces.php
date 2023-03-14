@@ -57,7 +57,7 @@ EOSQL;
         } else if (($nationinfo['alliance_id'] == $targetnation['alliance_id']) && $nationinfo['alliance_id'] && $_POST['attack']) {
             $errors[] = "You cannot attack someone in your alliance.";
         } else if ($attackssent > 10) {
-			$errors[] = "You cannot send more than 10 attacks to the same target nation"
+			$errors[] = "You cannot send more than 10 attacks to the same target nation";
 		}
 		if (!$errors) {
 			if ($targetnation['region'] != $thisforce['region']) {
