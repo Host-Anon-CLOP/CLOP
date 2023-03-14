@@ -47,14 +47,14 @@ echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE ATTACKERS IN YOUR NATION!</span></center>
 EOFORM;
 if ($attackers-you-lose) {
-  echo <<<EOFORM
-  <center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
+echo <<<EOFORM
+<center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
 EOFORM;
 } else {
-    echo <<<EOFORM
-    <center><span class="text-success">YOUR FORCES WILL WIN!</span></center>
+echo <<<EOFORM
+<center><span class="text-success">YOUR FORCES WILL WIN!</span></center>
 EOFORM; 
-  }
+}
 }
 if ($nationinfo['government'] == "Alicorn Elite" || $nationinfo['government'] == "Transponyism") {
     $sedisplay = "(Ascending)";
