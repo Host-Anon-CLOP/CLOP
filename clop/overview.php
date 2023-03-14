@@ -56,11 +56,11 @@ if ( ($attackers) || ($incomingnumber > 0) ) {
   if ($attackersyouwin) {
     echo <<<EOFORM
     <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK!</span></center>
-    EOFORM;
+EOFORM;
     } else {
     echo <<<EOFORM
     <center><span class="text-danger">YOUR NATION WILL BE LOST NEXT WAR-TICK!</span></center>
-    EOFORM;
+EOFORM;
     }
 }
 if ($nationinfo['government'] == "Alicorn Elite" || $nationinfo['government'] == "Transponyism") {
