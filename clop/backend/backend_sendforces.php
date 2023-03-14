@@ -56,7 +56,7 @@ EOSQL;
             $errors[] = "That nation's owner is in stasis.";
         } else if (($nationinfo['alliance_id'] == $targetnation['alliance_id']) && $nationinfo['alliance_id'] && $_POST['attack']) {
             $errors[] = "You cannot attack someone in your alliance.";
-        } else if ($attackssent > 10) {
+        } else if ($attackssent[0] > 10) {
 			$errors[] = "You cannot send more than 10 attacks to the same target nation - $attackssent";
 		}
 		if (!$errors) {
