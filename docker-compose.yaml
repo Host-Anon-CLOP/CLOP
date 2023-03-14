@@ -46,6 +46,7 @@ services:
       exec apache2-foreground"
     environment:
       MYSQL_PASS: ${MYSQL_PASS}
+      DOMAIN_URL: ${DOMAIN_URL}
 
   caddy:
     image: caddy:2-alpine
