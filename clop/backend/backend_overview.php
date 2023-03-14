@@ -456,7 +456,7 @@ if ($rs['number']) {
     $incomingnumber = "";
 }
 
-if ( ($attackers) || ($incomingnumber > 0) ) {
+if ( ($attackers) || ($incomingnumber) ) {
     # CALCULATE IF YOU WILL WIN THE ATTACK
     $attackersyouwin = true;
 }

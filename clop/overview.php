@@ -52,7 +52,7 @@ echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE {$incomingnumber} INCOMING ATTACKS!</span></center>
 EOFORM;
 }
-if ( ($attackers) || ($incomingnumber > 0) ) {
+if ( ($attackers) || ($incomingnumber) ) {
   if ($attackersyouwin) {
     echo <<<EOFORM
     <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong)</span></center>
