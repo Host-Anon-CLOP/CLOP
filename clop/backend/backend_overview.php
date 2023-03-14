@@ -445,4 +445,8 @@ while ($rs = mysqli_fetch_array($sth)) {
         $defenders[] = $rs;
     }
 }
+if ($attackers) {
+    # CALCULATE IF YOU WILL WIN THE ATTACK
+    $attackersyoulose = true
+}
 ?>
