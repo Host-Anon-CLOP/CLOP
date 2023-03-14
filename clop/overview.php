@@ -46,15 +46,22 @@ if ($attackers) {
 echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE ATTACKERS IN YOUR NATION!</span></center>
 EOFORM;
-if ($attackersyouwin) {
+}
+if ($incomingnumber > 0) {
 echo <<<EOFORM
-<center><span class="text-success">YOUR FORCES WILL WIN!</span></center>
-EOFORM;
-} else {
-echo <<<EOFORM
-<center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
+<center><span class="text-danger">YOU HAVE {$incomingnumber} INCOMING ATTACKS!</span></center>
 EOFORM;
 }
+if ( ($attackers) || ($incomingnumber > 0) ) {
+  if ($attackersyouwin) {
+    echo <<<EOFORM
+    <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK!</span></center>
+    EOFORM;
+    } else {
+    echo <<<EOFORM
+    <center><span class="text-danger">YOUR NATION WILL BE LOST NEXT WAR-TICK!</span></center>
+    EOFORM;
+    }
 }
 if ($nationinfo['government'] == "Alicorn Elite" || $nationinfo['government'] == "Transponyism") {
     $sedisplay = "(Ascending)";

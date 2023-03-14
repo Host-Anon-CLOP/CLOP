@@ -445,6 +445,17 @@ while ($rs = mysqli_fetch_array($sth)) {
         $defenders[] = $rs;
     }
 }
+
+$sql = <<<EOSQL
+SELECT COUNT(*) AS number FROM forcegroups WHERE destination_id = {$_SESSION['nation_id']} AND attack_mission = 1 AND departuredate IS NOT NULL
+EOSQL;
+$rs = onelinequery($sql);
+if ($rs['number']) {
+    $incomingnumber = " ({$rs['number']})";
+} else {
+    $incomingnumber = "";
+}
+
 if ($attackers) {
     # CALCULATE IF YOU WILL WIN THE ATTACK
     $attackersyouwin = true;
