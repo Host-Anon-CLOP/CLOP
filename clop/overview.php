@@ -52,8 +52,8 @@ echo <<<EOFORM
 EOFORM;
 } else {
 echo <<<EOFORM
-<center><span class="text-success">YOUR FORCES WILL WIN!</span></center>
-EOFORM; 
+<center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
+EOFORM;
 }
 }
 if ($nationinfo['government'] == "Alicorn Elite" || $nationinfo['government'] == "Transponyism") {
