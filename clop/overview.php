@@ -49,11 +49,11 @@ EOFORM;
 if ($attackers-you-lose) {
   echo <<<EOFORM
   <center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
-  EOFORM;
+EOFORM;
 } else {
     echo <<<EOFORM
     <center><span class="text-success">YOUR FORCES WILL WIN!</span></center>
-    EOFORM; 
+EOFORM; 
   }
 }
 if ($nationinfo['government'] == "Alicorn Elite" || $nationinfo['government'] == "Transponyism") {
