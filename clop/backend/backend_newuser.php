@@ -174,7 +174,8 @@ EOSQL;
             ('{$_SESSION['nation_id']}', '71', '1000000'),
             ('{$_SESSION['nation_id']}', '72', '1000000'),
             ('{$_SESSION['nation_id']}', '73', '1000000'),
-            ('{$_SESSION['nation_id']}', '75', '1000000')
+            ('{$_SESSION['nation_id']}', '75', '1000000'),
+            ('{$_SESSION['nation_id']}', '77', '1000000')
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
 
@@ -183,7 +184,7 @@ EOSQL;
 EOSQL;
     $GLOBALS['mysqli']->query($sql);
         $sql = <<<EOSQL
-        UPDATE nations SET funds = 10000000000 WHERE nation_id = '{$_SESSION['nation_id']}'
+        UPDATE nations SET funds = 100000000000000 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
         }
