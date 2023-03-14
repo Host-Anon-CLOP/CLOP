@@ -27,6 +27,11 @@ if (!$errors) {
 		WHERE fg.forcegroup_id = '{$mysql['forcegroup_id']}' AND fg.nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
 		$thisforce = onelinequery($sql);
+		$sql=<<<EOSQL
+		SELECT COUNT(destination_id) FROM forcegroups 
+		WHERE nation_id = {$nationinfo['nation_id']} AND destination_id = {$targetnation['nation_id']}
+EOSQL;
+		$attackssent = onelinequery($sql);
         $sql=<<<EOSQL
         SELECT n.*, u.stasismode, u.alliance_id FROM nations n INNER JOIN users u ON n.user_id = u.user_id WHERE n.name = '{$mysql['name']}'
 EOSQL;
@@ -51,7 +56,9 @@ EOSQL;
             $errors[] = "That nation's owner is in stasis.";
         } else if (($nationinfo['alliance_id'] == $targetnation['alliance_id']) && $nationinfo['alliance_id'] && $_POST['attack']) {
             $errors[] = "You cannot attack someone in your alliance.";
-        }
+        } else if ($attackssent > 10) {
+			$errors[] = "You cannot send more than 10 attacks to the same target nation"
+		}
 		if (!$errors) {
 			if ($targetnation['region'] != $thisforce['region']) {
 				$sql=<<<EOSQL
