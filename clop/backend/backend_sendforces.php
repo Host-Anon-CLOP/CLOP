@@ -28,7 +28,7 @@ if (!$errors) {
 EOSQL;
 		$thisforce = onelinequery($sql);
 		$sql=<<<EOSQL
-		SELECT COUNT(*)
+		SELECT COUNT(*) AS count
 		FROM forcegroups 
 		WHERE ( (nation_id = '{$nationinfo['nation_id']}') AND (destination_id = '{$targetnation['nation_id']}') )
 EOSQL;
@@ -57,8 +57,8 @@ EOSQL;
             $errors[] = "That nation's owner is in stasis.";
         } else if (($nationinfo['alliance_id'] == $targetnation['alliance_id']) && $nationinfo['alliance_id'] && $_POST['attack']) {
             $errors[] = "You cannot attack someone in your alliance.";
-        } else if ($attackssent['sentcount'] >= 9) {
-			$errors[] = "You cannot send more than 10 attacks to the same target nation - {$attackssent['sentcount']}";
+        } else if ($attackssent['count'] >= 9) {
+			$errors[] = "You cannot send more than 10 attacks to the same target nation - {$attackssent['count']}";
 		}
 		if (!$errors) {
 			if ($targetnation['region'] != $thisforce['region']) {
@@ -121,7 +121,7 @@ EOSQL;
                 attack_mission = {$mission}, departuredate = NOW() WHERE forcegroup_id = {$mysql['forcegroup_id']}
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-				$infos[] = "Force en route. {$attackssent[0]} / {$attackssent} / $attackssent";
+				$infos[] = "Force en route. {$attackssent['count']} / {$attackssent} / $attackssent";
 			}
 		}
     }
