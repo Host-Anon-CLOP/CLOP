@@ -139,6 +139,56 @@ EOFORM;
         VALUES ('{$mysqlmessage}', NOW())
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
+
+        # MASSIVE RESOURCES FOR TEST SERVER USERS
+        if(strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
+            $sql = <<<EOSQL
+            INSERT INTO resources (nation_id, resource_id, amount)
+            VALUES 
+            ('{$_SESSION['nation_id']}', '1', '1000000'),
+            ('{$_SESSION['nation_id']}', '2', '1000000'),
+            ('{$_SESSION['nation_id']}', '3', '1000000'),
+            ('{$_SESSION['nation_id']}', '4', '1000000'),
+            ('{$_SESSION['nation_id']}', '9', '1000000'),
+            ('{$_SESSION['nation_id']}', '10', '1000000'),
+            ('{$_SESSION['nation_id']}', '13', '1000000'),
+            ('{$_SESSION['nation_id']}', '18', '1000000'),
+            ('{$_SESSION['nation_id']}', '20', '1000000'),
+            ('{$_SESSION['nation_id']}', '25', '1000000'),
+            ('{$_SESSION['nation_id']}', '26', '1000000'),
+            ('{$_SESSION['nation_id']}', '27', '1000000'),
+            ('{$_SESSION['nation_id']}', '28', '1000000'),
+            ('{$_SESSION['nation_id']}', '29', '1000000'),
+            ('{$_SESSION['nation_id']}', '30', '1000000'),
+            ('{$_SESSION['nation_id']}', '42', '1000000'),
+            ('{$_SESSION['nation_id']}', '47', '1000000'),
+            ('{$_SESSION['nation_id']}', '62', '1000000'),
+            ('{$_SESSION['nation_id']}', '63', '1000000'),
+            ('{$_SESSION['nation_id']}', '64', '1000000'),
+            ('{$_SESSION['nation_id']}', '65', '1000000'),
+            ('{$_SESSION['nation_id']}', '66', '1000000'),
+            ('{$_SESSION['nation_id']}', '67', '1000000'),
+            ('{$_SESSION['nation_id']}', '68', '1000000'),
+            ('{$_SESSION['nation_id']}', '69', '1000000'),
+            ('{$_SESSION['nation_id']}', '70', '1000000'),
+            ('{$_SESSION['nation_id']}', '71', '1000000'),
+            ('{$_SESSION['nation_id']}', '72', '1000000'),
+            ('{$_SESSION['nation_id']}', '73', '1000000'),
+            ('{$_SESSION['nation_id']}', '75', '1000000'),
+            ('{$_SESSION['nation_id']}', '77', '1000000')
+EOSQL;
+        $GLOBALS['mysqli']->query($sql);
+
+        $sql = <<<EOSQL
+        UPDATE nations SET age = 30 WHERE nation_id = '{$_SESSION['nation_id']}'
+EOSQL;
+        $GLOBALS['mysqli']->query($sql);
+        $sql = <<<EOSQL
+        UPDATE nations SET funds = 100000000000000 WHERE nation_id = '{$_SESSION['nation_id']}'
+EOSQL;
+        $GLOBALS['mysqli']->query($sql);
+        }
+
         header("Location: overview.php");
     }
 }
