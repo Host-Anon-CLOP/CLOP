@@ -121,7 +121,7 @@ EOSQL;
                 attack_mission = {$mission}, departuredate = NOW() WHERE forcegroup_id = {$mysql['forcegroup_id']}
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-				$infos[] = "Force en route. {$attackssent['sentcount']}";
+				$infos[] = "Force en route. {$attackssent[0]} / {$attackssent} / $attackssent";
 			}
 		}
     }
