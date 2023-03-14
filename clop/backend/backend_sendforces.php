@@ -30,9 +30,9 @@ EOSQL;
 		$sql=<<<EOSQL
 		SELECT COUNT(*) AS count
 		FROM forcegroups 
-		WHERE ( (destination_id = '{$targetnation['nation_id']}') ) 
+		WHERE destination_id = '{$targetnation['nation_id']}' AND nation_id = '{$nationinfo['nation_id']}'
 EOSQL;
-		$attackssent = onelinequery($sql); # # AND  # (nation_id = '{$nationinfo['nation_id']}')
+		$attackssent = onelinequery($sql);
         $sql=<<<EOSQL
         SELECT n.*, u.stasismode, u.alliance_id FROM nations n INNER JOIN users u ON n.user_id = u.user_id WHERE n.name = '{$mysql['name']}'
 EOSQL;
