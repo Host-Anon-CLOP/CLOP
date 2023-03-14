@@ -31,6 +31,12 @@ EOSQL;
         SELECT n.*, u.stasismode, u.alliance_id FROM nations n INNER JOIN users u ON n.user_id = u.user_id WHERE n.name = '{$mysql['name']}'
 EOSQL;
 		$targetnation = onelinequery($sql);
+		$sql=<<<EOSQL
+		SELECT COUNT(*) AS count
+		FROM forcegroups 
+		WHERE nation_id = '{$nationinfo['nation_id']}' AND destination_id = '{$targetnation['nation_id']}'
+EOSQL;
+		$attackssent = onelinequery($sql);
 		if (!$thisforce) {
 			$errors[] = "Shenanigans.";
 		} else if (!$targetnation) {
