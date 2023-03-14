@@ -30,7 +30,7 @@ EOSQL;
 		$sql=<<<EOSQL
 		SELECT COUNT(*) AS count
 		FROM forcegroups 
-		WHERE ( (nation_id = '{$nationinfo['nation_id']}') AND (destination_id = '{$targetnation['nation_id']}') )
+		WHERE ( (nation_id = '{$nationinfo['nation_id']}') ) 
 EOSQL;
 		$attackssent = onelinequery($sql);
         $sql=<<<EOSQL
@@ -121,7 +121,7 @@ EOSQL;
                 attack_mission = {$mission}, departuredate = NOW() WHERE forcegroup_id = {$mysql['forcegroup_id']}
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-				$infos[] = "Force en route. {$attackssent['count2']} / {$attackssent} / $attackssent";
+				$infos[] = "Force en route. {$attackssent['count']} / {$attackssent} / $attackssent";
 			}
 		}
     }
