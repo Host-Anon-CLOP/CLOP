@@ -182,11 +182,11 @@ EOSQL;
         $sql = <<<EOSQL
         UPDATE nations SET age = 30 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
-    $GLOBALS['mysqli']->query($sql);
+        $GLOBALS['mysqli']->query($sql);
         $sql = <<<EOSQL
         UPDATE nations SET funds = 100000000000000 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
-$GLOBALS['mysqli']->query($sql);
+        $GLOBALS['mysqli']->query($sql);
         }
 
         header("Location: overview.php");
