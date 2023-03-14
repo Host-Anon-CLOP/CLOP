@@ -447,6 +447,6 @@ while ($rs = mysqli_fetch_array($sth)) {
 }
 if ($attackers) {
     # CALCULATE IF YOU WILL WIN THE ATTACK
-    $attackersyoulose = true
+    $attackersyoulose = true;
 }
 ?>
