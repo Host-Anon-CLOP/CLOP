@@ -57,8 +57,8 @@ EOSQL;
             $errors[] = "That nation's owner is in stasis.";
         } else if (($nationinfo['alliance_id'] == $targetnation['alliance_id']) && $nationinfo['alliance_id'] && $_POST['attack']) {
             $errors[] = "You cannot attack someone in your alliance.";
-        } else if ($attackssent['count'] >= 9) {
-			$errors[] = "You cannot send more than 10 attacks to the same target nation - {$attackssent['count']}";
+        } else if ($attackssent['count'] >= 10) {
+			$errors[] = "You cannot send more than 10 attacks to the same target nation";
 		}
 		if (!$errors) {
 			if ($targetnation['region'] != $thisforce['region']) {
@@ -121,7 +121,7 @@ EOSQL;
                 attack_mission = {$mission}, departuredate = NOW() WHERE forcegroup_id = {$mysql['forcegroup_id']}
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-				$infos[] = "Force en route. {$attackssent['count']} / {$attackssent} / $attackssent";
+				$infos[] = "Force en route.";
 			}
 		}
     }
