@@ -30,7 +30,7 @@ EOSQL;
 		$sql=<<<EOSQL
 		SELECT COUNT(*) AS count
 		FROM forcegroups 
-		WHERE nation_id = '{$nationinfo['nation_id']}'
+		WHERE destination_id = '{$targetnation['nation_id']}'
 EOSQL;
 		$attackssent = onelinequery($sql);
         $sql=<<<EOSQL
