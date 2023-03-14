@@ -52,7 +52,7 @@ echo <<<EOFORM
 EOFORM;
 } else {
 echo <<<EOFORM
-<center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
+<center><span class="text-success">YOUR FORCES WILL WIN!</span></center>
 EOFORM;
 }
 }
