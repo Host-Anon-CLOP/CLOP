@@ -46,7 +46,7 @@ if ($attackers) {
 echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE ATTACKERS IN YOUR NATION!</span></center>
 EOFORM;
-if ($attackers-you-lose) {
+if ($attackersyoulose) {
 echo <<<EOFORM
 <center><span class="text-danger">YOUR FORCES WILL LOSE!</span></center>
 EOFORM;
