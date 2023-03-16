@@ -1047,6 +1047,7 @@ if ( (date("G") == 0 || date("G") == 12) || (strpos($_ENV["DOMAIN_URL"], "test.4
 $hour = date("H");
 
 # no travel time on test
+$sql="";
 if(strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
 $sql=<<<EOSQL
 SELECT fg.forcegroup_id FROM forcegroups fg
