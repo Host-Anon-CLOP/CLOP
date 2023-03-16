@@ -180,9 +180,64 @@ EOSQL;
         $GLOBALS['mysqli']->query($sql);
 
         $sql = <<<EOSQL
+        INSERT INTO weapons(nation_id, weapon_id, amount)
+        VALUES
+        ('{$_SESSION['nation_id']}', '1', '1000000'),
+        ('{$_SESSION['nation_id']}', '2', '1000000'),
+        ('{$_SESSION['nation_id']}', '3', '1000000'),
+        ('{$_SESSION['nation_id']}', '4', '1000000'),
+        ('{$_SESSION['nation_id']}', '5', '1000000'),
+        ('{$_SESSION['nation_id']}', '6', '1000000'),
+        ('{$_SESSION['nation_id']}', '7', '1000000'),
+        ('{$_SESSION['nation_id']}', '8', '1000000'),
+        ('{$_SESSION['nation_id']}', '9', '1000000'),
+        ('{$_SESSION['nation_id']}', '10', '1000000'),
+        ('{$_SESSION['nation_id']}', '11', '1000000'),
+        ('{$_SESSION['nation_id']}', '12', '1000000'),
+        ('{$_SESSION['nation_id']}', '13', '1000000'),
+        ('{$_SESSION['nation_id']}', '14', '1000000'),
+        ('{$_SESSION['nation_id']}', '15', '1000000'),
+        ('{$_SESSION['nation_id']}', '16', '1000000'),
+        ('{$_SESSION['nation_id']}', '17', '1000000'),
+        ('{$_SESSION['nation_id']}', '18', '1000000'),
+        ('{$_SESSION['nation_id']}', '19', '1000000')
+EOSQL;
+        $GLOBALS['mysqli']->query($sql);
+
+        $sql = <<<EOSQL
+        INSERT INTO armor(nation_id, armor_id, amount)
+        VALUES
+        ('{$_SESSION['nation_id']}', '1', '1000000'),
+        ('{$_SESSION['nation_id']}', '2', '1000000'),
+        ('{$_SESSION['nation_id']}', '3', '1000000'),
+        ('{$_SESSION['nation_id']}', '4', '1000000'),
+        ('{$_SESSION['nation_id']}', '5', '1000000'),
+        ('{$_SESSION['nation_id']}', '6', '1000000'),
+        ('{$_SESSION['nation_id']}', '7', '1000000'),
+        ('{$_SESSION['nation_id']}', '8', '1000000'),
+        ('{$_SESSION['nation_id']}', '9', '1000000'),
+        ('{$_SESSION['nation_id']}', '10', '1000000'),
+        ('{$_SESSION['nation_id']}', '11', '1000000'),
+        ('{$_SESSION['nation_id']}', '12', '1000000'),
+        ('{$_SESSION['nation_id']}', '13', '1000000'),
+        ('{$_SESSION['nation_id']}', '14', '1000000'),
+        ('{$_SESSION['nation_id']}', '15', '1000000'),
+        ('{$_SESSION['nation_id']}', '16', '1000000'),
+        ('{$_SESSION['nation_id']}', '17', '1000000'),
+        ('{$_SESSION['nation_id']}', '18', '1000000')
+EOSQL;
+        $GLOBALS['mysqli']->query($sql);
+
+        $sql = <<<EOSQL
         UPDATE nations SET age = 30 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
+
+        $sql = <<<EOSQL
+        UPDATE nations SET satisfaction = 1000 WHERE nation_id = '{$_SESSION['nation_id']}'
+EOSQL;
+        $GLOBALS['mysqli']->query($sql);
+
         $sql = <<<EOSQL
         UPDATE nations SET funds = 100000000000000 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
