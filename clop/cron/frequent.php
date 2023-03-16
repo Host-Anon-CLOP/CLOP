@@ -1048,17 +1048,19 @@ $hour = date("H");
 
 # no travel time on test
 $sql="";
-if(strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
+if (strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
+$sql=<<<EOSQL
 $sql=<<<EOSQL
 SELECT fg.forcegroup_id FROM forcegroups fg
 LEFT JOIN nations n ON fg.location_id = n.nation_id
 LEFT JOIN nations n2 ON fg.destination_id = n2.nation_id
 WHERE fg.departuredate IS NOT NULL AND (
-(n.region = n2.region AND fg.attack_mission = 0) OR
-(n.region = n2.region AND fg.attack_mission = 1) OR
-(fg.attack_mission = 0) OR
-(fg.attack_mission = 1)
+(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 12 HOUR) AND n.region = n2.region AND fg.attack_mission = 0) OR
+(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 24 HOUR) AND n.region = n2.region AND fg.attack_mission = 1) OR
+(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 36 HOUR) AND fg.attack_mission = 0) OR
+(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 48 HOUR) AND fg.attack_mission = 1)
 )
+EOSQL;
 EOSQL;
 } else {
 $sql=<<<EOSQL
@@ -1071,7 +1073,7 @@ WHERE fg.departuredate IS NOT NULL AND (
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 36 HOUR) AND fg.attack_mission = 0) OR
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 48 HOUR) AND fg.attack_mission = 1)
 )
-EOSQL;	
+EOSQL;
 }
 
 $sth = $GLOBALS['mysqli']->query($sql);
