@@ -1053,10 +1053,10 @@ SELECT fg.forcegroup_id FROM forcegroups fg
 LEFT JOIN nations n ON fg.location_id = n.nation_id
 LEFT JOIN nations n2 ON fg.destination_id = n2.nation_id
 WHERE fg.departuredate IS NOT NULL AND (
-n.region = n2.region AND fg.attack_mission = 0) OR
-n.region = n2.region AND fg.attack_mission = 1) OR
-fg.attack_mission = 0) OR
-fg.attack_mission = 1)
+(n.region = n2.region AND fg.attack_mission = 0) OR
+(n2.region AND fg.attack_mission = 1) OR
+(fg.attack_mission = 0) OR
+(fg.attack_mission = 1)
 )
 EOSQL;
 } else {
