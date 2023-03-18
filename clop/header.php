@@ -205,7 +205,6 @@ if ($_SESSION['user_id']) {
 echo <<<EOFORM
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="index.php">&gt;CLOP</a>
 </div>
 <ul class="nav navbar-nav">
   <li><a class="dropdown-toggle" href="messages.php">Messages <span class="badge">{$messagenumber}</span></a></li>
