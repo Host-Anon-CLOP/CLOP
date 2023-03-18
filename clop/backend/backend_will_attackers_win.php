@@ -1,7 +1,7 @@
 <?php
 //// WAR
-$midnight = strtotime("tomorrow 00:00:00");
-$midday = strtotime('noon');
+$midnight = strtotime('now') - strtotime("tomorrow 00:00:00");
+$midday = strtotime('now') - strtotime('noon');
 #$TimeUntilNextWarTick = ?;
 
 /*
