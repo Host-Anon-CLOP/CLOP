@@ -78,6 +78,7 @@ EOFORM;
 	echo <<<EOFORM
         </td>
     </tr>
+</table>
 EOFORM;
 }
 } else {

@@ -17,6 +17,11 @@ if ($_POST && (($_POST['token_viewalliance'] == "") || ($_POST['token_viewallian
 if ($_POST || ($_SESSION['token_viewalliance'] == "")) {
 	$_SESSION['token_viewalliance'] = sha1(rand() . $_SESSION['token_viewalliance']);
 }
+
+$sql = "SELECT funmode FROM users WHERE user_id = '{$_SESSION['user_id']}'";
+$funmode = onelinequery($sql);
+$funmode = $funmode['funmode'];
+
 $sql=<<<EOSQL
 SELECT a.name, a.alliance_id, a.public_description, u.donator, ar.user_id AS alliancerequested
 FROM alliances a
@@ -60,39 +65,7 @@ EOSQL;
 			}
 		}
 		$infos[] = "Alliance embargoed.";
-	} else if ($_POST['friendalliance']) {
-		$sql=<<<EOSQL
-		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
-EOSQL;
-		$sth = $GLOBALS['mysqli']->query($sql);
-		while ($rs = mysqli_fetch_array($sth)) {
-			if ($rs['user_id'] != $_SESSION['user_id']) {
-			$sql=<<<EOSQL
-			INSERT INTO friends SET friender = '{$_SESSION['user_id']}', friendee = '{$rs['user_id']}'
-EOSQL;
-			$GLOBALS['mysqli']->query($sql);
-			} else {
-				$errors[] = "You can friend your own alliance if you like, but you can't friend yourself!";
-			}
-		}
-		$infos[] = "Alliance friended.";
-	} else if ($_POST['enemyalliance']) {
-		$sql=<<<EOSQL
-		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
-EOSQL;
-		$sth = $GLOBALS['mysqli']->query($sql);
-		while ($rs = mysqli_fetch_array($sth)) {
-			if ($rs['user_id'] != $_SESSION['user_id']) {
-			$sql=<<<EOSQL
-			INSERT INTO enemies SET enemier = '{$_SESSION['user_id']}', enemiee = '{$rs['user_id']}'
-EOSQL;
-			$GLOBALS['mysqli']->query($sql);
-			} else {
-				$errors[] = "You can enemy your own alliance if you like, but you can't enemy yourself!";
-			}
-		}
-		$infos[] = "Alliance enemied.";
-	}	else if ($_POST['unembargoalliance']) {
+	} else if ($_POST['unembargoalliance']) {
 		$sql=<<<EOSQL
 		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
 EOSQL;
@@ -104,30 +77,6 @@ EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 		}
 		$infos[] = "Alliance unembargoed.";
-	}	else if ($_POST['unfriendalliance']) {
-		$sql=<<<EOSQL
-		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
-EOSQL;
-		$sth = $GLOBALS['mysqli']->query($sql);
-		while ($rs = mysqli_fetch_array($sth)) {
-			$sql=<<<EOSQL
-			DELETE FROM friends WHERE friender = '{$_SESSION['user_id']}' AND friendee = '{$rs['user_id']}'
-EOSQL;
-			$GLOBALS['mysqli']->query($sql);
-		}
-		$infos[] = "Alliance unfriended.";
-	} else if ($_POST['unenemyalliance']) {
-		$sql=<<<EOSQL
-		SELECT user_id FROM users WHERE alliance_id = '{$mysql['alliance_id']}'
-EOSQL;
-		$sth = $GLOBALS['mysqli']->query($sql);
-		while ($rs = mysqli_fetch_array($sth)) {
-			$sql=<<<EOSQL
-			DELETE FROM enemies WHERE enemier = '{$_SESSION['user_id']}' AND enemiee = '{$rs['user_id']}'
-EOSQL;
-			$GLOBALS['mysqli']->query($sql);
-		}
-		$infos[] = "Alliance unenemied.";
 	}
 	}
     $sql=<<<EOSQL
@@ -137,49 +86,17 @@ EOSQL;
 	while ($rs = mysqli_fetch_array($sth)) {
 		$alliancemembers[] = $rs;
 		$sql=<<<EOSQL
-		SELECT nation_id, name, region FROM nations WHERE user_id = {$rs['user_id']} ORDER BY name
+		SELECT nation_id, name FROM nations WHERE user_id = {$rs['user_id']} ORDER BY name
 EOSQL;
 		$sth2 = $GLOBALS['mysqli']->query($sql);
 		while ($rs2 = mysqli_fetch_array($sth2)) {
 			$nations[$rs['user_id']][] = $rs2;
 		}
 	}
-    $displaypubdescription = nl2br(htmlentities($allianceinfo['public_description'], ENT_SUBSTITUTE, "UTF-8"));
-    
-# Get HideIcons Details
-$sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
-$nationinfo = onelinequery($sql);
-
-# Alliance Resources
-$allianceaffectedresources = array();
-$alliancerequiredresources = array();
-$allianceresources = array();
-
-$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
-FROM resourceeffects rr
-INNER JOIN resources r ON r.resource_id = rr.resource_id
-INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
-INNER JOIN nations n ON r.nation_id = n.nation_id
-INNER JOIN users u ON n.user_id = u.user_id
-WHERE u.alliance_id = '{$allianceinfo['alliance_id']}'
-GROUP BY rd.name";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-    $allianceaffectedresources[$rs['name']] = $rs['affected'];
-}
-
-$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
-FROM resourcerequirements rr
-INNER JOIN resources r ON r.resource_id = rr.resource_id
-INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
-INNER JOIN nations n ON r.nation_id = n.nation_id
-INNER JOIN users u ON n.user_id = u.user_id
-WHERE u.alliance_id = '{$allianceinfo['alliance_id']}'
-GROUP BY rd.name";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-    $alliancerequiredresources[$rs['name']] = $rs['required'];
-}
-
+    if ($allianceinfo['donator'] && ($funmode == "1")) {
+        $displaypubdescription = nl2br($allianceinfo['public_description']);
+    } else {
+        $displaypubdescription = nl2br(htmlentities($allianceinfo['public_description'], ENT_SUBSTITUTE, "UTF-8"));
+    }
 }
 ?>

@@ -1,7 +1,6 @@
 <?php
 include_once("allfunctions.php");
 $nationinfo = needsnation();
-$compoundsmysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "compounds");
 $sql=<<<EOSQL
 SELECT SUM(r.amount) AS buildings FROM resources r
 INNER JOIN resourcedefs rd ON r.resource_id = rd.resource_id
@@ -27,10 +26,6 @@ if (!$errors) {
 			$errors[] = "You don't have the money!";
 		}
 		if (!$errors) {
-        $sql=<<<EOSQL
-		DELETE FROM topmessage WHERE 1 = 1;
-EOSQL;
-		$GLOBALS['mysqli']->query($sql);
 		$sql=<<<EOSQL
 INSERT INTO topmessage SET message = '{$mysql['message']}', user_id = '{$_SESSION['user_id']}'
 EOSQL;
@@ -314,10 +309,6 @@ EOSQL;
                 VALUES ('{$rs2['username']} has ascended!', NOW())
 EOSQL;
                 $GLOBALS['mysqli']->query($sql);
-                $sql=<<<EOSQL
-				UPDATE users SET ascended = 1 WHERE username = '{$rs2['username']}'
-EOSQL;
-                $GLOBALS['compoundsmysqli']->query($sql);
 				header("Location: viewascension.php?user_id={$_SESSION['user_id']}");
 				exit;
 			}
@@ -588,7 +579,7 @@ EOSQL;
         }
 		if ($nationinfo['government'] == "Repression") {
             $sql=<<<EOSQL
-SELECT nation_id, name FROM nations WHERE user_id = '{$_SESSION['user_id']}'      
+SELECT nation_id, name FROM nations WHERE user_id = '{$_SESSION['user_id']}'
 EOSQL;
             $sth = $GLOBALS['mysqli']->query($sql);
             while ($nations = mysqli_fetch_array($sth)) {
@@ -788,7 +779,7 @@ EOSQL;
             $name = "Free Market";
         }
         if ($_POST['statecontrolled']) {
-            $resource_id = 18; //cider
+            $resource_id = 18; //vodka
             $name = "State Controlled";
         }
         $sql =<<<EOSQL
@@ -809,7 +800,7 @@ EOSQL;
         if (($rs['amount'] < 25) && $_POST['freemarket']) {
             $errors[] = "We're not doing this without enough coffee, boss!";
         } else if (($rs['amount'] < 25) && $_POST['statecontrolled']) {
-            $errors[] = "You will need more cider for us to do this, comrade!";
+            $errors[] = "You will need more vodka for us to do this, comrade!";
         }
         if (empty($errors)) {
             $sql="UPDATE nations SET active_economy = 1, economy = '{$name}', funds = funds - 1000000 WHERE nation_id = '{$_SESSION['nation_id']}'";

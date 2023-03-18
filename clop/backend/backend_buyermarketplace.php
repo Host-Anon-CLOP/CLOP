@@ -13,7 +13,6 @@ if ($getpost['mode'] == "weapons") {
     $resource_id = "weapon_id";
     $tradeable1 = "";
     $tradeable2 = "";
-    $max = 100000000 + (int)($nationinfo['funds'] / 10);
 } else if ($getpost['mode'] == "armor") {
     $mode = "armor";
     $buyermarketplace = "armorbuyermarketplace";
@@ -22,7 +21,6 @@ if ($getpost['mode'] == "weapons") {
     $resource_id = "armor_id";
     $tradeable1 = "";
     $tradeable2 = "";
-    $max = 100000000 + (int)($nationinfo['funds'] / 10);
 } else {
     $mode = "";
     $buyermarketplace = "buyermarketplace";
@@ -31,13 +29,10 @@ if ($getpost['mode'] == "weapons") {
     $resource_id = "resource_id";
     $tradeable1 = "AND rd.is_tradeable = 1";
     $tradeable2 = "WHERE rd.is_tradeable = 1";
-    $max = 200000000 + (int)($nationinfo['funds'] / 10);
 }
 $resources = array();
 $deals = array();
 $embargoed = array();
-$friends = array();
-$enemies = array();
 $buyingmultiplier = getbuyingmultiplier($_SESSION['nation_id']);
 $displaybuyingmultiplier = ($buyingmultiplier - 1) * 100;
 $sellingmultiplier = getsellingmultiplier($_SESSION['nation_id']);
@@ -70,15 +65,6 @@ if ($_POST['offer']) {
 	WHERE nation_id = {$_SESSION['nation_id']}
 EOSQL;
 	$currenttotal = onelinequery($sql);
-    $commasmax = commas($max);
-    if (($mysql['price'] * $mysql['amount']) + $currenttotal['totalamount'] > $max) {
-		if ($max > $currenttotal['totalamount']) {
-			$remaining = commas($max - $currenttotal['totalamount']);
-		} else {
-			$remaining = "No more";
-		}
-		$errors[] = "You may only offer {$commasmax} bits total for all {$resourcesname} on the buyer's marketplace. ({$remaining} available)";
-    }
 	$cost = floor($mysql['price'] * $mysql['amount'] * $buyingmultiplier);
 	$displaycost = commas($cost);
     if ($nationinfo['funds'] < $cost) {
@@ -118,21 +104,6 @@ if ($_POST) {
     if ($sth) {
     while ($rs = mysqli_fetch_array($sth)) {
         $embargoed[$rs['user_id']] = $rs['user_id'];
-    }
-    }
-
-    $sql = "SELECT u.user_id FROM friends e INNER JOIN users u ON e.friendee = u.user_id WHERE e.friender = '{$_SESSION['user_id']}'";
-    $sth = $GLOBALS['mysqli']->query($sql);
-    if ($sth) {
-    while ($rs = mysqli_fetch_array($sth)) {
-        $friends[$rs['user_id']] = $rs['user_id'];
-    }
-    }
-    $sql = "SELECT u.user_id FROM enemies e INNER JOIN users u ON e.enemiee = u.user_id WHERE e.enemier = '{$_SESSION['user_id']}'";
-    $sth = $GLOBALS['mysqli']->query($sql);
-    if ($sth) {
-    while ($rs = mysqli_fetch_array($sth)) {
-        $enemies[$rs['user_id']] = $rs['user_id'];
     }
     }
 }
@@ -188,7 +159,7 @@ if ($_POST['sellone'] || $_POST['sellall'] || $_POST['sellamount']) {
             if ($_POST['sellone']) {
                 $sellingamount = 1;
             } else if ($_POST['sellall']) {
-                $sellingamount = $rs['amount'];
+                $sellingamount = $mysql['quantity'];
             } else if ($_POST['sellamount']) {
                 $sellingamount = (int)$mysql['sellingamount'];
                 if ($sellingamount < 1) {
@@ -224,13 +195,14 @@ if ($_POST['sellone'] || $_POST['sellall'] || $_POST['sellamount']) {
                 $displaynewfunds = commas($newfunds);
 				$cost = floor($mysql['price'] * $sellingamount * getbuyingmultiplier($mysql['sellingto_id']));
                 $displaycost = commas($cost);
+		$displayprice = commas($mysql['price']);
                 if ($samealliance) {
                 $buyermessage =<<<EOFORM
-You bought {$sellingamount} {$rs['name']} from <a href="viewnation.php?nation_id={$_SESSION['nation_id']}"><span class="text-success">{$nationinfo['name']}</span></a> for {$displaycost} bits.
+You bought {$sellingamount} {$rs['name']} from <a href="viewnation.php?nation_id={$_SESSION['nation_id']}"><span class="text-success">{$nationinfo['name']}</span></a> for {$displaycost} bits @{$displayprice} a piece.
 EOFORM;
                 } else {
                 $buyermessage =<<<EOFORM
-You bought {$sellingamount} {$rs['name']} from <a href="viewnation.php?nation_id={$_SESSION['nation_id']}">{$nationinfo['name']}</a> for {$displaycost} bits.
+You bought {$sellingamount} {$rs['name']} from <a href="viewnation.php?nation_id={$_SESSION['nation_id']}">{$nationinfo['name']}</a> for {$displaycost} bits @{$displayprice} a piece.
 EOFORM;
                 }
                 $mysql['buyermessage'] = $GLOBALS['mysqli']->real_escape_string($buyermessage);
@@ -238,15 +210,15 @@ EOFORM;
                 $GLOBALS['mysqli']->query($sql);
                 $displayfunds = commas($nationinfo['funds']);
                 $infos[] =<<<EOFORM
-You sold {$sellingamount} {$rs['name']} to <a href="viewnation.php?nation_id={$mysql['sellingto_id']}">{$rs['nationname']}</a> and made {$displaynewfunds} bits.
+You sold {$sellingamount} {$rs['name']} to <a href="viewnation.php?nation_id={$mysql['sellingto_id']}">{$rs['nationname']}</a> for {$displayprice} bits a piece and made {$displaynewfunds} bits.
 EOFORM;
                 if ($samealliance) {
                 $sellermessage =<<<EOFORM
-You sold {$sellingamount} {$rs['name']} to <a href="viewnation.php?nation_id={$mysql['sellingto_id']}"><span class="text-success">{$rs['nationname']}</span></a> and made {$displaynewfunds} bits.
+You sold {$sellingamount} {$rs['name']} to <a href="viewnation.php?nation_id={$mysql['sellingto_id']}"><span class="text-success">{$rs['nationname']}</span></a> for {$displayprice} bits a piece and made {$displaynewfunds} bits.
 EOFORM;
                 } else {
                 $sellermessage =<<<EOFORM
-You sold {$sellingamount} {$rs['name']} to <a href="viewnation.php?nation_id={$mysql['sellingto_id']}">{$rs['nationname']}</a> and made {$displaynewfunds} bits.
+You sold {$sellingamount} {$rs['name']} to <a href="viewnation.php?nation_id={$mysql['sellingto_id']}">{$rs['nationname']}</a> for {$displayprice} bits a piece and made {$displaynewfunds} bits.
 EOFORM;
                 }
 				$nationinfo['funds'] += $newfunds;
@@ -261,7 +233,7 @@ EOFORM;
     }
 }
 if ($_POST) {
-    $sql = "SELECT m.*, n.nation_id, n.name, n.region, u.user_id, u.alliance_id FROM {$buyermarketplace} m INNER JOIN nations n ON n.nation_id = m.nation_id
+    $sql = "SELECT m.*, n.nation_id, n.name, u.user_id, u.alliance_id FROM {$buyermarketplace} m INNER JOIN nations n ON n.nation_id = m.nation_id
     INNER JOIN users u ON u.user_id = n.user_id WHERE m.{$resource_id} = '{$mysql['resource_id']}' ORDER BY m.price DESC, n.nation_id DESC";
     $sth = $GLOBALS['mysqli']->query($sql);
     if ($sth) {

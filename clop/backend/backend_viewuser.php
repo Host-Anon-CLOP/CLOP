@@ -6,13 +6,16 @@ if ($_POST['user_id']) {
 	$mysql['user_id'] = (int)$_GET['user_id'];
 }
 $sql =<<<EOSQL
-SELECT u.username, u.user_id, u.email, u.flag, u.donator, u.stasismode, u.description, u.hidebanners, u.hideicons, u.hideflags, u.hidereports, u.alliance_id, a.name AS alliancename
+SELECT u.username, u.user_id, u.email, u.flag, u.donator, u.stasismode, u.description, u.hidebanners, u.hideicons, u.hidereports, u.alliance_id, a.name AS alliancename
 FROM users u LEFT JOIN alliances a ON u.alliance_id = a.alliance_id WHERE u.user_id = '{$mysql['user_id']}'
 EOSQL;
 $userinfo = onelinequery($sql);
-$display['description'] = $userinfo['description'];
+$sql = "SELECT funmode FROM users WHERE user_id = '{$_SESSION['user_id']}'";
+$funmode = onelinequery($sql)['funmode'];
+if (!$userinfo['donator'] || ($funmode == "0")) $display['description'] = nl2br(htmlentities($userinfo['description'], ENT_SUBSTITUTE, "UTF-8"));
+else $display['description'] = $userinfo['description'];
 $sql=<<<EOSQL
-SELECT nation_id, name, region FROM nations WHERE user_id = '{$mysql['user_id']}'
+SELECT nation_id, name FROM nations WHERE user_id = '{$mysql['user_id']}'
 EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 $nations = array();

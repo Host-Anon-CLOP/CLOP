@@ -1,7 +1,11 @@
 <?php
+//ini_set('session.cookie_httponly', 1);//make cookie inaccessible to javascript, thus preventing PHPSESSID stealing //bullshit. (XHR requests .withCredentials = true;)
+
 //let's stick the database shit in here for now
-//AYYO YOU THOUGHT I WASN'T GOING TO TAKE THIS SHIT OUT DIDNTJA
-$mysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "clopus_clop");
+require_once('sql_data.php');
+$mysqli = new mysqli($dbhost, $username, $password, $database);
+$sql = "SET time_zone = '+00:00'";
+$GLOBALS['mysqli']->query($sql);
 date_default_timezone_set("UTC");
 session_start();
 if (!isset($_SESSION['SERVER_GENERATED_SID'])) {
@@ -10,6 +14,43 @@ if (!isset($_SESSION['SERVER_GENERATED_SID'])) {
     session_regenerate_id(true);
     $_SESSION['SERVER_GENERATED_SID'] = true;
 }
+
+if (!isset($_SESSION['LOGON_REMOTE_ADDR'])) {
+    $_SESSION['LOGON_REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
+    $_SESSION['USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];
+} else if (($_SESSION['LOGON_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) && ($_SESSION['USER_AGENT'] != $_SERVER['HTTP_USER_AGENT'])) {
+    //one user can't possibly change BOTH IP AND UserAgent during a single login session
+    //if he somehow does, then all my faith is gone. I give up
+    //notify about session hijacking attempt
+    $xforwarded = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED']);
+    $xforwardedfor = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED_FOR']);
+    $ua = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_USER_AGENT']);
+    //i'm a fucking idiot
+    $sql=<<<EOSQL
+INSERT INTO hijacks(user_id, ip, forwarded, forwarded_for, logindate, ua)
+    VALUES ('{$_SESSION['user_id']}', '{$_SERVER['REMOTE_ADDR']}', '{$xforwarded}', '{$xforwardedfor}', NOW(), '{$ua}')
+EOSQL;
+    $GLOBALS['mysqli']->query($sql);
+    /* if you want to be notified as well, uncomment this
+    $mailmsg = <<<EOMSG
+Host identified by IP {$_SERVER['REMOTE_ADDR']}\r
+tried to impersonate user going by user_id {$_SESSION['user_id']}.\r
+Additional info in database\r
+\r
+--------\r
+This is an automated message\r
+EOMSG;
+    mail("youremail@example.com", "ReClop Session Hijacking Prevented", $mailmsg);
+    */
+
+    session_destroy();
+    session_start();
+    session_regenerate_id(true);
+    $_SESSION['SERVER_GENERATED_SID'] = true;
+    $errors[] = 'Why do you have to make my life harder? (Changing <b>BOTH</b> IP <b>AND</b> UserAgent during a <b>single session</b>)';
+    //die('Cheeky');
+}
+
 if ($_POST['switchnation_id']) {
 	$mysql['switchnation_id'] = (int)$_POST['switchnation_id'];
     $sql=<<<EOSQL
@@ -43,7 +84,7 @@ function needsnation() {
     exit;
     } else {
         $sql=<<<EOSQL
-        SELECT n.*, u.alliance_id, u.seesecrets, u.stasismode, u.hideicons, u.hideflags FROM nations n INNER JOIN users u ON u.user_id = n.user_id
+        SELECT n.*, u.alliance_id, u.seesecrets, u.stasismode, u.hideicons FROM nations n INNER JOIN users u ON u.user_id = n.user_id
         WHERE u.user_id = {$_SESSION['user_id']} AND n.nation_id = {$_SESSION['nation_id']}
 EOSQL;
         $rs = onelinequery($sql);
@@ -128,7 +169,7 @@ EOSQL;
         $relationeffect = $max - $startingrelation;
         if ($relationeffect == 0) {
             return "Your relationship with the {$empire} can't get any better, despite the effects of your {$affector}.";
-        } 
+        }
     } else if (($startingrelation + $relationeffect < -1000) && !$rs['empiremax']) {
         $relationeffect = -1000 - $startingrelation;
         if ($relationeffect == 0) {
@@ -161,7 +202,7 @@ function affectsatisfaction($nation_id, $startingrelation, $relationeffect, $aff
         $relationeffect = $max - $startingrelation;
         if ($relationeffect == 0) {
             return "Your population can't be any more satisfied, despite the effects of your {$affector}.";
-        } 
+        }
     }
     $chosenword = chooseword($startingrelation, $relationeffect);
     $sql = "UPDATE nations SET satisfaction = satisfaction + {$relationeffect} WHERE nation_id = {$nation_id}";

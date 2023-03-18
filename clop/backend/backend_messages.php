@@ -149,4 +149,9 @@ while ($rs = mysqli_fetch_array($sth)) {
     $rs['message'] = nl2br(htmlentities($rs['message'], ENT_SUBSTITUTE, "UTF-8"));
     $sentbox[] = $rs;
 }
+
+$sql = <<<EOSQL
+UPDATE users SET user_lastread = (SELECT MAX(message_id) FROM messages WHERE touser = '{$_SESSION['user_id']}' AND todeleted = '0') WHERE user_id = '{$_SESSION['user_id']}'
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
 ?>

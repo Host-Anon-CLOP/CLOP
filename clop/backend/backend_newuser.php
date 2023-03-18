@@ -1,6 +1,5 @@
 <?php
 include_once("allfunctions.php");
-$elementsmysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "clopus_elements");
 if ($_SESSION['user_id']) {
     $errors[] = "The \"multiple accounts will get you banned\" thing isn't a joke. Don't do it.";
 }
@@ -37,7 +36,7 @@ $keys = array_keys($baseregions);
 shuffle($keys);
 $regions = array();
 foreach ($keys as $key) {
-$regions[$key] = $baseregions[$key]; 
+$regions[$key] = $baseregions[$key];
 }
 $basesubregions = array();
 $basesubregions[1] = "North";
@@ -47,7 +46,7 @@ $keys = array_keys($basesubregions);
 shuffle($keys);
 $subregions = array();
 foreach ($keys as $key) {
-$subregions[$key] = $basesubregions[$key]; 
+$subregions[$key] = $basesubregions[$key];
 }
 if ($_POST && (($_POST['token_newuser'] == "") || ($_POST['token_newuser'] != $_SESSION['token_newuser']))) {
     $errors[] = "Try again.";
@@ -63,6 +62,10 @@ if (!empty($_POST)) {
     if ($_POST['realusername'] != preg_replace('/[^0-9a-zA-Z_\ ]/' ,"", $_POST['realusername'])) {
         $errors[] = "Only English letters and numbers for the username.";
     }
+    if (preg_match('/p\s*?[o0]\s*?[li]\s*?a\s*?n\s*?d\s*?b\s*?a\s*?[li]\s*?[li]/i', $_POST['realusername']) == 1) {
+        //ain't no thing like overkill
+        $errors[] = "O ty szczwana bestyjo.";
+}
     if ($_POST['nationname'] != preg_replace('/[^0-9a-zA-Z_\ ]/' ,"", $_POST['nationname'])) {
         $errors[] = "Only English letters and numbers for the nation name.";
     }
@@ -108,11 +111,6 @@ if (!empty($_POST)) {
     if ($rs['count'] > 0) {
         $errors[] = "Due to the potential for faggotry, we're not going to let you make your username someone else's nation name.";
     }
-    $sql = "SELECT COUNT(*) AS count FROM users WHERE username = '{$mysql['realusername']}'";
-	$rs = mysqli_fetch_array($GLOBALS['elementsmysqli']->query($sql));
-	if ($rs['count'] > 0) {
-		$errors[] = "Username already exists in the sequel.";
-	}
     if (empty($errors)) {
         $passwordhash = sha1($mysql['password'] . "saltlick"); //I'm fully aware that this is shit, thanks
         $sql = "INSERT INTO users (username, password, email, creation_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}')";
@@ -128,7 +126,8 @@ EOFORM;
         $sql = "SELECT nation_id FROM nations WHERE user_id = '{$rs['user_id']}'";
         $rs2 = onelinequery($sql);
         $_SESSION['nation_id'] = $rs2['nation_id'];
-        $sql = "INSERT INTO logins(user_id, ip, logindate, failed) VALUES ({$rs['user_id']}, '{$_SERVER['REMOTE_ADDR']}', NOW(), false)";
+        $mysql['user_agent'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_USER_AGENT']);
+        $sql = "INSERT INTO logins(user_id, ip, logindate, failed, ua) VALUES ({$rs['user_id']}, '{$_SERVER['REMOTE_ADDR']}', NOW(), false, '{$mysql['user_agent']}')";
         $GLOBALS['mysqli']->query($sql);
         $message=<<<EOFORM
 The user <a href="viewuser.php?user_id={$rs['user_id']}">{$mysql['realusername']}</a> has joined the game with the nation of <a href="viewnation.php?nation_id={$rs2['nation_id']}">{$mysql['nationname']}</a>.
@@ -139,56 +138,6 @@ EOFORM;
         VALUES ('{$mysqlmessage}', NOW())
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
-
-        # MASSIVE RESOURCES FOR TEST SERVER USERS
-        if(strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
-            $sql = <<<EOSQL
-            INSERT INTO resources (nation_id, resource_id, amount)
-            VALUES 
-            ('{$_SESSION['nation_id']}', '1', '1000000'),
-            ('{$_SESSION['nation_id']}', '2', '1000000'),
-            ('{$_SESSION['nation_id']}', '3', '1000000'),
-            ('{$_SESSION['nation_id']}', '4', '1000000'),
-            ('{$_SESSION['nation_id']}', '9', '1000000'),
-            ('{$_SESSION['nation_id']}', '10', '1000000'),
-            ('{$_SESSION['nation_id']}', '13', '1000000'),
-            ('{$_SESSION['nation_id']}', '18', '1000000'),
-            ('{$_SESSION['nation_id']}', '20', '1000000'),
-            ('{$_SESSION['nation_id']}', '25', '1000000'),
-            ('{$_SESSION['nation_id']}', '26', '1000000'),
-            ('{$_SESSION['nation_id']}', '27', '1000000'),
-            ('{$_SESSION['nation_id']}', '28', '1000000'),
-            ('{$_SESSION['nation_id']}', '29', '1000000'),
-            ('{$_SESSION['nation_id']}', '30', '1000000'),
-            ('{$_SESSION['nation_id']}', '42', '1000000'),
-            ('{$_SESSION['nation_id']}', '47', '1000000'),
-            ('{$_SESSION['nation_id']}', '62', '1000000'),
-            ('{$_SESSION['nation_id']}', '63', '1000000'),
-            ('{$_SESSION['nation_id']}', '64', '1000000'),
-            ('{$_SESSION['nation_id']}', '65', '1000000'),
-            ('{$_SESSION['nation_id']}', '66', '1000000'),
-            ('{$_SESSION['nation_id']}', '67', '1000000'),
-            ('{$_SESSION['nation_id']}', '68', '1000000'),
-            ('{$_SESSION['nation_id']}', '69', '1000000'),
-            ('{$_SESSION['nation_id']}', '70', '1000000'),
-            ('{$_SESSION['nation_id']}', '71', '1000000'),
-            ('{$_SESSION['nation_id']}', '72', '1000000'),
-            ('{$_SESSION['nation_id']}', '73', '1000000'),
-            ('{$_SESSION['nation_id']}', '75', '1000000'),
-            ('{$_SESSION['nation_id']}', '77', '1000000')
-EOSQL;
-        $GLOBALS['mysqli']->query($sql);
-
-        $sql = <<<EOSQL
-        UPDATE nations SET age = 30 WHERE nation_id = '{$_SESSION['nation_id']}'
-EOSQL;
-        $GLOBALS['mysqli']->query($sql);
-        $sql = <<<EOSQL
-        UPDATE nations SET funds = 100000000000000 WHERE nation_id = '{$_SESSION['nation_id']}'
-EOSQL;
-        $GLOBALS['mysqli']->query($sql);
-        }
-
         header("Location: overview.php");
     }
 }

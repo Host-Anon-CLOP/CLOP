@@ -1,7 +1,10 @@
 <?php
 date_default_timezone_set("UTC");
-set_time_limit(60);
-$mysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "clopus_clop");
+//set_time_limit(60);
+require_once('../backend/sql_data.php');
+$mysqli = new mysqli($dbhost, $username, $password, $database);
+$sql = "SET time_zone = '+00:00'";
+$GLOBALS['mysqli']->query($sql);
 $reportid = "report" . time();
 function onelinequery($sql) {
     $sth = $GLOBALS['mysqli']->query($sql);
@@ -102,16 +105,6 @@ while ($rs = mysqli_fetch_array($sth)) {
     $disabled = 0;
     $envirodamage = 0;
     $envirocleaners = 0;
-	if ($rs['funds'] > 500000000) {
-		$tax = ceil(($rs['funds'] - 500000000)/500);
-		$displaytax = commas($tax);
-		$messages[] = "Inflation has taken away {$displaytax} bits.";
-		$sql=<<<EOSQL
-UPDATE nations SET funds = funds - {$tax}
-WHERE nation_id = {$rs['nation_id']}
-EOSQL;
-		$GLOBALS['mysqli']->query($sql);
-	}
     if (date("G") == 0) {
         $sql=<<<EOSQL
 UPDATE nations SET age = age + 1
@@ -340,12 +333,6 @@ EOSQL;
 			}
         }
     }
-		if ($amount > 50000) {
-			$tax = ceil(($amount - 50000)/500);
-			$sql = "UPDATE resources SET amount = amount - {$tax} WHERE nation_id = {$rs['nation_id']} AND resource_id = {$checkingresource}";
-            $GLOBALS['mysqli']->query($sql);
-			$messages[] = "As you have more than 50,000 {$resourceinfo[$checkingresource]['name']}, {$tax} was siphoned off.";
-		}
     }
     if ($envirocleaners) {
 		$fixeddamage = $envirodamage - ceil($envirodamage * pow(.9, $envirocleaners));
@@ -355,26 +342,6 @@ EOSQL;
 		$messages[] = "Some of the environmental damage has been repaired. ({$fixeddamage} sat)";
     }
     }
-    $sql = "SELECT w.weapon_id, w.amount, wd.name FROM weapons w INNER JOIN weapondefs wd ON wd.weapon_id = w.weapon_id WHERE w.nation_id = {$rs['nation_id']}";
-    $sth2 = $GLOBALS['mysqli']->query($sql);
-    while ($rs2 = mysqli_fetch_array($sth2)) {
-        if ($rs2['amount'] > 1000) {
-            $tax = ceil(($rs2['amount'] - 1000)/500);
-            $sql = "UPDATE weapons SET amount = amount - {$tax} WHERE nation_id = {$rs['nation_id']} AND weapon_id = {$rs2['weapon_id']}";
-            $GLOBALS['mysqli']->query($sql);
-			$messages[] = "As you have more than 1,000 {$rs2['name']}, {$tax} were siphoned off.";
-        }
-    }
-    $sql = "SELECT a.armor_id, a.amount, ad.name FROM armor a INNER JOIN armordefs ad ON ad.armor_id = a.armor_id WHERE a.nation_id = {$rs['nation_id']}";
-    $sth2 = $GLOBALS['mysqli']->query($sql);
-    while ($rs2 = mysqli_fetch_array($sth2)) {
-        if ($rs2['amount'] > 1000) {
-            $tax = ceil(($rs2['amount'] - 1000)/500);
-            $sql = "UPDATE armor SET amount = amount - {$tax} WHERE nation_id = {$rs['nation_id']} AND armor_id = {$rs2['armor_id']}";
-            $GLOBALS['mysqli']->query($sql);
-			$messages[] = "As you have more than 1,000 {$rs2['name']}, {$tax} were siphoned off.";
-        }
-    }
     if (date("G") == 0 || date("G") == 12) {
 	$sql=<<<EOSQL
 	SELECT size, type, name, force_id FROM forces WHERE nation_id = '{$rs['nation_id']}'
@@ -383,18 +350,18 @@ EOSQL;
     while ($rs2 = mysqli_fetch_array($sth2)) {
 		switch ($rs2['type']) {
 		case 1:
-			if ($ownedresources['3'] < ($rs2['size'] * 5)) { //apples
+			if ($ownedresources['3'] < ($rs2['size'] * 5)) { //sugar
 				$sql=<<<EOSQL
 				DELETE FROM forces WHERE force_id = '{$rs2['force_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$messages[] = "You couldn't pay the upkeep for your {$rs2['name']} and it's gone!";
 			} else {
-                $usedapples = $rs2['size'] * 5;
-				$sql = "UPDATE resources SET amount = amount - {$usedapples} WHERE nation_id = '{$rs['nation_id']}' AND resource_id = '3'";
+                $usedsugar = $rs2['size'] * 5;
+				$sql = "UPDATE resources SET amount = amount - {$usedsugar} WHERE nation_id = '{$rs['nation_id']}' AND resource_id = '3'";
 				$GLOBALS['mysqli']->query($sql);
-				$ownedresources['3'] -= $usedapples;
-				$messages[] = "Your {$rs2['name']} used up {$usedapples} apples.";
+				$ownedresources['3'] -= $usedsugar;
+				$messages[] = "Your {$rs2['name']} used up {$usedsugar} sugar.";
 			}
 			break;
 		case 2:
@@ -611,14 +578,14 @@ EOSQL;
         $rs['se_relation'] += 60;
     }
     if ($rs['economy'] == "State Controlled") {
-        if ($ownedresources['18'] < 6) { // cider
-            $messages[] = "Your economy lacks the cider to function properly! (-25 sat, unable to make deals)";
+        if ($ownedresources['18'] < 6) { // vodka
+            $messages[] = "Your economy lacks the vodka to function properly! (-25 sat, unable to make deals)";
             $sql ="UPDATE nations SET satisfaction = satisfaction - 25, active_economy = 0 WHERE nation_id = '{$rs['nation_id']}'";
             $GLOBALS['mysqli']->query($sql);
         } else {
             $sql = "UPDATE resources SET amount = amount - 6 WHERE nation_id = '{$rs['nation_id']}' AND resource_id = '18'";
             $GLOBALS['mysqli']->query($sql);
-            $messages[] = "Your State Controllers drank 6 cider.";
+            $messages[] = "Your State Controllers drank 6 vodka.";
             $sql = "UPDATE nations SET active_economy = 1 WHERE nation_id = '{$rs['nation_id']}'";
             $GLOBALS['mysqli']->query($sql);
         }
@@ -964,7 +931,7 @@ EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	if ($rs['se_relation'] < -25) {
-		$attacker = -1; 
+		$attacker = -1;
 		$strength = ceil((0 - $rs['se_relation'])/4);
 		$attackername = "Solar Empire";
 		$relation = "se_relation";
@@ -1548,7 +1515,7 @@ EOSQL;
 		$GLOBALS['mysqli']->query($sql);
 		if ($oldestnation['government'] == "Solar Vassal" || $oldestnation['government'] == "Lunar Client") {
 			$sql=<<<EOSQL
-DELETE FROM resources WHERE nation_id = '{$battleground}' AND resource_id = 41	
+DELETE FROM resources WHERE nation_id = '{$battleground}' AND resource_id = 41
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			if ($oldestnation['government'] == "Solar Vassal") {
@@ -1626,6 +1593,11 @@ $GLOBALS['mysqli']->query($sql);
 
 $sql=<<<EOSQL
 DELETE FROM news WHERE posted < DATE_SUB(NOW(), INTERVAL 4 WEEK)
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+
+$sql=<<<EOSQL
+DELETE FROM alliance_creations WHERE creationdate < DATE_SUB(NOW(), INTERVAL 8 DAY)
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 ?>

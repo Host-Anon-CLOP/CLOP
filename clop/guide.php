@@ -20,7 +20,7 @@ Malls are extremely high reward, high risk.<br/>
 <b>Environmental facilities.</b> If you're running a very advanced build with many, many buildings over the environmental soft caps and five of each empire's environmental facility, guess what happens
 when you run out of energy?<br/>
 <b>To survive in the long term, it is highly advisable to log in twice a day (a few minutes in the morning and at night) and pay attention to your Reports.</b><br/>
-If you need to go on vacation or take a break from >CLOP for other reasons, <b>go into stasis mode</b> under User Info.<br/>
+If you need to go on vacation or take a break from >ReClop for other reasons, <b>go into stasis mode</b> under User Info.<br/>
 <br/>
 <center><b>Basics</b></center>
 If you just made an account, the first thing you want to do is build farms, oil wells, or copper mines.
@@ -41,7 +41,7 @@ If you don't have enough energy to run your factories, your actual GDP will be m
 Neither your buildings nor your military will use resources that you gained automatically during a tick in the same tick that you gained them.
 Make sure that you have enough in your stockpiles to feed all your upkeep needs at the <b>beginning</b> of a tick.<br/>
 <center><b>Trade and Regions</b></center>
-&gt;CLOP is a game of trading.<br/>
+&gt;ReClop is a game of trading.<br/>
 The only source of farm products is Burrozil. Farm products keep ponies happy, and you don't want unhappy ponies.<br/>
 The only source of minerals is Zebrica. Minerals are used to make buildings and factory parts for buildings. Some of the amounts required are brutally high.<br/>
 The only source of oil is Saddle Arabia. Oil makes energy. Lots and lots of things need energy.<br/>
@@ -60,7 +60,7 @@ business there. Switch to a Free Market to make use of the Marketplace less cost
 <center><b>Game Balance</b></center>
 As your nation grows, your ponies will become more demanding. Your armies will have expensive upkeep.
 And, of course, one major market shortage will bring you to your knees unless you have huge stockpiles.<br/>
-This is all intentional. &gt;CLOP is not a game of watching your numbers go up uninterrupted and crushing everypony you see just because you played longer than them. It is also not a game of mercy.
+This is all intentional. &gt;ReClop is not a game of watching your numbers go up uninterrupted and crushing everypony you see just because you played longer than them. It is also not a game of mercy.
 Anypony who's had time to get his hooves on the ground is fair game. As are you. Waggle your e-horsecock long enough in this game and somepony's likely to stick it in a meatgrinder.
 EOFORM;
 include("footer.php");

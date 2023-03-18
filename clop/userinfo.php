@@ -1,16 +1,16 @@
-<?
+<?php
 include("backend/backend_userinfo.php");
 $extratitle = "User Info - ";
 include("header.php");
-$cssoptions = array(0 => "Grey", 1 => "Black", 2 => "White");
+$cssoptions = array(0 => "White", 1 => "Black", 2 => "Gray");
 if ($userinfo['donator']) {
     echo <<<EOFORM
-<center><b>Thank you for your donation!</b></center>
+<center><b>Everybody has donor status now! Hooray!</b></center>
 EOFORM;
 }
 if ($userinfo['stasismode']) {
     echo <<<EOFORM
-<center><b>You are in stasis mode! Leave stasis to play >CLOP.</b></center>
+<center><b>You are in stasis mode! Leave stasis to play >ReClop.</b></center>
 EOFORM;
 }
 echo <<<EOFORM
@@ -19,7 +19,7 @@ echo <<<EOFORM
 <input type="hidden" name="token_userinfo" value="{$_SESSION['token_userinfo']}"/>
 <input type="hidden" name="user_id" value="{$getpost['user_id']}"/>
 <center><table>
-<tr><td>Current Password</td><td><input type="password" class="form-control" name="currentpassword" maxlength="250" class="width:200px;" autocomplete="off"/></td></tr>
+<tr><td>Current Password</td><td><input type="password" class="form-control" name="currentpassword" class="width:200px;" autocomplete="off"/></td></tr>
 <tr><td>New Password</td><td><input type="password" name="password" class="form-control" class="width:200px;" autocomplete="off"/></td></tr>
 <tr><td>Confirm New Password</td><td><input type="password" class="form-control" class="width:200px;" name="confirm_password"/></td></tr>
 </table></center>
@@ -98,17 +98,19 @@ echo <<<EOFORM
 <center><input type="submit" name="showicons" value="Show Overview Icons" class="btn btn-success"/></center>
 EOFORM;
 }
-if (!$userinfo['hideflags']) {
-echo <<<EOFORM
-<center><input type="submit" name="hideflags" value="Hide Flags" class="btn btn-success"/></center>
-EOFORM;
-} else {
-echo <<<EOFORM
-<center><input type="submit" name="showflags" value="Show Flags" class="btn btn-success"/></center>
-EOFORM;
-}
 echo <<<EOFORM
 </form>
+
+<form name="funmode" method="post" action="userinfo.php">
+<center style="margin-top: 10px; font-weight: bold;">
+Funmode:
+<label class="label-toggle-switch" for="toggle-switch"></label>
+<input type="checkbox" id="toggle-switch" name="funstatus" {$funstatus} onclick="/*document.getElementById('funtoggle').click();*/ submitForm(event);">
+<input type="hidden" name="async_token" value="{$_SESSION['async_token']}">
+<!--<input type="submit" name="funtoggle" id="funtoggle" style="display:none;">-->
+</center>
+</form>
+
 <form name="stasis" method="post" action="userinfo.php">
 <input type="hidden" name="token_userinfo" value="{$_SESSION['token_userinfo']}"/>
 EOFORM;

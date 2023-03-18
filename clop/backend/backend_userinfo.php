@@ -11,13 +11,17 @@ if ($_POST || ($_SESSION['token_userinfo'] == "")) {
     $_SESSION['token_userinfo'] = sha1(rand() . $_SESSION['token_userinfo']);
 }
 $sql =<<<EOSQL
-SELECT u.username, u.user_id, u.email, u.flag, u.donator, u.description, u.stasismode, u.hidebanners, u.hideicons, u.hideflags, u.hidereports, u.alliance_id, a.name AS alliancename
+SELECT u.username, u.user_id, u.email, u.flag, u.donator, u.description, u.stasismode, u.hidebanners, u.hideicons, u.hidereports, u.alliance_id, u.funmode, a.name AS alliancename
 FROM users u LEFT JOIN alliances a ON u.alliance_id = a.alliance_id WHERE u.user_id = '{$_SESSION['user_id']}'
 EOSQL;
 $userinfo = onelinequery($sql);
 $display['description'] = htmlentities($userinfo['description'], ENT_SUBSTITUTE, "UTF-8");
 $display['email'] = htmlentities($userinfo['email'], ENT_SUBSTITUTE, "UTF-8");
 $display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
+
+$funstatus = ($userinfo['funmode'] == 1) ? "checked" : "";
+$_SESSION['async_token'] = sha1(rand());
+
 if (!$errors) {
 if ($_POST['changedescription']) {
     $sql=<<<EOSQL
@@ -194,21 +198,6 @@ EOSQL;
 EOSQL;
     $GLOBALS['mysqli']->query($sql);
     $userinfo['hideicons'] = 0;
-}
-if ($_POST['hideflags']) {
-    $sql=<<<EOSQL
-    UPDATE users SET hideflags = 1 WHERE user_id = '{$_SESSION['user_id']}'
-EOSQL;
-    $GLOBALS['mysqli']->query($sql);
-    $userinfo['hideflags'] = 1;
-    $_SESSION['hideflags'] = 1;
-} else if ($_POST['showflags']) {
-    $sql=<<<EOSQL
-    UPDATE users SET hideflags = 0 WHERE user_id = '{$_SESSION['user_id']}'
-EOSQL;
-    $GLOBALS['mysqli']->query($sql);
-    $userinfo['hideflags'] = 0;
-    $_SESSION['hideflags'] = 0;
 }
 }
 ?>

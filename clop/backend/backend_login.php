@@ -4,12 +4,10 @@ function ReverseIPOctets($inputip){
     $ipoc = explode(".",$inputip);
     return $ipoc[3].".".$ipoc[2].".".$ipoc[1].".".$ipoc[0];
 }
-    # since run on docker this is getting the container ip 
-    #$mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);
-    $mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X-REAL-IP']);
-    
+    $mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);
     $mysql['forwarded'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED']);
     $mysql['forwarded_for'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED_FOR']);
+    $mysql['user_agent'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_USER_AGENT']);
     $sql = <<<EOSQL
     SELECT ip, reason FROM banlist WHERE ip = '{$mysql['remote_addr']}' OR ip = '{$mysql['forwarded']}' OR ip = '{$mysql['forwarded_for']}'
 EOSQL;
@@ -37,24 +35,23 @@ if (gethostbyname(ReverseIPOctets($_SERVER['REMOTE_ADDR']).".".$_SERVER['SERVER_
 }
     if (!$errors) {
     $passwordhash = sha1($mysql['password'] . "saltlick"); //SURE IS SHIT-HA1 IN HERE AIN'T IT
-    $sql = "SELECT user_id, alliance_id, stasisdate, stasismode, css, hidebanners, hidereports, hideflags, alliance_messages_last_checked FROM users WHERE username = '{$mysql['username']}' AND password = '{$passwordhash}'";
+    $sql = "SELECT user_id, stasisdate, stasismode, css, hidebanners, hidereports, funmode FROM users WHERE username = '{$mysql['username']}' AND password = '{$passwordhash}'";
     $rs = onelinequery($sql);
         if ($rs) {
             if ((strtotime($rs['stasisdate']) > (time() - 86400)) && $rs['stasismode']) {
             $errors[] = "You have entered stasis less than 24 hours ago.";
             } else {
+            //show me your browsers ;)
             $sql =<<<EOSQL
-            INSERT INTO logins(user_id, ip, forwarded, forwarded_for, logindate, failed)
-            VALUES ({$rs['user_id']}, '{$mysql['remote_addr']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), false)
+            INSERT INTO logins(user_id, ip, forwarded, forwarded_for, logindate, failed, ua)
+            VALUES ({$rs['user_id']}, '{$mysql['remote_addr']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), false, '{$mysql['user_agent']}')
 EOSQL;
             $GLOBALS['mysqli']->query($sql);
             $_SESSION['css'] = $rs['css'];
             $_SESSION['hidebanners'] = $rs['hidebanners'];
             $_SESSION['hidereports'] = $rs['hidereports'];
-            $_SESSION['hideflags'] = $rs['hideflags'];
             $_SESSION['user_id'] = $rs['user_id'];
-            $_SESSION['alliance_id'] = $rs['alliance_id'];
-            $_SESSION['alliance_messages_last_checked'] = $rs['alliance_messages_last_checked'];
+            $_SESSION['funmode'] = $rs['funmode'];
             $sql = "SELECT nation_id, name FROM nations WHERE user_id = '{$rs['user_id']}'"; // replace with multiple handling at some point
             $rs2 = onelinequery($sql);
             $_SESSION['nation_id'] = $rs2['nation_id'];
@@ -63,8 +60,8 @@ EOSQL;
             }
         } else {
             $sql =<<<EOSQL
-            INSERT INTO logins(user_id, ip, forwarded, forwarded_for, logindate, failed)
-            VALUES(0, '{$mysql['remote_addr']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), true)
+            INSERT INTO logins(user_id, ip, forwarded, forwarded_for, logindate, failed, ua)
+            VALUES(0, '{$mysql['remote_addr']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), true, '{$mysql['user_agent']}')
 EOSQL;
             $GLOBALS['mysqli']->query($sql);
             $errors[] = "Login incorrect.";

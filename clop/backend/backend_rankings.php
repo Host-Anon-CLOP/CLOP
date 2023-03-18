@@ -26,7 +26,7 @@ EOSQL;
 $sqlcount = onelinequery($sql);
     $mode = "longevity";
     $sql=<<<EOSQL
-SELECT u.flag, n.name, n.nation_id, n.region, n.government, n.economy, n.creationdate, n.age FROM nations n
+SELECT u.flag, n.name, n.nation_id, n.government, n.economy, n.creationdate, n.age FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1
 ORDER BY age DESC, creationdate ASC, nation_id ASC
@@ -39,7 +39,7 @@ EOSQL;
 $sqlcount = onelinequery($sql);
     $mode = "gdp";
     $sql=<<<EOSQL
-SELECT u.flag, n.name, n.nation_id, n.region, n.government, n.economy, n.gdp_last_turn FROM nations n
+SELECT u.flag, n.name, n.nation_id, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1
 ORDER BY gdp_last_turn DESC, nation_id ASC

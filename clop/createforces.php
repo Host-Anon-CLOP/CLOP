@@ -7,7 +7,7 @@ echo <<<EOFORM
 <center><h4>Create New Force</h4></center>
 <center><table>
 <tr><th>Force</th><th>Price per Unit</th><th>Upkeep</th></tr>
-<tr><td>Cavalry</td><td>200,000</td><td>5 apples/12 hours</td></tr>
+<tr><td>Cavalry</td><td>200,000</td><td>5 sugar/12 hours</td></tr>
 <tr><td>Tanks</td><td>300,000</td><td>5 gasoline/12 hours</td></tr>
 <tr><td>Pegasi</td><td>300,000</td><td>5 coffee/12 hours</td></tr>
 <tr><td>Unicorns</td><td>400,000</td><td>5 gems/12 hours</td></tr>

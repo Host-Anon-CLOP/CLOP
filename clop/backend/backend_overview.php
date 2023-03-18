@@ -5,7 +5,7 @@ $buildings = array();
 $resources = array();
 $weapons = array();
 $armor = array();
-$regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
+$regiontypes = array(0 => "Hades", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
 $subregiontypes = array(0 => "", 1 => "North ", 2 => "Central ", 3 => "South ");
 $forcetypes = array(1 => "Cavalry", 2 => "Tanks", 3 => "Pegasi", 4 => "Unicorns", 5 => "Naval", 6 => "Alicorns");
 $nationinfo['regionname'] = $regiontypes[$nationinfo['region']];
@@ -120,13 +120,6 @@ if (!$errors) {
 		}
 	}
 }
-if ($nationinfo['funds'] > 500000000) {
-	$nationtax = ceil(($nationinfo['funds'] - 500000000)/500);
-	$displaytax = commas($nationtax);
-} else {
-	$nationtax = 0;
-	$displaytax = 0;
-}
 $gdp = getgdp($_SESSION['nation_id']);
 if ($nationinfo['government'] == "Authoritarianism") {
     $gdp += $gdp * 1.5;
@@ -150,28 +143,18 @@ while ($rs = mysqli_fetch_array($sth)) {
 		$buildings[] = $rs;
 	} else {
 		$resources[$rs['name']] = $rs['amount'];
-		if ($rs['amount'] > 50000) {
-			$taxes[$rs['name']] = ceil(($rs['amount'] - 50000)/500);
-		} else {
-			$taxes[$rs['name']] = 0;
-		}
 	}
 }
+
 $sql = "SELECT r.amount, rd.name, r.weapon_id FROM weapons r INNER JOIN weapondefs rd ON r.weapon_id = rd.weapon_id WHERE r.nation_id = '{$_SESSION['nation_id']}' ORDER BY rd.name";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $weapons[$rs['name']] = $rs['amount'];
-	if ($rs['amount'] > 1000) {
-		$taxes[$rs['name']] = ceil(($rs['amount'] - 1000)/500);
-	}
 }
 $sql = "SELECT r.amount, rd.name, r.armor_id FROM armor r INNER JOIN armordefs rd ON r.armor_id = rd.armor_id WHERE r.nation_id = '{$_SESSION['nation_id']}' ORDER BY rd.name";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $armor[$rs['name']] = $rs['amount'];
-	if ($rs['amount'] > 1000) {
-		$taxes[$rs['name']] = ceil(($rs['amount'] - 1000)/500);
-	}
 }
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
 FROM resourcerequirements rr
@@ -203,9 +186,9 @@ if ($nationinfo['government'] == "Democracy") {
 if ($nationinfo['economy'] == "Free Market") {
 	$requiredresources["Coffee"] += 6;
 } else if ($nationinfo['economy'] == "State Controlled") {
-	$requiredresources["Cider"] += 6;
+	$requiredresources["Vodka"] += 6;
 }
-$milapples = 0;
+$milsugar = 0;
 $milgems = 0;
 $milgasoline = 0;
 $milcoffee = 0;
@@ -215,7 +198,7 @@ EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     if ($rs['type'] == 1) {
-        $milapples += ($rs['totalsize'] * 5);
+        $milsugar += ($rs['totalsize'] * 5);
     } else if ($rs['type'] == 2 || $rs['type'] == 5) {
         $milgasoline += ($rs['totalsize'] * 5);
     } else if ($rs['type'] == 3) {

@@ -9,6 +9,8 @@ $rs = onelinequery($sql);
 if (!$rs['alliance_id']) {
     header("Location: overview.php");
     exit;
+} else {
+	$allianceid = $rs['alliance_id'];
 }
 foreach ($_POST as $key => $value) {
     $mysql[$key] = $GLOBALS['mysqli']->real_escape_string($value);
@@ -23,8 +25,11 @@ EOSQL;
 $allianceinfo = onelinequery($sql);
 $displayeditpubdescription = htmlentities($allianceinfo['public_description'], ENT_SUBSTITUTE, "UTF-8");
 $displayeditdescription = htmlentities($allianceinfo['description'], ENT_SUBSTITUTE, "UTF-8");
-$displaydescription = nl2br(htmlentities($allianceinfo['description'], ENT_SUBSTITUTE, "UTF-8"));
-
+if ($allianceinfo['donator']) {
+    $displaydescription = nl2br($allianceinfo['description']);
+} else {
+    $displaydescription = nl2br(htmlentities($allianceinfo['description'], ENT_SUBSTITUTE, "UTF-8"));
+}
 if ($_POST && (($_POST['token_myalliance'] == "") || ($_POST['token_myalliance'] != $_SESSION['token_myalliance']))) {
     $errors[] = "Try again.";
 }
@@ -35,7 +40,6 @@ if ($_SESSION['user_id'] == $allianceinfo['owner_id']) {
     $owner = true;
 }
 if (!$errors) {
-    # Alliance Leader Stuff
     if ($owner) {
     if ($_POST['updatedescription']) {
         $sql=<<<EOSQL
@@ -43,7 +47,11 @@ if (!$errors) {
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
         $displayeditdescription = htmlentities($_POST['alliancedescription'], ENT_SUBSTITUTE, "UTF-8");
-        $displaydescription = nl2br(htmlentities($_POST['alliancedescription'], ENT_SUBSTITUTE, "UTF-8"));
+        if ($allianceinfo['donator']) {
+            $displaydescription = nl2br($_POST['alliancedescription']);
+        } else {
+            $displaydescription = nl2br(htmlentities($_POST['alliancedescription'], ENT_SUBSTITUTE, "UTF-8"));
+        }
     }
     if ($_POST['updatepubdescription']) {
         $sql=<<<EOSQL
@@ -136,6 +144,13 @@ EOSQL;
     DELETE FROM alliances WHERE alliance_id = '{$allianceinfo['alliance_id']}'
 EOSQL;
         $GLOBALS['mysqli']->query($sql);
+	//if alliance is older than a week (604 800 seconds)
+	if ((time() - strtotime($allianceinfo['creationdate'])) > 604800) {
+	$rawmessage = "The ".$allianceinfo['name']." Alliance has been disbanded!";
+	$message = $GLOBALS['mysqli']->real_escape_string($rawmessage);
+	$sql = "INSERT INTO news VALUES ('', '".$message."', NOW())";
+	$GLOBALS['mysqli']->query($sql);
+	}
     header("Location: overview.php");
     exit;
     }
@@ -154,7 +169,7 @@ EOSQL;
    }
 if ($_POST['action'] == "Leave Alliance") {
     $sql=<<<EOSQL
-    UPDATE users SET alliance_id = 0 WHERE user_id = '{$_SESSION['user_id']}'
+    UPDATE users SET alliance_id = 0, alliance_lastread = '0' WHERE user_id = '{$_SESSION['user_id']}'
 EOSQL;
     $GLOBALS['mysqli']->query($sql);
     header("Location: overview.php");
@@ -187,8 +202,6 @@ EOSQL;
     }
 }
 }
-
-# Alliance Member Stuff
 $alliancemembers = array();
 $requestingmembers = array();
 $sql=<<<EOSQL
@@ -198,7 +211,7 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $alliancemembers[] = $rs;
     $sql=<<<EOSQL
-	SELECT nation_id, name, region FROM nations WHERE user_id = {$rs['user_id']} ORDER BY name
+	SELECT nation_id, name FROM nations WHERE user_id = {$rs['user_id']} ORDER BY name
 EOSQL;
 	$sth2 = $GLOBALS['mysqli']->query($sql);
 	while ($rs2 = mysqli_fetch_array($sth2)) {
@@ -225,47 +238,9 @@ if ($sth) {
         $messages[] = $rs;
     }
 }
-
-# Set when Alliance Messages were last checked
-$sql=<<<EOSQL
-UPDATE users SET alliance_messages_last_checked = NOW() WHERE user_id = {$_SESSION['user_id']}
+$sql = <<<EOSQL
+UPDATE users SET alliance_lastread = (SELECT MAX(message_id) FROM alliance_messages WHERE alliance_id = '{$allianceid}') WHERE user_id = '{$_SESSION['user_id']}'
 EOSQL;
-$sth = $GLOBALS['mysqli']->query($sql);
-$_SESSION['alliance_messages_last_checked'] = date("Y-m-d H:i:s");
+$GLOBALS['mysqli']->query($sql) or die($mysqli->error);
 
-# Get HideIcons Details
-$sql = "SELECT n.hideicons, from nations WHERE n.nation_id = '{$mysql['nation_id']}'";
-$nationinfo = onelinequery($sql);
-
-# Alliance Resources
-$allianceaffectedresources = array();
-$alliancerequiredresources = array();
-$allianceresources = array();
-
-$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
-FROM resourceeffects rr
-INNER JOIN resources r ON r.resource_id = rr.resource_id
-INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
-INNER JOIN nations n ON r.nation_id = n.nation_id
-INNER JOIN users u ON n.user_id = u.user_id
-WHERE u.alliance_id = {$allianceinfo['alliance_id']}
-GROUP BY rd.name";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-    $allianceaffectedresources[$rs['name']] = $rs['affected'];
-}
-
-$sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
-FROM resourcerequirements rr
-INNER JOIN resources r ON r.resource_id = rr.resource_id
-INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
-INNER JOIN nations n ON r.nation_id = n.nation_id
-INNER JOIN users u ON n.user_id = u.user_id
-WHERE u.alliance_id = {$allianceinfo['alliance_id']}
-GROUP BY rd.name";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-    $alliancerequiredresources[$rs['name']] = $rs['required'];
-}
-    
 ?>

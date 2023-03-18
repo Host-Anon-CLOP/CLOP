@@ -1,4 +1,4 @@
-<?
+<?php
 include("backend/backend_viewuser.php");
 $extratitle = "View User - ";
 include("header.php");
@@ -10,7 +10,7 @@ EOFORM;
 } else {
 if ($userinfo['donator']) {
     echo <<<EOFORM
-<center><b>This user has donated to >CLOP!</b></center>
+<center><b>This user has donated to >ReClop!</b></br><b style="color: #1CC51C;">>he sure did</b></center>
 EOFORM;
 }
 if ($userinfo['stasismode']) {
@@ -18,18 +18,15 @@ if ($userinfo['stasismode']) {
 <center><b>This user is in stasis.</b></center>
 EOFORM;
 }
+if ($userinfo['flag']) {
+$display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
+$flaghtml =<<<EOFORM
+<img src="{$display['flag']}" height="20" width="20">
+EOFORM;
+}
 echo <<<EOFORM
-<center>{$userinfo['username']}</center>
+<center>{$flaghtml} {$userinfo['username']}</center>
 EOFORM;
-if ( ($userinfo['flag']) && ($_SESSION['hideflags'] == 0) ) {
-    $display['flag'] = htmlentities($userinfo['flag'], ENT_SUBSTITUTE, "UTF-8");
-    $flaghtml =<<<EOFORM
-    <img src="{$display['flag']}" height="150" width="250">
-EOFORM;
-    echo <<<EOFORM
-    <center>{$flaghtml}</center>
-EOFORM;
-    }
 if ($userinfo['alliancename']) {
 echo <<<EOFORM
 <center><a href="viewalliance.php?alliance_id={$userinfo['alliance_id']}">{$userinfo['alliancename']}</a></center>
@@ -54,11 +51,9 @@ echo <<<EOFORM
 <center>Nations</center>
 <center><table>
 EOFORM;
-$regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
-$icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
 foreach ($nations as $nation) {
 echo <<<EOFORM
-<tr><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a></td></tr>
+<tr><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}</a></td></tr>
 EOFORM;
 }
 echo <<<EOFORM

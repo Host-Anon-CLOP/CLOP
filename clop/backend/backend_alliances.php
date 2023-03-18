@@ -40,6 +40,7 @@ EOFORM;
     SELECT alliance_id FROM alliances WHERE owner_id = '{$_SESSION['user_id']}'
 EOSQL;
     $rs = onelinequery($sql);
+    $allianceid = $rs['alliance_id'];
     $sql =<<<EOFORM
     UPDATE users SET alliance_id = '{$rs['alliance_id']}' WHERE user_id = '{$_SESSION['user_id']}'
 EOFORM;
@@ -48,6 +49,23 @@ EOFORM;
     DELETE FROM alliance_requests WHERE user_id = '{$_SESSION['user_id']}'
 EOFORM;
     $GLOBALS['mysqli']->query($sql);
+    $sql = <<<EOSQL
+INSERT INTO alliance_creations VALUES ('{$_SESSION['user_id']}', '{$allianceid}', NOW())
+EOSQL;
+    $GLOBALS['mysqli']->query($sql);
+    $sql = <<<EOSQL
+SELECT COUNT(*) AS created_count, u.username FROM alliance_creations AS ac INNER JOIN users AS u ON ac.user_id = u.user_id WHERE ac.user_id = '{$_SESSION['user_id']}' AND ac.creationdate > DATE_SUB(NOW(), INTERVAL 7 DAY)
+EOSQL;
+    $rs = onelinequery($sql);
+    //nah, let's raise the news limits to three alliances per week
+    if ($rs['created_count'] <= 3) {
+	$rawmessage = <<<EOMSG
+The user <a href="viewuser.php?user_id={$_SESSION['user_id']}">{$rs['username']}</a> has created an alliance <a href="viewalliance.php?alliance_id={$allianceid}">{$mysql['alliancename']}</a>.
+EOMSG;
+	$message = $GLOBALS['mysqli']->real_escape_string($rawmessage);
+	$sql = "INSERT INTO news VALUES ('', '".$message."', NOW())";
+	$GLOBALS['mysqli']->query($sql);
+    }
     header("Location: myalliance.php");
     exit;
     }

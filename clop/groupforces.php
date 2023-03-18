@@ -120,6 +120,7 @@ EOFORM;
                 </form>
             </td>
         </tr>
+</table>
 EOFORM;
 }
 } else {

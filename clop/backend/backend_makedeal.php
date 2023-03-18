@@ -78,7 +78,6 @@ if ($_POST || ($_SESSION['token_makedeal'] == "")) {
     $_SESSION['token_makedeal'] = sha1(rand() . $_SESSION['token_makedeal']);
 }
 if (!$errors) {
-$bitsmax = 100000000 + (int)($nationinfo['funds'] / 10);
 if ($_POST['type'] == "weapon") {
 	$offerarray = $offerweapons;
 	$askarray = $askweapons;
@@ -87,7 +86,6 @@ if ($_POST['type'] == "weapon") {
 	$resourcestable = "weapons";
 	$resourcedefs = "weapondefs";
 	$tradeable = "";
-	$max = 5000 + (int)($nationinfo['funds'] / 200000);
 } else if ($_POST['type'] == "armor") {
 	$offerarray = $offerarmor;
 	$askarray = $askarmor;
@@ -96,7 +94,6 @@ if ($_POST['type'] == "weapon") {
 	$resourcestable = "armor";
 	$resourcedefs = "armordefs";
 	$tradeable = "";
-	$max = 5000 + (int)($nationinfo['funds'] / 200000);
 } else {
 	$offerarray = $offeritems;
 	$askarray = $askitems;
@@ -105,7 +102,6 @@ if ($_POST['type'] == "weapon") {
 	$resourcestable = "resources";
 	$resourcedefs = "resourcedefs";
 	$tradeable = "AND is_tradeable = 1";
-	$max = 10000 + (int)($nationinfo['funds'] / 100000);
 }
 if ($_POST['offeritem']) {
     $sql =<<<EOSQL
@@ -114,15 +110,6 @@ EOSQL;
     $rs = onelinequery($sql);
     if (!$rs) {
         $errors[] = "Did you know that people like you only exist to make my life harder?";
-    }
-	$sql =<<<EOSQL
-	SELECT SUM(dio.amount) AS totalamount FROM deal{$basetable}_offered dio
-	INNER JOIN deals d ON dio.deal_id = d.deal_id
-	WHERE d.fromnation = '{$_SESSION['nation_id']}' AND dio.{$resource_id} = {$mysql['resource_id']}
-EOSQL;
-	$currenttotal = onelinequery($sql);
-    if ($mysql['amount'] + $currenttotal['totalamount'] > $max) {
-        $errors[] = "You may only have {$max} of this kind of item in deals.";
     }
     $sql =<<<EOSQL
     SELECT amount FROM {$resourcestable} WHERE nation_id = '{$_SESSION['nation_id']}' AND {$resource_id} = {$mysql['resource_id']}
@@ -241,10 +228,6 @@ EOSQL;
 	WHERE fromnation = {$_SESSION['nation_id']}
 EOSQL;
 	$currenttotal = onelinequery($sql);
-    if ($mysql['amount'] + $currenttotal['totalamount'] > $bitsmax) {
-        $commasbitsmax = commas($bitsmax);
-        $errors[] = "You may only offer {$commasbitsmax} bits total in deals.";
-    }
     if ($nationinfo['funds'] < $mysql['amount']) {
         $errors[] = "You do not have that much money.";
     }

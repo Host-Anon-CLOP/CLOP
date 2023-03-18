@@ -4,7 +4,7 @@ $extratitle = "Alliances - ";
 include("header.php");
 if ($hasalliance) {
     echo <<<EOFORM
-<center><h4><a href="myalliance.php">View My Alliance</a></h4></center>
+<center><h4><a href="myalliance.php">My Alliance</a></h4></center>
 EOFORM;
 } else {
     echo <<<EOFORM
@@ -27,7 +27,8 @@ if (!$hasalliance) {
 echo "<th></th>";
 }
 echo "</tr>";
-foreach ($alliances AS $allianceinfo) {
+if (!empty($alliances)) {
+foreach ($alliances as $allianceinfo) {
     if ($allianceinfo['nations']) {
     if (!$hasalliance) {
     $request =<<<EOFORM
@@ -50,6 +51,7 @@ EOFORM;
 <td>{$allianceinfo['players']}</td><td>{$allianceinfo['nations']}</td><td><a href="viewuser.php?user_id={$allianceinfo['owner_id']}">{$allianceinfo['leader']}</a></td>{$request}</tr>
 EOFORM;
     }
+}
 }
 echo <<<EOFORM
 </table></center>

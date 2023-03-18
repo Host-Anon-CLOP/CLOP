@@ -1,5 +1,8 @@
 <?php
-$mysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "clopus_elements");
+require_once('sql_data.php');
+$mysqli = new mysqli($dbhost, $username, $password, $database);
+$sql = "SET time_zone = '+00:00'";
+$GLOBALS['mysqli']->query($sql);
 date_default_timezone_set("UTC");
 session_start();
 if (!isset($_SESSION['SERVER_GENERATED_SID'])) {

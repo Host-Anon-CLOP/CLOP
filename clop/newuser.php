@@ -22,7 +22,7 @@ $subregionlist .=<<<EOFORM
 EOFORM;
 }
 echo <<<EOFORM
-Hold it! Have you read the <a href="rules.php">Rules</a> and the <a href="https://docs.google.com/document/u/0/d/1jSinNyYJCHkoDvQgaJkD_z2g9SV5G6v9gsKI-nwmrYM/mobilebasic">Guide</a>?
+Hold it! Have you read the <a href="rules.php">Rules</a> and the <a href="guide.php">Guide</a>?
 <form name="newuser" method="post" action="newuser.php" role="form">
 <input type="hidden" name="token_newuser" value="{$_SESSION['token_newuser']}"/>
 Leave this field blank (stops crawler spambots) <input name="username" maxlength="25"/>
@@ -32,12 +32,12 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
     <input type="text" class="form-control" id="realusername" placeholder="Username" name="realusername" maxlength="25" value="{$display['realusername']}"/>
   </div>
   <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password" name="password" maxlength="250"/>
+    <label for="password">Password</label><p>I sure hope you don't use the same password for every website you register on!</p>
+    <input type="password" class="form-control" id="password" placeholder="Password" name="password" maxlength="25"/>
   </div>
   <div class="form-group">
     <label for="confirmpassword">Confirm Password</label>
-    <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password" name="confirmpassword" maxlength="250"/>
+    <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password" name="confirmpassword" maxlength="25"/>
   </div>
   <div class="form-group">
     <label for="asdf">Email</label>
@@ -64,7 +64,7 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
 			{$subregionlist}
 		</select>
   </div>
-<input type="submit" class="btn btn-success" value="Join >CLOP"/>
+<input type="submit" class="btn btn-success" value="Join >ReClop"/>
 </form>
 EOFORM;
 include("footer.php");

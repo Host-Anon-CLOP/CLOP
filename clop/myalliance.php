@@ -53,7 +53,7 @@ if ($owner) {
     echo <<<EOFORM
 <form name="bulkdelete" method="post" action="myalliance.php">
 <input type="hidden" name="token_myalliance" value="{$_SESSION['token_myalliance']}"/>
-<center><div class="input-group">Delete all messages more than <input name="deletedays" type="text" style="width:25px;" maxlength="2"//> days old
+<center><div class="input-group">Delete all messages more than <input name="deletedays" type="text" style="width:25px;" maxlength="2"/> days old
 <input type="submit" name="bulkdelete" value="Bulk Delete" class="btn btn-sm btn-danger" onclick="return confirm('Really bulk delete messages?')"/></div></center>
 </form>
 EOFORM;
@@ -102,12 +102,10 @@ echo <<<EOFORM
 <td>{$stasis}</td><td>
 EOFORM;
     if ($nations[$member['user_id']]) {
-        $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
-        $icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
         $displaynations = array();
         foreach ($nations[$member['user_id']] as $nation) {
             $displaynations[] =<<<EOFORM
-<a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a>
+<a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']}</a>
 EOFORM;
         }
         echo implode(", ", $displaynations);
@@ -151,78 +149,4 @@ EOFORM;
     <input type="submit" name="action" value="Leave Alliance" class="btn btn-danger btn-sm" onclick="return confirm('Really leave your alliance?')"/></form></center>
 EOFORM;
 }
-
-# Alliance Resources
-# uncentered: <div class="col-md-6">
-# centered: <div class="col-md-6 col-md-offset-3">
-echo <<<EOFORM
-</tbody>
-</table>
-</div>
-</div>
-    <div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default">
-        <div class="panel-heading">Alliance Resources</div>
-        <table class="table">
-        <thead>
-        <tr>
-EOFORM;
-        if (!$nationinfo['hideicons']) {
-        echo <<<EOFORM
-            <td></td>
-EOFORM;
-        }
-        echo <<<EOFORM
-            <td style="text-align: right;">Resource</td>
-            <td>Generated</td>
-            <td>Used</td>
-            <td>Net</td>
-        </tr>
-        </thead>
-        <tbody>
-EOFORM;
-foreach($allianceaffectedresources as $name => $amount) {
-if (!$allianceresources[$name]) $allianceresources[$name] = 0;
-}
-foreach($alliancerequiredresources as $name => $amount) {
-if (!$allianceresources[$name]) $allianceresources[$name] = 0;
-}
-ksort($allianceresources);
-foreach($allianceresources as $name => $amount) {
-    if (!$allianceaffectedresources[$name]) {
-    $allianceaffectedresources[$name] = 0;
-    }
-    if (!$alliancerequiredresources[$name]) {
-    $alliancerequiredresources[$name] = 0;
-    }
-    $amountNet = ($allianceaffectedresources[$name] - $alliancerequiredresources[$name]);
-
-    if($amountNet > 0) $amountNetClass = "text-success";
-    elseif($amountNet == 0) $amountNetClass = "text-warning";
-    else $amountNetClass = "text-danger";
-    $displayaffected = commas($allianceaffectedresources[$name]);
-    $displayrequired = commas($alliancerequiredresources[$name]);
-    if ($amountNet < 0) {
-    $displaynet = "-" . commas(abs($amountNet));
-    } else {
-    $displaynet = commas($amountNet);
-    }
-
-    echo <<<EOFORM
-    <tr>
-EOFORM;
-    if (!$nationinfo['hideicons']) {
-    echo <<<EOFORM
-    <td style="width: 16px;"><img src="images/icons/{$name}.png"/></td>
-EOFORM;
-    }
-    echo <<<EOFORM
-    <td style="text-align: right;">{$name}</td>
-    <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
-    <td style="text-align: center;"><span class="text-danger">{$displayrequired}</span></td>
-    <td style="text-align: center;"><span class="{$amountNetClass}">{$displaynet}</span></td>
-    </tr>
-EOFORM;
-}
-    
 ?>

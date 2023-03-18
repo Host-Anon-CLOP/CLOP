@@ -151,7 +151,7 @@ EOSQL;
 	} else if ($rs['government'] == "Oppression") {
         $errors[] = "That Oppressive government is unable to accept deals!";
 	} else if ($rs['nation_id'] == $_SESSION['nation_id']) {
-		$errors[] = "Clop, clop, clop...";
+		$errors[] = "Clop, Clop, Clop...";
     } else {
 		$sql=<<<EOSQL
 		INSERT INTO deals (fromnation, tonation) VALUES ('{$_SESSION['nation_id']}', '{$rs['nation_id']}')

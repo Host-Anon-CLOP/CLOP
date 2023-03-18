@@ -12,7 +12,7 @@ EOSQL;
 EOSQL;
 	$GLOBALS['mysqli']->query($sql);
     $sql=<<<EOSQL
-	DELETE FROM chat WHERE posted <= DATE_SUB(NOW(), INTERVAL 1 WEEK)
+	DELETE FROM chat WHERE posted <= DATE_SUB(NOW(), INTERVAL 4 WEEK)
 EOSQL;
 	$GLOBALS['mysqli']->query($sql);
     }
