@@ -458,7 +458,7 @@ if ($rs['number']) {
 
 if ( ($attackers) || ($incomingnumber) ) {
     # CALCULATE IF YOU WILL WIN THE ATTACK
-    #include("backend/backend_will_attackers_win.php");
+    include("backend/backend_will_attackers_win.php");
     $attackersyouwin = true;
 }
 ?>
