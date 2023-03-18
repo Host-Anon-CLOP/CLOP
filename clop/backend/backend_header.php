@@ -42,6 +42,12 @@ if ($rs['number']) {
 }
 
 $sql = <<<EOSQL
+SELECT COUNT(*) AS pollcount FROM requests WHERE visible = '1' AND voteable = '1' AND request_id NOT IN (SELECT poll_id FROM votes WHERE user_id = '{$_SESSION['user_id']}')
+EOSQL;
+$activepolls = onelinequery($sql);
+$pollcount = ($activepolls['pollcount'] > 0) ? '('.$activepolls['pollcount'].')' : '';
+
+$sql = <<<EOSQL
 SELECT COUNT(*) AS number FROM forcegroups WHERE destination_id = {$_SESSION['nation_id']} AND attack_mission = 1 AND departuredate IS NOT NULL
 EOSQL;
 $rs = onelinequery($sql);

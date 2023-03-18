@@ -65,11 +65,11 @@ function $$ (selector, el) {
 }
 </script>
 <center>
-<h3>People's Republic of >ReClop</h2>
-<h5>Global rules 1 & 2 doesn't apply here!</h5>
+<h3>Polls</h2>
 </center>
 <b>You are allowed to vote once per each poll, and you cannot change your vote. Your vote is cast automatically when you select appropriate option, so be careful!</b>
 </br>Also note that the poll result isn't binding. The polls may last for indefinite time period.
+</br>I will try and implement features based on how many people want them. So when there are multiple polls for features, try and only vote on what you want done the most
 </br>
 EOTXT;
 if (count($polls) > 0) {
