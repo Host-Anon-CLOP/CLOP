@@ -14,12 +14,10 @@ margin-right: 10px;
 }
 </style>
 <center>
-<h3>People's Republic of >ReClop</h2>
-<h5>Global rules 1 & 2 doesn't apply here!</h5>
+<h3>Feature Requests</h2>
 </center>
-<b>Instead, they are superseded by <a href="requestrules.php" target="_self">those two rules</a>. Make sure you familiarize with them!</b></br>
 Your request will be reviewed, and if it's OK, it will be made into a poll, where users can vote if they would want to see your idea implemented in game or not.</br>
-Submit your ideas about looks, game mechanics, rules, bugs, users, admins and <abbr title="within rules">everything</abbr>!
+Submit your ideas about looks, game mechanics, rules, bugs, users, admins and everything!
 </br></br></br>
 <div class="row">
 <form name="feature-form" action="requestfeature.php" method="post" class="form">
