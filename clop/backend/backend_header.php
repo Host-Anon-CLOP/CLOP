@@ -20,7 +20,7 @@ $sql = <<<EOSQL
 SELECT COUNT(*) AS pollcount FROM requests WHERE visible = '1' AND voteable = '1' AND request_id NOT IN (SELECT poll_id FROM votes WHERE user_id = '{$_SESSION['user_id']}')
 EOSQL;
 $activepolls = onelinequery($sql);
-$pollcount = ($activepolls['pollcount'] > 0) ? '( work'.$activepolls['pollcount'].')' : '( none'.$activepolls['pollcount'].')';
+$pollcount = ($activepolls['pollcount'] > 0) ? '('.$activepolls['pollcount'].')' : '';
 
 $sql = <<<EOSQL
 SELECT COUNT(*) AS number FROM alliance_messages WHERE alliance_id = {$_SESSION['alliance_id']} AND posted > "{$_SESSION['alliance_messages_last_checked']}";
