@@ -52,6 +52,11 @@ echo <<<EOFORM
 <center><span class="text-danger">YOU HAVE {$incomingnumber} INCOMING ATTACKS!</span></center>
 EOFORM;
 }
+
+echo <<<EOFORM
+<center><span class="text-success">next war tick midnight: $midnight / midday: $midday</span></center>
+EOFORM;
+
 if ( ($attackers) || ($incomingnumber) ) {
   if ($attackersyouwin) {
     echo <<<EOFORM
