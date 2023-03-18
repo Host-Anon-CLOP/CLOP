@@ -22,9 +22,6 @@ if ($_POST['action'] == "Submit") {
 SELECT COUNT(*) AS count FROM requests WHERE submitter = {$_SESSION['user_id']} AND submitdate >= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND isbug = FALSE
 EOSQL;
 	$count = onelinequery($sql);
-	if ($count['count'] >= 5 && !$isbug && ($_SESSION['user_id'] != 1)) {
-		$errors[] = "Hold on! You've exceeded current form submit limits.";
-	}
 	$sql = <<<EOSQL
 SELECT COUNT(*) AS count FROM requests WHERE submitter = {$_SESSION['user_id']} AND submitdate >= DATE_SUB(NOW(), INTERVAL 1 WEEK) AND isbug = TRUE
 EOSQL;
