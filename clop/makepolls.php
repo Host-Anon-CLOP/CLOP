@@ -1,8 +1,5 @@
 <?php
 require_once("backend/allfunctions.php");
-if ($_SESSION['user_id'] != 1) {
-	die("Get out of here, stalker");
-}
 
 if (empty($_GET) && empty($_POST)) {
 $sql = "SELECT r.*, u.username FROM requests AS r INNER JOIN users AS u ON r.submitter = u.user_id ORDER BY r.request_id DESC";
