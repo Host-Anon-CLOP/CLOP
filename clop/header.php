@@ -282,6 +282,13 @@ echo <<<EOFORM
       <li><a href="graveyard.php">Graveyard</a></li>
       </ul>
       </li>
+      <li class="dropdown">
+      <a class="dropdown-toggle" href="#">Feedback <span class="badge">{$pollcount}</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="requestfeature.php">Request Feature/Submit Bug</a></li>
+        <li><a href="polls.php">Polls <span class="badge">{$pollcount}</span></a></li>
+      </ul>
+      </li>
       <li><a href="news.php">News</a></li>
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><font color="orange">Guides </font><b class="caret"></b></a>
       <ul class="dropdown-menu">
