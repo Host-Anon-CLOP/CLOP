@@ -59,9 +59,9 @@ if ( ($attackers) || ($incomingnumber) ) {
     <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong) </span></center>
 EOFORM;
 
-while ($rowData= $test->fetch_array()) {
+foreach($test as $row) {
   echo <<<EOFORM
-  '{$rowData['classtype']}'
+  '<strong>Per room amount:  </strong>'.$row
 EOFORM;
 }
 
