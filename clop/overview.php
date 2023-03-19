@@ -59,11 +59,11 @@ if ( ($attackers) || ($incomingnumber) ) {
     <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong) </span></center>
 EOFORM;
 
-foreach($test as $row) {
+$row = mysqli_fetch_assoc($test);
   echo <<<EOFORM
-  '<strong>Per room amount:  </strong>'.$row
+  htmlentities($row['classtype'], ENT_QUOTES, 'UTF-8')
 EOFORM;
-}
+
 
     } else {
     echo <<<EOFORM
