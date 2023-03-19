@@ -1,4 +1,6 @@
 <?php
+include_once("allfunctions.php");
+
 //// WAR
 if (strtotime('now') < strtotime('midnight')) {
 	$midnight =	(strtotime('midnight') - strtotime('now'));
