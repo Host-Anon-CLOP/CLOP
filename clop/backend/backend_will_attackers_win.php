@@ -19,7 +19,7 @@ $hour = date("H");
 $sql=<<<EOSQL
 SELECT fg.forcegroup_id FROM forcegroups fg
 LEFT JOIN nations n ON fg.location_id = n.nation_id
-LEFT JOIN nations n2 ON fg.destination_id = $_SESSION['nation_id']
+LEFT JOIN nations n2 ON fg.destination_id = '{$_SESSION['nation_id']}'
 WHERE fg.departuredate IS NOT NULL
 
 EOSQL;
