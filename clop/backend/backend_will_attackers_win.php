@@ -1,15 +1,15 @@
 <?php
 //// WAR
 if (strtotime('now') < strtotime('midnight')) {
-	$midnight =	strtotime('midnight');
+	$midnight =	(strtotime('midnight') - strtotime('now'));
 } else {
-	$midnight = strtotime('tomorrow midnight');
+	$midnight = (strtotime('tomorrow midnight') - strtotime('now'));
 }
 
 if (strtotime('now') < strtotime('noon')) {
-	$midday = strtotime('noon');
+	$midday = (strtotime('noon') - strtotime('now'));
  } else {
-	$midday = strtotime('tomorrow noon');
+	$midday = (strtotime('tomorrow noon') - strtotime('now'));
  }
 #$TimeUntilNextWarTick = ?;
 
