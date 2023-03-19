@@ -61,7 +61,7 @@ EOFORM;
 
 $row = mysqli_fetch_assoc($test);
   echo <<<EOFORM
-  htmlentities($row['classtype'], ENT_QUOTES, 'UTF-8')
+  $row['classtype']
 EOFORM;
 
 
