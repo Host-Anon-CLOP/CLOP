@@ -61,7 +61,7 @@ EOFORM;
 
 while ($rowData= $test->fetch_array()) {
   echo <<<EOFORM
-  echo $rowData['classtype'];
+  $rowData['classtype']
 EOFORM;
 }
 
