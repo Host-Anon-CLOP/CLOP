@@ -13,20 +13,26 @@ if (strtotime('now') < strtotime('noon')) {
  }
 $TimeUntilNextWarTick = min($midday, $midnight);
 
-/*
 $hour = date("H");
 $sql=<<<EOSQL
 SELECT fg.forcegroup_id FROM forcegroups fg
 LEFT JOIN nations n ON fg.location_id = n.nation_id
-LEFT JOIN nations n2 ON fg.destination_id = n2.nation_id
-WHERE fg.departuredate IS NOT NULL AND (
+LEFT JOIN nations n2 ON fg.destination_id = $_SESSION['nation_id']
+WHERE fg.departuredate IS NOT NULL
+
+EOSQL;
+
+/*
+ AND (
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 12 HOUR) AND n.region = n2.region AND fg.attack_mission = 0) OR
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 24 HOUR) AND n.region = n2.region AND fg.attack_mission = 1) OR
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 36 HOUR) AND fg.attack_mission = 0) OR
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 48 HOUR) AND fg.attack_mission = 1)
-)
-EOSQL;
+*/
+
 $sth = $GLOBALS['mysqli']->query($sql);
+$test = $sth;
+/*
 while ($rs = mysqli_fetch_array($sth)) {
     $sql=<<<EOSQL
     UPDATE forcegroups SET location_id = destination_id, destination_id = 0, departuredate = NULL WHERE forcegroup_id = '{$rs['forcegroup_id']}'

@@ -56,7 +56,7 @@ EOFORM;
 if ( ($attackers) || ($incomingnumber) ) {
   if ($attackersyouwin) {
     echo <<<EOFORM
-    <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong) $test</span></center>
+    <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong) results: $test</span></center>
 EOFORM;
     } else {
     echo <<<EOFORM
