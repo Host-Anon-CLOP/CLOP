@@ -1,13 +1,11 @@
 <?php
 //// WAR
-$midnight = "unset"
 if (strtotime('now') < strtotime('midnight')) {
 	$midnight =	strtotime('midnight');
 } else {
 	$midnight = strtotime('tomorrow midnight');
 }
 
-$midday = "unset"
 if (strtotime('now') < strtotime('noon')) {
 	$midday = strtotime('noon');
  } else {
