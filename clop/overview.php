@@ -56,8 +56,15 @@ EOFORM;
 if ( ($attackers) || ($incomingnumber) ) {
   if ($attackersyouwin) {
     echo <<<EOFORM
-    <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong) results: $test</span></center>
+    <center><span class="text-success">YOU WILL SURVIVE THE NEXT WAR-TICK! (this is still being coded, message is wrong) </span></center>
 EOFORM;
+
+while ($rowData= $test->fetch_array()) {
+  echo <<<EOFORM
+  echo $rowData['classtype'];
+EOFORM;
+}
+
     } else {
     echo <<<EOFORM
     <center><span class="text-danger">YOUR NATION WILL BE LOST NEXT WAR-TICK!</span></center>
