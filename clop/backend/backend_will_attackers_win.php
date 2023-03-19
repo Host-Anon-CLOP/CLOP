@@ -15,9 +15,11 @@ if (strtotime('now') < strtotime('noon')) {
  }
 $TimeUntilNextWarTick = min($midday, $midnight);
 
+// ATTACKS INCOMING. WILL NOT INCLUDE ATTACKERS ALREADY THERE
 $hour = date("H");
 $sql=<<<EOSQL
 SELECT fg.forcegroup_id FROM forcegroups fg
+WHERE fg.destination_id = '{$_SESSION['nation_id']}'
 LEFT JOIN nations n ON fg.location_id = n.nation_id
 LEFT JOIN nations n2 ON fg.destination_id = '{$_SESSION['nation_id']}'
 WHERE fg.departuredate IS NOT NULL
