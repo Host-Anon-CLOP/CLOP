@@ -60,9 +60,11 @@ if ( ($attackers) || ($incomingnumber) ) {
 EOFORM;
 
 $row = mysqli_fetch_assoc($test);
+foreach($test as $row) {
   echo <<<EOFORM
-  '{$row['classtype']}'
+  '<strong>Per room amount:  </strong>'.$row
 EOFORM;
+}
 
 
     } else {
