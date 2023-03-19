@@ -11,7 +11,7 @@ if (strtotime('now') < strtotime('noon')) {
  } else {
 	$midday = (strtotime('tomorrow noon') - strtotime('now'));
  }
-#$TimeUntilNextWarTick = ?;
+$TimeUntilNextWarTick = min($midday, $midnight);
 
 /*
 $hour = date("H");
