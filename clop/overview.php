@@ -61,7 +61,7 @@ EOFORM;
 
 $row = mysqli_fetch_assoc($test);
   echo <<<EOFORM
-  {$row['classtype']}
+  '{$row['classtype']}'
 EOFORM;
 
 
