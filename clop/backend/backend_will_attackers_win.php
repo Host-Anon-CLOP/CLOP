@@ -3,17 +3,17 @@ include_once("allfunctions.php");
 
 //// WAR
 if (strtotime('now') < strtotime('midnight')) {
-	$midnight =	(strtotime('midnight') - strtotime('now'));
+	$TimeUntilNextWarTick_midnight =	(strtotime('midnight') - strtotime('now'));
 } else {
-	$midnight = (strtotime('tomorrow midnight') - strtotime('now'));
+	$TimeUntilNextWarTick_midnight = (strtotime('tomorrow midnight') - strtotime('now'));
 }
 
 if (strtotime('now') < strtotime('noon')) {
-	$midday = (strtotime('noon') - strtotime('now'));
+	$TimeUntilNextWarTick_midday = (strtotime('noon') - strtotime('now'));
  } else {
-	$midday = (strtotime('tomorrow noon') - strtotime('now'));
+	$_TimeUntilNextWarTickmidday = (strtotime('tomorrow noon') - strtotime('now'));
  }
-$TimeUntilNextWarTick = min($midday, $midnight);
+$TimeUntilNextWarTick = min($TimeUntilNextWarTick_midday, $TimeUntilNextWarTick_midnight);
 
 // ATTACKS INCOMING. WILL NOT INCLUDE ATTACKERS ALREADY THERE
 $hour = date("H");
@@ -22,10 +22,10 @@ SELECT fg.forcegroup_id FROM forcegroups fg
 LEFT JOIN nations n ON fg.location_id = n.nation_id
 LEFT JOIN nations n2 ON fg.destination_id = n2.nation_id
 WHERE fg.departuredate IS NOT NULL AND (
-(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 12 HOUR) AND n.region = n2.region AND fg.attack_mission = 0) OR
-(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 24 HOUR) AND n.region = n2.region AND fg.attack_mission = 1) OR
-(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 36 HOUR) AND fg.attack_mission = 0) OR
-(fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 48 HOUR) AND fg.attack_mission = 1)
+(fg.departuredate < DATE_SUB(DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 12 HOUR), INTERVAL $TimeUntilNextWarTick seconds) AND n.region = n2.region AND fg.attack_mission = 0) OR
+(fg.departuredate < DATE_SUB(DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 24 HOUR), INTERVAL $TimeUntilNextWarTick seconds) AND n.region = n2.region AND fg.attack_mission = 1) OR
+(fg.departuredate < DATE_SUB(DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 36 HOUR), INTERVAL $TimeUntilNextWarTick seconds) AND fg.attack_mission = 0) OR
+(fg.departuredate < DATE_SUB(DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 48 HOUR), INTERVAL $TimeUntilNextWarTick seconds) AND fg.attack_mission = 1)
 )
 EOSQL;
 
