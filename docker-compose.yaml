@@ -20,7 +20,6 @@ services:
       - "./clop/tables without data.sql:/docker-entrypoint-initdb.d/03-clop.sql"
       - "./elements/tables with data.sql:/docker-entrypoint-initdb.d/04-elements.sql"
       - "./elements/tables without data.sql:/docker-entrypoint-initdb.d/05-elements.sql"
-
     # NOTE: mariadb image 10.0.20 doesn't support initdb, so manually connect to the container and run the following:
     # mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/01-dbs.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/02-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/03-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/04-elements.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/05-elements.sql
 
@@ -62,12 +61,12 @@ services:
     environment:
       DOMAIN_URL: ${DOMAIN_URL}
 
-  #socat:
-  #  image: alpine/socat
-  #  networks:
-  #    - default
-  #    - internal
-  #  ports:
-  #    - 0.0.0.0:443:8081
-  #    - 0.0.0.0:80:8081
-  #  command: tcp-listen:8081,fork,reuseaddr tcp-connect:apache-php:80
+#  socat:
+#    image: alpine/socat
+#    networks:
+#      - default
+#      - internal
+#    ports:
+#      - 0.0.0.0:443:8081
+#      - 0.0.0.0:80:8081
+#    command: tcp-listen:8081,fork,reuseaddr tcp-connect:apache-php:80

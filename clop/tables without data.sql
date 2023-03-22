@@ -598,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `lastactive` datetime DEFAULT NULL,
   `flag` tinytext COLLATE utf8_unicode_ci NOT NULL,
-  `alliance_messages_last_checked` datetime DEFAULT NOT NULL,
+  `alliance_messages_last_checked` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

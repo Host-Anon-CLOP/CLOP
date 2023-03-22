@@ -141,7 +141,7 @@ EOSQL;
         $GLOBALS['mysqli']->query($sql);
 
         # MASSIVE RESOURCES FOR TEST SERVER USERS
-        if(strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
+        if((strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) OR (strpos($_ENV["DOMAIN_URL"], "localhost") !== false)) {
             $sql = <<<EOSQL
             INSERT INTO resources (nation_id, resource_id, amount)
             VALUES 
