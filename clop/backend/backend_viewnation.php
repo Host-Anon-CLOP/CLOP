@@ -68,6 +68,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 # Nation Resources
 $affectedresources = array();
 $requiredresources = array();
+$alliancenationsinfo = array();
 $resources = array();
 
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
