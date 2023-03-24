@@ -68,7 +68,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 # Nation Resources
 $affectedresources = array();
 $requiredresources = array();
-$alliancenationsinfo = array();
+$rs = array();
 $resources = array();
 
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
@@ -155,29 +155,29 @@ if ($nationinfo['alliance_id'] != 0) {
     WHERE u.alliance_id = {nationinfo['alliance_id']} AND u.stasismode = 0
 	GROUP BY n.government";
     $sth = $GLOBALS['mysqli']->query($sql);
-    while ($alliancenationsinfo = mysqli_fetch_array($sth)) {
-        if ($alliancenationsinfo['government'] == "Democracy") {
-            $alliancerequiredresources["Gasoline"] += (20 * $alliancenationsinfo['count']);
-            $alliancerequiredresources["Vehicle Parts"] += (2 * $alliancenationsinfo['count']);
-        } else if ($alliancenationsinfo['government'] == "Repression") {
-            $alliancerequiredresources["Gasoline"] += (10 * $alliancenationsinfo['count']);
-        } else if ($alliancenationsinfo['government'] == "Independence") {
-            $alliancerequiredresources["Gasoline"] += (40 * $alliancenationsinfo['count']);
-            $alliancerequiredresources["Vehicle Parts"] += (4 * $alliancenationsinfo['count']);
-        } else if ($alliancenationsinfo['government'] == "Decentralization") {
-            $alliancerequiredresources["Gasoline"] += (50 * $alliancenationsinfo['count']);
-            $alliancerequiredresources["Vehicle Parts"] += (5 * $alliancenationsinfo['count']);
-        } else if ($alliancenationsinfo['government'] == "Authoritarianism") {
-            $alliancerequiredresources["Gasoline"] += (10 * $alliancenationsinfo['count']);
-            $alliancerequiredresources["Machinery Parts"] += (3 * $alliancenationsinfo['count']);
-        } else if ($alliancenationsinfo['government'] == "Oppression") {
-            $alliancerequiredresources["Gasoline"] += (10 * $alliancenationsinfo['count']);
-            $alliancerequiredresources["Machinery Parts"] += (5 * $alliancenationsinfo['count']);
+    while ($rs = mysqli_fetch_array($sth)) {
+        if ($rs['government'] == "Democracy") {
+            $alliancerequiredresources["Gasoline"] += (20 * $rs['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (2 * $rs['count']);
+        } else if ($rs['government'] == "Repression") {
+            $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+        } else if ($rs['government'] == "Independence") {
+            $alliancerequiredresources["Gasoline"] += (40 * $rs['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (4 * $rs['count']);
+        } else if ($rs['government'] == "Decentralization") {
+            $alliancerequiredresources["Gasoline"] += (50 * $rs['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (5 * $rs['count']);
+        } else if ($rs['government'] == "Authoritarianism") {
+            $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+            $alliancerequiredresources["Machinery Parts"] += (3 * $rs['count']);
+        } else if ($rs['government'] == "Oppression") {
+            $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+            $alliancerequiredresources["Machinery Parts"] += (5 * $rs['count']);
         }
-        #if ($alliancenationsinfo['economy'] == "Free Market") {
-        #    $alliancerequiredresources["Coffee"] += (6 * $alliancenationsinfo['count']);
-        #} else if ($alliancenationsinfo['economy'] == "State Controlled") {
-        #    $alliancerequiredresources["Cider"] += (6 * $alliancenationsinfo['count']);
+        #if ($rs['economy'] == "Free Market") {
+        #    $alliancerequiredresources["Coffee"] += (6 * $rs['count']);
+        #} else if ($rs['economy'] == "State Controlled") {
+        #    $alliancerequiredresources["Cider"] += (6 * $rs['count']);
         #}
     }
 
