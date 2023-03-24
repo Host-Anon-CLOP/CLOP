@@ -148,7 +148,10 @@ if ($nationinfo['alliance_id'] != 0) {
     }
 
     # Add resources used by government/economy type
-    $sql = "SELECT n.*, u.user_id, u.username, u.donator, u.alliance_id, u.flag from nations n INNER JOIN users u ON u.user_id = n.user_id WHERE u.alliance_id = nationinfo['alliance_id'] AND u.stasismode = 0";
+    $sql = "SELECT n.*, u.user_id, u.username, u.donator, u.alliance_id, u.flag
+    FROM nations n
+    INNER JOIN users u ON u.user_id = n.user_id
+    WHERE u.alliance_id = {nationinfo['alliance_id']} AND u.stasismode = 0";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($alliancenationsinfo = mysqli_fetch_array($sth)) {
         if ($alliancenationsinfo['government'] == "Democracy") {
