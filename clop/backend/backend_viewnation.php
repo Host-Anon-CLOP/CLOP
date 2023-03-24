@@ -156,14 +156,11 @@ if ($nationinfo['alliance_id'] != 0) {
     WHERE u.alliance_id = '{nationinfo['alliance_id']}' AND u.stasismode = 0
 	GROUP BY n.government";
     */
-    $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
-    FROM resourcerequirements rr
-    INNER JOIN resources r ON r.resource_id = rr.resource_id
-    INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
-    INNER JOIN nations n ON r.nation_id = n.nation_id
-    INNER JOIN users u ON n.user_id = u.user_id
-    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
-    GROUP BY rd.name";
+    $sql = "SELECT n.government, count(n.government) AS count
+    FROM nations n
+    INNER JOIN users u ON u.user_id = n.user_id
+    WHERE u.alliance_id = '{nationinfo['alliance_id']}' AND u.stasismode = 0
+	GROUP BY n.government";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($rs = mysqli_fetch_array($sth)) {
         if ($rs['government'] == "Democracy") {
