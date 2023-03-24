@@ -91,6 +91,29 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $requiredresources[$rs['name']] = $rs['required'];
 }
+if ($nationinfo['government'] == "Democracy") {
+	$requiredresources["Gasoline"] += 20;
+	$requiredresources["Vehicle Parts"] += 2;
+} else if ($nationinfo['government'] == "Repression") {
+	$requiredresources["Gasoline"] += 10;
+} else if ($nationinfo['government'] == "Independence") {
+	$requiredresources["Gasoline"] += 40;
+	$requiredresources["Vehicle Parts"] += 4;
+} else if ($nationinfo['government'] == "Decentralization") {
+	$requiredresources["Gasoline"] += 50;
+	$requiredresources["Vehicle Parts"] += 5;
+} else if ($nationinfo['government'] == "Authoritarianism") {
+	$requiredresources["Gasoline"] += 10;
+	$requiredresources["Machinery Parts"] += 3;
+} else if ($nationinfo['government'] == "Oppression") {
+	$requiredresources["Gasoline"] += 10;
+	$requiredresources["Machinery Parts"] += 5;
+}
+if ($nationinfo['economy'] == "Free Market") {
+	$requiredresources["Coffee"] += 6;
+} else if ($nationinfo['economy'] == "State Controlled") {
+	$requiredresources["Cider"] += 6;
+}
 
 # Alliance Resources
 if ($nationinfo['alliance_id'] != 0) {
@@ -104,7 +127,7 @@ if ($nationinfo['alliance_id'] != 0) {
     INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
     INNER JOIN nations n ON r.nation_id = n.nation_id
     INNER JOIN users u ON n.user_id = u.user_id
-    WHERE u.alliance_id = '{$nationinfo['alliance_id']}'
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
     GROUP BY rd.name";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($rs = mysqli_fetch_array($sth)) {
@@ -117,7 +140,7 @@ if ($nationinfo['alliance_id'] != 0) {
     INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
     INNER JOIN nations n ON r.nation_id = n.nation_id
     INNER JOIN users u ON n.user_id = u.user_id
-    WHERE u.alliance_id = '{$nationinfo['alliance_id']}'
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
     GROUP BY rd.name";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($rs = mysqli_fetch_array($sth)) {

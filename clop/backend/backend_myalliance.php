@@ -248,7 +248,7 @@ INNER JOIN resources r ON r.resource_id = rr.resource_id
 INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
 INNER JOIN nations n ON r.nation_id = n.nation_id
 INNER JOIN users u ON n.user_id = u.user_id
-WHERE u.alliance_id = {$allianceinfo['alliance_id']}
+WHERE u.alliance_id = {$allianceinfo['alliance_id']} AND u.stasismode = 0
 GROUP BY rd.name";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
@@ -261,7 +261,7 @@ INNER JOIN resources r ON r.resource_id = rr.resource_id
 INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
 INNER JOIN nations n ON r.nation_id = n.nation_id
 INNER JOIN users u ON n.user_id = u.user_id
-WHERE u.alliance_id = {$allianceinfo['alliance_id']}
+WHERE u.alliance_id = {$allianceinfo['alliance_id']} AND u.stasismode = 0
 GROUP BY rd.name";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {

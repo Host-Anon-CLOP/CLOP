@@ -33,19 +33,27 @@ $players_active_month = onelinequery($sql)['COUNT(*)'];
 
 # Census
 $sql=<<<EOSQL
-SELECT COUNT(*) FROM nations WHERE region = "3"
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND u.stasismode = 0;
 EOSQL;
 $census_burrozil = onelinequery($sql)['COUNT(*)'];
 $sql=<<<EOSQL
-SELECT COUNT(*) FROM nations WHERE region = "2"
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND u.stasismode = 0;
 EOSQL;
 $census_zebrica = onelinequery($sql)['COUNT(*)'];
 $sql=<<<EOSQL
-SELECT COUNT(*) FROM nations WHERE region = "1"
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND u.stasismode = 0;
 EOSQL;
 $census_saddle = onelinequery($sql)['COUNT(*)'];
 $sql=<<<EOSQL
-SELECT COUNT(*) FROM nations WHERE region = "4"
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND u.stasismode = 0;
 EOSQL;
 $census_prze = onelinequery($sql)['COUNT(*)'];
 
@@ -59,6 +67,9 @@ $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
 FROM resourceeffects rr
 INNER JOIN resources r ON r.resource_id = rr.resource_id
 INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
+INNER JOIN nations n ON r.nation_id = n.nation_id
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE u.stasismode = 0
 GROUP BY rd.name";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
@@ -69,6 +80,9 @@ $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS required
 FROM resourcerequirements rr
 INNER JOIN resources r ON r.resource_id = rr.resource_id
 INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
+INNER JOIN nations n ON r.nation_id = n.nation_id
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE u.stasismode = 0
 GROUP BY rd.name";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
