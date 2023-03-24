@@ -149,7 +149,7 @@ if ($nationinfo['alliance_id'] != 0) {
     }
 
     # Add resources used by government/economy type
-    $sql = "SELECT n.government, count(n.government) as count
+    $sql = "SELECT n.government, count(n.government) AS counts
     FROM nations n
     INNER JOIN users u ON u.user_id = n.user_id
     WHERE u.alliance_id = {nationinfo['alliance_id']} AND u.stasismode = 0
