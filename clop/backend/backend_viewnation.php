@@ -148,35 +148,36 @@ if ($nationinfo['alliance_id'] != 0) {
     }
 
     # Add resources used by government/economy type
-    $sql = "SELECT n.*, u.user_id, u.username, u.donator, u.alliance_id, u.flag
+    $sql = "SELECT n.government, count(n.government) as count
     FROM nations n
     INNER JOIN users u ON u.user_id = n.user_id
-    WHERE u.alliance_id = {nationinfo['alliance_id']} AND u.stasismode = 0";
+    WHERE u.alliance_id = {nationinfo['alliance_id']} AND u.stasismode = 0
+	GROUP BY n.government";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($alliancenationsinfo = mysqli_fetch_array($sth)) {
         if ($alliancenationsinfo['government'] == "Democracy") {
-            $alliancerequiredresources["Gasoline"] += 20;
-            $alliancerequiredresources["Vehicle Parts"] += 2;
+            $alliancerequiredresources["Gasoline"] += (20 * $alliancenationsinfo['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (2 * $alliancenationsinfo['count']);
         } else if ($alliancenationsinfo['government'] == "Repression") {
-            $alliancerequiredresources["Gasoline"] += 10;
+            $alliancerequiredresources["Gasoline"] += (10 * $alliancenationsinfo['count']);
         } else if ($alliancenationsinfo['government'] == "Independence") {
-            $alliancerequiredresources["Gasoline"] += 40;
-            $alliancerequiredresources["Vehicle Parts"] += 4;
+            $alliancerequiredresources["Gasoline"] += (40 * $alliancenationsinfo['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (4 * $alliancenationsinfo['count']);
         } else if ($alliancenationsinfo['government'] == "Decentralization") {
-            $alliancerequiredresources["Gasoline"] += 50;
-            $alliancerequiredresources["Vehicle Parts"] += 5;
+            $alliancerequiredresources["Gasoline"] += (50 * $alliancenationsinfo['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (5 * $alliancenationsinfo['count']);
         } else if ($alliancenationsinfo['government'] == "Authoritarianism") {
-            $alliancerequiredresources["Gasoline"] += 10;
-            $alliancerequiredresources["Machinery Parts"] += 3;
+            $alliancerequiredresources["Gasoline"] += (10 * $alliancenationsinfo['count']);
+            $alliancerequiredresources["Machinery Parts"] += (3 * $alliancenationsinfo['count']);
         } else if ($alliancenationsinfo['government'] == "Oppression") {
-            $alliancerequiredresources["Gasoline"] += 10;
-            $alliancerequiredresources["Machinery Parts"] += 5;
+            $alliancerequiredresources["Gasoline"] += (10 * $alliancenationsinfo['count']);
+            $alliancerequiredresources["Machinery Parts"] += (5 * $alliancenationsinfo['count']);
         }
-        if ($alliancenationsinfo['economy'] == "Free Market") {
-            $alliancerequiredresources["Coffee"] += 6;
-        } else if ($alliancenationsinfo['economy'] == "State Controlled") {
-            $alliancerequiredresources["Cider"] += 6;
-        }
+        #if ($alliancenationsinfo['economy'] == "Free Market") {
+        #    $alliancerequiredresources["Coffee"] += (6 * $alliancenationsinfo['count']);
+        #} else if ($alliancenationsinfo['economy'] == "State Controlled") {
+        #    $alliancerequiredresources["Cider"] += (6 * $alliancenationsinfo['count']);
+        #}
     }
 
     }
