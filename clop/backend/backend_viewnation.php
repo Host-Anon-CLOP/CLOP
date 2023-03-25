@@ -159,7 +159,7 @@ if ($nationinfo['alliance_id'] != 0) {
     $sql = "SELECT n.government, count(n.government) AS count
     FROM nations n
     INNER JOIN users u ON u.user_id = n.user_id
-    WHERE u.alliance_id = '{nationinfo['alliance_id']}' AND u.stasismode = 0
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
 	GROUP BY n.government";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($rs = mysqli_fetch_array($sth)) {
