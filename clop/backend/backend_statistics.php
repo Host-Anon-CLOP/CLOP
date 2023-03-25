@@ -88,4 +88,47 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $requiredresources[$rs['name']] = $rs['required'];
 }
+
+# Add resources used by government type
+$sql = "SELECT n.government, count(n.government) AS count
+FROM nations n
+INNER JOIN users u ON u.user_id = n.user_id
+WHERE u.stasismode = 0
+GROUP BY n.government";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    if ($rs['government'] == "Democracy") {
+        $requiredresources["Gasoline"] += (20 * $rs['count']);
+        $requiredresources["Vehicle Parts"] += (2 * $rs['count']);
+    } else if ($rs['government'] == "Repression") {
+        $requiredresources["Gasoline"] += (10 * $rs['count']);
+    } else if ($rs['government'] == "Independence") {
+        $requiredresources["Gasoline"] += (40 * $rs['count']);
+        $requiredresources["Vehicle Parts"] += (4 * $rs['count']);
+    } else if ($rs['government'] == "Decentralization") {
+        $requiredresources["Gasoline"] += (50 * $rs['count']);
+        $requiredresources["Vehicle Parts"] += (5 * $rs['count']);
+    } else if ($rs['government'] == "Authoritarianism") {
+        $requiredresources["Gasoline"] += (10 * $rs['count']);
+        $requiredresources["Machinery Parts"] += (3 * $rs['count']);
+    } else if ($rs['government'] == "Oppression") {
+        $requiredresources["Gasoline"] += (10 * $rs['count']);
+        $requiredresources["Machinery Parts"] += (5 * $rs['count']);
+    }
+}
+
+# Add resources used by economy type
+$sql = "SELECT n.economy, count(n.economy) AS count
+FROM nations n
+INNER JOIN users u ON u.user_id = n.user_id
+WHERE u.stasismode = 0
+GROUP BY n.economy";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+    if ($rs['economy'] == "Free Market") {
+        $requiredresources["Coffee"] += (6 * $rs['count']);
+    } else if ($rs['economy'] == "State Controlled") {
+        $requiredresources["Cider"] += (6 * $rs['count']);
+    }
+}
 ?>

@@ -181,5 +181,48 @@ while ($rs = mysqli_fetch_array($sth)) {
     $alliancerequiredresources[$rs['name']] = $rs['required'];
 }
 
+# Add resources used by government type
+$sql = "SELECT n.government, count(n.government) AS count
+FROM nations n
+INNER JOIN users u ON u.user_id = n.user_id
+WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
+GROUP BY n.government";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	if ($rs['government'] == "Democracy") {
+		$alliancerequiredresources["Gasoline"] += (20 * $rs['count']);
+		$alliancerequiredresources["Vehicle Parts"] += (2 * $rs['count']);
+	} else if ($rs['government'] == "Repression") {
+		$alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+	} else if ($rs['government'] == "Independence") {
+		$alliancerequiredresources["Gasoline"] += (40 * $rs['count']);
+		$alliancerequiredresources["Vehicle Parts"] += (4 * $rs['count']);
+	} else if ($rs['government'] == "Decentralization") {
+		$alliancerequiredresources["Gasoline"] += (50 * $rs['count']);
+		$alliancerequiredresources["Vehicle Parts"] += (5 * $rs['count']);
+	} else if ($rs['government'] == "Authoritarianism") {
+		$alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+		$alliancerequiredresources["Machinery Parts"] += (3 * $rs['count']);
+	} else if ($rs['government'] == "Oppression") {
+		$alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+		$alliancerequiredresources["Machinery Parts"] += (5 * $rs['count']);
+	}
+}
+
+# Add resources used by economy type
+$sql = "SELECT n.economy, count(n.economy) AS count
+FROM nations n
+INNER JOIN users u ON u.user_id = n.user_id
+WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
+GROUP BY n.economy";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	if ($rs['economy'] == "Free Market") {
+		$alliancerequiredresources["Coffee"] += (6 * $rs['count']);
+	} else if ($rs['economy'] == "State Controlled") {
+		$alliancerequiredresources["Cider"] += (6 * $rs['count']);
+	}
+}
+
 }
 ?>
