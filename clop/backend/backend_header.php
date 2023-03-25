@@ -19,6 +19,7 @@ if ($rs['number']) {
 $sql = <<<EOSQL
 SELECT COUNT(*) AS pollcount FROM requests WHERE visible = '1' AND voteable = '1' AND isbug = '0' AND request_id NOT IN (SELECT poll_id FROM votes WHERE user_id = '{$_SESSION['user_id']}')
 EOSQL;
+$sql = <<<EOSQL
 $activepolls = onelinequery($sql);
 $pollcount = ($activepolls['pollcount'] > 0) ? '('.$activepolls['pollcount'].')' : '';
 
