@@ -21,7 +21,7 @@ EOFORM;
   }
 echo <<<EOFORM
 <center><h4>Alliance: <a href="viewalliance.php?alliance_id={$nationinfo['alliance_id']}">{$nationinfo['alliance_name']}</a></h4></center>
-<center><h4>Created: {$nationinfo['creationdate']}</h4></center>
+<center><h4>Created: {$nationinfo['creationdate']} (Age: {$nationinfo['age']})</h4></center>
 <center>{$display['description']}</center><br/>
 <center>GDP: {$displaygdp} bits every 2 hours</center>
 <center><b>Buildings</b></center>
