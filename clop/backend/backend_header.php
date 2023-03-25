@@ -22,6 +22,7 @@ EOSQL;
 $sql = <<<EOSQL
 $activepolls = onelinequery($sql);
 $pollcount = ($activepolls['pollcount'] > 0) ? '('.$activepolls['pollcount'].')' : '';
+EOSQL;
 
 $sql = <<<EOSQL
 SELECT COUNT(*) AS number FROM alliance_messages WHERE alliance_id = {$_SESSION['alliance_id']} AND posted > "{$_SESSION['alliance_messages_last_checked']}";
