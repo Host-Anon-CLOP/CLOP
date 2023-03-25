@@ -148,14 +148,7 @@ if ($nationinfo['alliance_id'] != 0) {
         $alliancerequiredresources[$rs['name']] = $rs['required'];
     }
 
-    # Add resources used by government/economy type
-    /*
-    $sql = "SELECT n.government, count(n.government) AS count
-    FROM nations n
-    INNER JOIN users u ON u.user_id = n.user_id
-    WHERE u.alliance_id = '{nationinfo['alliance_id']}' AND u.stasismode = 0
-	GROUP BY n.government";
-    */
+    # Add resources used by government type
     $sql = "SELECT n.government, count(n.government) AS count
     FROM nations n
     INNER JOIN users u ON u.user_id = n.user_id
@@ -181,11 +174,21 @@ if ($nationinfo['alliance_id'] != 0) {
             $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
             $alliancerequiredresources["Machinery Parts"] += (5 * $rs['count']);
         }
-        #if ($rs['economy'] == "Free Market") {
-        #    $alliancerequiredresources["Coffee"] += (6 * $rs['count']);
-        #} else if ($rs['economy'] == "State Controlled") {
-        #    $alliancerequiredresources["Cider"] += (6 * $rs['count']);
-        #}
+
+        # Add resources used by economy type
+        $sql = "SELECT n.economy, count(n.economy) AS count
+        FROM nations n
+        INNER JOIN users u ON u.user_id = n.user_id
+        WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
+        GROUP BY n.economy";
+        $sth = $GLOBALS['mysqli']->query($sql);
+        while ($rs = mysqli_fetch_array($sth)) {
+            if ($rs['economy'] == "Free Market") {
+                $alliancerequiredresources["Coffee"] += (6 * $rs['count']);
+            } else if ($rs['economy'] == "State Controlled") {
+                $alliancerequiredresources["Cider"] += (6 * $rs['count']);
+            }
+        }
     }
 
     }
