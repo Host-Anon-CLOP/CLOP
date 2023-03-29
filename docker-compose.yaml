@@ -10,6 +10,7 @@ services:
     image: mariadb:10.0.20
     networks:
       - internal
+      - default
     ports:
       - 127.0.0.1:3307:3306
     environment:
