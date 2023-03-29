@@ -10,6 +10,8 @@ services:
     image: mariadb:10.0.20
     networks:
       - internal
+    ports:
+      - 127.0.0.1:3307:3306
     environment:
       - MYSQL_DATABASE=clopus_clop
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASS}
