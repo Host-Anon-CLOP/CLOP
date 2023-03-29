@@ -68,6 +68,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 # Nation Resources
 $affectedresources = array();
 $requiredresources = array();
+$rs = array();
 $resources = array();
 
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
@@ -91,6 +92,29 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $requiredresources[$rs['name']] = $rs['required'];
 }
+if ($nationinfo['government'] == "Democracy") {
+	$requiredresources["Gasoline"] += 20;
+	$requiredresources["Vehicle Parts"] += 2;
+} else if ($nationinfo['government'] == "Repression") {
+	$requiredresources["Gasoline"] += 10;
+} else if ($nationinfo['government'] == "Independence") {
+	$requiredresources["Gasoline"] += 40;
+	$requiredresources["Vehicle Parts"] += 4;
+} else if ($nationinfo['government'] == "Decentralization") {
+	$requiredresources["Gasoline"] += 50;
+	$requiredresources["Vehicle Parts"] += 5;
+} else if ($nationinfo['government'] == "Authoritarianism") {
+	$requiredresources["Gasoline"] += 10;
+	$requiredresources["Machinery Parts"] += 3;
+} else if ($nationinfo['government'] == "Oppression") {
+	$requiredresources["Gasoline"] += 10;
+	$requiredresources["Machinery Parts"] += 5;
+}
+if ($nationinfo['economy'] == "Free Market") {
+	$requiredresources["Coffee"] += 6;
+} else if ($nationinfo['economy'] == "State Controlled") {
+	$requiredresources["Cider"] += 6;
+}
 
 # Alliance Resources
 if ($nationinfo['alliance_id'] != 0) {
@@ -104,7 +128,7 @@ if ($nationinfo['alliance_id'] != 0) {
     INNER JOIN resourcedefs rd ON rd.resource_id = rr.affectedresource_id
     INNER JOIN nations n ON r.nation_id = n.nation_id
     INNER JOIN users u ON n.user_id = u.user_id
-    WHERE u.alliance_id = '{$nationinfo['alliance_id']}'
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
     GROUP BY rd.name";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($rs = mysqli_fetch_array($sth)) {
@@ -117,12 +141,55 @@ if ($nationinfo['alliance_id'] != 0) {
     INNER JOIN resourcedefs rd ON rd.resource_id = rr.requiredresource_id
     INNER JOIN nations n ON r.nation_id = n.nation_id
     INNER JOIN users u ON n.user_id = u.user_id
-    WHERE u.alliance_id = '{$nationinfo['alliance_id']}'
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
     GROUP BY rd.name";
     $sth = $GLOBALS['mysqli']->query($sql);
     while ($rs = mysqli_fetch_array($sth)) {
         $alliancerequiredresources[$rs['name']] = $rs['required'];
     }
+
+    # Add resources used by government type
+    $sql = "SELECT n.government, count(n.government) AS count
+    FROM nations n
+    INNER JOIN users u ON u.user_id = n.user_id
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
+	GROUP BY n.government";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    while ($rs = mysqli_fetch_array($sth)) {
+        if ($rs['government'] == "Democracy") {
+            $alliancerequiredresources["Gasoline"] += (20 * $rs['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (2 * $rs['count']);
+        } else if ($rs['government'] == "Repression") {
+            $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+        } else if ($rs['government'] == "Independence") {
+            $alliancerequiredresources["Gasoline"] += (40 * $rs['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (4 * $rs['count']);
+        } else if ($rs['government'] == "Decentralization") {
+            $alliancerequiredresources["Gasoline"] += (50 * $rs['count']);
+            $alliancerequiredresources["Vehicle Parts"] += (5 * $rs['count']);
+        } else if ($rs['government'] == "Authoritarianism") {
+            $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+            $alliancerequiredresources["Machinery Parts"] += (3 * $rs['count']);
+        } else if ($rs['government'] == "Oppression") {
+            $alliancerequiredresources["Gasoline"] += (10 * $rs['count']);
+            $alliancerequiredresources["Machinery Parts"] += (5 * $rs['count']);
+        }
     }
+
+    # Add resources used by economy type
+    $sql = "SELECT n.economy, count(n.economy) AS count
+    FROM nations n
+    INNER JOIN users u ON u.user_id = n.user_id
+    WHERE u.alliance_id = '{$nationinfo['alliance_id']}' AND u.stasismode = 0
+    GROUP BY n.economy";
+    $sth = $GLOBALS['mysqli']->query($sql);
+    while ($rs = mysqli_fetch_array($sth)) {
+        if ($rs['economy'] == "Free Market") {
+            $alliancerequiredresources["Coffee"] += (6 * $rs['count']);
+        } else if ($rs['economy'] == "State Controlled") {
+            $alliancerequiredresources["Cider"] += (6 * $rs['count']);
+        }
+    }
+}
 }
 ?>

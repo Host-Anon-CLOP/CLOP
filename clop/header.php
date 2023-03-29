@@ -150,7 +150,7 @@ EOFORM;
 }
 echo <<<EOFORM
 <center><span id="topmessage">{$topmessage}</span></center>
-<center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/thread/39731290" target="_new_win">/MLP/ Thread</a> | <a href="https://irc.4clop.com" target="_new_win">IRC Chat (join without a password initially)</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
+<center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/thread/39759879" target="_new_win">/MLP/ Thread</a> | <a href="https://irc.4clop.com" target="_new_win">IRC Chat (join without a password initially)</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
 EOFORM;
 if ($errors) {
     $errormessages.=<<<EOFORM
@@ -205,7 +205,6 @@ if ($_SESSION['user_id']) {
 echo <<<EOFORM
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="index.php">&gt;CLOP</a>
 </div>
 <ul class="nav navbar-nav">
   <li><a class="dropdown-toggle" href="messages.php">Messages <span class="badge">{$messagenumber}</span></a></li>
@@ -297,6 +296,8 @@ echo <<<EOFORM
         <li><a href="https://4clop.com/images/the_chart.png" target="_new_win">Enviro Loss Chart</a></li>
         <li><a href="guide.php">Another Guide</a></li>
         <li><a href="warguide.php">War Guide</a></li>
+        <li><a href="https://files.catbox.moe/iqa8bn.txt">Another War Guide</a></li>
+        <li><a href="https://files.catbox.moe/akfmdc.png">Unit Comparison Table</a></li>
       </ul>
 </ul>
 <div class="navbar-header"></div>
