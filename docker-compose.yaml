@@ -53,6 +53,7 @@ services:
 
   caddy:
     image: caddy:2-alpine
+    container_name: clop-caddy-oldclop-1
     networks:
       - internal
       - default
