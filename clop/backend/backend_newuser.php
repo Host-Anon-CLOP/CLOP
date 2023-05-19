@@ -115,7 +115,7 @@ if (!empty($_POST)) {
 	}
     if (empty($errors)) {
         $passwordhash = sha1($mysql['password'] . "saltlick"); //I'm fully aware that this is shit, thanks
-        $sql = "INSERT INTO users (username, password, email, creation_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}')";
+        $sql = "INSERT INTO users (username, password, email, creation_ip, creation_ip2, creation_forwarded_ip, creation_forwarded_for_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['remote_addr2']}', '{$_SERVER['forwarded']}', '{$_SERVER['forwarded_for']}')";
         $GLOBALS['mysqli']->query($sql);
         $sql = "SELECT user_id FROM users WHERE username ='{$mysql['realusername']}'";
         $rs = onelinequery($sql);
