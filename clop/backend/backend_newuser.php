@@ -115,7 +115,10 @@ if (!empty($_POST)) {
 	}
     if (empty($errors)) {
         $passwordhash = sha1($mysql['password'] . "saltlick"); //I'm fully aware that this is shit, thanks
-        $sql = "INSERT INTO users (username, password, email, creation_ip, creation_ip2, creation_forwarded_ip, creation_forwarded_for_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}', '{$_SERVER['remote_addr2']}', '{$_SERVER['forwarded']}', '{$_SERVER['forwarded_for']}')";
+        $mysql['remote_addr2'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);        
+        $mysql['forwarded'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED']);
+        $mysql['forwarded_for'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED_FOR']);
+        $sql = "INSERT INTO users (username, password, email, creation_ip, creation_ip2, creation_forwarded_ip, creation_forwarded_for_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}', '{$mysql['remote_addr2']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}')";
         $GLOBALS['mysqli']->query($sql);
         $sql = "SELECT user_id FROM users WHERE username ='{$mysql['realusername']}'";
         $rs = onelinequery($sql);
