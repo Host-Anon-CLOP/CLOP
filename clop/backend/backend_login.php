@@ -5,7 +5,7 @@ function ReverseIPOctets($inputip){
     return $ipoc[3].".".$ipoc[2].".".$ipoc[1].".".$ipoc[0];
 }
     # since run on docker this is getting the container ip 
-    #$mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);
+    $mysql['remote_addr2'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);
     $mysql['remote_addr'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X-REAL-IP']);
     
     $mysql['forwarded'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED']);
@@ -44,8 +44,8 @@ if (gethostbyname(ReverseIPOctets($_SERVER['REMOTE_ADDR']).".".$_SERVER['SERVER_
             $errors[] = "You have entered stasis less than 24 hours ago.";
             } else {
             $sql =<<<EOSQL
-            INSERT INTO logins(user_id, ip, forwarded, forwarded_for, logindate, failed)
-            VALUES ({$rs['user_id']}, '{$mysql['remote_addr']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), false)
+            INSERT INTO logins(username, user_id, ip, ip2, forwarded, forwarded_for, logindate, failed)
+            VALUES ('{$mysql['username']}', {$rs['user_id']}, '{$mysql['remote_addr']}', '{$mysql['remote_addr2']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), false)
 EOSQL;
             $GLOBALS['mysqli']->query($sql);
             $_SESSION['css'] = $rs['css'];
@@ -63,8 +63,8 @@ EOSQL;
             }
         } else {
             $sql =<<<EOSQL
-            INSERT INTO logins(user_id, ip, forwarded, forwarded_for, logindate, failed)
-            VALUES(0, '{$mysql['remote_addr']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), true)
+            INSERT INTO logins(username, user_id, ip, ip2, forwarded, forwarded_for, logindate, failed)
+            VALUES('{$mysql['username']}', 0, '{$mysql['remote_addr']}', '{$mysql['remote_addr2']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}', NOW(), true)
 EOSQL;
             $GLOBALS['mysqli']->query($sql);
             $errors[] = "Login incorrect.";

@@ -424,8 +424,10 @@ CREATE TABLE IF NOT EXISTS `graveyard` (
 --
 
 CREATE TABLE IF NOT EXISTS `logins` (
+  `username` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `ip` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
+  `ip2` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `forwarded` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `forwarded_for` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `logindate` datetime NOT NULL,
