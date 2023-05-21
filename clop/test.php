@@ -1,7 +1,7 @@
 <?php
 #include("backend/backend_warguide.php");
 #$extratitle = "War Guide - ";
-include("header.php");
+#include("header.php");
 echo <<<EOFORM
 <html>
 <body>
@@ -61,5 +61,5 @@ echo <<<EOFORM
 </body>
 </html>
 EOFORM;
-include("footer.php");
+#include("footer.php");
 ?>
