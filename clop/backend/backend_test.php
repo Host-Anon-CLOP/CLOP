@@ -3,7 +3,7 @@ include_once("allfunctions.php");
 
 echo <<<EOFORM
 <script>
-const groupFieldsBackend = document.getElementById('group-fields')
+const groupFieldsBackend = document.getElementById('')
 </script>
 
 foreach ($group in $groupFieldsBackend) {
@@ -12,5 +12,12 @@ foreach ($group in $groupFieldsBackend) {
 
 	}
 EOFORM;
+
+var element = document.getElementById('group-fields');
+var children = element.children;
+for(var i=0; i<children.length; i++){
+    var child = children[i];
+    echo "{$child.text}";
+  }
 
 ?>
