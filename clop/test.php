@@ -1,5 +1,4 @@
 <?php
-include("backend/backend_test.php");
 /*
     <label for="groups">Number of Groups:</label>
     <input type="number" name="groups" id="groups" min="1" required><br><br>
