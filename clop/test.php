@@ -1,5 +1,5 @@
 <?php
-#include("backend/backend_warguide.php");
+include("backend/backend_test.php");
 /*
     <label for="groups">Number of Groups:</label>
     <input type="number" name="groups" id="groups" min="1" required><br><br>
@@ -17,7 +17,7 @@
 echo <<<EOFORM
 <html>
 <body>
-  <form method="POST" action="/calculate">
+  <form method="post" action="test.php">
     <div id="group-fields"></div>
 
     <button type="submit">Calculate</button>
