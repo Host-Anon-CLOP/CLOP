@@ -49,6 +49,8 @@ EOSQL;
 if ($_POST['changeflag']) {
 	if (!preg_match('/^(http:\/\/)?([\w\-\.]+)\:?([0-9]*)\/([^ \?&=\#\"\n\r\t<]*?(\.(jpg|jpeg|gif|png)))$/i', $_POST['flag']) && $_POST['flag'] != "") {
 		$errors[] = "Heeeeyyy... are you SURE that's an image? (JPGs, GIFs, and PNGs only.)";
+	} elseif ((strpos($_POST['flag'], "http://") !== false) && $_POST['flag'] != "") {
+		$errors[] = "Only https URL's are accepted for images";
 	}
     if (empty($errors)) {
         $sql=<<<EOSQL

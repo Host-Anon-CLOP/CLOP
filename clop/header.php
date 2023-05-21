@@ -205,7 +205,6 @@ if ($_SESSION['user_id']) {
 echo <<<EOFORM
 <nav class="navbar navbar-default" role="navigation">
 <div class="navbar-header">
-<a class="navbar-brand" href="index.php">&gt;CLOP</a>
 </div>
 <ul class="nav navbar-nav">
   <li><a class="dropdown-toggle" href="messages.php">Messages <span class="badge">{$messagenumber}</span></a></li>
@@ -282,6 +281,13 @@ echo <<<EOFORM
       <li><a href="graveyard.php">Graveyard</a></li>
       </ul>
       </li>
+      <li class="dropdown">
+      <a class="dropdown-toggle" href="#">Feedback <span class="badge">{$pollcount}</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="requestfeature.php">Request Feature/Submit Bug</a></li>
+        <li><a href="polls.php">Polls <span class="badge">{$pollcount}</span></a></li>
+      </ul>
+      </li>
       <li><a href="news.php">News</a></li>
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><font color="orange">Guides </font><b class="caret"></b></a>
       <ul class="dropdown-menu">
@@ -290,6 +296,8 @@ echo <<<EOFORM
         <li><a href="https://4clop.com/images/the_chart.png" target="_new_win">Enviro Loss Chart</a></li>
         <li><a href="guide.php">Another Guide</a></li>
         <li><a href="warguide.php">War Guide</a></li>
+        <li><a href="https://files.catbox.moe/iqa8bn.txt">Another War Guide</a></li>
+        <li><a href="https://files.catbox.moe/akfmdc.png">Unit Comparison Table</a></li>
       </ul>
 </ul>
 <div class="navbar-header"></div>

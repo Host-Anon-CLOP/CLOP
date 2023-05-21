@@ -598,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `lastactive` datetime DEFAULT NULL,
   `flag` tinytext COLLATE utf8_unicode_ci NOT NULL,
-  `alliance_messages_last_checked` datetime DEFAULT NOT NULL,
+  `alliance_messages_last_checked` datetime NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -655,3 +655,33 @@ CREATE TABLE IF NOT EXISTS `weaponsmarketplace` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- feature request form
+CREATE TABLE IF NOT EXISTS `requests` (
+  `request_id` int(11) NOT NULL AUTO_INCREMENT,
+  `submitter` int(10) unsigned NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `description` text,
+  `isbug` tinyint(1) NOT NULL DEFAULT '0',
+  `submitdate` datetime NOT NULL,
+  `visible` tinyint(1) DEFAULT '0',
+  `voteable` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`request_id`)
+) DEFAULT CHARSET=utf8;
+
+-- polls
+CREATE TABLE IF NOT EXISTS `votes` (
+  `poll_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `option` int(10) unsigned NOT NULL,
+  `date` datetime,
+  UNIQUE KEY `UQ_votes` (`poll_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `poll_options` (
+  `optid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `poll_id` int(10) unsigned NOT NULL,
+  `opttext` varchar(300) NOT NULL,
+  PRIMARY KEY (`optid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
