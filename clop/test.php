@@ -66,7 +66,14 @@ echo <<<EOFORM
           '<option value="ohno">Ohno</option>' +
           '<option value="titan">Titan</option>';
         }
-        
+        } else if (unittype == 'Pegasi') {
+          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+          '<option value="cooler">Cooler</option>' +
+          '<option value="wonder">Wonder</option>' +
+          '<option value="griffin">Griffin</option>' +
+          '<option value="dragon">Dragon</option>';
+        }
+
         groupDiv.appendChild(armorSelect);
 
         const weaponLabel = document.createElement('label');
