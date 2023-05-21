@@ -38,25 +38,31 @@ echo <<<EOFORM
       function addNewGroup() {
         var e = document.getElementById("unit-type");
         var value = e.options[e.selectedIndex].value;
-        var text = e.options[e.selectedIndex].text;
+        var unittype = e.options[e.selectedIndex].text;
 
         const groupFields = document.getElementById('group-fields');
 
         const groupDiv = document.createElement('div');
 
         const unitLabel = document.createElement('label');
-        unitLabel.textContent = 'Unit: ' + text;
+        unitLabel.textContent = 'Unit: ' + unittype;
         groupDiv.appendChild(unitLabel);
 
         const armorLabel = document.createElement('label');
-        armorLabel.textContent = 'Armor:';
+        armorLabel.textContent = ' Armor:';
         groupDiv.appendChild(armorLabel);
 
         const armorSelect = document.createElement('select');
         armorSelect.name = 'armor';
+        if (unittype == 'Cavalry') {
         armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="custom">Custom</option>' +
+          '<option value="custom">CAV</option>' +
           '<option value="standard">Standard</option>';
+        } else {
+          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+          '<option value="custom">OTHER</option>' +
+          '<option value="standard">Standard</option>';
+        }
         groupDiv.appendChild(armorSelect);
 
         const weaponLabel = document.createElement('label');
