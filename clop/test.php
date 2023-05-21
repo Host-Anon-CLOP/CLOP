@@ -47,11 +47,9 @@ echo <<<EOFORM
 
     <script>
     function calculate() {
-      var element = document.getElementById('group-fields');
-      var children = element.children;
-      document.write($element.outerHTML);
+      document.write("test");
     }
-  </script>
+    </script>
 
     <script>
       function addNewGroup() {
