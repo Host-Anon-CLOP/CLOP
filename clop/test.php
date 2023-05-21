@@ -100,6 +100,12 @@ echo <<<EOFORM
           '<option value="atfu">ATFU</option>' +
           '<option value="aufu">AUFU</option>';
         }
+        if (unittype == 'Tanks') {
+          weaponSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+            '<option value="k9p">K9P</option>' +
+            '<option value="elbo-grs">ELBO-GRS</option>' +
+            '<option value="chem-light">Chem-Light</option>';
+          }
         groupDiv.appendChild(weaponSelect);
 
         groupFields.appendChild(groupDiv);
