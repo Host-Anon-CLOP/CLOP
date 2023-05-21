@@ -1,9 +1,10 @@
 <?php
 include_once("allfunctions.php");
 
-foreach ($attacks as $attack) {
+const groupFieldsBackend = document.getElementById('group-fields');
+foreach ($group in $groupFieldsBackend) {
 	echo <<<EOFORM
-<tr><td>{$attack['totalsize']}</td>
+<tr><td>$group</td></tr>
 EOFORM;
 	}
 
