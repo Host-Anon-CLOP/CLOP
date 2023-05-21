@@ -23,8 +23,8 @@
 
         // Function to remove the selected row
         function removeRow() {
-            //$(this).closest("tr").remove();
-            $('table.order-list > tbody > tr:last').remove();
+            $(this).closest("<tr>").remove();
+            //$('table.order-list > tbody > tr:last').remove();
         }
 
         // Function to bind the dynamic dropdown menus
