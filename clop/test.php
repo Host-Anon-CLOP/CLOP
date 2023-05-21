@@ -22,13 +22,14 @@
         }
 
 
-                      
-        } else if (unittype == 'Navy') {
+                      } else if (unittype == 'Unicorns') {
           armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="c-pon3">C-PON3</option>' +
-          '<option value="esohes">Esohes</option>' +
-          '<option value="shubidu">Shubidu</option>';
-        }  
+          '<option value="hornshield">Hornshield</option>' +
+          '<option value="librarian">Librarian</option>' +
+          '<option value="shining">Shining</option>' +
+          '<option value="d2a">D2A</option>';
+        }
+
 */
 
 echo <<<EOFORM
@@ -81,14 +82,13 @@ echo <<<EOFORM
           '<option value="shepherd">Shepherd</option>' +
           '<option value="ohno">Ohno</option>' +
           '<option value="titan">Titan</option>';
+        } else if (unittype == 'Navy') {
+          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+          '<option value="c-pon3">C-PON3</option>' +
+          '<option value="esohes">Esohes</option>' +
+          '<option value="shubidu">Shubidu</option>';
         }
-      } else if (unittype == 'Unicorns') {
-        armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-        '<option value="hornshield">Hornshield</option>' +
-        '<option value="librarian">Librarian</option>' +
-        '<option value="shining">Shining</option>' +
-        '<option value="d2a">D2A</option>';
-      }
+
 
         groupDiv.appendChild(armorSelect);
 
