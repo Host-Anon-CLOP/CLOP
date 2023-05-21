@@ -45,7 +45,7 @@ echo <<<EOFORM
         const groupDiv = document.createElement('div');
 
         const unitLabel = document.createElement('label');
-        unitLabel.textContent = 'Unit: ';
+        unitLabel.textContent = 'Unit: ' + text;
         groupDiv.appendChild(unitLabel);
 
         const armorLabel = document.createElement('label');
