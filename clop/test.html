@@ -1,113 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dynamic Form</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      var counter = 1;
+    <title>Dynamic Form Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Function to add a new row
+        function addRow() {
+            var newRow = $("<tr>");
+            var cols = "";
 
-      // Function to add a new row
-      function addRow() {
-        var newRow = `<tr id="row${counter}">
-          <td>
-            <select name="type[]" onchange="loadWeapons(this, ${counter})">
-              <option value="">Select Type</option>
-              <option value="1">Type 1</option>
-              <option value="2">Type 2</option>
-              <!-- Add more type options as needed -->
-            </select>
-          </td>
-          <td>
-            <select name="weapon[]" id="weapon${counter}">
-              <option value="">Select Weapon</option>
-            </select>
-          </td>
-          <td>
-            <select name="armor[]" id="armor${counter}">
-              <option value="">Select Armor</option>
-            </select>
-          </td>
-          <td><input type="text" name="size[]" /></td>
-          <td><input type="text" name="training[]" /></td>
-          <td><button type="button" onclick="removeRow(${counter})">Remove</button></td>
-        </tr>`;
+            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Warrior">Warrior</option><option value="Mage">Mage</option></select></td>';
+            cols += '<td><select name="weapon[]" class="weapon"><option value="">Select Weapon</option></select></td>';
+            cols += '<td><select name="armor[]" class="armor"><option value="">Select Armor</option></select></td>';
+            cols += '<td><input type="text" name="size[]" /></td>';
+            cols += '<td><input type="text" name="training[]" /></td>';
+            cols += '<td><input type="button" class="ibtnDel" value="Remove"></td>';
 
-        $('#rows').append(newRow);
-        counter++;
-      }
-
-      // Function to remove a row
-      function removeRow(rowId) {
-        $('#row' + rowId).remove();
-      }
-
-      // Function to load weapons based on the selected type
-      function loadWeapons(selectElement, rowId) {
-        var type = selectElement.value;
-        var weaponSelect = $('#weapon' + rowId);
-
-        // Clear previous options
-        weaponSelect.empty();
-        weaponSelect.append('<option value="">Select Weapon</option>');
-
-        // Add options based on the selected type
-        if (type === '1') {
-          weaponSelect.append('<option value="Sword">Sword</option>');
-          weaponSelect.append('<option value="Axe">Axe</option>');
-        } else if (type === '2') {
-          weaponSelect.append('<option value="Bow">Bow</option>');
-          weaponSelect.append('<option value="Crossbow">Crossbow</option>');
+            newRow.append(cols);
+            $("table.order-list").append(newRow);
+            bindDropdowns();
         }
-        // Add more options based on other types as needed
-      }
 
-      // Event listener for adding a new row
-      $('#addRowBtn').on('click', addRow);
-    });
-  </script>
+        // Function to remove the selected row
+        function removeRow() {
+            $(this).closest("tr").remove();
+        }
+
+        // Function to bind the dynamic dropdown menus
+        function bindDropdowns() {
+            $(".type").on("change", function() {
+                var weaponDropdown = $(this).closest("tr").find(".weapon");
+                var armorDropdown = $(this).closest("tr").find(".armor");
+                var type = $(this).val();
+
+                // Clear previous options
+                weaponDropdown.empty();
+                armorDropdown.empty();
+
+                // Add options based on the selected type
+                if (type === "Warrior") {
+                    weaponDropdown.append('<option value="">Select Weapon</option><option value="Sword">Sword</option><option value="Axe">Axe</option>');
+                    armorDropdown.append('<option value="">Select Armor</option><option value="Plate">Plate</option><option value="Chainmail">Chainmail</option>');
+                } else if (type === "Mage") {
+                    weaponDropdown.append('<option value="">Select Weapon</option><option value="Staff">Staff</option><option value="Wand">Wand</option>');
+                    armorDropdown.append('<option value="">Select Armor</option><option value="Robe">Robe</option><option value="Cloak">Cloak</option>');
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            // Bind initial dropdowns
+            bindDropdowns();
+
+            // Add a new row on button click
+            $("#addRow").on("click", function() {
+                addRow();
+            });
+
+            // Remove row on button click
+            $("table.order-list").on("click", ".ibtnDel", function() {
+                removeRow();
+            });
+        });
+    </script>
 </head>
 <body>
-  <form action="backend.php" method="POST">
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Weapon</th>
-          <th>Armor</th>
-          <th>Size</th>
-          <th>Training</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="rows">
-        <tr id="row0">
-          <td>
-            <select name="type[]" onchange="loadWeapons(this, 0)">
-              <option value="">Select Type</option>
-              <option value="1">Type 1</option>
-              <option value="2">Type 2</option>
-              <!-- Add more type options as needed -->
-            </select>
-          </td>
-          <td>
-            <select name="weapon[]" id="weapon0">
-              <option value="">Select Weapon</option>
-            </select>
-          </td>
-          <td>
-            <select name="armor[]" id="armor0">
-              <option value="">Select Armor</option>
-            </select>
-          </td>
-          <td><input type="text" name="size[]" /></td>
-          <td><input type="text" name="training[]" /></td>
-          <td><button type="button" onclick="removeRow(0)">Remove</button></td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="button" id="addRowBtn">Add Row</button>
-    <button type="submit">Submit</button>
-  </form>
+    <form method="post" action="backend.php">
+        <table class="order-list">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Weapon</th>
+                    <th>Armor</th>
+                    <th>Size</th>
+                    <th>Training</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="type[]" class="type">
+                            <option value="">Select Type</option>
+                            <option value="Warrior">Warrior</option>
+                            <option value="Mage">Mage</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="weapon[]" class="weapon">
+                            <option value="">Select Weapon</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="armor[]" class="armor">
+                            <option value="">Select Armor</option>
+                        </select>
+                    </td>
+                    <td><input type="text" name="size[]" /></td>
+                    <td><input type="text" name="training[]" /></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="button" id="addRow" value="Add Row" />
+        <input type="submit" value="Submit" />
+    </form>
 </body>
 </html>
