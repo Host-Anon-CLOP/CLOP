@@ -109,12 +109,12 @@ echo <<<EOFORM
           '<option value="propwash">PropWash</option>' +
           '<option value="steambucket">SteamBucket</option>' +
           '<option value="canopylights">CanopyLights</option>';
-        } else if (unittype == 'Unicorns' {
+        } else if (unittype == 'Unicorns') {
         weaponSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
           '<option value="longstand">LongStand</option>' +
           '<option value="longweight">LongWeight</option>' +
           '<option value="gridsquares">GridSquares</option>';
-        } else if (unittype == 'Navy' {
+        } else if (unittype == 'Navy') {
         weaponSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
           '<option value="shoreline">Shoreline</option>' +
           '<option value="waterhammer">WaterHammer</option>' +
