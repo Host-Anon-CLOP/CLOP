@@ -11,6 +11,10 @@
           '<option value="pegasi">Pegasi</option>' +
           '<option value="unicorns">Unicorns</option>';
         groupDiv.appendChild(unitSelect);
+
+                var e = document.getElementById("elementId");
+        var value = e.options[e.selectedIndex].value;
+        var text = e.options[e.selectedIndex].text;
 */
 
 echo <<<EOFORM
@@ -38,12 +42,8 @@ echo <<<EOFORM
 
         const groupDiv = document.createElement('div');
 
-        var e = document.getElementById("elementId");
-        var value = e.options[e.selectedIndex].value;
-        var text = e.options[e.selectedIndex].text;
-
         const unitLabel = document.createElement('label');
-        unitLabel.textContent = 'Unit: ' + str(text);
+        unitLabel.textContent = 'Unit: ';
         groupDiv.appendChild(unitLabel);
 
         const armorLabel = document.createElement('label');
