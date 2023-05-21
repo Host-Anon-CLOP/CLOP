@@ -12,18 +12,6 @@
           '<option value="unicorns">Unicorns</option>';
         groupDiv.appendChild(unitSelect);
 
-
-                
-
-
-                      } else if (unittype == 'Unicorns') {
-          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="hornshield">Hornshield</option>' +
-          '<option value="librarian">Librarian</option>' +
-          '<option value="shining">Shining</option>' +
-          '<option value="d2a">D2A</option>';
-        }
-
 */
 
 echo <<<EOFORM
@@ -82,6 +70,12 @@ echo <<<EOFORM
           '<option value="wonder">Wonder</option>' +
           '<option value="griffin">Griffin</option>' +
           '<option value="dragon">Dragon</option>';
+        } else if (unittype == 'Unicorns') {
+          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+          '<option value="hornshield">Hornshield</option>' +
+          '<option value="librarian">Librarian</option>' +
+          '<option value="shining">Shining</option>' +
+          '<option value="d2a">D2A</option>';
         } else if (unittype == 'Navy') {
           armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
           '<option value="c-pon3">C-PON3</option>' +
