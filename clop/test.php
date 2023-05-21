@@ -36,12 +36,9 @@ echo <<<EOFORM
       function calculate() {
         var element = document.getElementById('group-fields');
         var children = element.children;
-EOFORM;
         for(var i=0; i<children.length; i++){
             var child = children[i];
-            echo <<<EOFORM
             <div class="panel-heading h4">{$child.outerHTML}</div>
-EOFORM;
           }
         }
     </script>
