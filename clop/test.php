@@ -47,6 +47,7 @@ echo <<<EOFORM
 
     <script>
     function calculate() {
+      document.write('test');
     }
     </script>
 
