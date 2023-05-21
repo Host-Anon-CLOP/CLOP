@@ -33,14 +33,14 @@ echo <<<EOFORM
     <button type="button" onclick="addNewGroup()">Add Group</button>
 
     <script>
-    function calculate() {
-      var element = document.getElementById('group-fields');
-      var children = element.children;
-      for(var i=0; i<children.length; i++){
-          var child = children[i];
-          echo "$child.outerHTML";
+      function calculate() {
+        var element = document.getElementById('group-fields');
+        var children = element.children;
+        for(var i=0; i<children.length; i++){
+            var child = children[i];
+            echo "$child.outerHTML";
+          }
         }
-      }
     </script>
 
     <script>
