@@ -58,9 +58,9 @@ echo <<<EOFORM
         armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
           '<option value="custom">CAV</option>' +
           '<option value="standard">Standard</option>';
-        } else {
+        } else if (unittype == 'Tanks') {
           armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="custom">OTHER</option>' +
+          '<option value="custom">TANK</option>' +
           '<option value="standard">Standard</option>';
         }
         groupDiv.appendChild(armorSelect);
