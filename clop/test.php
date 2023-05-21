@@ -4,6 +4,13 @@
     <label for="groups">Number of Groups:</label>
     <input type="number" name="groups" id="groups" min="1" required><br><br>
     
+            const unitSelect = document.createElement('select');
+        unitSelect.name = 'unit';
+        unitSelect.innerHTML = '<option value="cavalry">Cavalry</option>' +
+          '<option value="tanks">Tanks</option>' +
+          '<option value="pegasi">Pegasi</option>' +
+          '<option value="unicorns">Unicorns</option>';
+        groupDiv.appendChild(unitSelect);
 */
 
 echo <<<EOFORM
@@ -31,17 +38,13 @@ echo <<<EOFORM
 
         const groupDiv = document.createElement('div');
 
-        const unitLabel = document.createElement('label');
-        unitLabel.textContent = 'Unit:';
-        groupDiv.appendChild(unitLabel);
+        var e = document.getElementById("elementId");
+        var value = e.options[e.selectedIndex].value;
+        var text = e.options[e.selectedIndex].text;
 
-        const unitSelect = document.createElement('select');
-        unitSelect.name = 'unit';
-        unitSelect.innerHTML = '<option value="cavalry">Cavalry</option>' +
-          '<option value="tanks">Tanks</option>' +
-          '<option value="pegasi">Pegasi</option>' +
-          '<option value="unicorns">Unicorns</option>';
-        groupDiv.appendChild(unitSelect);
+        const unitLabel = document.createElement('label');
+        unitLabel.textContent = 'Unit: ' + str(text);
+        groupDiv.appendChild(unitLabel);
 
         const armorLabel = document.createElement('label');
         armorLabel.textContent = 'Armor:';
