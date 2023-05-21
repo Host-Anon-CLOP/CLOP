@@ -3,13 +3,15 @@
 /*
     <label for="groups">Number of Groups:</label>
     <input type="number" name="groups" id="groups" min="1" required><br><br>
-    <div id="group-fields"></div>
+    
 */
 
 echo <<<EOFORM
 <html>
 <body>
   <form method="POST" action="/calculate">
+    <div id="group-fields"></div>
+
     <button type="submit">Calculate</button>
 
     <select name="unit-type" class="form-control" style="width:210px;"/>
