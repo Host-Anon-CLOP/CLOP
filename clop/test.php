@@ -13,13 +13,7 @@
         groupDiv.appendChild(unitSelect);
 
 
-                } else if (unittype == 'Pegasi') {
-          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="cooler">Cooler</option>' +
-          '<option value="wonder">Wonder</option>' +
-          '<option value="griffin">Griffin</option>' +
-          '<option value="dragon">Dragon</option>';
-        }
+                
 
 
                       } else if (unittype == 'Unicorns') {
@@ -82,6 +76,13 @@ echo <<<EOFORM
           '<option value="shepherd">Shepherd</option>' +
           '<option value="ohno">Ohno</option>' +
           '<option value="titan">Titan</option>';
+        } else if (unittype == 'Pegasi') {
+          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+          '<option value="cooler">Cooler</option>' +
+          '<option value="wonder">Wonder</option>' +
+          '<option value="griffin">Griffin</option>' +
+          '<option value="dragon">Dragon</option>';
+        }
         } else if (unittype == 'Navy') {
           armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
           '<option value="c-pon3">C-PON3</option>' +
