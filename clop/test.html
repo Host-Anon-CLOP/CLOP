@@ -9,13 +9,6 @@
             var newRow = $("<tr>");
             var cols = "";
 
-            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Warrior">Warrior</option><option value="Mage">Mage</option></select></td>';
-            cols += '<td><select name="weapon[]" class="weapon"><option value="">Select Weapon</option></select></td>';
-            cols += '<td><select name="armor[]" class="armor"><option value="">Select Armor</option></select></td>';
-            cols += '<td><input type="text" name="size[]" size="5"/></td>';
-            cols += '<td><input type="text" name="training[]" size="5"/></td>';
-            cols += '<td><input type="button" class="ibtnDel" value="Remove"></td>';
-
             newRow.append(cols);
             $("table.order-list").append(newRow);
             bindDropdowns();
@@ -39,11 +32,11 @@
 
                 // Add options based on the selected type
                 if (type === "Warrior") {
-                    weaponDropdown.append('<option value="">Select Weapon</option><option value="Sword">Sword</option><option value="Axe">Axe</option>');
-                    armorDropdown.append('<option value="">Select Armor</option><option value="Plate">Plate</option><option value="Chainmail">Chainmail</option>');
+                    weaponDropdown.append('<option value="">Weapon</option><option value="Sword">Sword</option><option value="Axe">Axe</option>');
+                    armorDropdown.append('<option value="">Armor</option><option value="Plate">Plate</option><option value="Chainmail">Chainmail</option>');
                 } else if (type === "Mage") {
-                    weaponDropdown.append('<option value="">Select Weapon</option><option value="Staff">Staff</option><option value="Wand">Wand</option>');
-                    armorDropdown.append('<option value="">Select Armor</option><option value="Robe">Robe</option><option value="Cloak">Cloak</option>');
+                    weaponDropdown.append('<option value="">Weapon</option><option value="Staff">Staff</option><option value="Wand">Wand</option>');
+                    armorDropdown.append('<option value="">Armor</option><option value="Robe">Robe</option><option value="Cloak">Cloak</option>');
                 }
             });
         }
