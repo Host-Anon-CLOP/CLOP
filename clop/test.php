@@ -47,8 +47,12 @@ echo <<<EOFORM
 
     <script>
     function calculate() {
-      var testthing = 'test';
-      document.write(testthing);
+      var element = document.getElementById('group-fields');
+      var children = element.children;
+      for(var i=0; i<children.length; i++){
+          var child = children[i];
+          document.write(child.outerHTML);
+        }
     }
     </script>
 
