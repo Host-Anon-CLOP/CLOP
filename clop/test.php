@@ -12,9 +12,7 @@
           '<option value="unicorns">Unicorns</option>';
         groupDiv.appendChild(unitSelect);
 
-                var e = document.getElementById("elementId");
-        var value = e.options[e.selectedIndex].value;
-        var text = e.options[e.selectedIndex].text;
+                
 */
 
 echo <<<EOFORM
@@ -25,7 +23,7 @@ echo <<<EOFORM
 
     <button type="submit">Calculate</button>
 
-    <select name="unit-type" class="form-control" style="width:210px;"/>
+    <select name="unit-type" id="unit-type" class="form-control" style="width:210px;"/>
       <option value="Cavalry">Cavalry</option>
       <option value="Tanks">Tanks</option>
       <option value="Pegasi">Pegasi</option>
@@ -38,6 +36,10 @@ echo <<<EOFORM
 
     <script>
       function addNewGroup() {
+        var e = document.getElementById("unit-type");
+        var value = e.options[e.selectedIndex].value;
+        var text = e.options[e.selectedIndex].text;
+
         const groupFields = document.getElementById('group-fields');
 
         const groupDiv = document.createElement('div');
