@@ -13,12 +13,12 @@ echo <<<EOFORM
     <button type="submit">Calculate</button>
 
     <select name="unit-type" class="form-control" style="width:210px;"/>
-      <option value="Cavalry"</option>
-      <option value="Tanks"</option>
-      <option value="Pegasi"</option>
-      <option value="Unicorns"</option>
-      <option value="Navy"</option>
-      <option value="Alicorns"</option>
+      <option value="Cavalry">Cavalry</option>
+      <option value="Tanks">Tanks</option>
+      <option value="Pegasi">Pegasi</option>
+      <option value="Unicorns">Unicorns</option>
+      <option value="Navy">Navy</option>
+      <option value="Alicorns">Alicorns</option>
     </select>
 
     <button type="button" onclick="addNewGroup()">Add Group</button>
