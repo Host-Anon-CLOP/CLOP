@@ -66,26 +66,7 @@ echo <<<EOFORM
           '<option value="ohno">Ohno</option>' +
           '<option value="titan">Titan</option>';
         }
-        } else if (unittype == 'Pegasi') {
-          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="cooler">Cooler</option>' +
-          '<option value="wonder">Wonder</option>' +
-          '<option value="griffin">Griffin</option>' +
-          '<option value="dragon">Dragon</option>';
-        }
-        } else if (unittype == 'Unicorns') {
-          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="hornshield">Hornshield</option>' +
-          '<option value="librarian">Librarian</option>' +
-          '<option value="shining">Shining</option>' +
-          '<option value="d2a">D2A</option>';
-        }
-        } else if (unittype == 'Navy') {
-          armorSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
-          '<option value="c-pon3">C-PON3</option>' +
-          '<option value="esohes">Esohes</option>' +
-          '<option value="shubidu">Shubidu</option>';
-        }
+        
         groupDiv.appendChild(armorSelect);
 
         const weaponLabel = document.createElement('label');
