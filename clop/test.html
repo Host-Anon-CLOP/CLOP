@@ -53,14 +53,10 @@
             bindDropdowns();
 
             // Add a new row on button click
-            $("#addRow").on("click", function() {
-                addRow();
-            });
+            $("#addRow").on("click", addRow);
 
             // Remove row on button click
-            $("table.order-list").on("click", ".ibtnDel", function() {
-                removeRow();
-            });
+            $("table.order-list").on("click", ".ibtnDel", removeRow);
         });
     </script>
 </head>
