@@ -82,8 +82,6 @@ echo <<<EOFORM
           '<option value="esohes">Esohes</option>' +
           '<option value="shubidu">Shubidu</option>';
         }
-
-
         groupDiv.appendChild(armorSelect);
 
         const weaponLabel = document.createElement('label');
@@ -92,9 +90,16 @@ echo <<<EOFORM
 
         const weaponSelect = document.createElement('select');
         weaponSelect.name = 'weapon';
-        weaponSelect.innerHTML = '<option value="canopy lights">Canopy Lights</option>' +
-          '<option value="scrounged">Scrounged</option>' +
-          '<option value="standard">Standard</option>';
+        if (unittype == 'Cavalry') {
+        weaponSelect.innerHTML = '<option value="scrounged">Scrounged</option>' +
+          '<option value="prc-e6">PRC-E6</option>' +
+          '<option value="prc-e7">PRC-E7</option>' +
+          '<option value="prc-e8">PRC-E8</option>' +
+          '<option value="acfu">ACFU</option>' +
+          '<option value="apfu">APFU</option>' +
+          '<option value="atfu">ATFU</option>' +
+          '<option value="aufu">AUFU</option>';
+        }
         groupDiv.appendChild(weaponSelect);
 
         groupFields.appendChild(groupDiv);
