@@ -20,7 +20,7 @@ echo <<<EOFORM
   <form method="post" action="test.php">
     <div id="group-fields"></div>
 
-    <button type="submit">Calculate</button>
+    <button type="button" onclick="calculate()">Calculate</button>
 
     <select name="unit-type" id="unit-type" class="form-control" style="width:210px;"/>
       <option value="Cavalry">Cavalry</option>
