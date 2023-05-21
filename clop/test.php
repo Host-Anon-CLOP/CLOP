@@ -49,7 +49,7 @@ echo <<<EOFORM
     function calculate() {
       var element = document.getElementById('group-fields');
       var children = element.children;
-      echo $element.outerHTML;
+      document.write($element.outerHTML);
     }
   </script>
 
