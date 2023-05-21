@@ -51,7 +51,7 @@ echo <<<EOFORM
       var children = element.children;
       for(var i=0; i<children.length; i++){
           var child = children[i];
-          document.write('RESULT: ' + child.outerHTML + ' END RESULT');
+          document.write('RESULT: ' + child.innerHTML + ' END RESULT');
         }
     }
     </script>
