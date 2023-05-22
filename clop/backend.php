@@ -83,6 +83,7 @@ $GLOBALS['mysqli']->query($sql);
     // ...
 
 // WAR CALCS
+$types = array(1 => "cavalry", 2 => "tanks", 3 => "pegasi", 4 => "unicorns", 5 => "naval");
 $invaderattackers = array();
 $invaderdefenders = array();
 $repellerattackers = array();
@@ -134,11 +135,6 @@ while ($rs = mysqli_fetch_array($sth)) {
 			$rs["arm_{$type}"] = .1;
 		}
 	} else {
-        echo 'weapon';
-        echo $types;
-        echo $typenumber;
-        echo 'weapondone';
-
 		if (!$rs['weapon_id']) {
 			foreach ($types as $typenumber => $type) {
 				$rs["dmg_{$type}"] = .25;
