@@ -69,7 +69,7 @@ $GLOBALS['mysqli']->query($sql);
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    echo "$sql"
+    echo "$sql";
     // Display defender data
     // ...
 
