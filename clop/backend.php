@@ -64,6 +64,7 @@ EOSQL;
 
     echo "<h2>MySQL Result</h2>";
     #echo($rs[0]);
+    echo($forcegroup)
     // Display defender data
     // ...
 
