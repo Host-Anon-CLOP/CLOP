@@ -275,7 +275,7 @@ foreach ($damageinfo as $attackerid => $restofit) {
     foreach ($restofit as $defenderid => $damage) {
     $damage = round($damage, 6);
     echo "{$units[$attackerid]['name']} (size {$units[$attackerid]['size']}) hit {$units[$defenderid]['name']} (size {$units[$defenderid]['size']}) for {$damage} damage ({$hitinfo[$attackerid][$defenderid]} hits)<br>";
-	
+	/*
 	if ($units[$attackerid]['nation_id'] > 0) {
 		$messages[$units[$defenderid]['nation_id']][] =<<<EOFORM
 Your {$units[$defenderid]['name']} (size {$units[$defenderid]['size']}) were hit by
@@ -289,8 +289,10 @@ Your {$units[$defenderid]['name']} (size {$units[$defenderid]['size']}) were hit
 for {$damage} damage ({$hitinfo[$attackerid][$defenderid]} hits)
 EOFORM;
 	}
+    */
     }
 }
+/*
 foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
 	if ($unit['damage'] > 0) {
@@ -309,5 +311,6 @@ EOSQL;
 		}
 	}
 }
+*/
 }
 ?>
