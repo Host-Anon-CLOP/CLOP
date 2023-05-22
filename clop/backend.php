@@ -20,7 +20,8 @@ $GLOBALS['mysqli']->query($sql);
 # Get Forcegroup ID
 $sql = "SELECT forcegroup_id FROM forcegroups_calc WHERE name = 'attackers'";
 $sth = $GLOBALS['mysqli']->query($sql);
-$forcegroup = mysqli_fetch_array($sth)[0]['forcegroup_id'];
+#$forcegroup = mysqli_fetch_array($sth)[0]['forcegroup_id'];
+$forcegroup = "test2";
 
         foreach ($_POST['type'] as $index => $type) {
             if (!empty($type)) {
