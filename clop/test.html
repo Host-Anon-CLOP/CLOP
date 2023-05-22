@@ -9,7 +9,7 @@
             var newRow = $("<tr>");
             var cols = "";
 
-            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Tanks">Tanks</option><option value="Pegasi">Pegasi</option><option value="Unicorns">Unicorns</option><option value="Navy">Navy</option></select></td>';
+            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Tanks">Tanks</option><option value="Pegasi">Pegasi</option><option value="Unicorns">Unicorns</option><option value="Naval">Naval</option></select></td>';
             cols += '<td><select name="weapon[]" class="weapon"><option value=""></option></select></td>';
             cols += '<td><select name="armor[]" class="armor"><option value=""></option></select></td>';
             cols += '<td><input type="text" name="size[]" size="5"/></td>';
@@ -89,7 +89,7 @@
                     armorDropdown.append('<option value="Shining">Shining</option>');
                     armorDropdown.append('<option value="D2A">D2A</option>');
                 }
-                else if (type === "Navy") {
+                else if (type === "Naval") {
                     weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
                     weaponDropdown.append('<option value="Shoreline">Shoreline</option>');
                     weaponDropdown.append('<option value="WaterHammer">WaterHammer</option>');
@@ -137,7 +137,7 @@
                             <option value="Tanks">Tanks</option>
                             <option value="Pegasi">Pegasi</option>
                             <option value="Unicorns">Unicorns</option>
-                            <option value="Navy">Navy</option>
+                            <option value="Naval">Naval</option>
                         </select>
                     </td>
                     <td>
@@ -150,8 +150,8 @@
                             <option value="">Select Armor</option>
                         </select>
                     </td>
-                    <td><input type="text" name="size[]" size="5" default="1"/></td>
-                    <td><input type="text" name="training[]" size="5" default="0"/></td>
+                    <td><input type="text" name="size[]" size="5"/></td>
+                    <td><input type="text" name="training[]" size="5"/></td>
                     <td></td>
                 </tr>
             </tbody>
