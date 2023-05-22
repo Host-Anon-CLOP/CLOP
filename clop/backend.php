@@ -27,11 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'name' => $name
                 ];
 
-                
-
-                $sql=<<<EOSQL
-                INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', 0)
-EOSQL;
+                $sql="INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', 0)";
                 $rs = onelinequery($sql);
 
                 $sql = "SELECT * FROM forces_calc";
