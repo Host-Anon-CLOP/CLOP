@@ -11,7 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Retrieve data for attackers
     if (!empty($_POST['type']) && is_array($_POST['type'])) {
-# Create Forcegroup
+
+# Clear Previous Results
 $sql=<<<EOSQL
 truncate forcegroups_calc
 EOSQL;
@@ -22,16 +23,18 @@ truncate forces_calc
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-
+# Create Attackers Forcegroup
 $sql=<<<EOSQL
-INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (1, 1, 1, 'attackers')
+INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (1, 2, 1, 'attackers')
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-# Get Forcegroup ID
-$sql = "SELECT forcegroup_id FROM forcegroups_calc WHERE name = 'attackers'";
-$sth = $GLOBALS['mysqli']->query($sql);
-$forcegroup = mysqli_fetch_array($sth)['forcegroup_id'];
+# Create Defenders Forcegroup
+$sql=<<<EOSQL
+INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (2, 2, 0, 'Defenders')
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+
 
         foreach ($_POST['type'] as $index => $type) {
             if (!empty($type)) {
@@ -51,7 +54,13 @@ $forcegroup = mysqli_fetch_array($sth)['forcegroup_id'];
 
 # Create Force
 $sql=<<<EOSQL
-INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$index]}, {$forcetypes[$type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', 1)
+INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$index]}, {$forcetypes[$type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{a_$name}', 1)
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+
+# Create Force - Mirror for defenders
+$sql=<<<EOSQL
+INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (2, {$_POST['size'][$index]}, {$forcetypes[$type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{d_$name}', 2)
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
@@ -69,7 +78,7 @@ $GLOBALS['mysqli']->query($sql);
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    echo "$sql";
+    #echo "$sql";
     // Display defender data
     // ...
 
