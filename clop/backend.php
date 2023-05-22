@@ -15,12 +15,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'type' => $type,
                     'forcetype' => $forcetypes[$type],
                     'weapon' => $_POST['weapon'][$index],
-                    'weapontypes' => $weapontypes[$_POST['weapon'][$index]],
+                    'weapontype' => $weapontypes[$_POST['weapon'][$index]],
                     'armor' => $_POST['armor'][$index],
-                    'armortypes' => $armortypes[$_POST['armor'][$index]],
+                    'armortype' => $armortypes[$_POST['armor'][$index]],
                     'size' => $_POST['size'][$index],
                     'training' => $_POST['training'][$index]
                 ];
+
+                /*
+                $GLOBALS['mysqli']->query($sql);
+                $forcegroup_id = mysqli_insert_id($GLOBALS['mysqli']);
+                $sql=<<<EOSQL
+                INSERT INTO forces_calc (nation_id, size, type, training, name, forcegroup_id) VALUES ({<NATION_ID>}, {$_POST['size'][$index]}, '{$type}', {$_POST['training'][$index]}, '{<NAME>}', {$forcegroup_id})
+EOSQL;
+*/
+
+#nation name forcegroup_id
             }
         }
     }
@@ -37,5 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<h2>Defender Data:</h2>";
     // Display defender data
     // ...
+
+/*
+    $GLOBALS['mysqli']->query($sql);
+    $sql=<<<EOSQL
+    INSERT INTO forcegroups_calc (nation_id, location_id, name) VALUES ({$_SESSION['nation_id']}, {$_SESSION['nation_id']}, '{$mysql['name']}')
+EOSQL;
+*/
+
 }
 ?>
