@@ -35,6 +35,7 @@ EOSQL;
 
                 $sql = "SELECT * FROM forces_calc";
                 $sth = $GLOBALS['mysqli']->query($sql);
+                $rs = mysqli_fetch_array($sth)
             }
         }
     }
@@ -49,7 +50,7 @@ EOSQL;
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    echo($sth);
+    echo($rs);
     // Display defender data
     // ...
 
