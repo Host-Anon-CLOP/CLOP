@@ -135,6 +135,10 @@ while ($rs = mysqli_fetch_array($sth)) {
 		}
 	} else {
 		if (!$rs['weapon_id']) {
+            echo 'weapon';
+            echo $types;
+            echo $typenumber;
+            echo 'weapondone';
 			foreach ($types as $typenumber => $type) {
 				$rs["dmg_{$type}"] = .25;
 			}
