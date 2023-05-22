@@ -28,11 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
 
                 
-                $GLOBALS['mysqli']->query($sql);
-                $forcegroup_id = mysqli_insert_id($GLOBALS['mysqli']);
+
                 $sql=<<<EOSQL
                 INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', 0)
 EOSQL;
+                $rs = onelinequery($sql);
 
                 $sql = "SELECT * FROM forces_calc";
                 $sth = $GLOBALS['mysqli']->query($sql);
