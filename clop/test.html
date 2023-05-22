@@ -9,7 +9,7 @@
             var newRow = $("<tr>");
             var cols = "";
 
-            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Tanks">Tanks</option><option value="Pegasi">Pegasi</option><option value="Unicorns">Unicorns</option><option value="Naval">Naval</option></select></td>';
+            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Tanks">Tanks</option><option value="Pegasi">Pegasi</option><option value="Unicorns">Unicorns</option><option value="Naval">Naval</option><option value="Alicorns">Alicorns</option></select></td>';
             cols += '<td><select name="weapon[]" class="weapon"><option value=""></option></select></td>';
             cols += '<td><select name="armor[]" class="armor"><option value=""></option></select></td>';
             cols += '<td><input type="text" name="size[]" size="5"/></td>';
@@ -100,6 +100,10 @@
                     armorDropdown.append('<option value="Esohes">Esohes</option>');
                     armorDropdown.append('<option value="Shubidu">Shubidu</option>');
                 }
+                else if (type === "Alicorns") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                }
             });
         }
 
@@ -138,6 +142,7 @@
                             <option value="Pegasi">Pegasi</option>
                             <option value="Unicorns">Unicorns</option>
                             <option value="Naval">Naval</option>
+                            <option value="Alicorns">Alicorns</option>
                         </select>
                     </td>
                     <td>

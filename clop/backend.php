@@ -25,14 +25,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'name' => $name
                 ];
 
-                /*
+                
                 $GLOBALS['mysqli']->query($sql);
                 $forcegroup_id = mysqli_insert_id($GLOBALS['mysqli']);
                 $sql=<<<EOSQL
-                INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{<NAME>}', 0)
+                INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', 0)
 EOSQL;
-*/
 
+                $sql = "SELECT * FROM forces_calc";
+                $sth = $GLOBALS['mysqli']->query($sql);
             }
         }
     }
@@ -46,7 +47,8 @@ EOSQL;
     print_r($attackerData);
     echo "</pre>";
 
-    echo "<h2>Defender Data:</h2>";
+    echo "<h2>MySQL Result</h2>";
+    echo($sth);
     // Display defender data
     // ...
 
