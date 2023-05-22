@@ -117,7 +117,7 @@ WHERE fg.location_id = {$battleground} AND fg.departuredate IS NULL
 EOSQL;
 
 // TO DO
-$defenderbonus = true
+$defenderbonus = true;
 
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
