@@ -275,11 +275,14 @@ foreach ($damageinfo as $attackerid => $restofit) {
     foreach ($restofit as $defenderid => $damage) {
     $damage = round($damage, 6);
 	if ($units[$defenderid]['nation_id'] > 0) {
+        echo "Your {$units[$attackerid]['name']} (size {$units[$attackerid]['size']}) hit defenders {$units[$defenderid]['name']} (size {$units[$defenderid]['size']}) for {$damage} damage ({$hitinfo[$attackerid][$defenderid]} hits)"
+        /*
         $messages[$units[$attackerid]['nation_id']][] =<<<EOFORM
 Your {$units[$attackerid]['name']} (size {$units[$attackerid]['size']}) hit
 <a href="viewnation.php?nation_id={$units[$defenderid]['nation_id']}">{$units[$defenderid]['nationname']}</a>'s {$units[$defenderid]['name']} (size {$units[$defenderid]['size']})
 for {$damage} damage ({$hitinfo[$attackerid][$defenderid]} hits)
 EOFORM;
+*/
 	} else {
 		$messages[$units[$attackerid]['nation_id']][] =<<<EOFORM
 Your {$units[$attackerid]['name']} (size {$units[$attackerid]['size']}) hit
