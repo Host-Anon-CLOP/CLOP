@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    echo($sth);
+    #echo($sth);
     // Display defender data
     // ...
 
