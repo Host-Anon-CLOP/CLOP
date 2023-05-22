@@ -13,6 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['type']) && is_array($_POST['type'])) {
 # Create Forcegroup
 $sql=<<<EOSQL
+truncate forcegroups_calc
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+
+$sql=<<<EOSQL
+truncate forces_calc
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+
+
+$sql=<<<EOSQL
 INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (0, 0, 1, 'attackers')
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
@@ -24,7 +35,7 @@ $forcegroup = mysqli_fetch_array($sth)['forcegroup_id'];
 
         foreach ($_POST['type'] as $index => $type) {
             if (!empty($type)) {
-                $name = $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_' . $_POST['training'][$index] . '_' . $_POST['size'][$index];
+                $name = $type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_' . $_POST['training'][$index] . '_' . $_POST['size'][$index];
 
                 $attackerData[] = [
                     'type' => $type,
