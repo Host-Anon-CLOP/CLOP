@@ -50,7 +50,7 @@ EOSQL;
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    echo($rs);
+    echo($rs[0]);
     // Display defender data
     // ...
 
