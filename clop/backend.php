@@ -39,7 +39,7 @@ $forcegroup = mysqli_fetch_array($sth)['forcegroup_id'];
                 ];
 
 # Create Force
-/*
+
 $sql=<<<EOSQL
 INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', '{$forcegroup}')
 EOSQL;
@@ -48,7 +48,7 @@ EOSQL;
                 $sql = "SELECT * FROM forces_calc";
                 $sth = $GLOBALS['mysqli']->query($sql);
                 $rs = mysqli_fetch_array($sth);
-                */
+                
             }
         }
     }
