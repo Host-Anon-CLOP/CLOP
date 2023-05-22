@@ -33,8 +33,8 @@ INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, n
 EOSQL;
                 $GLOBALS['mysqli']->query($sql);
 
-                #$sql = "SELECT * FROM forces_calc";
-                #$sth = $GLOBALS['mysqli']->query($sql);
+                $sql = "SELECT * FROM forces_calc";
+                $sth = $GLOBALS['mysqli']->query($sql);
             }
         }
     }
@@ -49,9 +49,15 @@ EOSQL;
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    #echo($sth);
+    echo($sth);
     // Display defender data
     // ...
+
+# DELETE AFTER DONE
+$sql=<<<EOSQL
+truncate forces_calc
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
 
 /*
     $GLOBALS['mysqli']->query($sql);
