@@ -24,7 +24,7 @@ $GLOBALS['mysqli']->query($sql);
 
 
 $sql=<<<EOSQL
-INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (0, 0, 1, 'attackers')
+INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (1, 1, 1, 'attackers')
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
@@ -50,16 +50,11 @@ $forcegroup = mysqli_fetch_array($sth)['forcegroup_id'];
                 ];
 
 # Create Force
-
 $sql=<<<EOSQL
-INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, $type, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', '{$forcegroup}')
+INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$index]}, $type, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', '1')
 EOSQL;
-                $GLOBALS['mysqli']->query($sql);
+$GLOBALS['mysqli']->query($sql);
 
-                $sql = "SELECT * FROM forces_calc";
-                $sth = $GLOBALS['mysqli']->query($sql);
-                $rs = mysqli_fetch_array($sth);
-                
             }
         }
     }
@@ -74,8 +69,6 @@ EOSQL;
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    #echo($rs[0]);
-    echo($forcegroup);
     // Display defender data
     // ...
 
