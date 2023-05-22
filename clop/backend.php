@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'armor' => $_POST['armor'][$index],
                     'armortype' => $armortypes[$_POST['armor'][$index]],
                     'size' => $_POST['size'][$index],
-                    'training' => $_POST['training'][$index]
+                    'training' => $_POST['training'][$index],
                     'name' => $name
                 ];
 
