@@ -11,8 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['type']) && is_array($_POST['type'])) {
         foreach ($_POST['type'] as $index => $type) {
             if (!empty($type)) {
-                #$name = "$_POST['weapon'][$index] + '_' + $_POST['armor'][$index] + '_' + $_POST['training'][$index] + '_' + $_POST['size'][$index]";
-                $name = "test";
+                $name = "$_POST['weapon'][$index] + '_' + $_POST['armor'][$index] + '_' + $_POST['training'][$index] + '_' + $_POST['size'][$index]";
 
                 $attackerData[] = [
                     'type' => $type,
