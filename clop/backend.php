@@ -35,7 +35,7 @@ EOSQL;
 
                 $sql = "SELECT * FROM forces_calc";
                 $sth = $GLOBALS['mysqli']->query($sql);
-                $rs = mysqli_fetch_array($sth)
+                $rs = mysqli_fetch_array($sth);
             }
         }
     }
