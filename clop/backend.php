@@ -11,6 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Retrieve data for attackers
     if (!empty($_POST['type']) && is_array($_POST['type'])) {
+# Create Forcegroup
+$sql=<<<EOSQL
+INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALUES (0, 0, 1, 'attackers')
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+
+# Get Forcegroup ID
+$sql = "SELECT forcegroup_id FROM forcegroups_calc WHERE name = 'attackers'";
+$sth = $GLOBALS['mysqli']->query($sql);
+$forcegroup = mysqli_fetch_array($sth)[0];
+
         foreach ($_POST['type'] as $index => $type) {
             if (!empty($type)) {
                 $name = $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_' . $_POST['training'][$index] . '_' . $_POST['size'][$index];
@@ -27,15 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'name' => $name
                 ];
 
-
+# Create Force
+/*
 $sql=<<<EOSQL
-INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', 0)
+INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (0, {$_POST['size'][$index]}, '{$type}', '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, '{$name}', '{$forcegroup}')
 EOSQL;
                 $GLOBALS['mysqli']->query($sql);
 
                 $sql = "SELECT * FROM forces_calc";
                 $sth = $GLOBALS['mysqli']->query($sql);
                 $rs = mysqli_fetch_array($sth);
+                */
             }
         }
     }
@@ -50,22 +63,14 @@ EOSQL;
     echo "</pre>";
 
     echo "<h2>MySQL Result</h2>";
-    echo($rs[0]);
+    #echo($rs[0]);
     // Display defender data
     // ...
 
 # DELETE AFTER DONE
-$sql=<<<EOSQL
-truncate forces_calc
-EOSQL;
-$GLOBALS['mysqli']->query($sql);
-
-/*
-    $GLOBALS['mysqli']->query($sql);
-    $sql=<<<EOSQL
-    INSERT INTO forcegroups_calc (nation_id, location_id, name) VALUES ({$_SESSION['nation_id']}, {$_SESSION['nation_id']}, '{$mysql['name']}')
-EOSQL;
-*/
-
+#$sql=<<<EOSQL
+#truncate forces_calc
+#EOSQL;
+#$GLOBALS['mysqli']->query($sql);
 }
 ?>
