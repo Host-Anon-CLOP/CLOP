@@ -113,7 +113,7 @@ LEFT JOIN nations n ON f.nation_id = n.nation_id
 INNER JOIN forcegroups_calc fg ON f.forcegroup_id = fg.forcegroup_id
 LEFT JOIN armordefs ad ON f.armor_id = ad.armor_id
 LEFT JOIN weapondefs wd ON f.weapon_id = wd.weapon_id
-WHERE fg.location_id = {$battleground} AND fg.departuredate IS NULL
+WHERE fg.location_id = 2 AND fg.departuredate IS NULL
 EOSQL;
 
 // TO DO
