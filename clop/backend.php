@@ -1,4 +1,6 @@
 <?php
+require_once("backend/allfunctions.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $attackerData = [];
     $defenderData = [];
