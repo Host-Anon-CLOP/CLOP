@@ -150,6 +150,9 @@ while ($rs = mysqli_fetch_array($sth)) {
     //both sides play "attacker" and "defender" to each other
     if ($rs['attack_mission']) {
         $invaders[$rs['force_id']] = $rs;
+        echo "$types";
+        echo "$typenumber";
+        echo "$type";
         foreach ($types as $typenumber => $type) {
             $invaderarmorsizes[$rs['type']][$typenumber][] = $rs['size']; // DO NOT FUCK WITH THIS - there's an array_multisort issue
             $invaderarmornations[$rs['type']][$typenumber][] = $rs['nation_id']; //involving multiple sorts using the same array as a guideline
