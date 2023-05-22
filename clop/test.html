@@ -9,7 +9,7 @@
             var newRow = $("<tr>");
             var cols = "";
 
-            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Mage">Mage</option></select></td>';
+            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Tanks">Tanks</option><option value="Pegasi">Pegasi</option><option value="Unicorns">Unicorns</option><option value="Navy">Navy</option></select></td>';
             cols += '<td><select name="weapon[]" class="weapon"><option value=""></option></select></td>';
             cols += '<td><select name="armor[]" class="armor"><option value=""></option></select></td>';
             cols += '<td><input type="text" name="size[]" size="5"/></td>';
@@ -52,9 +52,53 @@
                     armorDropdown.append('<option value="Barding">Barding</option>');
                     armorDropdown.append('<option value="Bigdog">Bigdog</option>');
                     armorDropdown.append('<option value="Nope">Nope</option>');
-                } else if (type === "Mage") {
-                    weaponDropdown.append('<option value="">Select Weapon</option><option value="Staff">Staff</option><option value="Wand">Wand</option>');
-                    armorDropdown.append('<option value="">Select Armor</option><option value="Robe">Robe</option><option value="Cloak">Cloak</option>');
+                }
+                else if (type === "Tanks") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="K9P">K9P</option>');
+                    weaponDropdown.append('<option value="ELBO-GRS">ELBO-GRS</option>');
+                    weaponDropdown.append('<option value="Chem-Light">Chem-Light</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Trundle">Trundle</option>');
+                    armorDropdown.append('<option value="Shepherd">Shepherd</option>');
+                    armorDropdown.append('<option value="Ohno">Ohno</option>');
+                    armorDropdown.append('<option value="Titan">Titan</option>');
+                }
+                else if (type === "Pegasi") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="PropWash">PropWash</option>');
+                    weaponDropdown.append('<option value="SteamBucket">SteamBucket</option>');
+                    weaponDropdown.append('<option value="CanopyLights">CanopyLights</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Cooler">Cooler</option>');
+                    armorDropdown.append('<option value="Wonder">Wonder</option>');
+                    armorDropdown.append('<option value="Griffin">Griffin</option>');
+                    armorDropdown.append('<option value="Dragon">Dragon</option>');
+                }
+                else if (type === "Unicorns") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="LongStand">LongStand</option>');
+                    weaponDropdown.append('<option value="LongWeight">LongWeight</option>');
+                    weaponDropdown.append('<option value="GridSquares">GridSquares</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Hornshield">Hornshield</option>');
+                    armorDropdown.append('<option value="Librarian">Librarian</option>');
+                    armorDropdown.append('<option value="Shining">Shining</option>');
+                    armorDropdown.append('<option value="D2A">D2A</option>');
+                }
+                else if (type === "Navy") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="Shoreline">Shoreline</option>');
+                    weaponDropdown.append('<option value="WaterHammer">WaterHammer</option>');
+                    weaponDropdown.append('<option value="WaterlineEraser">WaterlineEraser</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="C-PON3">C-PON3</option>');
+                    armorDropdown.append('<option value="Esohes">Esohes</option>');
+                    armorDropdown.append('<option value="Shubidu">Shubidu</option>');
                 }
             });
         }
@@ -90,7 +134,10 @@
                         <select name="type[]" class="type">
                             <option value="">Select Type</option>
                             <option value="Cavalry">Cavalry</option>
-                            <option value="Mage">Mage</option>
+                            <option value="Tanks">Tanks</option>
+                            <option value="Pegasi">Pegasi</option>
+                            <option value="Unicorns">Unicorns</option>
+                            <option value="Navy">Navy</option>
                         </select>
                     </td>
                     <td>
