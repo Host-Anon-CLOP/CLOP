@@ -125,8 +125,6 @@ while ($rs = mysqli_fetch_array($sth)) {
         $rs['nationname'] = $NPCforces[$rs['nation_id']];
     }
 	$rs['hits'] = $rs['size']; //might not be necessary but code clarity
-    echo 'test';
-    echo $rs['hits'];
 	if ($rs['type'] == 6) { //alicorns
 		$rs['type'] = 5; // treat them like naval for now
 		foreach ($types as $typenumber => $type) {
