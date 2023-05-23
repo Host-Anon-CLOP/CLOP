@@ -49,18 +49,36 @@ $GLOBALS['mysqli']->query($sql);
                     'name' => $name
                 ];
 
-# Create Force
+# Create Attackers
 $sql=<<<EOSQL
 INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$index]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, 'A_$name', 1)
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
+            }
+        }
+    }
 
-# Create Force - Mirror for defenders
+    // Retrieve data for Defenders
+    if (!empty($_POST['defend_type']) && is_array($_POST['defend_type'])) {
+
+        foreach ($_POST['defend_type'] as $index => $which_type) {
+            if (!empty($which_type)) {
+                $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_size_' . $_POST['size'][$index]. '_train_' . $_POST['training'][$index];
+
+                $defenderData[] = [
+                    'unit' => $which_type,
+                    'weapon' => $_POST['weapon'][$index],
+                    'armor' => $_POST['armor'][$index],
+                    'size' => $_POST['size'][$index],
+                    'training' => $_POST['training'][$index],
+                    'name' => $name
+                ];
+
+# Create Defenders
 $sql=<<<EOSQL
 INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (2, {$_POST['size'][$index]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, 'D_$name', 2)
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
-
             }
         }
     }
@@ -70,12 +88,12 @@ $GLOBALS['mysqli']->query($sql);
     echo "<pre>";
     foreach ($attackerData as $attacker) {
         echo $attacker['unit'] . ' ' . $attacker['weapon'] . ' ' . $attacker['armor'] . ' size:' . $attacker['size'] . ' train:' . $attacker['training'];
-    }
     echo "</pre>";
 
     echo "<h2>Defender Data:</h2>";
     echo "<pre>";
-    print_r($defenderData);
+    foreach ($defenderData as $defender) {
+        echo $defender['unit'] . ' ' . $defender['weapon'] . ' ' . $defender['armor'] . ' size:' . $defender['size'] . ' train:' . $defender['training'];
     echo "</pre>";
 
     echo "<h2>Battle Result</h2>";
