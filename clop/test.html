@@ -9,7 +9,7 @@
         // Function to add a new row
         function addRow() {
             // Create new row from table
-            var newRow = $("table.order-list")[0].insertRow();
+            var newRow = $("table.attacker")[0].insertRow();
 
             // Get row contents from the template
             var rowContents = templateRow.content.cloneNode(true);
@@ -42,7 +42,7 @@
 
         // Function to remove the selected row
         function removeRow() {
-            var table = $("table.order-list")[0];
+            var table = $("table.attacker")[0];
             if ($('.ibtnDel').length < 2) {
                 alert("Cannot remove the last row in the table.")
                 return false;
@@ -53,7 +53,7 @@
         }
 
         function showHideDeleteButton() {
-            var table = $("table.order-list")[0];
+            var table = $("table.attacker")[0];
             var btns = $('.ibtnDel');
             // If only one button (and only one row), hide it
             if(btns.length < 2) {
@@ -155,7 +155,7 @@
             $("#addRow").on("click", addRow);
 
             // Remove row on button click
-            $("table.order-list").on("click", ".ibtnDel", removeRow);
+            $("table.attacker").on("click", ".ibtnDel", removeRow);
 
             // Submit button pre-submit checks
             $('#btnSubmit').on("click", preSubmitChecks);
@@ -164,7 +164,7 @@
 </head>
 <body>
     <form method="post" action="backend.php">
-        <table class="order-list">
+        <table class="attacker">
             <thead>
                 <tr>
                     <th>Type</th>
