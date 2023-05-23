@@ -32,7 +32,7 @@ INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALU
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-var count = 0;
+    $count = 0;
 
     // Retrieve data for attackers
     if (!empty($_POST['attack_type']) && is_array($_POST['attack_type'])) {
@@ -56,7 +56,7 @@ INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, n
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-            count += 1;
+            $count += 1;
             }
         }
     }
@@ -83,7 +83,7 @@ INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, n
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-            count += 1;
+            $count += 1;
             }
         }
     }
