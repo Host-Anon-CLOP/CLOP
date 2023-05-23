@@ -7,9 +7,21 @@
         var templateRow;
 
         // Function to add a new row
-        function addRow() {
+        function addRowAttacker() {
             // Create new row from table
             var newRow = $("table.attacker")[0].insertRow();
+
+            // Get row contents from the template
+            var rowContents = templateRow.content.cloneNode(true);
+            
+            // Attach everything together then rebind
+            newRow.append(rowContents);
+            bindDropdowns();
+            showHideDeleteButton();
+        }
+        function addRowDefender() {
+            // Create new row from table
+            var newRow = $("table.defender")[0].insertRow();
 
             // Get row contents from the template
             var rowContents = templateRow.content.cloneNode(true);
@@ -149,11 +161,12 @@
             templateRow = $("#rowTemplate")[0];
 
             // Create initial row
-            addRow();
+            addRowAttacker();
+            addRowDefender();
 
             // Add a new row on button click
-            $("#addRowAttacker").on("click", addRow);
-            $("#addRowDefender").on("click", addRow);
+            $("#addRowAttacker").on("click", addRowAttacker);
+            $("#addRowDefender").on("click", addRowDefender);
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
