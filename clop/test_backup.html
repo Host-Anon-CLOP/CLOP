@@ -4,67 +4,26 @@
     <title>Dynamic Form Example</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        var templateRow;
-
         // Function to add a new row
         function addRow() {
-            // Create new row from table
-            var newRow = $("table.order-list")[0].insertRow();
+            var newRow = $("<tr>");
+            var cols = "";
 
-            // Get row contents from the template
-            var rowContents = templateRow.content.cloneNode(true);
-            
-            // Attach everything together then rebind
-            newRow.append(rowContents);
+            cols += '<td><select name="type[]" class="type"><option value="">Select Type</option><option value="Cavalry">Cavalry</option><option value="Tanks">Tanks</option><option value="Pegasi">Pegasi</option><option value="Unicorns">Unicorns</option><option value="Naval">Naval</option><option value="Alicorns">Alicorns</option></select></td>';
+            cols += '<td><select name="weapon[]" class="weapon"><option value=""></option></select></td>';
+            cols += '<td><select name="armor[]" class="armor"><option value=""></option></select></td>';
+            cols += '<td><input type="text" name="size[]" size="5"/></td>';
+            cols += '<td><input type="text" name="training[]" size="5"/></td>';
+            cols += '<td><input type="button" class="ibtnDel" value="Remove"></td>';
+
+            newRow.append(cols);
+            $("table.order-list").append(newRow);
             bindDropdowns();
-            showHideDeleteButton();
-        }
-
-        function preSubmitChecks() {
-            var preventSubmit = false;
-            
-            // Pre-submission checks go here...
-            var typeDropdowns = $('select.type');
-            for (let i = 0; i < typeDropdowns.length; i++) {
-                if (typeDropdowns[i].selectedIndex == "0") {// Unselected
-                    alert("Please select a valid type");
-                    preventSubmit = true;
-                }
-            }
-
-            // If any of the submission checks failed, prevent the page from submitting the form
-            if (preventSubmit){
-                event.preventDefault();
-                event.cancelBubble = true;
-                return false;
-            }
         }
 
         // Function to remove the selected row
         function removeRow() {
-            var table = $("table.order-list")[0];
-            if ($('.ibtnDel').length < 2) {
-                alert("Cannot remove the last row in the table.")
-                return false;
-            }
-
             $(this).closest("tr").remove();
-            showHideDeleteButton();
-        }
-
-        function showHideDeleteButton() {
-            var table = $("table.order-list")[0];
-            var btns = $('.ibtnDel');
-            // If only one button (and only one row), hide it
-            if(btns.length < 2) {
-                btns[0].style.display = "none";
-            }
-            // If multiple buttons (i.e. multiple rows), display them
-            else {
-                for(var i = 0; i < btns.length; i++) {
-                    btns[i].style.display = "inline-block";
-                }
-            }
         }
 
         // Function to bind the dynamic dropdown menus
@@ -141,24 +100,22 @@
                     armorDropdown.append('<option value="Esohes">Esohes</option>');
                     armorDropdown.append('<option value="Shubidu">Shubidu</option>');
                 }
+                else if (type === "Alicorns") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                }
             });
         }
 
         $(document).ready(function() {
-            // Take the row from the HTML defined below as the template row that all future rows will be based on.
-            templateRow = $("#rowTemplate")[0];
-
-            // Create initial row
-            addRow();
+            // Bind initial dropdowns
+            bindDropdowns();
 
             // Add a new row on button click
             $("#addRow").on("click", addRow);
 
             // Remove row on button click
             $("table.order-list").on("click", ".ibtnDel", removeRow);
-
-            // Submit button pre-submit checks
-            $('#btnSubmit').on("click", preSubmitChecks);
         });
     </script>
 </head>
@@ -176,7 +133,7 @@
                 </tr>
             </thead>
             <tbody>
-                <template id="rowTemplate">
+                <tr>
                     <td>
                         <select name="type[]" class="type">
                             <option value="">Select Type</option>
@@ -185,6 +142,7 @@
                             <option value="Pegasi">Pegasi</option>
                             <option value="Unicorns">Unicorns</option>
                             <option value="Naval">Naval</option>
+                            <option value="Alicorns">Alicorns</option>
                         </select>
                     </td>
                     <td>
@@ -197,19 +155,19 @@
                             <option value="">Select Armor</option>
                         </select>
                     </td>
-                    <td><input type="number" name="size[]" size="5" min="0" value="0"/></td>
-                    <td><input type="number" name="training[]" size="5" min="0" value="0"/></td>
-                    <td><input type="button" class="ibtnDel" value="Remove"></td>
-                </template>
+                    <td><input type="text" name="size[]" size="5"/></td>
+                    <td><input type="text" name="training[]" size="5"/></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
         <table>
-            <tr>
-                <td>
-                    <input type="submit" id="btnSubmit" value="Submit" />
-                    <input type="button" id="addRow" value="Add Row" />
-                </td>
-            </tr>          
+          <tr>
+            <td>
+            <input type="submit" value="Submit" />
+            <input type="button" id="addRow" value="Add Row" />
+          </td>
+          </tr>          
         </table>
     </form>
 </body>
