@@ -38,15 +38,12 @@ $GLOBALS['mysqli']->query($sql);
 
         foreach ($_POST['attack_type'] as $index => $which_type) {
             if (!empty($which_type)) {
-                $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_' . $_POST['training'][$index] . '_' . $_POST['size'][$index];
+                $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_size_' . $_POST['size'][$index]. '_train_' . $_POST['training'][$index];
 
                 $attackerData[] = [
-                    'type' => $which_type,
-                    'forcetype' => $forcetypes[$which_type],
+                    'unit' => $forcetypes[$which_type],
                     'weapon' => $_POST['weapon'][$index],
-                    'weapontype' => $weapontypes[$_POST['weapon'][$index]],
                     'armor' => $_POST['armor'][$index],
-                    'armortype' => $armortypes[$_POST['armor'][$index]],
                     'size' => $_POST['size'][$index],
                     'training' => $_POST['training'][$index],
                     'name' => $name
@@ -68,19 +65,18 @@ $GLOBALS['mysqli']->query($sql);
         }
     }
 
-    // Retrieve data for defenders
-    // ...
-
     // Display the entered data
     echo "<h2>Attacker Data:</h2>";
     echo "<pre>";
     print_r($attackerData);
     echo "</pre>";
 
-    echo "<h2>MySQL Result</h2>";
-    #echo "$sql";
-    // Display defender data
-    // ...
+    echo "<h2>Defender Data:</h2>";
+    echo "<pre>";
+    print_r($defenderData);
+    echo "</pre>";
+
+    echo "<h2>Battle Result</h2>";
 
 // WAR CALCS
 $types = array(1 => "cavalry", 2 => "tanks", 3 => "pegasi", 4 => "unicorns", 5 => "naval");
