@@ -69,7 +69,7 @@ $GLOBALS['mysqli']->query($sql);
     echo "<h2>Attacker Data:</h2>";
     echo "<pre>";
     foreach ($attackerData as $attacker) {
-        echo $attacker
+        echo $attacker;
     }
     echo "</pre>";
 
