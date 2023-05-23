@@ -4,7 +4,8 @@
     <title>Dynamic Form Example</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        var templateRow;
+        var templateRowAttacker;
+        var templateRowDefender;
 
         // Function to add a new row
         function addRowAttacker() {
@@ -12,7 +13,7 @@
             var newRow = $("table.attacker")[0].insertRow();
 
             // Get row contents from the template
-            var rowContents = templateRow.content.cloneNode(true);
+            var rowContents = templateRowAttacker.content.cloneNode(true);
             
             // Attach everything together then rebind
             newRow.append(rowContents);
@@ -24,7 +25,7 @@
             var newRow = $("table.defender")[0].insertRow();
 
             // Get row contents from the template
-            var rowContents = templateRow.content.cloneNode(true);
+            var rowContents = templateRowDefender.content.cloneNode(true);
             
             // Attach everything together then rebind
             newRow.append(rowContents);
@@ -158,7 +159,8 @@
 
         $(document).ready(function() {
             // Take the row from the HTML defined below as the template row that all future rows will be based on.
-            templateRow = $("#rowTemplate")[0];
+            templateRowAttacker = $("#rowTemplateAttacker")[0];
+            templateRowDefender = $("#rowTemplateDefender")[0];
 
             // Create initial row
             addRowAttacker();
