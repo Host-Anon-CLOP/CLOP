@@ -41,12 +41,7 @@ $GLOBALS['mysqli']->query($sql);
                 $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_size_' . $_POST['size'][$index]. '_train_' . $_POST['training'][$index];
 
                 $attackerData[] = [
-                    'unit' => $which_type,
-                    'weapon' => $_POST['weapon'][$index],
-                    'armor' => $_POST['armor'][$index],
-                    'size' => $_POST['size'][$index],
-                    'training' => $_POST['training'][$index],
-                    'name' => $name
+                    $which_type, $_POST['weapon'][$index], $_POST['armor'][$index], $_POST['size'][$index], $_POST['training'][$index], $name
                 ];
 
 # Create Force
