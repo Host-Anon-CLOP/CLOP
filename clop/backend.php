@@ -68,7 +68,7 @@ $GLOBALS['mysqli']->query($sql);
     // Display the entered data
     echo "<h2>Attacker Data:</h2>";
     echo "<pre>";
-    foreach ($attacker in $attackerData) {
+    foreach ($attackerData as $attacker) {
         echo $attacker
     }
     echo "</pre>";
