@@ -152,7 +152,8 @@
             addRow();
 
             // Add a new row on button click
-            $("#addRow").on("click", addRow);
+            $("#addRowAttacker").on("click", addRow);
+            $("#addRowDefender").on("click", addRow);
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
@@ -165,13 +166,11 @@
 <body>
     <form method="post" action="backend.php">
         <div>
-            <table>
-                <tr>
-                    <th style="text-align:center">Attackers</th>
-                </tr>
-            </table>
         <table class="attacker" style="float:left; width:calc(50vw - 20px); padding:0px; margin: 0px;">
             <thead>
+                <tr>
+                    <th>Attackers</th>
+                </tr>
                 <tr>
                     <th>Type</th>
                     <th>Weapon</th>
@@ -210,18 +209,16 @@
                 <tr>
                     <td>
                         <input type="submit" id="btnSubmit" value="Submit" />
-                        <input type="button" id="addRow" value="Add Row" />
+                        <input type="button" id="addRowAttacker" value="Add Row" />
                     </td>
                 </tr> 
             </tbody>
         </table>
-        <table>
-            <tr>
-                <th style="text-align:center">Attackers</th>
-            </tr>
-        </table>
         <table class="defender" style="float:right; width:calc(50vw - 20px); padding:0px; margin: 0px;">
             <thead>
+                <tr>
+                    <th>Defenders</th>
+                </tr>
                 <tr>
                     <th>Type</th>
                     <th>Weapon</th>
@@ -259,7 +256,7 @@
                 </template>
                 <tr>
                     <td>
-                        <input type="button" id="addRow" value="Add Row" />
+                        <input type="button" id="addRowDefender" value="Add Row" />
                     </td>
                 </tr> 
             </tbody>
