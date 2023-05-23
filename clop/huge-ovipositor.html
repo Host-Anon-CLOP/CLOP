@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Form Example</title>
+    <title>Ovipositor Calculator</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         var templateRowAttacker;
         var templateRowDefender;
 
         // Function to add a new row
-        function addRowAttacker() {
+        function addRow(attackOrDefend) {
+            if (attackOrDefend != 'attacker' && attackOrDefend != 'defender') {
+                alert("Invalid row type");
+                return false;
+            }
+
             // Create new row from table
-            var newRow = $("table.attacker")[0].insertRow();
+            var newRow = $("table." + attackOrDefend)[0].tBodies[0].insertRow();
 
             // Get row contents from the template
-            var rowContents = templateRowAttacker.content.cloneNode(true);
+            var template = attackOrDefend == 'attacker' ? templateRowAttacker : templateRowDefender;
+            var rowContents = template.content.cloneNode(true);
             
             // Attach everything together then rebind
             newRow.append(rowContents);
             bindDropdowns();
-            showHideDeleteButton();
-        }
-        function addRowDefender() {
-            // Create new row from table
-            var newRow = $("table.defender")[0].insertRow();
-
-            // Get row contents from the template
-            var rowContents = templateRowDefender.content.cloneNode(true);
-            
-            // Attach everything together then rebind
-            newRow.append(rowContents);
-            bindDropdowns();
-            showHideDeleteButton();
         }
 
+        // Function to remove the selected row
+        function removeRow() {
+            var table = $("table.attacker")[0];
+            if ($('.ibtnDel').length < 2) {
+                alert("Cannot remove the last row in the table.")
+                return false;
+            }
+
+            $(this).closest("tr").remove();
+        }
+
+        // Function to verify that the data is correct before sending to the backend
         function preSubmitChecks() {
             var preventSubmit = false;
             
@@ -50,33 +55,6 @@
                 event.preventDefault();
                 event.cancelBubble = true;
                 return false;
-            }
-        }
-
-        // Function to remove the selected row
-        function removeRow() {
-            var table = $("table.attacker")[0];
-            if ($('.ibtnDel').length < 2) {
-                alert("Cannot remove the last row in the table.")
-                return false;
-            }
-
-            $(this).closest("tr").remove();
-            showHideDeleteButton();
-        }
-
-        function showHideDeleteButton() {
-            var table = $("table.attacker")[0];
-            var btns = $('.ibtnDel');
-            // If only one button (and only one row), hide it
-            if(btns.length < 2) {
-                btns[0].style.display = "none";
-            }
-            // If multiple buttons (i.e. multiple rows), display them
-            else {
-                for(var i = 0; i < btns.length; i++) {
-                    btns[i].style.display = "inline-block";
-                }
             }
         }
 
@@ -163,12 +141,12 @@
             templateRowDefender = $("#rowTemplateDefender")[0];
 
             // Create initial row
-            addRowAttacker();
-            addRowDefender();
+            addRow('attacker');
+            addRow('defender');
 
             // Add a new row on button click
-            $("#addRowAttacker").on("click", addRowAttacker);
-            $("#addRowDefender").on("click", addRowDefender);
+            $("#addRowAttacker").on("click", () => addRow.call(this, 'attacker'));
+            $("#addRowDefender").on("click", () => addRow.call(this, 'defender'));
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
@@ -178,106 +156,217 @@
             $('#btnSubmit').on("click", preSubmitChecks);
         });
     </script>
+    <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            color: #ffffff;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            background-color: #25262b;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, select {
+            padding: 4px 5px;
+            border: none;
+            background-color: #393c47;
+            border-radius: 4px;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #8f49e3;
+        }
+
+        input[type=button], input[type=submit]{
+            padding: 4px 10px;
+            font-weight: bold;
+        }
+
+        input[type=button]:hover,
+        input[type=submit]:hover {
+            background-color: #773fba;
+        }
+
+        input[type=button]:active,
+        input[type=submit]:active {
+            background-color: #8f49e3;
+        }
+
+        .wrapper {
+            display: inline-flex;
+            flex-direction: row;
+            flex: 1 1 auto;
+            padding: 10px 0px;
+        }
+
+        .table-wrapper{
+            flex: 0 0 auto;
+            margin-right: 50px;
+        }
+
+        table {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        thead {
+            text-align: left;
+        }
+
+        thead :first-child th{
+            padding-bottom: 10px;
+            font-size: 2em;
+        }
+
+        thead > tr > th {
+            color: #a362f5;
+        }
+
+        thead > tr > th > * {
+            vertical-align: middle;
+        }
+
+        thead > tr > th > span {
+            color: #af7bed;
+        }
+
+        table .type-col{
+            width: 120px;
+        }
+
+        table .weapon-col{
+            width: 130px;
+        }
+
+        table .armor-col{
+            width: 120px;
+        }
+
+        table .size-col{
+            width: 100px;
+        }
+
+        table .training-col{
+            width: 100px;
+        }
+
+        table .remove-col{
+            width: 80px;
+        }
+    </style>
 </head>
 <body>
-    <form method="post" action="huge-ovipositor-backend.php">
+    <form method="post" action="backend.php">
+        <h1>Ovipositor Calculator</h1>
+        <div class="wrapper">
+            <div class="table-wrapper">
+                <table class="attacker">
+                    <thead>
+                        <tr>
+                            <th colspan="6">
+                                <span>Attackers</span>
+                                <input type="button" id="addRowAttacker" value="Add Row" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="type-col">Type</th>
+                            <th class="weapon-col">Weapon</th>
+                            <th class="armor-col">Armor</th>
+                            <th class="size-col">Size</th>
+                            <th class="training-col">Training</th>
+                            <th class="remove-col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template id="rowTemplateAttacker">
+                            <td>
+                                <select name="attack_type[]" class="type">
+                                    <option value="">Select Type</option>
+                                    <option value="Cavalry">Cavalry</option>
+                                    <option value="Tanks">Tanks</option>
+                                    <option value="Pegasi">Pegasi</option>
+                                    <option value="Unicorns">Unicorns</option>
+                                    <option value="Naval">Naval</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="weapon[]" class="weapon">
+                                    <option value="">Select Weapon</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="armor[]" class="armor">
+                                    <option value="">Select Armor</option>
+                                </select>
+                            </td>
+                            <td><input type="number" name="size[]" size="10" min="1" value="0"/></td>
+                            <td><input type="number" name="training[]" size="10" min="0" max="20" value="0"/></td>
+                            <td><input type="button" class="ibtnDel" value="Remove"></td>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-wrapper">
+                <table class="defender">
+                    <thead>
+                        <tr>
+                            <th colspan="6">
+                                <span>Defenders</span>
+                                <input type="button" id="addRowDefender" value="Add Row" />
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="type-col">Type</th>
+                            <th class="weapon-col">Weapon</th>
+                            <th class="armor-col">Armor</th>
+                            <th class="size-col">Size</th>
+                            <th class="training-col">Training</th>
+                            <th class="remove-col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template id="rowTemplateDefender">
+                            <td>
+                                <select name="defend_type[]" class="type">
+                                    <option value="">Select Type</option>
+                                    <option value="Cavalry">Cavalry</option>
+                                    <option value="Tanks">Tanks</option>
+                                    <option value="Pegasi">Pegasi</option>
+                                    <option value="Unicorns">Unicorns</option>
+                                    <option value="Naval">Naval</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="weapon[]" class="weapon">
+                                    <option value="">Select Weapon</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="armor[]" class="armor">
+                                    <option value="">Select Armor</option>
+                                </select>
+                            </td>
+                            <td><input type="number" name="size[]" size="10" min="1" value="0"/></td>
+                            <td><input type="number" name="training[]" size="10" min="0" max="20" value="0"/></td>
+                            <td><input type="button" class="ibtnDel" value="Remove"></td>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div>
-        <table class="attacker" style="float:left; width:calc(50vw - 20px); padding:0px; margin: 0px;">
-            <thead>
-                <tr>
-                    <th>Attackers</th>
-                </tr>
-                <tr>
-                    <th>Type</th>
-                    <th>Weapon</th>
-                    <th>Armor</th>
-                    <th>Size</th>
-                    <th>Training</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <template id="rowTemplateAttacker">
-                    <td>
-                        <select name="attack_type[]" class="type">
-                            <option value="">Select Type</option>
-                            <option value="Cavalry">Cavalry</option>
-                            <option value="Tanks">Tanks</option>
-                            <option value="Pegasi">Pegasi</option>
-                            <option value="Unicorns">Unicorns</option>
-                            <option value="Naval">Naval</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="weapon[]" class="weapon">
-                            <option value="">Select Weapon</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="armor[]" class="armor">
-                            <option value="">Select Armor</option>
-                        </select>
-                    </td>
-                    <td><input type="number" name="size[]" size="10" min="1" value="0"/></td>
-                    <td><input type="number" name="training[]" size="10" min="0" max="20" value="0"/></td>
-                    <td><input type="button" class="ibtnDel" value="Remove"></td>
-                </template>
-                <tr>
-                    <td>
-                        <input type="submit" id="btnSubmit" value="Submit" />
-                        <input type="button" id="addRowAttacker" value="Add Row" />
-                    </td>
-                </tr> 
-            </tbody>
-        </table>
-        <table class="defender" style="float:right; width:calc(50vw - 20px); padding:0px; margin: 0px;">
-            <thead>
-                <tr>
-                    <th>Defenders</th>
-                </tr>
-                <tr>
-                    <th>Type</th>
-                    <th>Weapon</th>
-                    <th>Armor</th>
-                    <th>Size</th>
-                    <th>Training</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <template id="rowTemplateDefender">
-                    <td>
-                        <select name="defend_type[]" class="type">
-                            <option value="">Select Type</option>
-                            <option value="Cavalry">Cavalry</option>
-                            <option value="Tanks">Tanks</option>
-                            <option value="Pegasi">Pegasi</option>
-                            <option value="Unicorns">Unicorns</option>
-                            <option value="Naval">Naval</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="weapon[]" class="weapon">
-                            <option value="">Select Weapon</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="armor[]" class="armor">
-                            <option value="">Select Armor</option>
-                        </select>
-                    </td>
-                    <td><input type="number" name="size[]" size="5" min="1" value="0"/></td>
-                    <td><input type="number" name="training[]" size="5" min="0" max="20" value="0"/></td>
-                    <td><input type="button" class="ibtnDel" value="Remove"></td>
-                </template>
-                <tr>
-                    <td>
-                        <input type="button" id="addRowDefender" value="Add Row" />
-                    </td>
-                </tr> 
-            </tbody>
-        </table>
-    </div>
+            <input type="submit" id="btnSubmit" value="Submit" />
+        </div>
     </form>
 </body>
 </html>

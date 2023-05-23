@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Form Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var templateRowAttacker;
+        var templateRowDefender;
+
+        // Function to add a new row
+        function addRowAttacker() {
+            // Create new row from table
+            var newRow = $("table.attacker")[0].insertRow();
+
+            // Get row contents from the template
+            var rowContents = templateRowAttacker.content.cloneNode(true);
+            
+            // Attach everything together then rebind
+            newRow.append(rowContents);
+            bindDropdowns();
+            showHideDeleteButton();
+        }
+        function addRowDefender() {
+            // Create new row from table
+            var newRow = $("table.defender")[0].insertRow();
+
+            // Get row contents from the template
+            var rowContents = templateRowDefender.content.cloneNode(true);
+            
+            // Attach everything together then rebind
+            newRow.append(rowContents);
+            bindDropdowns();
+            showHideDeleteButton();
+        }
+
+        function preSubmitChecks() {
+            var preventSubmit = false;
+            
+            // Pre-submission checks go here...
+            var typeDropdowns = $('select.type');
+            for (let i = 0; i < typeDropdowns.length; i++) {
+                if (typeDropdowns[i].selectedIndex == "0") {// Unselected
+                    alert("Please select a valid type");
+                    preventSubmit = true;
+                }
+            }
+
+            // If any of the submission checks failed, prevent the page from submitting the form
+            if (preventSubmit){
+                event.preventDefault();
+                event.cancelBubble = true;
+                return false;
+            }
+        }
+
+        // Function to remove the selected row
+        function removeRow() {
+            var table = $("table.attacker")[0];
+            if ($('.ibtnDel').length < 2) {
+                alert("Cannot remove the last row in the table.")
+                return false;
+            }
+
+            $(this).closest("tr").remove();
+            showHideDeleteButton();
+        }
+
+        function showHideDeleteButton() {
+            var table = $("table.attacker")[0];
+            var btns = $('.ibtnDel');
+            // If only one button (and only one row), hide it
+            if(btns.length < 2) {
+                btns[0].style.display = "none";
+            }
+            // If multiple buttons (i.e. multiple rows), display them
+            else {
+                for(var i = 0; i < btns.length; i++) {
+                    btns[i].style.display = "inline-block";
+                }
+            }
+        }
+
+        // Function to bind the dynamic dropdown menus
+        function bindDropdowns() {
+            $(".type").on("change", function() {
+                var weaponDropdown = $(this).closest("tr").find(".weapon");
+                var armorDropdown = $(this).closest("tr").find(".armor");
+                var type = $(this).val();
+
+                // Clear previous options
+                weaponDropdown.empty();
+                armorDropdown.empty();
+
+                // Add options based on the selected type
+                if (type === "Cavalry") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="PRC-E6">PRC-E6</option>');
+                    weaponDropdown.append('<option value="PRC-E7">PRC-E7</option>');
+                    weaponDropdown.append('<option value="PRC-E8">PRC-E8</option>');
+                    weaponDropdown.append('<option value="ACFU">ACFU</option>');
+                    weaponDropdown.append('<option value="ATFU">ATFU</option>');
+                    weaponDropdown.append('<option value="APFU">APFU</option>');
+                    weaponDropdown.append('<option value="AUFU">AUFU</option>');
+                    
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Barding">Barding</option>');
+                    armorDropdown.append('<option value="Bigdog">Bigdog</option>');
+                    armorDropdown.append('<option value="Nope">Nope</option>');
+                }
+                else if (type === "Tanks") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="K9P">K9P</option>');
+                    weaponDropdown.append('<option value="ELBO-GRS">ELBO-GRS</option>');
+                    weaponDropdown.append('<option value="Chem-Light">Chem-Light</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Trundle">Trundle</option>');
+                    armorDropdown.append('<option value="Shepherd">Shepherd</option>');
+                    armorDropdown.append('<option value="Ohno">Ohno</option>');
+                    armorDropdown.append('<option value="Titan">Titan</option>');
+                }
+                else if (type === "Pegasi") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="PropWash">PropWash</option>');
+                    weaponDropdown.append('<option value="SteamBucket">SteamBucket</option>');
+                    weaponDropdown.append('<option value="CanopyLights">CanopyLights</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Cooler">Cooler</option>');
+                    armorDropdown.append('<option value="Wonder">Wonder</option>');
+                    armorDropdown.append('<option value="Griffin">Griffin</option>');
+                    armorDropdown.append('<option value="Dragon">Dragon</option>');
+                }
+                else if (type === "Unicorns") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="LongStand">LongStand</option>');
+                    weaponDropdown.append('<option value="LongWeight">LongWeight</option>');
+                    weaponDropdown.append('<option value="GridSquares">GridSquares</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Hornshield">Hornshield</option>');
+                    armorDropdown.append('<option value="Librarian">Librarian</option>');
+                    armorDropdown.append('<option value="Shining">Shining</option>');
+                    armorDropdown.append('<option value="D2A">D2A</option>');
+                }
+                else if (type === "Naval") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    weaponDropdown.append('<option value="Shoreline">Shoreline</option>');
+                    weaponDropdown.append('<option value="WaterHammer">WaterHammer</option>');
+                    weaponDropdown.append('<option value="WaterlineEraser">WaterlineEraser</option>');
+
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="C-PON3">C-PON3</option>');
+                    armorDropdown.append('<option value="Esohes">Esohes</option>');
+                    armorDropdown.append('<option value="Shubidu">Shubidu</option>');
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            // Take the row from the HTML defined below as the template row that all future rows will be based on.
+            templateRowAttacker = $("#rowTemplateAttacker")[0];
+            templateRowDefender = $("#rowTemplateDefender")[0];
+
+            // Create initial row
+            addRowAttacker();
+            addRowDefender();
+
+            // Add a new row on button click
+            $("#addRowAttacker").on("click", addRowAttacker);
+            $("#addRowDefender").on("click", addRowDefender);
+
+            // Remove row on button click
+            $("table.attacker").on("click", ".ibtnDel", removeRow);
+            $("table.defender").on("click", ".ibtnDel", removeRow);
+
+            // Submit button pre-submit checks
+            $('#btnSubmit').on("click", preSubmitChecks);
+        });
+    </script>
+</head>
+<body>
+    <form method="post" action="huge-ovipositor-backend.php">
+        <div>
+        <table class="attacker" style="float:left; width:calc(50vw - 20px); padding:0px; margin: 0px;">
+            <thead>
+                <tr>
+                    <th>Attackers</th>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <th>Weapon</th>
+                    <th>Armor</th>
+                    <th>Size</th>
+                    <th>Training</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template id="rowTemplateAttacker">
+                    <td>
+                        <select name="attack_type[]" class="type">
+                            <option value="">Select Type</option>
+                            <option value="Cavalry">Cavalry</option>
+                            <option value="Tanks">Tanks</option>
+                            <option value="Pegasi">Pegasi</option>
+                            <option value="Unicorns">Unicorns</option>
+                            <option value="Naval">Naval</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="weapon[]" class="weapon">
+                            <option value="">Select Weapon</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="armor[]" class="armor">
+                            <option value="">Select Armor</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="size[]" size="10" min="1" value="0"/></td>
+                    <td><input type="number" name="training[]" size="10" min="0" max="20" value="0"/></td>
+                    <td><input type="button" class="ibtnDel" value="Remove"></td>
+                </template>
+                <tr>
+                    <td>
+                        <input type="submit" id="btnSubmit" value="Submit" />
+                        <input type="button" id="addRowAttacker" value="Add Row" />
+                    </td>
+                </tr> 
+            </tbody>
+        </table>
+        <table class="defender" style="float:right; width:calc(50vw - 20px); padding:0px; margin: 0px;">
+            <thead>
+                <tr>
+                    <th>Defenders</th>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <th>Weapon</th>
+                    <th>Armor</th>
+                    <th>Size</th>
+                    <th>Training</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template id="rowTemplateDefender">
+                    <td>
+                        <select name="defend_type[]" class="type">
+                            <option value="">Select Type</option>
+                            <option value="Cavalry">Cavalry</option>
+                            <option value="Tanks">Tanks</option>
+                            <option value="Pegasi">Pegasi</option>
+                            <option value="Unicorns">Unicorns</option>
+                            <option value="Naval">Naval</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="weapon[]" class="weapon">
+                            <option value="">Select Weapon</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="armor[]" class="armor">
+                            <option value="">Select Armor</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="size[]" size="5" min="1" value="0"/></td>
+                    <td><input type="number" name="training[]" size="5" min="0" max="20" value="0"/></td>
+                    <td><input type="button" class="ibtnDel" value="Remove"></td>
+                </template>
+                <tr>
+                    <td>
+                        <input type="button" id="addRowDefender" value="Add Row" />
+                    </td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
