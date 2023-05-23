@@ -316,7 +316,7 @@ EOFORM;
     }
 }
 
-echo "<br>"
+echo "<br>";
 foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
 	if ($unit['damage'] > 0) {
