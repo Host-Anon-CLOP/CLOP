@@ -7,7 +7,7 @@
         var templateRow;
 
         // Function to add a new row
-        function addRow() {
+        function addRow($type) {
             // Create new row from table
             var newRow = $("table.attacker")[0].insertRow();
 
@@ -149,11 +149,11 @@
             templateRow = $("#rowTemplate")[0];
 
             // Create initial row
-            addRow();
+            addRow('attacker');
 
             // Add a new row on button click
-            $("#addRowAttacker").on("click", addRow);
-            $("#addRowDefender").on("click", addRow);
+            $("#addRowAttacker").on("click", addRow('attacker'));
+            $("#addRowDefender").on("click", addRow('defender'));
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
