@@ -32,28 +32,31 @@ INSERT INTO forcegroups_calc (nation_id, location_id, attack_mission, name) VALU
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
+var count = 0;
 
     // Retrieve data for attackers
     if (!empty($_POST['attack_type']) && is_array($_POST['attack_type'])) {
 
         foreach ($_POST['attack_type'] as $index => $which_type) {
             if (!empty($which_type)) {
-                $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_size_' . $_POST['size'][$index]. '_train_' . $_POST['training'][$index];
+                $name = $which_type . '_' . $_POST['weapon'][$count] . '_' . $_POST['armor'][$count] . '_size_' . $_POST['size'][$count]. '_train_' . $_POST['training'][$count];
 
                 $attackerData[] = [
                     'unit' => $which_type,
-                    'weapon' => $_POST['weapon'][$index],
-                    'armor' => $_POST['armor'][$index],
-                    'size' => $_POST['size'][$index],
-                    'training' => $_POST['training'][$index],
+                    'weapon' => $_POST['weapon'][$count],
+                    'armor' => $_POST['armor'][$count],
+                    'size' => $_POST['size'][$count],
+                    'training' => $_POST['training'][$count],
                     'name' => $name
                 ];
 
 # Create Attackers
 $sql=<<<EOSQL
-INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$index]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, 'A_$name', 1)
+INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$count]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$count]]}', {$armortypes[$_POST['armor'][$count]]}, {$_POST['training'][$count]}, 'A_$name', 1)
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
+
+            count += 1;
             }
         }
     }
@@ -63,22 +66,24 @@ $GLOBALS['mysqli']->query($sql);
 
         foreach ($_POST['defend_type'] as $index => $which_type) {
             if (!empty($which_type)) {
-                $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_size_' . $_POST['size'][$index]. '_train_' . $_POST['training'][$index];
+                $name = $which_type . '_' . $_POST['weapon'][$count] . '_' . $_POST['armor'][$count] . '_size_' . $_POST['size'][$count]. '_train_' . $_POST['training'][$count];
 
                 $defenderData[] = [
                     'unit' => $which_type,
-                    'weapon' => $_POST['weapon'][$index],
-                    'armor' => $_POST['armor'][$index],
-                    'size' => $_POST['size'][$index],
-                    'training' => $_POST['training'][$index],
+                    'weapon' => $_POST['weapon'][$count],
+                    'armor' => $_POST['armor'][$count],
+                    'size' => $_POST['size'][$count],
+                    'training' => $_POST['training'][$count],
                     'name' => $name
                 ];
 
 # Create Defenders
 $sql=<<<EOSQL
-INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (2, {$_POST['size'][$index]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$index]]}', {$armortypes[$_POST['armor'][$index]]}, {$_POST['training'][$index]}, 'D_$name', 2)
+INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (2, {$_POST['size'][$count]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$count]]}', {$armortypes[$_POST['armor'][$count]]}, {$_POST['training'][$count]}, 'D_$name', 2)
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
+
+            count += 1;
             }
         }
     }
