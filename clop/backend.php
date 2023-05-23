@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $armortypes = array("Scrounged" => 0,"Barding" => 1,"Bigdog" => 2,"Nope" => 3,"Trundle" => 4,"Shepherd" => 5,"Ohno" => 6,"Titan" => 7,"Cooler" => 8,"Wonder" => 9,"Griffin" => 10,"Dragon" => 11,"Hornshield" => 12,"Librarian" => 13,"Shining" => 14,"D2A" => 15,"C-PON3" => 16,"Esohes" => 17,"Shubidu" => 18);
 
     // Retrieve data for attackers
-    if (!empty($_POST['type']) && is_array($_POST['type'])) {
+    if (!empty($_POST['attack_type']) && is_array($_POST['attack_type'])) {
 
 # Clear Previous Results
 $sql=<<<EOSQL
@@ -36,7 +36,7 @@ EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
 
-        foreach ($_POST['type'] as $index => $which_type) {
+        foreach ($_POST['attack_type'] as $index => $which_type) {
             if (!empty($which_type)) {
                 $name = $which_type . '_' . $_POST['weapon'][$index] . '_' . $_POST['armor'][$index] . '_' . $_POST['training'][$index] . '_' . $_POST['size'][$index];
 
