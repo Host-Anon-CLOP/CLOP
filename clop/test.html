@@ -152,8 +152,8 @@
             addRow();
 
             // Add a new row on button click
-            $("#addRowAttacker").on("click", addRow());
-            $("#addRowDefender").on("click", addRow());
+            $("#addRowAttacker").on("click", addRow);
+            $("#addRowDefender").on("click", addRow);
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
