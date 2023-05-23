@@ -214,6 +214,55 @@
                 </td>
             </tr>          
         </table>
+        <table class="defender">
+            <thead>
+                <tr>
+                    <th>Defenders</th>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <th>Weapon</th>
+                    <th>Armor</th>
+                    <th>Size</th>
+                    <th>Training</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template id="rowTemplate">
+                    <td>
+                        <select name="defend_type[]" class="type">
+                            <option value="">Select Type</option>
+                            <option value="Cavalry">Cavalry</option>
+                            <option value="Tanks">Tanks</option>
+                            <option value="Pegasi">Pegasi</option>
+                            <option value="Unicorns">Unicorns</option>
+                            <option value="Naval">Naval</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="weapon[]" class="weapon">
+                            <option value="">Select Weapon</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="armor[]" class="armor">
+                            <option value="">Select Armor</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="size[]" size="5" min="1" value="0"/></td>
+                    <td><input type="number" name="training[]" size="5" min="0" max="20" value="0"/></td>
+                    <td><input type="button" class="ibtnDel" value="Remove"></td>
+                </template>
+            </tbody>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <input type="button" id="addRow" value="Add Row" />
+                </td>
+            </tr>          
+        </table>
     </form>
 </body>
 </html>
