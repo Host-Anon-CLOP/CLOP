@@ -325,14 +325,14 @@ foreach ($units as $unit) {
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			$messages[$unit['nation_id']][] = "Your {$unit['name']} lost {$unit['damage']} size!";
-			echo 'Unit ' . {$unit['name']} . ' lost ' . {$unit['damage']} . ' size!'
+			echo 'Unit ' . {$unit['name']} . ' lost ' . {$unit['damage']} . ' size!';
 		} else {
 			$sql =<<<EOSQL
 			DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			$messages[$unit['nation_id']][] = "Your {$unit['name']} scattered to the four winds!";
-			echo 'Unit ' . {$unit['name']} . ' all died'
+			echo 'Unit ' . {$unit['name']} . ' all died';
 		}
 	}
 }
