@@ -170,6 +170,7 @@
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
+            $("table.defender").on("click", ".ibtnDel", removeRow);
 
             // Submit button pre-submit checks
             $('#btnSubmit').on("click", preSubmitChecks);
