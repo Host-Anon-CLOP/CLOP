@@ -87,14 +87,14 @@ $GLOBALS['mysqli']->query($sql);
     echo "<h2>Attacker Data:</h2>";
     echo "<pre>";
     foreach ($attackerData as $attacker) {
-        echo $attacker['unit'] . ' ' . $attacker['weapon'] . ' ' . $attacker['armor'] . ' size:' . $attacker['size'] . ' train:' . $attacker['training'];
+        echo $attacker['unit'] . ' ' . $attacker['weapon'] . ' ' . $attacker['armor'] . ' size:' . $attacker['size'] . ' train:' . $attacker['training'] . '<br>';
     }
     echo "</pre>";
 
     echo "<h2>Defender Data:</h2>";
     echo "<pre>";
     foreach ($defenderData as $defender) {
-        echo $defender['unit'] . ' ' . $defender['weapon'] . ' ' . $defender['armor'] . ' size:' . $defender['size'] . ' train:' . $defender['training'];
+        echo $defender['unit'] . ' ' . $defender['weapon'] . ' ' . $defender['armor'] . ' size:' . $defender['size'] . ' train:' . $defender['training'] . '<br>';
     }
     echo "</pre>";
 
