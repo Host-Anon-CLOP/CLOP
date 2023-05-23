@@ -320,18 +320,18 @@ foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
 	if ($unit['damage'] > 0) {
 		if ($unit['damage'] < $unit['size']) {
-			$sql =<<<EOSQL
-			UPDATE forces_calc SET size = size - {$unit['damage']} WHERE force_id = '{$unit['force_id']}'
-EOSQL;
-			$GLOBALS['mysqli']->query($sql);
-			$messages[$unit['nation_id']][] = "Your {$unit['name']} lost {$unit['damage']} size!";
+			#$sql =<<<EOSQL
+			#UPDATE forces_calc SET size = size - {$unit['damage']} WHERE force_id = '{$unit['force_id']}'
+#EOSQL;
+			#$GLOBALS['mysqli']->query($sql);
+			#$messages[$unit['nation_id']][] = "Your {$unit['name']} lost {$unit['damage']} size!";
 			echo 'Unit ' . {$unit['name']} . ' lost ' . {$unit['damage']} . ' size!';
 		} else {
-			$sql =<<<EOSQL
-			DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
-EOSQL;
-			$GLOBALS['mysqli']->query($sql);
-			$messages[$unit['nation_id']][] = "Your {$unit['name']} scattered to the four winds!";
+			#$sql =<<<EOSQL
+			#DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
+#EOSQL;
+			#$GLOBALS['mysqli']->query($sql);
+			#$messages[$unit['nation_id']][] = "Your {$unit['name']} scattered to the four winds!";
 			echo 'Unit ' . {$unit['name']} . ' all died';
 		}
 	}
