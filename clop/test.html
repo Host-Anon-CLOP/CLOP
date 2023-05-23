@@ -7,7 +7,7 @@
         var templateRow;
 
         // Function to add a new row
-        function addRow() {
+        function addRow($test) {
             // Create new row from table
             var newRow = $("table.attacker")[0].insertRow();
 
@@ -149,10 +149,10 @@
             templateRow = $("#rowTemplate")[0];
 
             // Create initial row
-            addRow();
+            addRow('test');
 
             // Add a new row on button click
-            $("#addRow").on("click", addRow);
+            $("#addRow").on("click", addRow('test'));
 
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
@@ -253,14 +253,12 @@
                     <td><input type="number" name="training[]" size="5" min="0" max="20" value="0"/></td>
                     <td><input type="button" class="ibtnDel" value="Remove"></td>
                 </template>
+                <tr>
+                    <td>
+                        <input type="button" id="addRow" value="Add Row" />
+                    </td>
+                </tr> 
             </tbody>
-        </table>
-        <table>
-            <tr>
-                <td>
-                    <input type="button" id="addRow" value="Add Row" />
-                </td>
-            </tr>          
         </table>
     </div>
     </form>
