@@ -9,11 +9,13 @@ update users set password = "<response from previous query>" where user_id = <us
 # DELETE USER & NATION:
 # --------------------
 # UPDATE THESE FOR NATION & USER ID
-set @nation_id = <NATION_ID_TO_DELETE>;
-set @user_id = <USER_ID_TO_DELETE>;
+# use the 'adminkilleveryone.php' page. IMPORTANT NOTE: this goes by the USER ID not the NATION ID! it will delete the user and any nations/deals etc
 
-delete from resources where nation_id = @nation_id; delete from nations where nation_id = @nation_id; delete from users where user_id = @user_id;
 
+# COPY FILE BETWEEN EC2 BOXES
+# first setup security groups allowing traffic between them (refer to AWS documentation)
+# scp -v mariadb-dump-2023-05-23_07-00-01.sql ec2-user@ip-172-31-14-154.ec2.internal:/home/ec2-user/mariadb-dump-2023-05-23_07-00-01.sql
+# 'ip-172-31-14-154.ec2.internal' is the private ip of the destination EC2 instance
 
 # RESTORE DATABASE
 # ----------------

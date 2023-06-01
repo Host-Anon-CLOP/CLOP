@@ -70,6 +70,10 @@
                 armorDropdown.empty();
 
                 // Add options based on the selected type
+                if (type === "Alicorns") {
+                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                }
                 if (type === "Cavalry") {
                     weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
                     weaponDropdown.append('<option value="PRC-E6">PRC-E6</option>');
@@ -339,6 +343,7 @@
                             <td>
                                 <select name="defend_type[]" class="type">
                                     <option value="">Select Type</option>
+                                    <option value="Alicorns">Alicorns</option>
                                     <option value="Cavalry">Cavalry</option>
                                     <option value="Tanks">Tanks</option>
                                     <option value="Pegasi">Pegasi</option>
