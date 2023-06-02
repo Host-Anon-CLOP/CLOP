@@ -11,7 +11,12 @@ if ($_POST['ascend-calc']) {
 
     for ($x = 0; $x <= $_POST['ticks']; $x++) {
         $current_rep += 1;
-        $new_pegasi = (ceil($current_rep / 4) * 2);
+        if ($current_rep >= 25) {
+            $new_pegasi = (ceil($current_rep / 4) * 2);
+        } 
+        else {
+            $new_pegasi = 0;
+        }
         $total_pegasi = $total_pegasi + $new_pegasi;
         echo "<br>";
         echo "tick " . $x . "<br>";
