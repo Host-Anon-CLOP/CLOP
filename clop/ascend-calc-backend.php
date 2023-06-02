@@ -43,7 +43,7 @@ if ($_POST['ascend-calc']) {
       echo "Pegasi Remaining: " . ($total_pegasi - floor($alicorn_damage_to_pegasi * $alicorns_needed_defend)) . "<br>";
 
       echo "<br>";
-      echo "Damage to Pegasi per Alicorn: " . $alicorn_damage_to_pegasi
+      echo "Damage to Pegasi per Alicorn: " . $alicorn_damage_to_pegasi . "<br>";
 
       echo "<br>";
       echo "Alicorns Required to Oneshot Pegasi: " . $alicorns_needed_kill . "<br>";
