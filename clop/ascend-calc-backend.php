@@ -32,16 +32,16 @@ if ($_POST['ascend-calc']) {
       $pegasi_damage_to_alicorns = $pegasi_damage_to_alicorns * .75;
       $alicorns_needed = ceil($total_pegasi * $pegasi_damage_to_alicorns);
 
-      $alicorn_damage_to_pegasi = round((10 * .45 * pow(1.5, ((20 - $_POST['barracks']) / 20))), 3);
+      $alicorn_damage_to_pegasi = round((10 * .45 * pow(1.5, (($_POST['barracks'] - 20) / 20))), 3);
 
       echo "<br><br>calc finished<br>";
-      echo "Damage Per Pegasi: " . $pegasi_damage_to_alicorns . "<BR>";
+      echo "Damage Per Pegasi: " . $pegasi_damage_to_alicorns . "<br>";
       echo "Total Pegasi: " . $total_pegasi . "<br>";
-      echo "Alicorns to Defend: " . $alicorns_needed;
-      echo "Pegasi Killed by Alicorns: " . floor($alicorn_damage_to_pegasi * $alicorns_needed);
+      echo "Alicorns to Defend: " . $alicorns_needed . "<br>";
+      echo "Pegasi Killed by Alicorns: " . floor($alicorn_damage_to_pegasi * $alicorns_needed) . "<br>";
 
       echo "<br>";
-      echo "Gems Upkeep for Alicorns: " . ($alicorns_needed * 10);
+      echo "Gems Upkeep for Alicorns: " . ($alicorns_needed * 10) . "<br>";
       echo "Bits to Create Alicorns: " . ($alicorns_needed * 2000000);
 }
 ?>
