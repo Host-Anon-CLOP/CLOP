@@ -39,9 +39,10 @@ if ($_POST['ascend-calc']) {
       echo "Total Pegasi: " . $total_pegasi . "<br>";
       echo "Alicorns to Defend: " . $alicorns_needed . "<br>";
       echo "Pegasi Killed by Alicorns: " . floor($alicorn_damage_to_pegasi * $alicorns_needed) . "<br>";
+      echo "Alicorn Damage to Pegasi: " . $alicorn_damage_to_pegasi;
 
       echo "<br>";
       echo "Gems Upkeep for Alicorns: " . ($alicorns_needed * 10) . "<br>";
-      echo "Bits to Create Alicorns: " . ($alicorns_needed * 2000000);
+      echo "Bits to Create Alicorns: " . (($alicorns_needed * 2000000) / 1000000) . " (mil)";
 }
 ?>
