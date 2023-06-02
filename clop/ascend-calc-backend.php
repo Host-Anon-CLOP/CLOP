@@ -5,6 +5,7 @@ if ($_POST['ascend-calc']) {
     echo "ticks " . $_POST['ticks'] . "<br>";
     echo "rep " . abs($_POST['reputation']) . "<br>";
     echo "pegasi " . $_POST['pegasi'] . "<br>";
+    echo "barracks/training " . $_POST['barracks'] . "<br>";
 
     $current_rep = abs($_POST['reputation']);
     $total_pegasi = $_POST['pegasi'];
@@ -26,14 +27,21 @@ if ($_POST['ascend-calc']) {
       }
     
       # PEGASI ARMOR VS NAVAL 0.45
-      $damage_to_alicorns = round((1.4 * .1 * pow(1.5, ((20 - $_POST['barracks']) / 20))), 3);
+      $pegasi_damage_to_alicorns = round((1.4 * .1 * pow(1.5, ((20 - $_POST['barracks']) / 20))), 3);
       # defender bonus
-      $damage_to_alicorns = $damage_to_alicorns * .75;
-      $alicorns_needed = ($total_pegasi * $damage_to_alicorns);
+      $pegasi_damage_to_alicorns = $pegasi_damage_to_alicorns * .75;
+      $alicorns_needed = ceil($total_pegasi * $pegasi_damage_to_alicorns);
+
+      $alicorn_damage_to_pegasi = round((10 * .45 * pow(1.5, ((20 - $_POST['barracks']) / 20))), 3);
 
       echo "<br><br>calc finished<br>";
-      echo "Damage Per Pegasi: " . $damage_to_alicorns . "<BR>";
+      echo "Damage Per Pegasi: " . $pegasi_damage_to_alicorns . "<BR>";
       echo "Total Pegasi: " . $total_pegasi . "<br>";
       echo "Alicorns to Defend: " . $alicorns_needed;
+      echo "Pegasi Killed by Alicorns: " . floor($alicorn_damage_to_pegasi * $alicorns_needed);
+
+      echo "<br>";
+      echo "Gems Upkeep for Alicorns: " . ($alicorns_needed * 10);
+      echo "Bits to Create Alicorns: " . ($alicorns_needed * 2000000);
 }
 ?>
