@@ -25,5 +25,6 @@ if ($_POST['ascend-calc']) {
         echo "total pegasi: " . $total_pegasi . "<br>";
       }
     
+      echo "<br><br>calc finished<br>Total Pegasi: " . $total_pegasi;
 }
 ?>
