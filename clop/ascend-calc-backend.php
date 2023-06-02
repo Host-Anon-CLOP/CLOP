@@ -2,7 +2,7 @@
 if ($_POST['ascend-calc']) {
     
     
-    echo $_POST['size'];
+    echo ($_POST['size'] + 1);
     
 }
 ?>
