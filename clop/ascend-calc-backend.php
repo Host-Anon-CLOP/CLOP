@@ -2,7 +2,9 @@
 if ($_POST['ascend-calc']) {
     
     
-    echo ($_POST['size'] + 1);
+    echo "ticks " . $_POST['ticks'];
+    echo "rep " . $_POST['reputation'];
+    echo "pegasi " . $_POST['pegasi'];
     
 }
 ?>
