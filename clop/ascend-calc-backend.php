@@ -25,6 +25,15 @@ if ($_POST['ascend-calc']) {
         echo "total pegasi: " . $total_pegasi . "<br>";
       }
     
-      echo "<br><br>calc finished<br>Total Pegasi: " . $total_pegasi;
+      # PEGASI ARMOR VS NAVAL 0.45
+      $damage_to_alicorns = round((1.4 * .1 * pow(1.5, ((20 - $_POST['barracks']) / 20))), 3);
+      # defender bonus
+      $damage_to_alicorns = $damage_to_alicorns * .75;
+      $alicorns_needed = ($total_pegasi * $damage_to_alicorns);
+
+      echo "<br><br>calc finished<br>";
+      echo "Damage Per Pegasi: " . $damage_to_alicorns . "<BR>";
+      echo "Total Pegasi: " . $total_pegasi . "<br>";
+      echo "Alicorns to Defend: " . $alicorns_needed;
 }
 ?>
