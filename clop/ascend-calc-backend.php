@@ -6,8 +6,16 @@ if ($_POST['ascend-calc']) {
     echo "rep " . $_POST['reputation'] . "<br>";
     echo "pegasi " . $_POST['pegasi'] . "<br>";
 
+    $current_rep = abs($_POST['reputation']);
+    $total_pegasi = $_POST['pegasi'];
+
     for ($x = 0; $x <= $_POST['ticks']; $x++) {
-        echo "The number is: $x <br>";
+        $current_rep += 1;
+        $new_pegasi = roundup($current_rep / 4);
+        $total_pegasi = $total_pegasi + $new_pegasi;
+        echo "rep: " . $current_rep . "<br>";
+        echo "new_pegasi: " . $new_pegasi . "<br>";
+        echo "total pegasi: " . $total_pegasi . "<br>";
       }
     
 }
