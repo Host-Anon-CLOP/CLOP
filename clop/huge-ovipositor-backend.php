@@ -33,7 +33,6 @@ EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
     $count = 0;
-
     // Retrieve data for attackers
     if (!empty($_POST['attack_type']) && is_array($_POST['attack_type'])) {
 
@@ -88,6 +87,9 @@ $GLOBALS['mysqli']->query($sql);
         }
     }
 
+	// Display Defender Bonus
+	echo "Defender Bonus: " . $_POST['defender_bonus'];
+
     // Display the entered data
     echo "<h2>Attacker Data:</h2>";
     echo "<pre>";
@@ -141,7 +143,7 @@ WHERE fg.location_id = 2 AND fg.departuredate IS NULL
 EOSQL;
 
 // TO DO
-$defenderbonus = true;
+$defenderbonus = $_POST['defender_bonus'];
 
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
