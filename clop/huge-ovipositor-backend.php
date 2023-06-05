@@ -142,9 +142,6 @@ LEFT JOIN weapondefs wd ON f.weapon_id = wd.weapon_id
 WHERE fg.location_id = 2 AND fg.departuredate IS NULL
 EOSQL;
 
-// TO DO
-$defenderbonus = $_POST['defender_bonus'];
-
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     if ($rs['nation_id'] < 0) {
@@ -237,7 +234,7 @@ foreach ($invaderdamages as $invaderdamage => $invaderattackers) { //whoever doe
                 if ($repellerdefenders[$typenumber][$attacker['type']]) {
 				foreach ($repellerdefenders[$typenumber][$attacker['type']] as $defender) {
                     $damage = round(($invaderdamage * $defender["arm_{$types[$attacker['type']]}"] * pow(1.5, (($attacker['training']-$defender['training'])/20))), 3);
-					if ($defenderbonus == true) {
+					if ($_POST['defender_bonus'] == "Yes") {
 						$damage = $damage * .75;
 					}
 					while ($units[$defender['force_id']]['size'] > $units[$defender['force_id']]['damage']) {
