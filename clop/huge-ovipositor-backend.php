@@ -335,14 +335,22 @@ EOSQL;
 	}
 }
 
+$damage_cavalry = 0;
+$damage_pegasi = 0;
+$damage_tank = 0;
+$damage_unicorn = 0;
+$damage_navy = 0;
+
 echo "<br><br>";
 echo "<h2>Remaining Attackers:</h2>";
 $sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '1'";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
-	if (1 == 2) {
-	echo "dmg peg: " . $rs['dmg_pegasi'] . " arm peg: " . $rs['arm_pegasi'] . "<br>";
+	if (1 == 1) {
+	echo "dmg peg: " . ($rs['dmg_pegasi'] * $rs['size']) . " arm peg: " . $rs['arm_pegasi'] . "<br>";
+	$damage_pegasi = $damage_pegasi + ($rs['dmg_pegasi'] * $rs['size']);
+
 	echo "dmg tnk: " . $rs['dmg_tanks'] . " arm tnk: " . $rs['arm_tanks'] ."<br>";
 	echo "dmg uni: " . $rs['dmg_unicorns'] . " arm uni: " . $rs['arm_unicorns'] ."<br>";
 	echo "dmg cav: " . $rs['dmg_cavalry'] . "arm cav: " . $rs['arm_cavalry'] . "<br>";
@@ -351,13 +359,15 @@ while ($rs = mysqli_fetch_array($sth)) {
 	}
 }
 
+echo "DMG PEG DONE: " . $damage_pegasi
+
 echo "<br><br>";
 echo "<h2>Remaining Defenders:</h2>";
 $sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '2'";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
-	if (1 == 2) {
+	if (1 == 1) {
 	echo "dmg peg: " . $rs['dmg_pegasi'] . " arm peg: " . $rs['arm_pegasi'] . "<br>";
 	echo "dmg tnk: " . $rs['dmg_tanks'] . " arm tnk: " . $rs['arm_tanks'] ."<br>";
 	echo "dmg uni: " . $rs['dmg_unicorns'] . " arm uni: " . $rs['arm_unicorns'] ."<br>";
