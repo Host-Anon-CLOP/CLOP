@@ -349,12 +349,14 @@ $sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
+	if (1 == 2) {
 	echo "dmg peg: " . $rs['dmg_pegasi'] . " arm peg: " . $rs['arm_pegasi'] . "<br>";
 	echo "dmg tnk: " . $rs['dmg_tanks'] . " arm tnk: " . $rs['arm_tanks'] ."<br>";
 	echo "dmg uni: " . $rs['dmg_unicorns'] . " arm uni: " . $rs['arm_unicorns'] ."<br>";
 	echo "dmg cav: " . $rs['dmg_cavalry'] . "arm cav: " . $rs['arm_cavalry'] . "<br>";
 	echo "dmg nav: " . $rs['dmg_naval'] . "arm nav: " . $rs['arm_naval'] ."<br>";
 	echo "<br>";
+	}
 }
 
 echo "<br><br>";
