@@ -320,22 +320,31 @@ foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
 	if ($unit['damage'] > 0) {
 		if ($unit['damage'] < $unit['size']) {
-			#$sql =<<<EOSQL
-			#UPDATE forces_calc SET size = size - {$unit['damage']} WHERE force_id = '{$unit['force_id']}'
-#EOSQL;
-			#$GLOBALS['mysqli']->query($sql);
-			#$messages[$unit['nation_id']][] = "Your {$unit['name']} lost {$unit['damage']} size!";
+			$sql =<<<EOSQL
+			UPDATE forces_calc SET size = size - {$unit['damage']} WHERE force_id = '{$unit['force_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} lost {$unit['damage']} size!<br>";
 		} else {
-			#$sql =<<<EOSQL
-			#DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
-#EOSQL;
-			#$GLOBALS['mysqli']->query($sql);
-			#$messages[$unit['nation_id']][] = "Your {$unit['name']} scattered to the four winds!";
+			$sql =<<<EOSQL
+			DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} IS KILL<br>";
 		}
 	}
 }
+
+echo "<br><br>";
+echo "Remaining Attackers: (not coded)";
+$GLOBALS['mysqli']->query($sql);
+$sql = "SELECT * from forces_calc";
+$sth = $GLOBALS['mysqli']->query($sql);
+echo $sth;
+
+
+echo "<br><br>";
+echo "Remaining Defenders: (not coded)";
 
 }
 ?>
