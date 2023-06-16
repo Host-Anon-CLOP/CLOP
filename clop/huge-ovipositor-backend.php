@@ -343,7 +343,7 @@ $damage_navy = 0;
 
 echo "<br><br>";
 echo "<h2>Remaining Attackers:</h2>";
-$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '1' ORDER BY size ASC";
+$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '1' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
@@ -363,7 +363,7 @@ echo "DMG PEG DONE: " . $damage_pegasi;
 
 echo "<br><br>";
 echo "<h2>Remaining Defenders:</h2>";
-$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '2' ORDER BY size ASC";
+$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
