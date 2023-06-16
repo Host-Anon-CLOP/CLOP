@@ -345,17 +345,17 @@ while ($rs = mysqli_fetch_array($sth)) {
 
 echo "<br><br>";
 echo "<h2>Remaining Defenders:</h2><br>";
-$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id WHERE forcegroup_id = '2'";
+$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id WHERE forcegroup_id = '2'";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
-	#echo "dmg peg: " . $rs['dmg_pegasi'] . "<br>";
-	##echo "dmg tnk: " . $rs['dmg_tanks'] . "<br>";
-	#echo "dmg uni: " . $rs['dmg_unicorns'] . "<br>";
-	#echo "dmg cav: " . $rs['dmg_cavalry'] . "<br>";
-	#echo "dmg nav: " . $rs['dmg_naval'] . "<br>";
+	echo $rs['fc.name'] . " LEFT: " . $rs['fc.size'] . "<br>";
+	echo "dmg peg: " . $rs['wd.dmg_pegasi'] . "<br>";
+	echo "dmg tnk: " . $rs['wd.dmg_tanks'] . "<br>";
+	echo "dmg uni: " . $rs['wd.dmg_unicorns'] . "<br>";
+	echo "dmg cav: " . $rs['wd.dmg_cavalry'] . "<br>";
+	echo "dmg nav: " . $rs['wd.dmg_naval'] . "<br>";
 }
-# , dmg_cavalry, dmg_tanks, dmg_pegasi, dmg_unicorns, dmg_naval
+
 echo "<br><br>";
 
 
