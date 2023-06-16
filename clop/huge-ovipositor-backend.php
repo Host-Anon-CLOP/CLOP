@@ -345,7 +345,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 
 echo "<br><br>";
 echo "<h2>Remaining Defenders:</h2><br>";
-$sql = "SELECT nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id, dmg_cavalry, dmg_tanks, dmg_pegasi, dmg_unicorns, dmg_naval FROM forces_calc fc INNER JOIN weapondefs wd WHERE forcegroup_id = 2";
+$sql = "SELECT nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id, dmg_cavalry, dmg_tanks, dmg_pegasi, dmg_unicorns, dmg_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id WHERE forcegroup_id = 2";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
