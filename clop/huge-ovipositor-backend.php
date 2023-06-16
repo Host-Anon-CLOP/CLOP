@@ -337,13 +337,18 @@ EOSQL;
 
 echo "<br><br>";
 echo "Remaining Attackers: (not coded)";
+$sql = "SELECT nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id FROM forces_calc WHERE forcegroup_id = 1";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	echo $rs['name'] . " remaining: " . $rs['size'];
+}
 
 echo "<br><br>";
 echo "Remaining Defenders: (not coded)";
 $sql = "SELECT nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id FROM forces_calc WHERE forcegroup_id = 2";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo "result: " . $rs['name'];
+	echo $rs['name'] . " remaining: " . $rs['size'];
 }
 
 
