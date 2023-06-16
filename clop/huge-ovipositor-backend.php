@@ -354,7 +354,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 	echo "dmg uni: " . $rs['dmg_unicorns'] . " arm uni: " . $rs['arm_unicorns'] ."<br>";
 	echo "dmg cav: " . $rs['dmg_cavalry'] . "arm cav: " . $rs['arm_cavalry'] . "<br>";
 	echo "dmg nav: " . $rs['dmg_naval'] . "arm nav: " . $rs['arm_naval'] ."<br>";
-	echo "<br>"
+	echo "<br>";
 }
 
 echo "<br><br>";
