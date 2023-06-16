@@ -351,6 +351,6 @@ $sql = "SELECT nation_id, size, type, weapon_id, armor_id, training, name, force
 
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo "result: $rs['name']";
+	echo "result: " . $rs['name'];
 }
 ?>
