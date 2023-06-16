@@ -359,7 +359,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 	}
 }
 
-echo "DMG PEG DONE: " . $damage_pegasi
+echo "DMG PEG DONE: " . $damage_pegasi;
 
 echo "<br><br>";
 echo "<h2>Remaining Defenders:</h2>";
