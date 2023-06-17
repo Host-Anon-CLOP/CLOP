@@ -386,19 +386,19 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$damage_unicorn = $damage_unicorn + ($rs['dmg_unicorns'] * $rs['size']);
 	$damage_navy = $damage_navy + ($rs['dmg_naval'] * $rs['size']);
 
-	if $rs['type'] == 1 {
+	if ($rs['type'] == 1) {
 		$attacker_cavalry_remaining = $attacker_cavalry_remaining + $rs['size'];
 	}
-	if $rs['type'] == 2 {
+	if ($rs['type'] == 2) {
 		$attacker_tank_remaining = $attacker_tank_remaining + $rs['size'];
 	}
-	if $rs['type'] == 3 {
+	if ($rs['type'] == 3) {
 		$attacker_pegasi_remaining = $attacker_pegasi_remaining + $rs['size'];
 	}
-	if $rs['type'] == 4 {
+	if ($rs['type'] == 4) {
 		$attacker_unicorn_remaining = $attacker_unicorn_remaining + $rs['size'];
 	}
-	if $rs['type'] == 5 {
+	if ($rs['type'] == 5) {
 		$attacker_navy_remaining = $attacker_navy_remaining + $rs['size'];
 	}
 	
@@ -448,19 +448,19 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$damage_unicorn = $damage_unicorn + ($rs['dmg_unicorns'] * $rs['size']);
 	$damage_navy = $damage_navy + ($rs['dmg_naval'] * $rs['size']);
 
-	if $rs['type'] == 1 {
+	if ($rs['type'] == 1) {
 		$defender_cavalry_remaining = $defender_cavalry_remaining + $rs['size'];
 	}
-	if $rs['type'] == 2 {
+	if ($rs['type'] == 2) {
 		$defender_tank_remaining = $defender_tank_remaining + $rs['size'];
 	}
-	if $rs['type'] == 3 {
+	if ($rs['type'] == 3) {
 		$defender_pegasi_remaining = $defender_pegasi_remaining + $rs['size'];
 	}
-	if $rs['type'] == 4 {
+	if ($rs['type'] == 4) {
 		$defender_unicorn_remaining = $defender_unicorn_remaining + $rs['size'];
 	}
-	if $rs['type'] == 5 {
+	if ($rs['type'] == 5) {
 		$defender_navy_remaining = $defender_navy_remaining + $rs['size'];
 	}
 	}
