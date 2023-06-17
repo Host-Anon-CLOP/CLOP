@@ -8,7 +8,7 @@
         var templateRowDefender;
 
         // Function to add a new row
-        function addRow(attackOrDefend) {
+        function addRow(attackOrDefend, rowContents) {
             if (attackOrDefend != 'attacker' && attackOrDefend != 'defender') {
                 alert("Invalid row type");
                 return false;
@@ -19,22 +19,54 @@
 
             // Get row contents from the template
             var template = attackOrDefend == 'attacker' ? templateRowAttacker : templateRowDefender;
-            var rowContents = template.content.cloneNode(true);
+            var rowHTML = template.content.cloneNode(true);
+            newRow.append(rowHTML);
             
-            // Attach everything together then rebind
-            newRow.append(rowContents);
+            // If contents provided, prepopulate row
+            if (rowContents != null) {
+                try {
+                    // Pre-bind the dropdowns to the chosen type
+                    bindDropdownsInner(rowContents["type"], $(newRow).find(".weapon"), $(newRow).find(".armor"));
+
+                    // For each field on the contents object, populate the matching field
+                    for(var field in rowContents) {
+                        try{
+                            var elem = newRow.querySelector("." + field);
+                            if(elem != null) {
+                                elem.value = rowContents[field].toString().trim().split(" ").join(""); // Remove any spaces from names
+                            }
+                        }
+                        catch(ex){
+                            console.log(rowContents, field);
+                            throw ex;
+                        }
+                    }
+                }
+                catch(ex){
+                    console.log("Unit malformed");
+                    throw ex;
+                }
+            }
+            
+            // Rebind
             bindDropdowns();
         }
 
         // Function to remove the selected row
         function removeRow() {
-            var table = $("table.attacker")[0];
+            /*
             if ($('.ibtnDel').length < 2) {
                 alert("Cannot remove the last row in the table.")
                 return false;
             }
-
+            */
             $(this).closest("tr").remove();
+        }
+
+        function clearRows(attackOrDefend){
+            var buttons = $("table." + attackOrDefend).find(".ibtnDel");
+            console.log($("table." + attackOrDefend), buttons)
+            buttons.each((ind, btn) => {console.log(btn); btn.click()});
         }
 
         // Function to verify that the data is correct before sending to the backend
@@ -64,79 +96,127 @@
                 var weaponDropdown = $(this).closest("tr").find(".weapon");
                 var armorDropdown = $(this).closest("tr").find(".armor");
                 var type = $(this).val();
-
-                // Clear previous options
-                weaponDropdown.empty();
-                armorDropdown.empty();
-
-                // Add options based on the selected type
-                if (type === "Alicorns") {
-                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
-                }
-                if (type === "Cavalry") {
-                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    weaponDropdown.append('<option value="PRC-E6">PRC-E6</option>');
-                    weaponDropdown.append('<option value="PRC-E7">PRC-E7</option>');
-                    weaponDropdown.append('<option value="PRC-E8">PRC-E8</option>');
-                    weaponDropdown.append('<option value="ACFU">ACFU</option>');
-                    weaponDropdown.append('<option value="ATFU">ATFU</option>');
-                    weaponDropdown.append('<option value="APFU">APFU</option>');
-                    weaponDropdown.append('<option value="AUFU">AUFU</option>');
-                    
-                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    armorDropdown.append('<option value="Barding">Barding</option>');
-                    armorDropdown.append('<option value="Bigdog">Bigdog</option>');
-                    armorDropdown.append('<option value="Nope">Nope</option>');
-                }
-                else if (type === "Tanks") {
-                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    weaponDropdown.append('<option value="K9P">K9P</option>');
-                    weaponDropdown.append('<option value="ELBO-GRS">ELBO-GRS</option>');
-                    weaponDropdown.append('<option value="Chem-Light">Chem-Light</option>');
-
-                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    armorDropdown.append('<option value="Trundle">Trundle</option>');
-                    armorDropdown.append('<option value="Shepherd">Shepherd</option>');
-                    armorDropdown.append('<option value="Ohno">Ohno</option>');
-                    armorDropdown.append('<option value="Titan">Titan</option>');
-                }
-                else if (type === "Pegasi") {
-                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    weaponDropdown.append('<option value="PropWash">PropWash</option>');
-                    weaponDropdown.append('<option value="SteamBucket">SteamBucket</option>');
-                    weaponDropdown.append('<option value="CanopyLights">CanopyLights</option>');
-
-                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    armorDropdown.append('<option value="Cooler">Cooler</option>');
-                    armorDropdown.append('<option value="Wonder">Wonder</option>');
-                    armorDropdown.append('<option value="Griffin">Griffin</option>');
-                    armorDropdown.append('<option value="Dragon">Dragon</option>');
-                }
-                else if (type === "Unicorns") {
-                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    weaponDropdown.append('<option value="LongStand">LongStand</option>');
-                    weaponDropdown.append('<option value="LongWeight">LongWeight</option>');
-                    weaponDropdown.append('<option value="GridSquares">GridSquares</option>');
-
-                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    armorDropdown.append('<option value="Hornshield">Hornshield</option>');
-                    armorDropdown.append('<option value="Librarian">Librarian</option>');
-                    armorDropdown.append('<option value="Shining">Shining</option>');
-                    armorDropdown.append('<option value="D2A">D2A</option>');
-                }
-                else if (type === "Naval") {
-                    weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    weaponDropdown.append('<option value="Shoreline">Shoreline</option>');
-                    weaponDropdown.append('<option value="WaterHammer">WaterHammer</option>');
-                    weaponDropdown.append('<option value="WaterlineEraser">WaterlineEraser</option>');
-
-                    armorDropdown.append('<option value="Scrounged">Scrounged</option>');
-                    armorDropdown.append('<option value="C-PON3">C-PON3</option>');
-                    armorDropdown.append('<option value="Esohes">Esohes</option>');
-                    armorDropdown.append('<option value="Shubidu">Shubidu</option>');
-                }
+                bindDropdownsInner(type, weaponDropdown, armorDropdown);
             });
+        }
+
+        function bindDropdownsInner(type, weaponDropdown, armorDropdown) {
+            // Clear previous options
+            weaponDropdown.empty();
+            armorDropdown.empty();
+
+            // Add options based on the selected type
+            if (type === "Alicorns") {
+                weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+            }
+            if (type === "Cavalry") {
+                weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                weaponDropdown.append('<option value="PRC-E6">PRC-E6</option>');
+                weaponDropdown.append('<option value="PRC-E7">PRC-E7</option>');
+                weaponDropdown.append('<option value="PRC-E8">PRC-E8</option>');
+                weaponDropdown.append('<option value="ACFU">ACFU</option>');
+                weaponDropdown.append('<option value="ATFU">ATFU</option>');
+                weaponDropdown.append('<option value="APFU">APFU</option>');
+                weaponDropdown.append('<option value="AUFU">AUFU</option>');
+                
+                armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                armorDropdown.append('<option value="Barding">Barding</option>');
+                armorDropdown.append('<option value="Bigdog">Bigdog</option>');
+                armorDropdown.append('<option value="Nope">Nope</option>');
+            }
+            else if (type === "Tanks") {
+                weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                weaponDropdown.append('<option value="K9P">K9P</option>');
+                weaponDropdown.append('<option value="ELBO-GRS">ELBO-GRS</option>');
+                weaponDropdown.append('<option value="Chem-LightBattery">Chem-Light Battery</option>');
+
+                armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                armorDropdown.append('<option value="Trundle">Trundle</option>');
+                armorDropdown.append('<option value="Shepherd">Shepherd</option>');
+                armorDropdown.append('<option value="Ohno">Ohno</option>');
+                armorDropdown.append('<option value="Titan">Titan</option>');
+            }
+            else if (type === "Pegasi") {
+                weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                weaponDropdown.append('<option value="PropWash">Prop Wash</option>');
+                weaponDropdown.append('<option value="SteamBucket">Steam Bucket</option>');
+                weaponDropdown.append('<option value="CanopyLights">Canopy Lights</option>');
+
+                armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                armorDropdown.append('<option value="Cooler">Cooler</option>');
+                armorDropdown.append('<option value="Wonder">Wonder</option>');
+                armorDropdown.append('<option value="Griffin">Griffin</option>');
+                armorDropdown.append('<option value="Dragon">Dragon</option>');
+            }
+            else if (type === "Unicorns") {
+                weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                weaponDropdown.append('<option value="LongStand">Long Stand</option>');
+                weaponDropdown.append('<option value="LongWeight">Long Weight</option>');
+                weaponDropdown.append('<option value="GridSquares">Grid Squares</option>');
+
+                armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                armorDropdown.append('<option value="Hornshield">Hornshield</option>');
+                armorDropdown.append('<option value="Librarian">Librarian</option>');
+                armorDropdown.append('<option value="Shining">Shining</option>');
+                armorDropdown.append('<option value="D2A">D2A</option>');
+            }
+            else if (type === "Naval") {
+                weaponDropdown.append('<option value="Scrounged">Scrounged</option>');
+                weaponDropdown.append('<option value="Shoreline">Shoreline</option>');
+                weaponDropdown.append('<option value="WaterHammer">Water Hammer</option>');
+                weaponDropdown.append('<option value="WaterlineEraser">Waterline Eraser</option>');
+
+                armorDropdown.append('<option value="Scrounged">Scrounged</option>');
+                armorDropdown.append('<option value="C-PON3">C-PON3</option>');
+                armorDropdown.append('<option value="Esohes">Esohes</option>');
+                armorDropdown.append('<option value="Shubidu">Shubidu</option>');
+            }
+        }
+
+        function importRows(attackOrDefend) {
+            /** Example import format
+            4_ACFU_Nope
+            Cavalry
+            ACFU
+            Nope
+            Size: 200
+            Training: 20
+            ...
+            */
+
+            // Check if any data provided
+            var text = document.getElementById("txtImport").value;
+            if (text.trim().length == 0)
+                return;
+    
+            try {
+                // Split the text into individual lines
+                var textLines = text.split(/\r?\n|\r/);
+
+                // Run through each line
+                for (let i = 0; i < textLines.length; i++) {
+                    // If the current line is a valid Training line
+                    if (i >= 4 && textLines[i].indexOf("Training:") === 0){
+                        // Create a new unit based on the most recent 5 lines
+                        var unit = {
+                            type:       textLines[i-4].trim(),
+                            weapon:     textLines[i-3].trim(),
+                            armor:      textLines[i-2].trim(),
+                            size:       parseInt(textLines[i-1].split(":")[1].trim()),
+                            training:   parseInt(textLines[i].split(":")[1].trim())
+                        };
+                        addRow(attackOrDefend, unit);
+                    }
+                }
+
+                // Finally, clear out the textarea upon successful import.
+                document.getElementById("txtImport").value = "";
+            }
+            catch(err) {
+                console.log(err);
+                alert("The import data was in an unexpected format.")
+            }
         }
 
         $(document).ready(function() {
@@ -152,9 +232,17 @@
             $("#addRowAttacker").on("click", () => addRow.call(this, 'attacker'));
             $("#addRowDefender").on("click", () => addRow.call(this, 'defender'));
 
+            // Add a new row on button click
+            $("#clearRowsAttacker").on("click", () => clearRows.call(this, 'attacker'));
+            $("#clearRowsDefender").on("click", () => clearRows.call(this, 'defender'));
+
             // Remove row on button click
             $("table.attacker").on("click", ".ibtnDel", removeRow);
             $("table.defender").on("click", ".ibtnDel", removeRow);
+
+            // Import rows on bbutton click
+            $('#btnImportAttackers').on("click", () => importRows.call(this, "attacker"));
+            $('#btnImportDefenders').on("click", () => importRows.call(this, "defender"));
 
             // Submit button pre-submit checks
             $('#btnSubmit').on("click", preSubmitChecks);
@@ -180,7 +268,7 @@
             flex-direction: column;
         }
 
-        input, select {
+        input, select, textarea {
             padding: 4px 5px;
             border: none;
             background-color: #393c47;
@@ -267,6 +355,20 @@
         table .remove-col{
             width: 80px;
         }
+
+        .importRegion{
+            margin-top: 20px;
+        }
+
+        .importButtons{
+            margin: 5px 0px;
+        }
+
+        #txtImport {
+            width: 500px;
+            height: 300px;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -280,6 +382,7 @@
                             <th colspan="6">
                                 <span>Attackers</span>
                                 <input type="button" id="addRowAttacker" value="Add Row" />
+                                <input type="button" id="clearRowsAttacker" value="Clear" />
                             </th>
                         </tr>
                         <tr>
@@ -313,8 +416,8 @@
                                     <option value="">Select Armor</option>
                                 </select>
                             </td>
-                            <td><input type="number" name="size[]" size="10" min="1" value="0"/></td>
-                            <td><input type="number" name="training[]" size="10" min="0" max="20" value="0"/></td>
+                            <td><input type="number" name="size[]" class="size" size="10" min="1" value="0"/></td>
+                            <td><input type="number" name="training[]" class="training" size="10" min="0" max="20" value="0"/></td>
                             <td><input type="button" class="ibtnDel" value="Remove"></td>
                         </template>
                     </tbody>
@@ -327,6 +430,7 @@
                             <th colspan="6">
                                 <span>Defenders</span>
                                 <input type="button" id="addRowDefender" value="Add Row" />
+                                <input type="button" id="clearRowsDefender" value="Clear" />
                             </th>
                         </tr>
                         <tr>
@@ -361,8 +465,8 @@
                                     <option value="">Select Armor</option>
                                 </select>
                             </td>
-                            <td><input type="number" name="size[]" size="10" min="1" value="0"/></td>
-                            <td><input type="number" name="training[]" size="10" min="0" max="20" value="0"/></td>
+                            <td><input type="number" name="size[]" class="size" size="10" min="1" value="0"/></td>
+                            <td><input type="number" name="training[]" class="training" size="10" min="0" max="20" value="0"/></td>
                             <td><input type="button" class="ibtnDel" value="Remove"></td>
                         </template>
                     </tbody>
@@ -370,7 +474,15 @@
             </div>
         </div>
         <div>
-            Defender Bonus:<select name="defender_bonus" class="defensebonus"><option value="Yes">Yes</option><option value="No">No</option></select><input type="submit" id="btnSubmit" value="Submit" />
+            Defender Bonus:&nbsp;<select name="defender_bonus" class="defensebonus"><option value="Yes">Yes</option><option value="No">No</option></select>&nbsp;<input type="submit" id="btnSubmit" value="Submit" />
+        </div>
+        <div class="importRegion">
+            <h2>Import data</h2>
+            <div class="importButtons">
+                <input type="button" id="btnImportAttackers" value="Import Attackers" title="Import to the attackers table" />
+                <input type="button" id="btnImportDefenders" value="Import Defenders" title="Import to the defenders table" />
+            </div>
+            <textarea id="txtImport"></textarea>
         </div>
     </form>
 </body>
