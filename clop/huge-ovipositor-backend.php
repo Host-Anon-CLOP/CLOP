@@ -50,7 +50,7 @@ $GLOBALS['mysqli']->query($sql);
                 ];
 
 # Create Attackers
-echo "THING: " . $weapontypes[$_POST['weapon'][$count]] . " armor: " . $armortypes[$_POST['armor'][$count]] . " raw weapon:" . $_POST['weapon'] . " raw armor:" . $_POST['armor'];
+echo "THING: " . $weapontypes[$_POST['weapon'][$count]] . " armor: " . $armortypes[$_POST['armor'][$count]] . " raw weapon:" . $_POST['weapon'][$count] . " raw armor:" . $_POST['armor'][$count];
 $sql=<<<EOSQL
 INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (1, {$_POST['size'][$count]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$count]]}', {$armortypes[$_POST['armor'][$count]]}, {$_POST['training'][$count]}, 'A_$name', 1)
 EOSQL;
