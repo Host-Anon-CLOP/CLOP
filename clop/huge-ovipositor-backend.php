@@ -329,11 +329,11 @@ EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} lost {$unit['damage']} size!<br>";
 
-			if (str_contains($unit['name'], 'A_')) {
+			if (strpos($unit['name'], 'A_') !== false) {
 				$attackers_died = $attackers_died + $unit['damage'];
 			}
 
-			if (str_contains($unit['name'], 'D_')) {
+			if (strpos($unit['name'], 'D_') !== false) {
 				$defenders_died = $defenders_died + $unit['damage'];
 			}
 		} else {
@@ -343,11 +343,11 @@ EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} IS KILL<br>";
 
-			if (str_contains($unit['name'], 'A_')) {
+			if (strpos($unit['name'], 'A_') !== false) {
 				$attackers_died = $attackers_died + $unit['size'];
 			}
 
-			if (str_contains($unit['name'], 'D_')) {
+			if (strpos($unit['name'], 'D_') !== false) {
 				$defenders_died = $defenders_died + $unit['size'];
 			}
 		}
