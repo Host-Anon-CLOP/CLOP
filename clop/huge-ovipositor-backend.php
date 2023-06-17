@@ -411,8 +411,11 @@ echo "<br>DMG TNK DONE: " . $damage_tank;
 echo "<br>DMG UNI DONE: " . $damage_unicorn;
 echo "<br>DMG NAV DONE: " . $damage_navy;
 echo "<br>Attackers Died: " . $attackers_died;
-
-
+echo "<br>Attacker Cav Remaining: " . $attacker_cavalry_remaining;
+echo "<br>Attacker Peg Remaining: " . $attacker_pegasi_remaining;
+echo "<br>Attacker Tank Remaining: " . $attacker_tank_remaining;
+echo "<br>Attacker Uni Remaining: " . $attacker_unicorn_remaining;
+echo "<br>Attacker Nav Remaining: " . $attacker_navy_remaining;
 
 
 $damage_cavalry = 0;
@@ -472,7 +475,11 @@ echo "<br>DMG TNK DONE: " . $damage_tank;
 echo "<br>DMG UNI DONE: " . $damage_unicorn;
 echo "<br>DMG NAV DONE: " . $damage_navy;
 echo "<br>Defenders died: " . $defenders_died;
-
+echo "<br>Defender Cav Remaining: " . $defender_cavalry_remaining;
+echo "<br>Defender Peg Remaining: " . $defender_pegasi_remaining;
+echo "<br>Defender Tank Remaining: " . $defender_tank_remaining;
+echo "<br>Defender Uni Remaining: " . $defender_unicorn_remaining;
+echo "<br>Defender Nav Remaining: " . $defender_navy_remaining;
 
 }
 ?>
