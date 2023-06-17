@@ -315,6 +315,9 @@ EOFORM;
     }
 }
 
+$attackers_died = 0;
+$defenders_died = 0;
+
 echo "<br>";
 foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
@@ -325,12 +328,28 @@ foreach ($units as $unit) {
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} lost {$unit['damage']} size!<br>";
+
+			if (str_contains($unit['name'], 'A_')) {
+				$attackers_died = $attackers_died + $unit['damage'];
+			}
+
+			if (str_contains($unit['name'], 'D_')) {
+				$defenders_died = $defenders_died + $unit['damage'];
+			}
 		} else {
 			$sql =<<<EOSQL
 			DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} IS KILL<br>";
+
+			if (str_contains($unit['name'], 'A_')) {
+				$attackers_died = $attackers_died + $unit['size'];
+			}
+
+			if (str_contains($unit['name'], 'D_')) {
+				$defenders_died = $defenders_died + $unit['size'];
+			}
 		}
 	}
 }
@@ -340,6 +359,12 @@ $damage_pegasi = 0;
 $damage_tank = 0;
 $damage_unicorn = 0;
 $damage_navy = 0;
+
+$attacker_cavalry_remaining = 0;
+$attacker_pegasi_remaining = 0;
+$attacker_tank_remaining = 0;
+$attacker_unicorn_remaining = 0;
+$attacker_navy_remaining = 0;
 
 echo "<br><br><h2>Remaining Attackers:</h2>";
 $sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '1' ORDER BY size DESC";
@@ -360,6 +385,23 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$damage_tank = $damage_tank + ($rs['dmg_tanks'] * $rs['size']);
 	$damage_unicorn = $damage_unicorn + ($rs['dmg_unicorns'] * $rs['size']);
 	$damage_navy = $damage_navy + ($rs['dmg_naval'] * $rs['size']);
+
+	if $rs['type'] == 1 {
+		$attacker_cavalry_remaining = $attacker_cavalry_remaining + $rs['size'];
+	}
+	if $rs['type'] == 2 {
+		$attacker_tank_remaining = $attacker_tank_remaining + $rs['size'];
+	}
+	if $rs['type'] == 3 {
+		$attacker_pegasi_remaining = $attacker_pegasi_remaining + $rs['size'];
+	}
+	if $rs['type'] == 4 {
+		$attacker_unicorn_remaining = $attacker_unicorn_remaining + $rs['size'];
+	}
+	if $rs['type'] == 5 {
+		$attacker_navy_remaining = $attacker_navy_remaining + $rs['size'];
+	}
+	
 	}
 }
 
@@ -368,6 +410,7 @@ echo "<br>DMG PEG DONE: " . $damage_pegasi;
 echo "<br>DMG TNK DONE: " . $damage_tank;
 echo "<br>DMG UNI DONE: " . $damage_unicorn;
 echo "<br>DMG NAV DONE: " . $damage_navy;
+echo "<br>Attackers Died: " . $attackers_died;
 
 
 
@@ -377,6 +420,13 @@ $damage_pegasi = 0;
 $damage_tank = 0;
 $damage_unicorn = 0;
 $damage_navy = 0;
+
+$defender_cavalry_remaining = 0;
+$defender_pegasi_remaining = 0;
+$defender_tank_remaining = 0;
+$defender_unicorn_remaining = 0;
+$defender_navy_remaining = 0;
+
 echo "<br><br><h2>Remaining Defenders:</h2>";
 $sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
@@ -391,11 +441,28 @@ while ($rs = mysqli_fetch_array($sth)) {
 	echo "dmg nav: " . $rs['dmg_naval'] . "arm nav: " . $rs['arm_naval'] ."<br>";
 	echo "<br>";
 	*/
+
 	$damage_cavalry = $damage_cavalry + ($rs['dmg_cavalry'] * $rs['size']);
 	$damage_pegasi = $damage_pegasi + ($rs['dmg_pegasi'] * $rs['size']);
 	$damage_tank = $damage_tank + ($rs['dmg_tanks'] * $rs['size']);
 	$damage_unicorn = $damage_unicorn + ($rs['dmg_unicorns'] * $rs['size']);
 	$damage_navy = $damage_navy + ($rs['dmg_naval'] * $rs['size']);
+
+	if $rs['type'] == 1 {
+		$defender_cavalry_remaining = $defender_cavalry_remaining + $rs['size'];
+	}
+	if $rs['type'] == 2 {
+		$defender_tank_remaining = $defender_tank_remaining + $rs['size'];
+	}
+	if $rs['type'] == 3 {
+		$defender_pegasi_remaining = $defender_pegasi_remaining + $rs['size'];
+	}
+	if $rs['type'] == 4 {
+		$defender_unicorn_remaining = $defender_unicorn_remaining + $rs['size'];
+	}
+	if $rs['type'] == 5 {
+		$defender_navy_remaining = $defender_navy_remaining + $rs['size'];
+	}
 	}
 }
 
@@ -404,6 +471,7 @@ echo "<br>DMG PEG DONE: " . $damage_pegasi;
 echo "<br>DMG TNK DONE: " . $damage_tank;
 echo "<br>DMG UNI DONE: " . $damage_unicorn;
 echo "<br>DMG NAV DONE: " . $damage_navy;
+echo "<br>Defenders died: " . $defenders_died;
 
 
 }
