@@ -367,7 +367,7 @@ echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
     echo "<br>Attackers_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
-echo "<br>"
+echo "<br>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		break;
@@ -382,7 +382,7 @@ foreach ($forcetypes as $key => $value) {
 	}
     echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
-echo "<br>"
+echo "<br>";
 foreach ($forcetypes as $key => $value) {
     echo "<br>Defenders_" . $key . " Initial:" . $Defenders_Initial_{$key} . " Died:" . $Defenders_Died_{$key} . " Remaining:" . $Defenders_Remaining_{$key};
 }
