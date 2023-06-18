@@ -130,9 +130,9 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Attackers = $Initial_Attackers + $rs['size'];
 	$Attackers_Initial_{array_search($rs['type'], $forcetypes)} = $Attackers_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
+	echo "<br>attackers total: " . $Initial_Attackers;
 	echo "<br>amount: Attackers_Initial_" . array_search($rs['type'], $forcetypes) . " size: " . $Attackers_Initial_{array_search($rs['type'], $forcetypes)};
 	}
-echo "<br>attackers total: " . $Initial_Attackers;
 # Defenders
 
     echo "<h2>Battle Result</h2>";
