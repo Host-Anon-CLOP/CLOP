@@ -99,7 +99,7 @@ $GLOBALS['mysqli']->query($sql);
                 ];
 
 # Create Defenders
-echo "<br> defender adding to db - type / name " . {$forcetypes[$which_type]} . " / " . $name
+echo "<br> defender adding to db - type / name " . {$forcetypes[$which_type]} . " / " . $name;
 $sql=<<<EOSQL
 INSERT INTO forces_calc (nation_id, size, type, weapon_id, armor_id, training, name, forcegroup_id) VALUES (2, {$_POST['size'][$count]}, {$forcetypes[$which_type]}, '{$weapontypes[$_POST['weapon'][$count]]}', {$armortypes[$_POST['armor'][$count]]}, {$_POST['training'][$count]}, 'D_$name', 2)
 EOSQL;
