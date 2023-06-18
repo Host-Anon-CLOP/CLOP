@@ -393,19 +393,20 @@ foreach ($forcetypes as $key => $value) {
 
 #Display Results - Attackers
 echo "<br><h2>Attackers Summary:</h2>";
-echo "<table><tr><td>Attackers Damage vs</td><td>Total Damage</td></tr>";
+echo "<table><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
 }
 echo "</table><br>";
 
+echo "<table><tr><td>Attackers</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
 	}
-    echo "<br>Attackers_" . $key . " Initial:" . $Attackers_Initial_{$key} . " Died:" . $Attackers_Died_{$key} . " Remaining:" . $Attackers_Remaining_{$key};
+    echo "<tr><td>" . $key . "</td><td>" . $Attackers_Initial_{$key} . " </td><td>" . $Attackers_Died_{$key} . "</td><td>" . $Attackers_Remaining_{$key} . "</td></tr>";
 }
-
+echo "</table><br>";
 
 #Display Results - Defenders
 echo "<br><br><h2>Defenders Summary:</h2>";
