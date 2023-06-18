@@ -131,16 +131,15 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Attackers = $Initial_Attackers + $rs['size'];
 	$Attackers_Initial_{array_search($rs['type'], $forcetypes)} = $Attackers_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 	}
-
-$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '1' ORDER BY size DESC";
+# Defenders
+$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo "<br>amount: Attackers_Initial_" . array_search($rs['type'], $forcetypes) . " size: " . $Attackers_Initial_{array_search($rs['type'], $forcetypes)};
+	$Initial_Defenders = $Initial_Defenders + $rs['size'];
+	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 	}
-echo "<br>attackers total: " . $Initial_Attackers;
-# Defenders
 
-    echo "<h2>Battle Result</h2>";
+echo "<h2>Battle Result</h2>";
 // WAR CALCS
 $types = array(1 => "cavalry", 2 => "tanks", 3 => "pegasi", 4 => "unicorns", 5 => "naval");
 $invaderattackers = array();
@@ -370,7 +369,7 @@ EOSQL;
 }
 
 
-#Display Results
+#Display Results - Attackers
 echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
     echo "<br>Attackers_Damage_" . $key . " " . $Attackers_Damage_{$key};
@@ -383,6 +382,7 @@ foreach ($forcetypes as $key => $value) {
     echo "<br>Attackers_" . $key . " Initial:" . $Attackers_Initial_{$key} . " Died:" . $Attackers_Died_{$key} . " Remaining:" . $Attackers_Remaining_{$key};
 }
 
+#Display Results - Defenders
 echo "<br><br><h2>Defenders Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
