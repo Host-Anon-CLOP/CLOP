@@ -393,37 +393,37 @@ foreach ($forcetypes as $key => $value) {
 
 #Display Results - Attackers
 echo "<br><h2>Attackers Summary:</h2>";
-echo "<table border=\"1\"><tr><td>Versus</td><td>Total Damage</td></tr>";
+echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
 }
-echo "</table><br>";
+echo "</table></div>";
 
-echo "<table border=\"1\"><tr><td>Attackers</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
+echo "<div><table border=\"1\"><tr><td>Attackers</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
 	}
     echo "<tr><td>" . $key . "</td><td>" . $Attackers_Initial_{$key} . " </td><td>" . $Attackers_Died_{$key} . "</td><td>" . $Attackers_Remaining_{$key} . "</td></tr>";
 }
-echo "</table><br>";
+echo "</table></div><br>";
 
 #Display Results - Defenders
 echo "<br><br><h2>Defenders Summary:</h2>";
-echo "<table border=\"1\"><tr><td>Versus</td><td>Total Damage</td></tr>";
+echo "<div><table border=\"1\ style=\"float: left\"" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
 	}
     echo "<tr><td>$key</td><td>" . $Defenders_Damage_{$key} . "</td></tr>";
 }
-echo "</table><br>";
+echo "</table></div>";
 
-echo "<table border=\"1\"><tr><td>Defenders</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
+echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Defenders</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>" . $key . "</td><td>" . $Defenders_Initial_{$key} . " </td><td>" . $Defenders_Died_{$key} . "</td><td>" . $Defenders_Remaining_{$key} . "</td></tr>";
 }
-echo "</table>";
+echo "</table></div>";
 
 }
 ?>
