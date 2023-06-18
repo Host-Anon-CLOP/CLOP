@@ -348,7 +348,6 @@ EOFORM;
     }
 }
 
-echo "<br>";
 foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
 	if ($unit['damage'] > 0) {
@@ -392,7 +391,7 @@ foreach ($forcetypes as $key => $value) {
 
 
 #Display Results - Attackers
-echo "<br><h2>Attackers Summary:</h2>";
+echo "<h2>Attackers Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
