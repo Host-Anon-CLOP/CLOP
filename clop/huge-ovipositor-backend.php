@@ -105,6 +105,13 @@ $GLOBALS['mysqli']->query($sql);
     }
     echo "</pre>";
 
+	echo "<br><br><br> STUFF NEW: ";
+$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	echo $rs['name'] . "size:" . $rs['size'] . "<br>";
+}
+
     echo "<h2>Battle Result</h2>";
 
 // WAR CALCS
