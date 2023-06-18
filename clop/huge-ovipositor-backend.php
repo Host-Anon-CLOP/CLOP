@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 # Declare Initial Variables
 foreach ($forcetypes as $key => $value) {
-	echo "setting initial " . $key;
     $Attackers_Damage_{$key} = 0;
 	$Defenders_Damage_{$key} = 0;
 	$Attackers_Initial_{$key} = 0;
@@ -367,13 +366,13 @@ EOSQL;
 echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
 	echo "attacker summary " . $key;
-	if ($key = 'Alicorns') {
+	if ($key == 'Alicorns') {
 		break;
 	}
     echo "<br>Attackers_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
 foreach ($forcetypes as $key => $value) {
-	if ($key = 'Alicorns') {
+	if ($key == 'Alicorns') {
 		break;
 	}
     echo "<br>Attackers_" . $key . " Initial:" . $Attackers_Initial_{$key} . " Died:" . $Attackers_Died_{$key} . " Remaining:" . $Attackers_Remaining_{$key};
@@ -381,13 +380,13 @@ foreach ($forcetypes as $key => $value) {
 
 echo "<br><br><h2>Defenders Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
-	if ($key = 'Alicorns') {
+	if ($key == 'Alicorns') {
 		break;
 	}
     echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
 foreach ($forcetypes as $key => $value) {
-	if ($key = 'Alicorns') {
+	if ($key == 'Alicorns') {
 		break;
 	}
     echo "<br>Defenders_" . $key . " Initial:" . $Defenders_Initial_{$key} . " Died:" . $Defenders_Died_{$key} . " Remaining:" . $Defenders_Remaining_{$key};
