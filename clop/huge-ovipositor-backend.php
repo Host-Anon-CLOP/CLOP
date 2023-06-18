@@ -9,6 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $weapontypes = array("ScroungedWeapons" => 0, "PRC-E6" => 1,"PRC-E7" => 2,"PRC-E8" => 3,"ACFU" => 4,"ATFU" => 5,"APFU" => 6,"AUFU" => 7,"K9P" => 8,"ELBO-GRS" => 9,"Chem-LightBattery" => 10,"PropWash" => 11,"SteamBucket" => 12,"CanopyLights" => 13,"LongStand" => 14,"LongWeight" => 15,"GridSquares" => 16,"Shoreline" => 17,"WaterHammer" => 18,"WaterlineEraser" => 19);
     $armortypes = array("ScroungedArmor" => 0,"Barding" => 1,"Bigdog" => 2,"Nope" => 3,"Trundle" => 4,"Shepherd" => 5,"Ohno" => 6,"Titan" => 7,"Cooler" => 8,"Wonder" => 9,"Griffin" => 10,"Dragon" => 11,"Hornshield" => 12,"Librarian" => 13,"Shining" => 14,"D2A" => 15,"C-PON3" => 16,"Esohes" => 17,"Shubidu" => 18);
 
+# Declare Initial Variables
+foreach ($forcetypes as &$value) {
+    echo "THING: " . $value . "<br>";
+}
+
 # Clear Previous Results
 $sql=<<<EOSQL
 truncate forcegroups_calc
@@ -105,7 +110,8 @@ $GLOBALS['mysqli']->query($sql);
     }
     echo "</pre>";
 
-	echo "<br><br><br> STUFF NEW: ";
+	#TALLY TROOPS BEFORE WAR
+	echo "<br><br><br> STUFF BEFORE: ";
 $sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
@@ -322,9 +328,6 @@ EOFORM;
     }
 }
 
-$attackers_died = 0;
-$defenders_died = 0;
-
 echo "<br>";
 foreach ($units as $unit) {
 	$unit['damage'] = floor(round($unit['damage'], 6)); //Seriously, fuck floating point errors and fuck hidden precision
@@ -335,161 +338,22 @@ foreach ($units as $unit) {
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} lost {$unit['damage']} size!<br>";
-
-			if (strpos($unit['name'], 'A_') !== false) {
-				$attackers_died = $attackers_died + $unit['damage'];
-			}
-
-			if (strpos($unit['name'], 'D_') !== false) {
-				$defenders_died = $defenders_died + $unit['damage'];
-			}
 		} else {
 			$sql =<<<EOSQL
 			DELETE FROM forces_calc WHERE force_id = '{$unit['force_id']}'
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			echo "{$unit['name']} IS KILL<br>";
-
-			if (strpos($unit['name'], 'A_') !== false) {
-				$attackers_died = $attackers_died + $unit['size'];
-			}
-
-			if (strpos($unit['name'], 'D_') !== false) {
-				$defenders_died = $defenders_died + $unit['size'];
-			}
 		}
 	}
 }
 
-$damage_cavalry = 0;
-$damage_pegasi = 0;
-$damage_tank = 0;
-$damage_unicorn = 0;
-$damage_navy = 0;
-
-$attacker_cavalry_remaining = 0;
-$attacker_pegasi_remaining = 0;
-$attacker_tank_remaining = 0;
-$attacker_unicorn_remaining = 0;
-$attacker_navy_remaining = 0;
-
 echo "<br><br><h2>Remaining Attackers:</h2>";
-$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '1' ORDER BY size DESC";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
-	if (1 == 1) {
-	/*
-	echo "dmg peg: " . ($rs['dmg_pegasi'] * $rs['size']) . " arm peg: " . $rs['arm_pegasi'] . "<br>";
-	echo "dmg tnk: " . $rs['dmg_tanks'] . " arm tnk: " . $rs['arm_tanks'] ."<br>";
-	echo "dmg uni: " . $rs['dmg_unicorns'] . " arm uni: " . $rs['arm_unicorns'] ."<br>";
-	echo "dmg cav: " . $rs['dmg_cavalry'] . "arm cav: " . $rs['arm_cavalry'] . "<br>";
-	echo "dmg nav: " . $rs['dmg_naval'] . "arm nav: " . $rs['arm_naval'] ."<br>";
-	echo "<br>";
-	*/
-	$damage_cavalry = $damage_cavalry + ($rs['dmg_cavalry'] * $rs['size']);
-	$damage_pegasi = $damage_pegasi + ($rs['dmg_pegasi'] * $rs['size']);
-	$damage_tank = $damage_tank + ($rs['dmg_tanks'] * $rs['size']);
-	$damage_unicorn = $damage_unicorn + ($rs['dmg_unicorns'] * $rs['size']);
-	$damage_navy = $damage_navy + ($rs['dmg_naval'] * $rs['size']);
-
-	if ($rs['type'] == 1) {
-		$attacker_cavalry_remaining = $attacker_cavalry_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 2) {
-		$attacker_tank_remaining = $attacker_tank_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 3) {
-		$attacker_pegasi_remaining = $attacker_pegasi_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 4) {
-		$attacker_unicorn_remaining = $attacker_unicorn_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 5) {
-		$attacker_navy_remaining = $attacker_navy_remaining + $rs['size'];
-	}
-	
-	}
-}
-
-echo "<br>DMG CAV DONE: " . $damage_cavalry;
-echo "<br>DMG PEG DONE: " . $damage_pegasi;
-echo "<br>DMG TNK DONE: " . $damage_tank;
-echo "<br>DMG UNI DONE: " . $damage_unicorn;
-echo "<br>DMG NAV DONE: " . $damage_navy;
-echo "<br>Attackers Died: " . $attackers_died;
-echo "<br>Attacker Cav Remaining: " . $attacker_cavalry_remaining;
-echo "<br>Attacker Peg Remaining: " . $attacker_pegasi_remaining;
-echo "<br>Attacker Tank Remaining: " . $attacker_tank_remaining;
-echo "<br>Attacker Uni Remaining: " . $attacker_unicorn_remaining;
-echo "<br>Attacker Nav Remaining: " . $attacker_navy_remaining;
-
-
-$damage_cavalry = 0;
-$damage_pegasi = 0;
-$damage_tank = 0;
-$damage_unicorn = 0;
-$damage_navy = 0;
-
-$defender_cavalry_remaining = 0;
-$defender_pegasi_remaining = 0;
-$defender_tank_remaining = 0;
-$defender_unicorn_remaining = 0;
-$defender_navy_remaining = 0;
 
 echo "<br><br><h2>Remaining Defenders:</h2>";
-$sql = "SELECT fc.size, fc.type, fc.weapon_id, fc.armor_id, fc.training, fc.name, fc.forcegroup_id, wd.dmg_cavalry, wd.dmg_tanks, wd.dmg_pegasi, wd.dmg_unicorns, wd.dmg_naval, ad.arm_cavalry, ad.arm_tanks, ad.arm_pegasi, ad.arm_unicorns, ad.arm_naval FROM forces_calc fc INNER JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id INNER JOIN armordefs ad ON fc.armor_id = ad.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs['name'] . " LEFT: " . $rs['size'] . "<br>";
-	if (1 == 1) {
-	/*
-	echo "dmg peg: " . $rs['dmg_pegasi'] . " arm peg: " . $rs['arm_pegasi'] . "<br>";
-	echo "dmg tnk: " . $rs['dmg_tanks'] . " arm tnk: " . $rs['arm_tanks'] ."<br>";
-	echo "dmg uni: " . $rs['dmg_unicorns'] . " arm uni: " . $rs['arm_unicorns'] ."<br>";
-	echo "dmg cav: " . $rs['dmg_cavalry'] . "arm cav: " . $rs['arm_cavalry'] . "<br>";
-	echo "dmg nav: " . $rs['dmg_naval'] . "arm nav: " . $rs['arm_naval'] ."<br>";
-	echo "<br>";
-	*/
-
-	$damage_cavalry = $damage_cavalry + ($rs['dmg_cavalry'] * $rs['size']);
-	$damage_pegasi = $damage_pegasi + ($rs['dmg_pegasi'] * $rs['size']);
-	$damage_tank = $damage_tank + ($rs['dmg_tanks'] * $rs['size']);
-	$damage_unicorn = $damage_unicorn + ($rs['dmg_unicorns'] * $rs['size']);
-	$damage_navy = $damage_navy + ($rs['dmg_naval'] * $rs['size']);
-
-	if ($rs['type'] == 1) {
-		$defender_cavalry_remaining = $defender_cavalry_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 2) {
-		$defender_tank_remaining = $defender_tank_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 3) {
-		$defender_pegasi_remaining = $defender_pegasi_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 4) {
-		$defender_unicorn_remaining = $defender_unicorn_remaining + $rs['size'];
-	}
-	if ($rs['type'] == 5) {
-		$defender_navy_remaining = $defender_navy_remaining + $rs['size'];
-	}
-	}
-}
-
-echo "<br>DMG CAV DONE: " . $damage_cavalry;
-echo "<br>DMG PEG DONE: " . $damage_pegasi;
-echo "<br>DMG TNK DONE: " . $damage_tank;
-echo "<br>DMG UNI DONE: " . $damage_unicorn;
-echo "<br>DMG NAV DONE: " . $damage_navy;
-echo "<br>Defenders died: " . $defenders_died;
-echo "<br>Defender Cav Remaining: " . $defender_cavalry_remaining;
-echo "<br>Defender Peg Remaining: " . $defender_pegasi_remaining;
-echo "<br>Defender Tank Remaining: " . $defender_tank_remaining;
-echo "<br>Defender Uni Remaining: " . $defender_unicorn_remaining;
-echo "<br>Defender Nav Remaining: " . $defender_navy_remaining;
 
 
-echo "<br><br><br> STUFF NEW: ";
+#calc remaining attackers
 $sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
