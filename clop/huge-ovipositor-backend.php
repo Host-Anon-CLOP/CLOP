@@ -137,9 +137,7 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Attackers = $Initial_Attackers + $rs['size'];
 	$Attackers_Initial_{array_search($rs['type'], $forcetypes)} = $Attackers_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
-	echo "<br> name " . $rs['name'] . " type " . $rs['type'] . " Attackers Initial " . array_search($rs['type'], $forcetypes) . " - " . $Attackers_Initial_{array_search($rs['type'], $forcetypes)};
 }
-echo "<br><br><br>";
 # Defenders
 $sql = "SELECT * from forces_calc fc LEFT JOIN armordefs ad ON fc.armor_id = ad.armor_id LEFT JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
