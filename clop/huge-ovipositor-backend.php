@@ -410,7 +410,7 @@ echo "</table><br>";
 
 #Display Results - Defenders
 echo "<br><br><h2>Defenders Summary:</h2>";
-echo "<table border\"1\"><tr><td>Versus</td><td>Total Damage</td></tr>";
+echo "<table border=\"1\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Defenders_Damage_{$key} . "</td></tr>";
 }
