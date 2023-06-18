@@ -141,7 +141,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 }
 # Defenders
 $sql = "SELECT * from forces_calc fc LEFT JOIN armordefs ad ON fc.armor_id = ad.armor_id
-LEFT JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id WHERE forcegroup_id = '2' ORDER BY size DESC";
+LEFT JOIN weapondefs wd ON fc.weapon_id = wd.weapon_id WHERE forcegroup_id = '2' ORDER BY size DESC"; 
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
