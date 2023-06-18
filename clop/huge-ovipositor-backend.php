@@ -397,7 +397,7 @@ echo "<table><tr><td>Attackers Damage vs</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
 }
-echo "</table><br>"
+echo "</table><br>";
 
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
