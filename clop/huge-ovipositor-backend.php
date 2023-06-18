@@ -128,7 +128,9 @@ $GLOBALS['mysqli']->query($sql);
 $sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '1' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs['name'] . "size:" . $rs['size'] . " type:" . $rs['type'] . "<br>";
+	echo $rs['name'] . "size:" . $rs['size'] . " type:" . array_search($rs['type'], $forcetypes) . "<br>";
+	#$Initial_Attackers = 0;
+	#$Attackers_Initial_{$key} = 0;
 }
 # Defenders
 
