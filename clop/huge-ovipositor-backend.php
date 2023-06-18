@@ -386,6 +386,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 
 // CALCULATE DIED TROOPS FOR RESULTS
 foreach ($forcetypes as $key => $value) {
+	$Attackers_Died_{$key} = $Attackers_Initial_{$key} - $Attackers_Remaining_{$key};
     $Defenders_Died_{$key} = $Defenders_Initial_{$key} - $Defenders_Remaining_{$key};
 }
 
