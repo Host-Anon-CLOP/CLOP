@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $armortypes = array("ScroungedArmor" => 0,"Barding" => 1,"Bigdog" => 2,"Nope" => 3,"Trundle" => 4,"Shepherd" => 5,"Ohno" => 6,"Titan" => 7,"Cooler" => 8,"Wonder" => 9,"Griffin" => 10,"Dragon" => 11,"Hornshield" => 12,"Librarian" => 13,"Shining" => 14,"D2A" => 15,"C-PON3" => 16,"Esohes" => 17,"Shubidu" => 18);
 
 # Declare Initial Variables
-foreach ($forcetypes as &$value) {
-    echo "THING: " . $value . "<br>";
+foreach ($forcetypes as $key => $value) {
+    echo "THING: " . $key . " " . $value . "<br>";
 }
 
 # Clear Previous Results
