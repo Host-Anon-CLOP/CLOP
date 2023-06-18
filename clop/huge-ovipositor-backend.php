@@ -15,7 +15,7 @@ foreach ($forcetypes as $key => $value) {
 }
 
 foreach ($forcetypes as $key => $value) {
-    echo "attacker_damage_" . $key . " " . $attacker_damage_{$key}
+    echo "attacker_damage_" . $key . " " . $attacker_damage_{$key};
 }
 
 # Clear Previous Results
