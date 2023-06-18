@@ -363,7 +363,7 @@ EOSQL;
 
 
 #Display Results
-echo "<br><h2>Attackers Summary:</h2>"
+echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
 	if ($key = 'Alicorns') {
 		break;
@@ -377,7 +377,7 @@ foreach ($forcetypes as $key => $value) {
     echo "<br>Attackers_" . $key . " Initial:" . $Attackers_Initial_{$key} . " Died:" . $Attackers_Died_{$key} . " Remaining:" . $Attackers_Remaining_{$key};
 }
 
-echo "<br><br><h2>Defenders Summary:</h2>"
+echo "<br><br><h2>Defenders Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
 	if ($key = 'Alicorns') {
 		break;
