@@ -113,6 +113,7 @@ $GLOBALS['mysqli']->query($sql);
 	echo "Defender Bonus: " . $_POST['defender_bonus'];
 
     // Display the entered data
+	/*
     echo "<h2>Attacker Data:</h2>";
     echo "<pre>";
     foreach ($attackerData as $attacker) {
@@ -126,6 +127,7 @@ $GLOBALS['mysqli']->query($sql);
         echo $defender['unit'] . ' ' . $defender['weapon'] . ' ' . $defender['armor'] . ' size:' . $defender['size'] . ' train:' . $defender['training'] . '<br>';
     }
     echo "</pre>";
+	*/
 
 // CALCULATE INITIAL TROOPS FOR RESULTS
 # Attackers
@@ -398,7 +400,7 @@ foreach ($forcetypes as $key => $value) {
 
 
 #Display Results - Attackers
-echo "<div><h2>Attackers Summary:</h2>";
+echo "<h2>Attackers Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
@@ -412,10 +414,10 @@ foreach ($forcetypes as $key => $value) {
 	}
     echo "<tr><td>" . $key . "</td><td>" . $Attackers_Initial_{$key} . " </td><td>" . $Attackers_Died_{$key} . "</td><td>" . $Attackers_Remaining_{$key} . "</td></tr>";
 }
-echo "</table></div></div>";
+echo "</table></div>";
 
 #Display Results - Defenders
-echo "<div><h2>Defenders Summary:</h2>";
+echo "<h2>Defenders Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
@@ -429,7 +431,7 @@ echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Defenders</td><td>I
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>" . $key . "</td><td>" . $Defenders_Initial_{$key} . " </td><td>" . $Defenders_Died_{$key} . "</td><td>" . $Defenders_Remaining_{$key} . "</td></tr>";
 }
-echo "</table></div></div>";
+echo "</table></div>";
 
 }
 ?>
