@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 # Declare Initial Variables
 foreach ($forcetypes as $key => $value) {
+	echo "setting initial " . $key;
     $Attackers_Damage_{$key} = 0;
 	$Defenders_Damage_{$key} = 0;
 	$Attackers_Initial_{$key} = 0;
@@ -365,6 +366,7 @@ EOSQL;
 #Display Results
 echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
+	echo "attacker summary " . $key;
 	if ($key = 'Alicorns') {
 		break;
 	}
