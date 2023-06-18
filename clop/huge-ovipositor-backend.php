@@ -481,5 +481,13 @@ echo "<br>Defender Tank Remaining: " . $defender_tank_remaining;
 echo "<br>Defender Uni Remaining: " . $defender_unicorn_remaining;
 echo "<br>Defender Nav Remaining: " . $defender_navy_remaining;
 
+
+echo "<br><br><br> STUFF NEW: ";
+$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	echo $rs;
+}
+
 }
 ?>
