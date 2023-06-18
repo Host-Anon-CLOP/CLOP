@@ -19,6 +19,10 @@ foreach ($forcetypes as $key => $value) {
 	$Defenders_Died_{$key} = 0;
 	$Attackers_Remaining_{$key} = 0;
 	$Defenders_Remaining_{$key} = 0;
+	$Attacker_Damage_Initial_{$key} = 0;
+	$Defender_Damage_Initial_{$key} = 0;
+	$Attacker_Damage_Remaining_{$key} = 0;
+	$Defender_Damage_Remaining_{$key} = 0;
 }
 $Initial_Attackers = 0;
 $Initial_Defenders = 0;
@@ -138,6 +142,9 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 	}
+
+	$Defender_Damage_Initial_{$key} = $Defender_Damage_Initial_{$key} + $rs["dmg_{$type}"];
+
 
 echo "<h2>Battle Result</h2>";
 // WAR CALCS
@@ -391,7 +398,7 @@ foreach ($forcetypes as $key => $value) {
 
 
 #Display Results - Attackers
-echo "<h2>Attackers Summary:</h2>";
+echo "<div><h2>Attackers Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
@@ -405,10 +412,10 @@ foreach ($forcetypes as $key => $value) {
 	}
     echo "<tr><td>" . $key . "</td><td>" . $Attackers_Initial_{$key} . " </td><td>" . $Attackers_Died_{$key} . "</td><td>" . $Attackers_Remaining_{$key} . "</td></tr>";
 }
-echo "</table></div>";
+echo "</table></div></div>";
 
 #Display Results - Defenders
-echo "<h2>Defenders Summary:</h2>";
+echo "<div><h2>Defenders Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
@@ -422,7 +429,7 @@ echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Defenders</td><td>I
 foreach ($forcetypes as $key => $value) {
     echo "<tr><td>" . $key . "</td><td>" . $Defenders_Initial_{$key} . " </td><td>" . $Defenders_Died_{$key} . "</td><td>" . $Defenders_Remaining_{$key} . "</td></tr>";
 }
-echo "</table></div>";
+echo "</table></div></div>";
 
 }
 ?>
