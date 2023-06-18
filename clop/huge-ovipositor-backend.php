@@ -376,12 +376,12 @@ foreach ($forcetypes as $key => $value) {
 
 echo "<br><br><h2>Defenders Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
-    echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
-}
-foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		break;
 	}
+    echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
+}
+foreach ($forcetypes as $key => $value) {
     echo "<br>Defenders_" . $key . " Initial:" . $Defenders_Initial_{$key} . " Died:" . $Defenders_Died_{$key} . " Remaining:" . $Defenders_Remaining_{$key};
 }
 
