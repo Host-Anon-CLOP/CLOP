@@ -368,6 +368,22 @@ EOSQL;
 	}
 }
 
+// CALCULATE REMAINING TROOPS FOR RESULTS
+# Attackers
+$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '1' ORDER BY size DESC";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	$Remaining_Attackers = $Remaining_Attackers + $rs['size'];
+	$Attackers_Remaining_{array_search($rs['type'], $forcetypes)} = $Attackers_Remaining_{array_search($rs['type'], $forcetypes)} + $rs['size'];
+	}
+# Defenders
+$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
+$sth = $GLOBALS['mysqli']->query($sql);
+while ($rs = mysqli_fetch_array($sth)) {
+	$Remaining_Defenders = $Remaining_Defenders + $rs['size'];
+	$Defenders_Remaining_{array_search($rs['type'], $forcetypes)} = $Defenders_Remaining_{array_search($rs['type'], $forcetypes)} + $rs['size'];
+	}
+
 
 #Display Results - Attackers
 echo "<br><h2>Attackers Summary:</h2>";
