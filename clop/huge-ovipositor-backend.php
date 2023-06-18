@@ -144,7 +144,7 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
-	$Defenders_Damage_Initial_{$key} = $Defenders_Damage_Initial_{$key} + $rs["dmg_" . array_search($rs['type'], $forcetypes)"];
+	$Defenders_Damage_Initial_{$key} = $Defenders_Damage_Initial_{$key} + $rs["dmg_" . array_search($rs['type'], $forcetypes)];
 	echo "test: " . $Defenders_Damage_Initial_{$key};
 }
 
