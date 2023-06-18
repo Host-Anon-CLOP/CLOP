@@ -123,16 +123,16 @@ $GLOBALS['mysqli']->query($sql);
     }
     echo "</pre>";
 
-	#TALLY TROOPS BEFORE WAR
-	echo "<br><br><br> STUFF BEFORE: ";
-$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
+// CALCULATE INITIAL TROOPS FOR RESULTS
+# Attackers
+$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '1' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs['name'] . "size:" . $rs['size'] . "<br>";
+	echo $rs['name'] . "size:" . $rs['size'] . " type:" . $rs['type'] . "<br>";
 }
+# Defenders
 
     echo "<h2>Battle Result</h2>";
-
 // WAR CALCS
 $types = array(1 => "cavalry", 2 => "tanks", 3 => "pegasi", 4 => "unicorns", 5 => "naval");
 $invaderattackers = array();
@@ -367,6 +367,7 @@ echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
     echo "<br>Attackers_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
+echo "<br>"
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		break;
@@ -381,6 +382,7 @@ foreach ($forcetypes as $key => $value) {
 	}
     echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
+echo "<br>"
 foreach ($forcetypes as $key => $value) {
     echo "<br>Defenders_" . $key . " Initial:" . $Defenders_Initial_{$key} . " Died:" . $Defenders_Died_{$key} . " Remaining:" . $Defenders_Remaining_{$key};
 }
