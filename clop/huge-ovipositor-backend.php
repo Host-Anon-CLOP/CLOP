@@ -410,7 +410,7 @@ echo "</table></div><br>";
 
 #Display Results - Defenders
 echo "<br><br><h2>Defenders Summary:</h2>";
-echo "<div><table border=\"1\ style=\"float: left\"" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
+echo "<div><table border=\"1\" style=\"float: left\"" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
