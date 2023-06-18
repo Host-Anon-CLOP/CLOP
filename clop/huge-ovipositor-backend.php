@@ -365,10 +365,6 @@ EOSQL;
 #Display Results
 echo "<br><h2>Attackers Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
-	echo "attacker summary " . $key;
-	if ($key == 'Alicorns') {
-		break;
-	}
     echo "<br>Attackers_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
 foreach ($forcetypes as $key => $value) {
@@ -380,9 +376,6 @@ foreach ($forcetypes as $key => $value) {
 
 echo "<br><br><h2>Defenders Summary:</h2>";
 foreach ($forcetypes as $key => $value) {
-	if ($key == 'Alicorns') {
-		break;
-	}
     echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
 foreach ($forcetypes as $key => $value) {
