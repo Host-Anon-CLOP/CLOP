@@ -406,10 +406,10 @@ foreach ($forcetypes as $key => $value) {
 	}
     echo "<tr><td>" . $key . "</td><td>" . $Attackers_Initial_{$key} . " </td><td>" . $Attackers_Died_{$key} . "</td><td>" . $Attackers_Remaining_{$key} . "</td></tr>";
 }
-echo "</table></div><br>";
+echo "</table></div>";
 
 #Display Results - Defenders
-echo "<br><br><h2>Defenders Summary:</h2>";
+echo "<h2>Defenders Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
