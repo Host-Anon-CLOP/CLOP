@@ -11,7 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 # Declare Initial Variables
 foreach ($forcetypes as $key => $value) {
-    echo "THING: " . $key . " " . $value . "<br>";
+    $attacker_damage_{$key} = $value;
+}
+
+foreach ($forcetypes as $key => $value) {
+    echo "attacker_damage_" . $key . " " . $attacker_damage_{$key}
 }
 
 # Clear Previous Results
