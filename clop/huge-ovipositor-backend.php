@@ -19,10 +19,10 @@ foreach ($forcetypes as $key => $value) {
 	$Defenders_Died_{$key} = 0;
 	$Attackers_Remaining_{$key} = 0;
 	$Defenders_Remaining_{$key} = 0;
-	$Attacker_Damage_Initial_{$key} = 0;
-	$Defender_Damage_Initial_{$key} = 0;
-	$Attacker_Damage_Remaining_{$key} = 0;
-	$Defender_Damage_Remaining_{$key} = 0;
+	$Attackers_Damage_Initial_{$key} = 0;
+	$Defenders_Damage_Initial_{$key} = 0;
+	$Attackers_Damage_Remaining_{$key} = 0;
+	$Defenders_Damage_Remaining_{$key} = 0;
 }
 $Initial_Attackers = 0;
 $Initial_Defenders = 0;
@@ -136,16 +136,16 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Attackers = $Initial_Attackers + $rs['size'];
 	$Attackers_Initial_{array_search($rs['type'], $forcetypes)} = $Attackers_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
-	}
+	$Attackers_Damage_Initial_{$key} = $Attackers_Damage_Initial_{$key} + $rs["dmg_{$rs['type']}"];	
+}
 # Defenders
 $sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
-	}
-
-	$Defender_Damage_Initial_{$key} = $Defender_Damage_Initial_{$key} + $rs["dmg_{$type}"];
+	$Defenders_Damage_Initial_{$key} = $Defenders_Damage_Initial_{$key} + $rs["dmg_{$rs['type']}"];
+}
 
 
 echo "<h2>Battle Result</h2>";
@@ -403,7 +403,7 @@ foreach ($forcetypes as $key => $value) {
 echo "<h2>Attackers Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
-    echo "<tr><td>$key</td><td>" . $Attackers_Damage_{$key} . "</td></tr>";
+    echo "<tr><td>$key</td><td>" . $Attackers_Damage_Initial_{$key} . "</td></tr>";
 }
 echo "</table></div>";
 
@@ -423,7 +423,7 @@ foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
 	}
-    echo "<tr><td>$key</td><td>" . $Defenders_Damage_{$key} . "</td></tr>";
+    echo "<tr><td>$key</td><td>" . $Defenders_Damage_Initial_{$key} . "</td></tr>";
 }
 echo "</table></div>";
 
