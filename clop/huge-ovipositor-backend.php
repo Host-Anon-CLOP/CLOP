@@ -11,12 +11,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 # Declare Initial Variables
 foreach ($forcetypes as $key => $value) {
-    $attacker_damage_{$key} = $value;
+    $Attackers_Damage_{$key} = 0;
+	$Defenders_Damage_{$key} = 0;
+	$Attackers_Initial_{$key} = 0;
+	$Defenders_Initial_{$key} = 0;
+	$Attackers_Died_{$key} = 0;
+	$Defenders_Died_{$key} = 0;
+	$Attackers_Remaining_{$key} = 0;
+	$Defenders_Remaining_{$key} = 0;
 }
-
-foreach ($forcetypes as $key => $value) {
-    echo "attacker_damage_" . $key . " " . $attacker_damage_{$key};
-}
+$Initial_Attackers = 0;
+$Initial_Defenders = 0;
+$Attackers_Died = 0;
+$Defenders_Died = 0;
+$Attackers_Remaining = 0;
+$Defenders_Remaining = 0;
 
 # Clear Previous Results
 $sql=<<<EOSQL
@@ -352,17 +361,36 @@ EOSQL;
 	}
 }
 
-echo "<br><br><h2>Remaining Attackers:</h2>";
 
-echo "<br><br><h2>Remaining Defenders:</h2>";
-
-
-#calc remaining attackers
-$sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
-$sth = $GLOBALS['mysqli']->query($sql);
-while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs['name'] . "size:" . $rs['size'] . "<br>";
+#Display Results
+echo "<br><h2>Attackers Summary:</h2>"
+foreach ($forcetypes as $key => $value) {
+	if ($key = 'Alicorns') {
+		break;
+	}
+    echo "<br>Attackers_Damage_" . $key . " " . $Attackers_Damage_{$key};
 }
+foreach ($forcetypes as $key => $value) {
+	if ($key = 'Alicorns') {
+		break;
+	}
+    echo "<br>Attackers_" . $key . " Initial:" . $Attackers_Initial_{$key} . " Died:" . $Attackers_Died_{$key} . " Remaining:" . $Attackers_Remaining_{$key};
+}
+
+echo "<br><br><h2>Defenders Summary:</h2>"
+foreach ($forcetypes as $key => $value) {
+	if ($key = 'Alicorns') {
+		break;
+	}
+    echo "<br>Defenders_Damage_" . $key . " " . $Attackers_Damage_{$key};
+}
+foreach ($forcetypes as $key => $value) {
+	if ($key = 'Alicorns') {
+		break;
+	}
+    echo "<br>Defenders_" . $key . " Initial:" . $Defenders_Initial_{$key} . " Died:" . $Defenders_Died_{$key} . " Remaining:" . $Defenders_Remaining_{$key};
+}
+
 
 }
 ?>
