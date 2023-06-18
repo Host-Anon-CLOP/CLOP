@@ -486,7 +486,7 @@ echo "<br><br><br> STUFF NEW: ";
 $sql = "SELECT * from forces_calc fc WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo $rs;
+	echo $rs['name'] . "<br>";
 }
 
 }
