@@ -144,9 +144,9 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 
-	# the table for this isn't joined. and when it was it broke things if scrounged weapons. maybe inner join vs left join is the problem?
-	echo "dmg cav: " . $rs['dmg_cavalry'];
-	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + $rs['dmg_cavalry'];
+	foreach ($forcetypes as $key => $value) {
+		$Defenders_Damage_Initial_{$key} = $Defenders_Damage_Initial_{$key} + $rs['dmg_cavalry'];
+	}
 }
 
 
@@ -425,7 +425,7 @@ foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
 	}
-    echo "<tr><td>$key</td><td>" . $Defenders_Damage_Initial_Cavalry . "</td></tr>";
+    echo "<tr><td>$key</td><td>" . $Defenders_Damage_Initial_{$key} . "</td></tr>";
 }
 echo "</table></div>";
 
