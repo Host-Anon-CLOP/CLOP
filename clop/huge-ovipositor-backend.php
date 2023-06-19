@@ -413,7 +413,7 @@ foreach ($forcetypes as $key => $value) {
 echo "<h2>Attackers Summary:</h2>";
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Versus</td><td>Total Damage</td></tr>";
 foreach ($forcetypes as $key => $value) {
-    echo "<tr><td>$key</td><td>" . $Attackers_Damage_Initial_{$key} . "</td></tr>";
+    echo "<tr><td>$key</td><td>" . $Attackers_Damage_Initial_Cavalry . "</td></tr>";
 }
 echo "</table></div>";
 
