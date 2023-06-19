@@ -164,6 +164,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 $sql = "SELECT * from forces_calc fc INNER JOIN weapondefs w ON fc.weapon_id = w.weapon_id INNER JOIN armordefs a ON fc.armor_id = a.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
+	echo "BLAG";
 	if (!$rs['weapon_id']) {
 	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + .25;
 	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + .25;
