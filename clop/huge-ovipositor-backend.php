@@ -145,7 +145,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 
 	foreach ($forcetypes as $key => $value) {
-		echo "dmg cav: " . $rs['dmg_cavalry']
+		echo "dmg cav: " . $rs['dmg_cavalry'];
 		$Defenders_Damage_Initial_{$key} = $Defenders_Damage_Initial_{$key} + $rs['dmg_cavalry'];
 	}
 }
