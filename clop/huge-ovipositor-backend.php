@@ -137,7 +137,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Attackers = $Initial_Attackers + $rs['size'];
 	$Attackers_Initial_{array_search($rs['type'], $forcetypes)} = $Attackers_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 	}
-$sql = "SELECT * from forces_calc fc INNER JOIN weapondefs w ON fc.weapon_id = w.weapon_id INNER JOIN armordefs a ON fc.armor_id = a.armor_id WHERE forcegroup_id = '1' ORDER BY size DESC";
+$sql = "SELECT * from forces_calc fc LEFT JOIN weapondefs w ON fc.weapon_id = w.weapon_id LEFT JOIN armordefs a ON fc.armor_id = a.armor_id WHERE forcegroup_id = '1' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	if (!$rs['weapon_id']) {
@@ -161,10 +161,9 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 }
-$sql = "SELECT * from forces_calc fc INNER JOIN weapondefs w ON fc.weapon_id = w.weapon_id INNER JOIN armordefs a ON fc.armor_id = a.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
+$sql = "SELECT * from forces_calc fc LEFT JOIN weapondefs w ON fc.weapon_id = w.weapon_id LEFT JOIN armordefs a ON fc.armor_id = a.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
-	echo "BLAG";
 	if (!$rs['weapon_id']) {
 	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + .25;
 	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + .25;
