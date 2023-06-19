@@ -417,6 +417,7 @@ echo "<tr><td>Tanks</td><td>" . $Attackers_Damage_Initial_Tanks . "</td></tr>";
 echo "<tr><td>Pegasi</td><td>" . $Attackers_Damage_Initial_Pegasi . "</td></tr>";
 echo "<tr><td>Unicorns</td><td>" . $Attackers_Damage_Initial_Unicorns . "</td></tr>";
 echo "<tr><td>Naval</td><td>" . $Attackers_Damage_Initial_Naval . "</td></tr>";
+echo "<tr><td>Alicorns</td><td>" . $Attackers_Damage_Initial_Naval . "</td></tr>";
 echo "</table></div>";
 
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Attackers</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
