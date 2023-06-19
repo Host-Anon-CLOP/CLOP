@@ -136,6 +136,12 @@ $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Attackers = $Initial_Attackers + $rs['size'];
 	$Attackers_Initial_{array_search($rs['type'], $forcetypes)} = $Attackers_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
+	
+	$Attackers_Damage_Initial_Cavalry = $Attackers_Damage_Initial_Cavalry + $rs['dmg_cavalry'];
+	$Attackers_Damage_Initial_Pegasi = $Attackers_Damage_Initial_Pegasi + $rs['dmg_pegasi'];
+	$Attackers_Damage_Initial_Tanks = $Attackers_Damage_Initial_Tanks + $rs['dmg_tanks'];
+	$Attackers_Damage_Initial_Unicorns = $Attackers_Damage_Initial_Unicorns + $rs['dmg_unicorns'];
+	$Attackers_Damage_Initial_Naval = $Attackers_Damage_Initial_Naval + $rs['dmg_naval'];
 	}
 # Defenders
 $sql = "SELECT * from forces_calc fc INNER JOIN weapondefs w ON fc.weapon_id = w.weapon_id INNER JOIN armordefs a ON fc.armor_id = a.armor_id WHERE forcegroup_id = '2' ORDER BY size DESC";
@@ -144,10 +150,11 @@ while ($rs = mysqli_fetch_array($sth)) {
 	$Initial_Defenders = $Initial_Defenders + $rs['size'];
 	$Defenders_Initial_{array_search($rs['type'], $forcetypes)} = $Defenders_Initial_{array_search($rs['type'], $forcetypes)} + $rs['size'];
 
-	foreach ($forcetypes as $key => $value) {
-		echo "dmg cav: " . $rs['dmg_cavalry'];
-		$Defenders_Damage_Initial_{$key} = $Defenders_Damage_Initial_{$key} + $rs['dmg_cavalry'];
-	}
+	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + $rs['dmg_cavalry'];
+	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + $rs['dmg_pegasi'];
+	$Defenders_Damage_Initial_Tanks = $Defenders_Damage_Initial_Tanks + $rs['dmg_tanks'];
+	$Defenders_Damage_Initial_Unicorns = $Defenders_Damage_Initial_Unicorns + $rs['dmg_unicorns'];
+	$Defenders_Damage_Initial_Naval = $Defenders_Damage_Initial_Naval + $rs['dmg_naval'];
 }
 
 
