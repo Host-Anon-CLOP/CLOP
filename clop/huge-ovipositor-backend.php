@@ -141,17 +141,17 @@ $sql = "SELECT * from forces_calc fc LEFT JOIN weapondefs w ON fc.weapon_id = w.
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	if (!$rs['weapon_id']) {
-	$Attackers_Damage_Initial_Cavalry = $Attackers_Damage_Initial_Cavalry + .25;
-	$Attackers_Damage_Initial_Pegasi = $Attackers_Damage_Initial_Pegasi + .25;
-	$Attackers_Damage_Initial_Tanks = $Attackers_Damage_Initial_Tanks + .25;
-	$Attackers_Damage_Initial_Unicorns = $Attackers_Damage_Initial_Unicorns + .25;
-	$Attackers_Damage_Initial_Naval = $Attackers_Damage_Initial_Naval + .25;
+	$Attackers_Damage_Initial_Cavalry = $Attackers_Damage_Initial_Cavalry + (.25 * $rs['size']);
+	$Attackers_Damage_Initial_Pegasi = $Attackers_Damage_Initial_Pegasi + (.25 * $rs['size']);
+	$Attackers_Damage_Initial_Tanks = $Attackers_Damage_Initial_Tanks + (.25 * $rs['size']);
+	$Attackers_Damage_Initial_Unicorns = $Attackers_Damage_Initial_Unicorns + (.25 * $rs['size']);
+	$Attackers_Damage_Initial_Naval = $Attackers_Damage_Initial_Naval + (.25 * $rs['size']);
 	} else {
-	$Attackers_Damage_Initial_Cavalry = $Attackers_Damage_Initial_Cavalry + $rs['dmg_cavalry'];
-	$Attackers_Damage_Initial_Pegasi = $Attackers_Damage_Initial_Pegasi + $rs['dmg_pegasi'];
-	$Attackers_Damage_Initial_Tanks = $Attackers_Damage_Initial_Tanks + $rs['dmg_tanks'];
-	$Attackers_Damage_Initial_Unicorns = $Attackers_Damage_Initial_Unicorns + $rs['dmg_unicorns'];
-	$Attackers_Damage_Initial_Naval = $Attackers_Damage_Initial_Naval + $rs['dmg_naval'];
+	$Attackers_Damage_Initial_Cavalry = $Attackers_Damage_Initial_Cavalry + ($rs['dmg_cavalry'] * $rs['size']);
+	$Attackers_Damage_Initial_Pegasi = $Attackers_Damage_Initial_Pegasi + ($rs['dmg_pegasi'] * $rs['size']);
+	$Attackers_Damage_Initial_Tanks = $Attackers_Damage_Initial_Tanks + ($rs['dmg_tanks'] * $rs['size']);
+	$Attackers_Damage_Initial_Unicorns = $Attackers_Damage_Initial_Unicorns + ($rs['dmg_unicorns'] * $rs['size']);
+	$Attackers_Damage_Initial_Naval = $Attackers_Damage_Initial_Naval + ($rs['dmg_naval'] * $rs['size']);
 	}
 	}	
 # Defenders
@@ -165,17 +165,17 @@ $sql = "SELECT * from forces_calc fc LEFT JOIN weapondefs w ON fc.weapon_id = w.
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
 	if (!$rs['weapon_id']) {
-	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + .25;
-	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + .25;
-	$Defenders_Damage_Initial_Tanks = $Defenders_Damage_Initial_Tanks + .25;
-	$Defenders_Damage_Initial_Unicorns = $Defenders_Damage_Initial_Unicorns + .25;
-	$Defenders_Damage_Initial_Naval = $Defenders_Damage_Initial_Naval + .25;
+	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + (.25 * $rs['size']);
+	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + (.25 * $rs['size']);
+	$Defenders_Damage_Initial_Tanks = $Defenders_Damage_Initial_Tanks + (.25 * $rs['size']);
+	$Defenders_Damage_Initial_Unicorns = $Defenders_Damage_Initial_Unicorns + (.25 * $rs['size']);
+	$Defenders_Damage_Initial_Naval = $Defenders_Damage_Initial_Naval + (.25 * $rs['size']);
 	} else {
-	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + $rs['dmg_cavalry'];
-	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + $rs['dmg_pegasi'];
-	$Defenders_Damage_Initial_Tanks = $Defenders_Damage_Initial_Tanks + $rs['dmg_tanks'];
-	$Defenders_Damage_Initial_Unicorns = $Defenders_Damage_Initial_Unicorns + $rs['dmg_unicorns'];
-	$Defenders_Damage_Initial_Naval = $Defenders_Damage_Initial_Naval + $rs['dmg_naval'];
+	$Defenders_Damage_Initial_Cavalry = $Defenders_Damage_Initial_Cavalry + ($rs['dmg_cavalry'] * $rs['size']);
+	$Defenders_Damage_Initial_Pegasi = $Defenders_Damage_Initial_Pegasi + ($rs['dmg_pegasi'] * $rs['size']);
+	$Defenders_Damage_Initial_Tanks = $Defenders_Damage_Initial_Tanks + ($rs['dmg_tanks'] * $rs['size']);
+	$Defenders_Damage_Initial_Unicorns = $Defenders_Damage_Initial_Unicorns + ($rs['dmg_unicorns'] * $rs['size']);
+	$Defenders_Damage_Initial_Naval = $Defenders_Damage_Initial_Naval + ($rs['dmg_naval'] * $rs['size']);
 	}
 }
 
