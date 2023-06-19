@@ -425,7 +425,7 @@ foreach ($forcetypes as $key => $value) {
 	if ($key == 'Alicorns') {
 		continue;
 	}
-    echo "<tr><td>$key</td><td>" . $Defenders_Damage_Initial_{$key} . "</td></tr>";
+    echo "<tr><td>$key</td><td>" . $Defenders_Damage_Initial_Cavalry . "</td></tr>";
 }
 echo "</table></div>";
 
