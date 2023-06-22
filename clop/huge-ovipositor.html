@@ -183,6 +183,11 @@
             Size: 200
             Training: 20
             ...
+            Alicorns are an edge case. Example format:
+            UnitName
+            Alicorns
+            Size: 30
+            Training: 20
             */
 
             // Check if any data provided
@@ -199,13 +204,24 @@
                     // If the current line is a valid Training line
                     if (i >= 4 && textLines[i].indexOf("Training:") === 0){
                         // Create a new unit based on the most recent 5 lines
-                        var unit = {
-                            type:       textLines[i-4].trim(),
-                            weapon:     textLines[i-3].trim(),
-                            armor:      textLines[i-2].trim(),
-                            size:       parseInt(textLines[i-1].split(":")[1].trim()),
-                            training:   parseInt(textLines[i].split(":")[1].trim())
-                        };
+                        if (textLines[i-2].trim() != "Alicorns") {
+                            var unit = {
+                                type:       textLines[i-4].trim(),
+                                weapon:     textLines[i-3].trim(),
+                                armor:      textLines[i-2].trim(),
+                                size:       parseInt(textLines[i-1].split(":")[1].trim()),
+                                training:   parseInt(textLines[i].split(":")[1].trim())
+                            };
+                        } else {
+                            // Edge case for Alicorns, as their format is different
+                            var unit = {
+                                type:       "Alicorns",
+                                weapon:     "Scrounged",
+                                armor:      "Scrounged",
+                                size:       parseInt(textLines[i-1].split(":")[1].trim()),
+                                training:   parseInt(textLines[i].split(":")[1].trim())
+                            };
+                        }
                         addRow(attackOrDefend, unit);
                     }
                 }

@@ -453,13 +453,12 @@ echo "</table></div>";
 
 #Display Results - Defenders
 echo "<h2>Defenders Summary:</h2>";
-echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Defend vs</td><td>Total Damage</td></tr>";
+echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Attack vs</td><td>Total Damage</td></tr>";
 echo "<tr><td>Cavalry</td><td>" . $Defenders_Damage_Initial_Cavalry . "</td></tr>";
 echo "<tr><td>Tanks</td><td>" . $Defenders_Damage_Initial_Tanks . "</td></tr>";
 echo "<tr><td>Pegasi</td><td>" . $Defenders_Damage_Initial_Pegasi . "</td></tr>";
 echo "<tr><td>Unicorns</td><td>" . $Defenders_Damage_Initial_Unicorns . "</td></tr>";
 echo "<tr><td>Naval</td><td>" . $Defenders_Damage_Initial_Naval . "</td></tr>";
-echo "<tr><td>Alicorns</td><td>" . $Defenders_Damage_Initial_Naval . "</td></tr>";
 echo "</table></div>";
 
 echo "<div><table border=\"1\" style=\"float: left\"><tr><td>Defenders</td><td>Initial</td><td>Died</td><td>Remaining</td></tr>";
