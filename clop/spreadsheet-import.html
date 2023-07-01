@@ -31,10 +31,18 @@
                 // Split the text into individual lines
                 var parsedResults = "";
                 var textLines = text.split(/\r?\n|\r/); 
-                for(var i = 0;i < textLines.length;i++){
-                console.log(textLines[i])
+
+                var businessArray = ["Bakery", "Basic Apple Orchard"]
+                for(var business = 0; business < businessArray.length; businessArray++){
+                    console.log("business: " + businessArray[business])
                 }
-                //var VAL = this.value;
+
+                //for each per type of building, and line breaks
+                //assume not found and set 0, which will get overwritten if found
+
+                //for(var line = 0; line < textLines.length; line++){
+                //console.log(textLines[line])
+                //}
 
                 //var email = new RegExp('^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$');
 
@@ -46,7 +54,7 @@
             }
             catch(err) {
                 console.log(err);
-                alert("The import data was in an unexpected format.")
+                alert("Error Found.")
             }
         }
 
