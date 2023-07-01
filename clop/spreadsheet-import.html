@@ -33,20 +33,45 @@
                 var parsedResultsDisabled = "";
                 var textLines = text.split(/\r?\n|\r/); 
 
-                const businessArray = ["Bakery", "Basic Apple Orchard"];
+                const businessArray = ["Basic Copper Mine", "Mechanized Copper Mine", "Gem Mine", "Tungsten Mine", "NEWLINE", "Basic Apple Orchard", "Mechanized Apple Farm", "Coffee Farm", "Drug Farm", "NEWLINE", "Basic Oil Well", "Mechanized Oil Well", "Oil Fracker", "NEWLINE", "Cider Production Facility", "Energy Collector", "Oil Combustion Facility", "Gasoline Combustion Facility", "Gasoline Refinery", "Plastics Factory", "Przewalskian Plastics Factory", "Toy Factory", "NEWLINE", "Bakery", "Bar", "Coffee Shop", "Statue", "Toy and Candy Shop", "Video Arcade", "Mall", "NEWLINE", "Basic Factory", "Advanced Factory", "DNA Extraction Facility", "Barracks", "NEWLINE", "Moon Worship Center", "Sun Worship Center", "NEWLINE", "Lunar Environmental Facility", "Solar Environmental Facility", "Forbidden Research Facility", "Alicornification Facility"];
                 //assume not found and set 0, which will get overwritten if found
                 var businessCount = 0;
                 var businessCountDisabled = 0;
 
                 businessArray.forEach(addBusiness);
-                const displayParsedResults = parsedResults + parsedResultsDisabled;
+                const displayParsedResults = parsedResults + "\n" + "\n" + "\n" + "\n" + "\n" + parsedResultsDisabled;
                 console.log("FINISHED");
 
                 function addBusiness(item) {
                 console.log(item);
+
+                parsedResults = parsedResults + "\n";
+                parsedResultsDisabled = parsedResultsDisabled + "\n";
+
                 // we are already checking each business in order. now we need to find the relevant line
                 for(var line = 0; line < textLines.length; line++){
-                    if (textLines[line].indexOf(item) !== -1) {
+                    if (item == "NEWLINE") {
+                        break;
+                    }
+                    if (item == "Plastics Factory") {
+                        if (textLines[line].indexOf("Przewalskian") !== -1) {
+                            continue;
+                        }
+                    }
+                    if (item == "Bar") {
+                        if (textLines[line].indexOf("Barracks") !== -1) {
+                            continue;
+                        }
+                    }
+                    else if (item == "Energy Collector") {
+                        if (textLines[line].indexOf("Solar Collector") !== -1) {
+                            businessCount = businessCount + textLines[line].match(/[0-9]+/)[0];
+                        }
+                        if (textLines[line].indexOf("Tidal Generator") !== -1) {
+                            businessCount = businessCount + textLines[line].match(/[0-9]+/)[0];
+                        }
+                    }
+                    else if (textLines[line].indexOf(item) !== -1) {
                         if (textLines[line].indexOf("disabled)") !== -1) {
                             //console.log("DISABLED item found:" + item + " in: " + textLines[line]);
                             //console.log(textLines[line].match(/[0-9]+/)[0]);
@@ -55,15 +80,15 @@
                             businessCountDisabledSplit = textLines[line].split("(");
                             //console.log("disabled count: " + businessCountDisabledSplit[1].match(/[0-9]+/)[0]);
                             businessCountDisabled = businessCountDisabledSplit[1].match(/[0-9]+/)[0];
-                            parsedResults = parsedResults + businessCount + "\n";
-                            parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled + "\n";
+                            parsedResults = parsedResults + businessCount;
+                            parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
                             break;
                         } else {
                             //console.log("REGULAR item found:" + item + " in: " + textLines[line]);
                             businessCount = textLines[line].match(/[0-9]+/)[0];
                             businessCountDisabled = 0;
-                            parsedResults = parsedResults + businessCount + "\n";
-                            parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled + "\n";
+                            parsedResults = parsedResults + businessCount;
+                            parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
                             break;
                         }
                     }
