@@ -32,13 +32,20 @@
                 var parsedResults = "";
                 var textLines = text.split(/\r?\n|\r/); 
 
-                const businessArray = ["Bakery", "Basic Apple Orchard"]
+                const businessArray = ["Bakery", "Basic Apple Orchard"];
+                var businessCount = 0;
 
                 businessArray.forEach(addBusiness);
 
                 function addBusiness(item) {
                 console.log(item);
-                parsedResults = parsedResults + item + "\n";
+                // we are already checking each business in order. now we need to find the relevant line
+                for(var line = 0; line < textLines.length; line++){
+                if (textLines[line].inclues(item))
+                console.log("item found:" + item + " in: " + textLines[line])
+                }
+
+                parsedResults = parsedResults + businessCount + "\n";
                 }
 
                 //for each per type of building, and line breaks
