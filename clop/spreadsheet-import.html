@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ovipositor Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var exportData;
+
+        function importRows(attackOrDefend) {
+            /** Example import format
+            4_ACFU_Nope
+            Cavalry
+            ACFU
+            Nope
+            Size: 200
+            Training: 20
+            ...
+            Alicorns are an edge case. Example format:
+            UnitName
+            Alicorns
+            Size: 30
+            Training: 20
+            */
+
+            // Check if any data provided
+            var text = document.getElementById("txtImport").value;
+            if (text.trim().length == 0)
+                return;
+    
+            try {
+                // Split the text into individual lines
+                var textLines = text.split(/\r?\n|\r/);
+
+                // Run through each line
+                for (let i = 0; i < textLines.length; i++) {
+                    // If the current line is a valid Training line
+                    if (i >= 4 && textLines[i].indexOf("Training:") === 0){
+                        // Create a new unit based on the most recent 5 lines
+                        if (textLines[i-2].trim() != "Alicorns") {
+                            var unit = {
+                                type:       textLines[i-4].trim(),
+                                weapon:     textLines[i-3].trim(),
+                                armor:      textLines[i-2].trim(),
+                                size:       parseInt(textLines[i-1].split(":")[1].trim()),
+                                training:   parseInt(textLines[i].split(":")[1].trim())
+                            };
+                        } else {
+                            // Edge case for Alicorns, as their format is different
+                            var unit = {
+                                type:       "Alicorns",
+                                weapon:     "Scrounged Weapons",
+                                armor:      "Scrounged Armor",
+                                size:       parseInt(textLines[i-1].split(":")[1].trim()),
+                                training:   parseInt(textLines[i].split(":")[1].trim())
+                            };
+                        }
+                        addRow(attackOrDefend, unit);
+                    }
+                }
+
+                // Finally, clear out the textarea upon successful import.
+                document.getElementById("txtImport").value = "";
+            }
+            catch(err) {
+                console.log(err);
+                alert("The import data was in an unexpected format.")
+            }
+        }
+
+        $(document).ready(function() {
+            // Import rows on bbutton click
+            $('#btnImportAttackers').on("click", () => importRows.call(this, "attacker"));
+        });
+    </script>
+</head>
+<body>
+        <h1>Ovipositor Calculator</h1>
+        <div class="importRegion">
+            <h2>Import data</h2>
+            <div class="importButtons">
+                <input type="button" id="btnImportAttackers" value="Import Attackers" title="Import to the attackers table" />
+            </div>
+            <textarea id="txtImport"></textarea>
+        </div>
+</body>
+</html>
