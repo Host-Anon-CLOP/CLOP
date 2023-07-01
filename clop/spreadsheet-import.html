@@ -39,6 +39,7 @@
                 var businessCountDisabled = 0;
 
                 businessArray.forEach(addBusiness);
+                const displayParsedResults = parsedResults + parsedResultsDisabled;
                 console.log("FINISHED");
 
                 function addBusiness(item) {
@@ -69,21 +70,7 @@
                 }
 
                 }
-
-                //for each per type of building, and line breaks
-                
-
-                //for(var line = 0; line < textLines.length; line++){
-                //console.log(textLines[line])
-                //}
-
-                //var email = new RegExp('^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$');
-
-                //if (email.test(VAL)) {
-                //    alert('Great, you entered an E-Mail-address');
-
-                // Finally, clear out the textarea upon successful import.
-                document.getElementById("txtImport").value = parsedResults;
+                document.getElementById("txtImport").value = displayParsedResults;
             }
             catch(err) {
                 console.log(err);
