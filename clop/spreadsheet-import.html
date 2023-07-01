@@ -66,14 +66,14 @@
 
                             businessCountDisabledSplit = textLines[line].split("(");
                             businessCountDisabled = businessCountDisabledSplit[1].match(/[0-9]+/)[0];
-                            parsedResults = parsedResults + businessCount;
-                            parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
+                            parsedResults = parsedResults + item + " " + businessCount;
+                            parsedResultsDisabled = parsedResultsDisabled + item + " " + businessCountDisabled;
                             break;
                         } else {
                             businessCount = textLines[line].match(/[0-9]+/)[0];
                             businessCountDisabled = 0;
-                            parsedResults = parsedResults + businessCount;
-                            parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
+                            parsedResults = parsedResults + item + " " + businessCount;
+                            parsedResultsDisabled = parsedResultsDisabled + item + " " + businessCountDisabled;
                             break;
                         }
                     }
