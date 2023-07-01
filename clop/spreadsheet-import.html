@@ -29,37 +29,21 @@
     
             try {
                 // Split the text into individual lines
+                var parsedResults;
                 var textLines = text.split(/\r?\n|\r/);
-
-                // Run through each line
-                for (let i = 0; i < textLines.length; i++) {
-                    // If the current line is a valid Training line
-                    if (i >= 4 && textLines[i].indexOf("Training:") === 0){
-                        // Create a new unit based on the most recent 5 lines
-                        if (textLines[i-2].trim() != "Alicorns") {
-                            var unit = {
-                                type:       textLines[i-4].trim(),
-                                weapon:     textLines[i-3].trim(),
-                                armor:      textLines[i-2].trim(),
-                                size:       parseInt(textLines[i-1].split(":")[1].trim()),
-                                training:   parseInt(textLines[i].split(":")[1].trim())
-                            };
-                        } else {
-                            // Edge case for Alicorns, as their format is different
-                            var unit = {
-                                type:       "Alicorns",
-                                weapon:     "Scrounged Weapons",
-                                armor:      "Scrounged Armor",
-                                size:       parseInt(textLines[i-1].split(":")[1].trim()),
-                                training:   parseInt(textLines[i].split(":")[1].trim())
-                            };
-                        }
-                        addRow(attackOrDefend, unit);
-                    }
+                for(var line in textLines) {
+                    parsedResults = parsedResults + line;
                 }
+                //var VAL = this.value;
+
+                //var email = new RegExp('^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$');
+
+                //if (email.test(VAL)) {
+                //    alert('Great, you entered an E-Mail-address');
+}
 
                 // Finally, clear out the textarea upon successful import.
-                document.getElementById("txtImport").value = "rawr";
+                document.getElementById("txtImport").value = parsedResults;
             }
             catch(err) {
                 console.log(err);
@@ -75,7 +59,7 @@
 </head>
 <body>
         <div class="importRegion">
-            <h2>Import data</h2>
+            <h2>Import data for Spreadsheet</h2>
             <div class="importButtons">
                 <input type="button" id="btnImportAttackers" value="Import Attackers" title="Import to the attackers table" />
             </div>
