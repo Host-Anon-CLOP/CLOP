@@ -66,14 +66,18 @@
 
                             businessCountDisabledSplit = textLines[line].split("(");
                             businessCountDisabled = businessCountDisabledSplit[1].match(/[0-9]+/)[0];
-                            parsedResults = parsedResults + item + " " + businessCount;
-                            parsedResultsDisabled = parsedResultsDisabled + item + " " + businessCountDisabled;
+                            parsedResults = parsedResults + businessCount;
+                            if ( (item != "Lunar Environmental Facility") && (item != "Solar Environmental Facility") ) {
+                                parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
+                            }
                             break;
                         } else {
                             businessCount = textLines[line].match(/[0-9]+/)[0];
                             businessCountDisabled = 0;
-                            parsedResults = parsedResults + item + " " + businessCount;
-                            parsedResultsDisabled = parsedResultsDisabled + item + " " + businessCountDisabled;
+                            parsedResults = parsedResults + businessCount;
+                            if ( (item != "Lunar Environmental Facility") && (item != "Solar Environmental Facility") ) {
+                                parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
+                            }
                             break;
                         }
                     }
