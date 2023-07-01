@@ -33,14 +33,12 @@
                 var textLines = text.split(/\r?\n|\r/); 
 
                 const businessArray = ["Bakery", "Basic Apple Orchard"]
-                //for(var business = 0; business <= businessArray.length; businessArray++){
-                //    console.log("business: " + businessArray[business])
-                //}
 
-                businessArray.forEach(myFunction);
+                businessArray.forEach(addBusiness);
 
-                function myFunction(item) {
+                function addBusiness(item) {
                 console.log(item);
+                parsedResults = parsedResults + item
                 }
 
                 //for each per type of building, and line breaks
