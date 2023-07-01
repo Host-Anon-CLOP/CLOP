@@ -30,10 +30,13 @@
             try {
                 // Split the text into individual lines
                 var parsedResults = "";
+                var parsedResultsDisabled = "";
                 var textLines = text.split(/\r?\n|\r/); 
 
                 const businessArray = ["Bakery", "Basic Apple Orchard"];
+                //assume not found and set 0, which will get overwritten if found
                 var businessCount = 0;
+                var businessCountDisabled = 0;
 
                 businessArray.forEach(addBusiness);
 
@@ -44,17 +47,19 @@
                     if (textLines[line].indexOf(item) !== -1) {
                         if (textLines[line].indexOf("disabled)") !== -1) {
                             console.log("DISABLED item found:" + item + " in: " + textLines[line]);
+                            console.log(textLines[line].match("/^[^\d]*(\d+)/"));
                         } else {
                             console.log("REGULAR item found:" + item + " in: " + textLines[line]);
                         }
                     }
                 }
+                
 
                 parsedResults = parsedResults + businessCount + "\n";
                 }
 
                 //for each per type of building, and line breaks
-                //assume not found and set 0, which will get overwritten if found
+                
 
                 //for(var line = 0; line < textLines.length; line++){
                 //console.log(textLines[line])
