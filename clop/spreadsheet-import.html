@@ -54,10 +54,14 @@
                     }
                     else if (item == "Energy Collector") {
                         if (textLines[line].indexOf("Solar Collector") !== -1) {
+                            console.log("energy collector - solar - " + businessCount);
                             businessCount = businessCount + textLines[line].match(/[0-9]+/)[0];
+                            console.log("energy collector - solar - " + businessCount);
                         }
                         if (textLines[line].indexOf("Tidal Generator") !== -1) {
+                            console.log("energy collector - lunar - " + businessCount);
                             businessCount = businessCount + textLines[line].match(/[0-9]+/)[0];
+                            console.log("energy collector - lunar - " + businessCount);
                         }
                     }
                     else if (textLines[line].indexOf(item) !== -1) {
