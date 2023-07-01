@@ -24,7 +24,7 @@
                 var businessCountDisabled = 0;
 
                 businessArray.forEach(addBusiness);
-                const displayParsedResults = parsedResults + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" + parsedResultsDisabled;
+                const displayParsedResults = parsedResults + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" + parsedResultsDisabled;
                 console.log("FINISHED");
 
                 function addBusiness(item) {
@@ -33,7 +33,6 @@
                     parsedResults = parsedResults + "\n";
                 }
                 
-
                 if ( (item != "Basic Copper Mine") && (item != "Lunar Environmental Facility") && (item != "Solar Environmental Facility") && (item != "Alicornification Facility") ) {
                     parsedResultsDisabled = parsedResultsDisabled + "\n";
                 }
