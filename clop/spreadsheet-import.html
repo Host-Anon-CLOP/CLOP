@@ -31,10 +31,9 @@
                 // Split the text into individual lines
                 var parsedResults = "";
                 var textLines = text.split(/\r?\n|\r/);
-                //for(var line in textLines) {
-                //    parsedResults = parsedResults . line;
-                //}
-                parsedResults = textLines + 'new';
+                for(line in textLines) {
+                    parsedResults = parsedResults + line;
+                }
                 //var VAL = this.value;
 
                 //var email = new RegExp('^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$');
