@@ -62,7 +62,7 @@
                         }
                         if (textLines[line].indexOf("Tidal Generator") !== -1) {
                             console.log("energy collector - lunar - " + businessCount);
-                            businessCount = businessCount + textLines[line].match(/[0-9]+/)[0];
+                            businessCount = Number(businessCount) + Number(textLines[line].match(/[0-9]+/)[0]);
                             console.log("energy collector - lunar - " + businessCount);
                         }
                     }
