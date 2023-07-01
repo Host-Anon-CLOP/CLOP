@@ -50,7 +50,7 @@
                             console.log(textLines[line].match(/[0-9]+/)[0]);
                             businessCount = textLines[line].match(/[0-9]+/)[0];
 
-                            businessCountDisabledSplit = text.split("(");
+                            businessCountDisabledSplit = textLines[line].split("(");
                             console.log(/[0-9]+/);
                             businessCountDisabled = businessCountDisabledSplit[0].match(/[0-9]+/)[0];
                         } else {
