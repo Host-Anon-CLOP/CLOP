@@ -57,7 +57,7 @@
                     else if (item == "Energy Collector") {
                         if (textLines[line].indexOf("Solar Collector") !== -1) {
                             console.log("energy collector - solar - " + businessCount);
-                            businessCount = int(businessCount) + int(textLines[line].match(/[0-9]+/)[0]);
+                            businessCount = Number(businessCount) + Number(textLines[line].match(/[0-9]+/)[0]);
                             console.log("energy collector - solar - " + businessCount);
                         }
                         if (textLines[line].indexOf("Tidal Generator") !== -1) {
