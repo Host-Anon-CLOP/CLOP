@@ -30,9 +30,9 @@
             try {
                 // Split the text into individual lines
                 var parsedResults = "";
-                var textLines = text.split;
-                for(var line in textLines) {
-                    console.log(line.toString());
+                var textLines = text.split(/\r?\n|\r/); 
+                for(var i = 0;i < textLines.length;i++){
+                console.log(textLines[i])
                 }
                 //var VAL = this.value;
 
