@@ -51,8 +51,8 @@
                             businessCount = textLines[line].match(/[0-9]+/)[0];
 
                             businessCountDisabledSplit = textLines[line].split("(");
-                            console.log(/[0-9]+/);
-                            businessCountDisabled = businessCountDisabledSplit[0].match(/[0-9]+/)[0];
+                            console.log(businessCountDisabledSplit[0].match(/[0-9]+/)[1]);
+                            businessCountDisabled = businessCountDisabledSplit[0].match(/[0-9]+/)[1];
                         } else {
                             console.log("REGULAR item found:" + item + " in: " + textLines[line]);
                             businessCount = textLines[line].match(/[0-9]+/)[0];
