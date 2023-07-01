@@ -51,18 +51,20 @@
                             businessCount = textLines[line].match(/[0-9]+/)[0];
 
                             businessCountDisabledSplit = textLines[line].split("(");
-                            console.log("disabled count: " + businessCountDisabledSplit[1]);
+                            console.log("disabled count: " + businessCountDisabledSplit[1].match(/[0-9]+/)[0]);
                             businessCountDisabled = businessCountDisabledSplit[1].match(/[0-9]+/)[0];
+                            parsedResults = parsedResults + businessCount + "\n";
+                            break;
                         } else {
                             console.log("REGULAR item found:" + item + " in: " + textLines[line]);
                             businessCount = textLines[line].match(/[0-9]+/)[0];
                             businessCountDisabled = 0;
+                            parsedResults = parsedResults + businessCount + "\n";
+                            break;
                         }
                     }
                 }
-                
 
-                parsedResults = parsedResults + businessCount + "\n";
                 }
 
                 //for each per type of building, and line breaks
