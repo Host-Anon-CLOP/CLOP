@@ -7,21 +7,6 @@
         var exportData;
 
         function importRows(attackOrDefend) {
-            /** Example import format
-            4_ACFU_Nope
-            Cavalry
-            ACFU
-            Nope
-            Size: 200
-            Training: 20
-            ...
-            Alicorns are an edge case. Example format:
-            UnitName
-            Alicorns
-            Size: 30
-            Training: 20
-            */
-
             // Check if any data provided
             var text = document.getElementById("txtImport").value;
             if (text.trim().length == 0)
@@ -45,8 +30,14 @@
                 function addBusiness(item) {
                 console.log(item);
 
-                parsedResults = parsedResults + "\n";
-                parsedResultsDisabled = parsedResultsDisabled + "\n";
+                if (item != "Basic Copper Mine") {
+                    parsedResults = parsedResults + "\n";
+                }
+                
+
+                if (item != ("Basic Copper Mine" && "Lunar Environmental Facility" && "Solar Environmental Facility" && "Alicornification Facility") ) {
+                    parsedResultsDisabled = parsedResultsDisabled + "\n";
+                }
 
                 // we are already checking each business in order. now we need to find the relevant line
                 for(var line = 0; line < textLines.length; line++){
