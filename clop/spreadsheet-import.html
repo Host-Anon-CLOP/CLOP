@@ -29,11 +29,12 @@
     
             try {
                 // Split the text into individual lines
-                var parsedResults;
+                var parsedResults = "";
                 var textLines = text.split(/\r?\n|\r/);
                 for(var line in textLines) {
                     parsedResults = parsedResults . line;
                 }
+                parsedResults = parsedResults . 'new';
                 //var VAL = this.value;
 
                 //var email = new RegExp('^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$');
