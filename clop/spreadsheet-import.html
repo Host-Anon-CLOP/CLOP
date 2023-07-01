@@ -42,7 +42,11 @@
                 // we are already checking each business in order. now we need to find the relevant line
                 for(var line = 0; line < textLines.length; line++){
                     if (textLines[line].indexOf(item) !== -1) {
-                    console.log("item found:" + item + " in: " + textLines[line]);
+                        if (textLines[line].indexOf("disabled)") !== -1) {
+                            console.log("DISABLED item found:" + item + " in: " + textLines[line]);
+                        } else {
+                            console.log("REGULAR item found:" + item + " in: " + textLines[line]);
+                        }
                     }
                 }
 
