@@ -14,7 +14,7 @@ EOSQL;
 $sqlcount = onelinequery($sql);
     $mode = "statues";
     $sql=<<<EOSQL
-SELECT u.flag, r.amount, n.nation_id, n.name, n.government, n.economy FROM nations n INNER JOIN users u ON u.user_id = n.user_id
+SELECT u.flag, r.amount, n.nation_id, n.name, n.region, n.government, n.economy FROM nations n INNER JOIN users u ON u.user_id = n.user_id
 INNER JOIN resources r ON r.nation_id = n.nation_id WHERE r.resource_id = '38' AND u.stasismode = 0 AND u.user_id != 1
 ORDER BY amount DESC, nation_id ASC
 LIMIT {$limit}, 20
