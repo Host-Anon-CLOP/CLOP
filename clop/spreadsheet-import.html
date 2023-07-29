@@ -44,6 +44,7 @@
                     if (item == "NEWLINE") {
                         break;
                     }
+                    /*
                     else if (item == "Plastics Factory") {
                         if (textLines[line].indexOf("Przewalskian") !== -1) {
                             continue;
@@ -54,6 +55,7 @@
                             continue;
                         }
                     }
+                    */
                     else if (item == "Energy Collector") {
                         if (textLines[line].indexOf("Solar Collector") !== -1) {
                             businessCount = Number(businessCount) + Number(textLines[line].match(/[0-9]+/)[0]);
