@@ -32,7 +32,7 @@ if ($_POST['ascend-calc']) {
       $pegasi_damage_to_alicorns = $pegasi_damage_to_alicorns * .75;
       $alicorn_damage_to_pegasi = round((10 * .45 * pow(1.5, (($_POST['barracks'] - 20) / 20))), 3);
 
-      $alicorns_needed_defend = ceil($total_pegasi * $pegasi_damage_to_alicorns);
+      $alicorns_needed_defend = ceil($total_pegasi * $pegasi_damage_to_alicorns) + 1;
       $alicorns_needed_kill = ceil($total_pegasi / $alicorn_damage_to_pegasi);
 
       echo "<br><br>SUMMARY<br>";
