@@ -8,13 +8,23 @@ SELECT time, message FROM topmessage ORDER BY time DESC
 EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 
+echo <<<EOFORM
+<table>
+<tr><td>DATE</td><td>MESSAGE</td></tr>
+EOFORM;
+
 while ($rs = mysqli_fetch_array($sth)) {
-    $time = strtotime($rs['time']);
+    $time = date("D H:i:s", strtotime($rs['time']));
 	$message = htmlentities($rs['message'], ENT_SUBSTITUTE, "UTF-8");
 	echo <<<EOFORM
-$message
+<tr><td>$time</td><td>$message</td></tr>
 EOFORM;
 }
+
+echo <<<EOFORM
+</table>
+EOFORM;
+
 
 
 include("footer.php");
