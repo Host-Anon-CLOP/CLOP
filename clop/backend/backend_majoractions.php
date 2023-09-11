@@ -27,10 +27,10 @@ if (!$errors) {
 			$errors[] = "You don't have the money!";
 		}
 		if (!$errors) {
-        #$sql=<<<EOSQL
-		#DELETE FROM topmessage WHERE 1 = 1;
-#EOSQL;
-		#$GLOBALS['mysqli']->query($sql);
+        $sql=<<<EOSQL
+		DELETE FROM topmessage WHERE 1 = 1;
+EOSQL;
+		$GLOBALS['mysqli']->query($sql);
 		$sql=<<<EOSQL
 INSERT INTO topmessage SET message = '{$mysql['message']}', user_id = '{$_SESSION['user_id']}'
 EOSQL;

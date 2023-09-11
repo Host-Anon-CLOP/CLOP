@@ -1,6 +1,6 @@
 <?php
 $sql=<<<EOSQL
-SELECT message FROM topmessage DESC
+SELECT message FROM topmessage
 EOSQL;
 $rs = onelinequery($sql);
 $topmessage = htmlentities($rs['message'], ENT_SUBSTITUTE, "UTF-8");
