@@ -54,7 +54,7 @@ EOSQL;
             $rs2 = onelinequery($sql);
             if ($rs2['nation_id']) {
 				$_SESSION['nation_id'] = $rs2['nation_id'];
-                header("Location: messages.php");
+                header("Location: test.php");
 				exit;
             } else {
 				unset($_SESSION['nation_id']);
