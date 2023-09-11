@@ -1,6 +1,6 @@
 <?php
 $sql=<<<EOSQL
-SELECT message FROM topmessage ORDER BY time DESC
+SELECT message FROM topmessage ORDER BY time DESC LIMIT 1
 EOSQL;
 $rs = onelinequery($sql);
 $topmessage = htmlentities($rs['message'], ENT_SUBSTITUTE, "UTF-8");
