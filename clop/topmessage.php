@@ -10,14 +10,12 @@ $sth = $GLOBALS['mysqli']->query($sql);
 
 echo <<<EOFORM
 <table>
-<tr><td>DATE</td><td>  MESSAGE</td></tr>
 EOFORM;
 
 while ($rs = mysqli_fetch_array($sth)) {
-    $time = $rs['time'];
 	$message = htmlentities($rs['message'], ENT_SUBSTITUTE, "UTF-8");
 	echo <<<EOFORM
-<tr><td>$time</td><td>  | $message</td></tr>
+<tr><td>$message</td></tr>
 EOFORM;
 }
 
