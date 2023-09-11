@@ -149,7 +149,7 @@ echo <<<EOFORM
 EOFORM;
 }
 echo <<<EOFORM
-<center><span id="topmessage"><a href="https://topmessage.php">{$topmessage}</a></span></center>
+<center><span id="topmessage"><a href="topmessage.php">{$topmessage}</a></span></center>
 <center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/catalog#s=4clop" target="_new_win">/MLP/ Thread</a> | <a href="https://irc.4clop.com" target="_new_win">IRC Chat (join without a password initially)</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
 EOFORM;
 if ($errors) {
