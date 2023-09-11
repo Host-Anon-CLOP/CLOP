@@ -14,7 +14,7 @@ echo <<<EOFORM
 EOFORM;
 
 while ($rs = mysqli_fetch_array($sth)) {
-    $time = date("D H:i:s", strtotime($rs['time']));
+    $time = strtotime($rs['time']);
 	$message = htmlentities($rs['message'], ENT_SUBSTITUTE, "UTF-8");
 	echo <<<EOFORM
 <tr><td>$time</td><td>$message</td></tr>
