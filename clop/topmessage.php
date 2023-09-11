@@ -1,5 +1,5 @@
 <?php
-#include("backend/backend_warguide.php");
+include("backend/backend_topmessage.php");
 $extratitle = "Top Message - ";
 include("header.php");
 
