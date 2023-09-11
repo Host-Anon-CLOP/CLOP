@@ -32,7 +32,7 @@ if (!$errors) {
 EOSQL;
 		$GLOBALS['mysqli']->query($sql);
 		$sql=<<<EOSQL
-INSERT INTO topmessage SET message = '{$mysql['message']}', user_id = '{$_SESSION['user_id']}'
+INSERT INTO topmessage SET message = '{$mysql['message']}', user_id = '{$_SESSION['user_id']}', time = NOW()
 EOSQL;
 		$GLOBALS['mysqli']->query($sql);
 		$sql = "UPDATE nations SET funds = funds - 5000000 WHERE nation_id = '{$_SESSION['nation_id']}'";

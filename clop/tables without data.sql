@@ -385,10 +385,49 @@ CREATE TABLE IF NOT EXISTS `forcegroups` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `forcegroups_calc`
+--
+
+CREATE TABLE IF NOT EXISTS `forcegroups_calc` (
+  `forcegroup_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `nation_id` int(11) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `destination_id` int(11) NOT NULL,
+  `departuredate` datetime DEFAULT NULL,
+  `attack_mission` tinyint(1) NOT NULL DEFAULT '0',
+  `oldmission` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`forcegroup_id`),
+  KEY `nation_id` (`nation_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `forces`
 --
 
 CREATE TABLE IF NOT EXISTS `forces` (
+  `force_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `forcegroup_id` int(10) unsigned NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `nation_id` int(11) NOT NULL,
+  `size` int(10) unsigned NOT NULL,
+  `training` int(10) unsigned NOT NULL DEFAULT '0',
+  `weapon_id` int(10) unsigned NOT NULL,
+  `armor_id` int(10) unsigned NOT NULL,
+  `type` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`force_id`),
+  KEY `nation_id` (`nation_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forces_calc`
+--
+
+CREATE TABLE IF NOT EXISTS `forces_calc` (
   `force_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `forcegroup_id` int(10) unsigned NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -571,7 +610,8 @@ CREATE TABLE IF NOT EXISTS `resources` (
 
 CREATE TABLE IF NOT EXISTS `topmessage` (
   `message` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
