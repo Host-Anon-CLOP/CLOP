@@ -22,7 +22,7 @@ $sth = $GLOBALS['mysqli']->query($sql);
 
 while ($rs = mysqli_fetch_array($sth)) {
     $empirenations += array($rs['nation_id'] => $rs['name']);
-    $resources += array(rs['nation_id']);
+    $resources += array(rs['nation_id'] => array());
 }
 
 # get resource stockpiles per nation owned
