@@ -7,7 +7,7 @@ include("header.php");
 
 
 echo <<<EOFORM
-<a role="button" aria-label="submit form" href="javascript:void(0)" onclick="document.querySelector('form').submit()">Submit</a>
+<a role="button" aria-label="switchnation_id" href="javascript:void(0)" onclick="document.querySelector('form').submit()">testuser5</a>
 EOFORM;
 
 echo <<<EOFORM
