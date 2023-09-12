@@ -30,6 +30,7 @@ EOFORM;
 }
 
         echo <<<EOFORM
+        <td>TOTAL</td>
         </tr>
       </thead>
       <tbody>
