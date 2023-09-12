@@ -4,24 +4,6 @@ $extratitle = "Empire Overview - ";
 include("header.php");
 
 
-
-
-echo <<<EOFORM
-<form action="" method="post"><button name="switchnation_id" type="submit" value="2">testuser2</button></form>
-EOFORM;
-
-echo <<<EOFORM
-<li><a><form action="" method="post"><select name="switchnation_id" onclick='this.form.submit()'><option value="2">testuser2</option></select></form></a></li>
-EOFORM;
-
-# <li><a><form action="" method="post"><select name="switchnation_id" onclick='this.form.submit()'><option value="2">testuser2</option></select></form></a></li>
-# <td><a href="viewnation.php?nation_id={$attack['attackerid']}">{$attack['attackername']}</a></td>
-
-
-
-
-
-
 echo <<<EOFORM
 <div class="row">
   <div class="col-md-6">
@@ -43,7 +25,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td style="text-align: left;">{$nation_name}</td>
+    <td style="text-align: left;"><form action="" method="post"><button name="switchnation_id" type="submit" value="{$nation_id}">{$nation_name}</button></form></td>
 EOFORM;
 }
 
