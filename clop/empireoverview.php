@@ -81,7 +81,7 @@ echo <<<EOFORM
 EOFORM;
 $total = 0
 foreach ($empirenations as $nation_id => $nation_name) {
-    $total = $total + $resources[$nation_id]['funds']
+    $total = $total + $resources[$nation_id]['funds'];
     echo <<<EOFORM
     <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['funds']}</span></td>
 EOFORM;
