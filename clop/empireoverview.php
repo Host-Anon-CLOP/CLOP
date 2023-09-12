@@ -29,24 +29,29 @@ foreach ($empirenations as $nation_id => $nation_name) {
 EOFORM;
 }
 
-        echo <<<EOFORM
-        <td>TOTAL</td>
-        </tr>
-      </thead>
-      <tbody>
+echo <<<EOFORM
+<td>TOTAL</td></tr></thead><tbody>
 EOFORM;
 
 # get satisfaction per nation
 echo <<<EOFORM
-    <tr><td></td><td style="text-align: left;">Satisfaction</td>
+<tr><td></td><td style="text-align: left;">Satisfaction</td>
 EOFORM;
 foreach ($empirenations as $nation_id => $nation_name) {
+    if ($resources[$nation_id]['satisfaction'] > 0) {
+        $displaycolor = "text-success";
+    } else if ($resources[$nation_id]['satisfaction'] == 0) {
+        $displaycolor = "text-warning";
+    } else {
+        $displaycolor = "text-danger";
+    }
+    $displayamount = commas($resources[$nation_id]['satisfaction']);
     echo <<<EOFORM
-    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['satisfaction']}</span></td>
+    <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
 }
 echo <<<EOFORM
-    <td></td></tr>
+<td></td></tr>
 EOFORM;
 
 # get nlr rep per nation
@@ -54,8 +59,16 @@ echo <<<EOFORM
     <tr><td></td><td style="text-align: left;">NLR Rep</td>
 EOFORM;
 foreach ($empirenations as $nation_id => $nation_name) {
+    if ($resources[$nation_id]['nlr'] > 0) {
+        $displaycolor = "text-success";
+    } else if ($resources[$nation_id]['nlr'] == 0) {
+        $displaycolor = "text-warning";
+    } else {
+        $displaycolor = "text-danger";
+    }
+    $displayamount = commas($resources[$nation_id]['nlr']);
     echo <<<EOFORM
-    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['nlr']}</span></td>
+    <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
 }
 echo <<<EOFORM
@@ -67,8 +80,16 @@ echo <<<EOFORM
     <tr><td></td><td style="text-align: left;">SE Rep</td>
 EOFORM;
 foreach ($empirenations as $nation_id => $nation_name) {
+    if ($resources[$nation_id]['se'] > 0) {
+        $displaycolor = "text-success";
+    } else if ($resources[$nation_id]['se'] == 0) {
+        $displaycolor = "text-warning";
+    } else {
+        $displaycolor = "text-danger";
+    }
+    $displayamount = commas($resources[$nation_id]['se']);
     echo <<<EOFORM
-    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['se']}</span></td>
+    <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
 }
 echo <<<EOFORM
@@ -82,12 +103,29 @@ EOFORM;
 $total = 0;
 foreach ($empirenations as $nation_id => $nation_name) {
     $total = $total + $resources[$nation_id]['funds'];
+    if ($resources[$nation_id]['funds'] > 0) {
+        $displaycolor = "text-success";
+    } else if ($resources[$nation_id]['funds'] == 0) {
+        $displaycolor = "text-warning";
+    } else {
+        $displaycolor = "text-danger";
+    }
+    $displayamount = commas($resources[$nation_id]['funds']);
     echo <<<EOFORM
-    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['funds']}</span></td>
+    <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
 }
+
+if ($total > 0) {
+    $displaycolor = "text-success";
+} else if ($total == 0) {
+    $displaycolor = "text-warning";
+} else {
+    $displaycolor = "text-danger";
+}
+$displaytotal = commas($total)
 echo <<<EOFORM
-<td style="text-align: left;"><span class="text-success">{$total}</span></td></tr>
+<td style="text-align: left;"><span class="{$displaycolor}">{$displaytotal}</span></td></tr>
 EOFORM;
 
 # iterate all nations, and all resources per nation
@@ -109,14 +147,29 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     $total = $total + $resources[$nation_id][$resource_id];
+    if ($resources[$nation_id][$resource_id] > 0) {
+        $displaycolor = "text-success";
+    } else if ($resources[$nation_id][$resource_id] == 0) {
+        $displaycolor = "text-warning";
+    } else {
+        $displaycolor = "text-danger";
+    }
+    $displayamount = commas($resources[$nation_id][$resource_id]);
     echo <<<EOFORM
-    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id][$resource_id]}</span></td>
+    <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
 }
  
-
+if ($total > 0) {
+    $displaycolor = "text-success";
+} else if ($total == 0) {
+    $displaycolor = "text-warning";
+} else {
+    $displaycolor = "text-danger";
+}
+$displaytotal = commas($total)
 echo <<<EOFORM
-<td style="text-align: left;"><span class="text-success">{$total}</span></td></tr>
+<td style="text-align: left;"><span class="{$displaycolor}">{$displaytotal}</span></td></tr>
 EOFORM;
 }
 
