@@ -32,7 +32,7 @@ EOSQL;
     $sth = $GLOBALS['mysqli']->query($sql);
 
     while ($rs = mysqli_fetch_array($sth)) {
-        $resources[$key] += array($rs['resource_id'] => $rs['amount']);
+        $resources += array($rs['resource_id'] => $rs['amount']);
         }
     }
 ?>
