@@ -4,7 +4,7 @@ $extratitle = "Empire Overview - ";
 include("header.php");
 
 echo <<<EOFORM
-<table class="table table-striped table-bordered"><tr>
+<table class="table table-striped table-bordered"><tr><td>Resource</td>
 EOFORM;
 
 foreach ($empirenations as $key => $value) {
@@ -12,6 +12,10 @@ foreach ($empirenations as $key => $value) {
 <td>$value</td>
 EOFORM;
 }
+
+echo <<<EOFORM
+<td>$empirenations['testuser2']</td>
+EOFORM;
 
 /*
 # Global Resources
