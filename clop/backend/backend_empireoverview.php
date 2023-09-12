@@ -1,5 +1,8 @@
 <?php
 include_once("allfunctions.php");
+$affectedresources = array();
+$requiredresources = array();
+$resources = array();
 
 $empirenations = array();
 
@@ -12,13 +15,6 @@ while ($rs = mysqli_fetch_array($sth)) {
     $empirenations[] = $rs['nation_id'];
 }
 
-
-
-/*
-# Global Resources
-$affectedresources = array();
-$requiredresources = array();
-$resources = array();
 
 $sql = "SELECT rd.name, SUM((r.amount - r.disabled) * rr.amount) AS affected
 FROM resourceeffects rr
@@ -88,7 +84,9 @@ while ($rs = mysqli_fetch_array($sth)) {
         $requiredresources["Cider"] += (6 * $rs['count']);
     }
 }
-*/
+
+
+
 
 
 ?>
