@@ -12,7 +12,7 @@ EOSQL;
 $sth = $GLOBALS['mysqli']->query($sql);
 
 while ($rs = mysqli_fetch_array($sth)) {
-    $empirenations = array_push($rs['nation_id'], $rs['name']);
+    $empirenations = array($rs['nation_id'] => $rs['name']);
 }
 
 
