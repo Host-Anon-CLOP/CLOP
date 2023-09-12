@@ -51,7 +51,7 @@ EOFORM;
 
 foreach ($empirenations as $key => $value) {
     echo <<<EOFORM
-   rawr
+   <td>rawr</td>
 EOFORM;
 }
  #<td>{$resources[$key][0]}</td>
