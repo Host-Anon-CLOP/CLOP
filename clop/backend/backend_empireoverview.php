@@ -1,7 +1,7 @@
 <?php
 include_once("allfunctions.php");
 
-$empirenations = array()
+$empirenations = array();
 
 $sql=<<<EOSQL
 select nation_id, name from nations where user_id = '{$_SESSION['user_id']}'
