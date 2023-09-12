@@ -59,12 +59,12 @@ EOFORM;
 
 echo <<<EOFORM
     </tr>
-    </tbody>
-    </table>
 EOFORM;
 }
 
-
+echo <<<EOFORM
+    </tbody></table>
+EOFORM;
 
 
 include("footer.php");
