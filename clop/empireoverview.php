@@ -53,6 +53,7 @@ foreach ($empirenations as $key => $value) {
     echo <<<EOFORM
     <td>{$resources[$key][0]}</td>
 EOFORM;
+}
 
 echo <<<EOFORM
     </tr>
