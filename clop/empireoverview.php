@@ -7,7 +7,7 @@ echo <<<EOFORM
 <div class="row">
   <div class="col-md-6">
    <div class="panel panel-default">
-     <div class="panel-heading">Resources</div>
+     <div class="panel-heading">Resources - stockpiles / net / ticksworth</div>
      <table class="table">
       <thead>
         <tr>
