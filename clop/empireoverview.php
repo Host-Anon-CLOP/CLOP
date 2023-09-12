@@ -15,8 +15,21 @@ EOFORM;
 
 foreach ($all_resources_list as $key => $value) {
 echo <<<EOFORM
-<tr><td>key - $key</td><td>value - $value</td></tr>
+    <tr>
 EOFORM;
+
+if (!$nationinfo['hideicons']) {
+    echo <<<EOFORM
+    <td style="width: 16px;"><img src="images/icons/{$key}.png"/></td>
+EOFORM;
+    }
+
+echo <<<EOFORM
+    <td style="text-align: right;">{$value}</td>
+    </tr>
+EOFORM;
+# subsequent td are format: <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
+
 }
 
 /*
