@@ -24,7 +24,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td style="text-align: center;">{$nation_name}</td>
+    <td style="text-align: left;">{$nation_name}</td>
 EOFORM;
 }
 
@@ -52,7 +52,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td style="text-align: center;"><span class="text-success">{$resources[$nation_id][$resource_id]}</span></td>
+    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id][$resource_id]}</span></td>
 EOFORM;
 }
  
