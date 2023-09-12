@@ -21,9 +21,9 @@ EOFORM;
         <td style="text-align: right;">Resource</td>
 EOFORM;
 
-foreach ($empirenations as $key => $value) {
+foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-<td>$value</td>
+<td>$nation_name</td>
 EOFORM;
 }
 
@@ -34,24 +34,24 @@ EOFORM;
 EOFORM;
 
 
-foreach ($all_resources_list as $resource_key => $resource_value) {
+foreach ($all_resources_list as $resource_id => $resource_name) {
 echo <<<EOFORM
     <tr>
 EOFORM;
 
 if (!$nationinfo['hideicons']) {
     echo <<<EOFORM
-    <td style="width: 16px;"><img src="images/icons/{$resource_value}.png"/></td>
+    <td style="width: 16px;"><img src="images/icons/{$resource_name}.png"/></td>
 EOFORM;
     }
 
 echo <<<EOFORM
-    <td style="text-align: right;">{$resource_value}</td>
+    <td style="text-align: right;">{$resource_name}</td>
 EOFORM;
 
-foreach ($empirenations as $nation_key => $nation_value) {
+foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td>{$resources[$nation_key]}</td>
+    <td>{$resources[$nation_id][0]}</td>
 EOFORM;
 }
  
