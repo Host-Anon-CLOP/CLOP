@@ -46,7 +46,7 @@ foreach ($empirenations as $nation_id => $nation_name) {
 EOFORM;
 }
 echo <<<EOFORM
-    </tr>
+    <td></td></tr>
 EOFORM;
 
 # get nlr rep per nation
@@ -59,7 +59,7 @@ foreach ($empirenations as $nation_id => $nation_name) {
 EOFORM;
 }
 echo <<<EOFORM
-    </tr>
+    <td></td></tr>
 EOFORM;
 
 # get se rep per nation
@@ -72,20 +72,22 @@ foreach ($empirenations as $nation_id => $nation_name) {
 EOFORM;
 }
 echo <<<EOFORM
-    </tr>
+    <td></td></tr>
 EOFORM;
 
 # get funds per nation
 echo <<<EOFORM
     <tr><td></td><td style="text-align: left;">Funds</td>
 EOFORM;
+$total = 0
 foreach ($empirenations as $nation_id => $nation_name) {
+    $total = $total + $resources[$nation_id]['funds']
     echo <<<EOFORM
     <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['funds']}</span></td>
 EOFORM;
 }
 echo <<<EOFORM
-    </tr>
+<td style="text-align: left;"><span class="text-success">{$total}</span></td></tr>
 EOFORM;
 
 # iterate all nations, and all resources per nation
