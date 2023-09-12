@@ -4,8 +4,27 @@ $extratitle = "Empire Overview - ";
 include("header.php");
 
 echo <<<EOFORM
-<table class="table table-striped table-bordered"><tr><td>Resource</td>
+<div class="row">
+  <div class="col-md-6">
+   <div class="panel panel-default">
+     <div class="panel-heading">Resources</div>
+     <table class="table">
+      <thead>
+        <tr>
 EOFORM;
+        if (!$nationinfo['hideicons']) {
+        echo <<<EOFORM
+          <td></td>
+EOFORM;
+        }
+        echo <<<EOFORM
+          <td style="text-align: right;">Resource</td>
+          <td>ticks/total/net</td>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+EOFORM
 
 foreach ($empirenations as $key => $value) {
     echo <<<EOFORM
@@ -20,7 +39,7 @@ EOFORM;
 
 if (!$nationinfo['hideicons']) {
     echo <<<EOFORM
-    <td style="width: 16px;"><img src="images/icons/{$key}.png"/></td>
+    <td style="width: 16px;"><img src="images/icons/{$value}.png"/></td>
 EOFORM;
     }
 
