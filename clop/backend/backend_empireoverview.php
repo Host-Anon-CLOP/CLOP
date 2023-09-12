@@ -27,9 +27,6 @@ while ($rs = mysqli_fetch_array($sth)) {
 }
 
 
-# sum(n.se_relation) sum(n.nlr_relation)  sum(n.funds)
-
-
 foreach ($empirenations as $nation_id => $nation_name) {
     # get satisfaction
     $sql=<<<EOSQL
@@ -37,6 +34,27 @@ foreach ($empirenations as $nation_id => $nation_name) {
 EOSQL;
     $rs = onelinequery($sql);
     $resources[$nation_id] += array('satisfaction' => $rs['amount']);
+
+    # get nlr rep
+    $sql=<<<EOSQL
+    SELECT sum(n.nlr_relation) AS amount FROM nations n WHERE n.nation_id = $nation_id
+EOSQL;
+    $rs = onelinequery($sql);
+    $resources[$nation_id] += array('nlr' => $rs['amount']);
+
+    # get se rep
+    $sql=<<<EOSQL
+    SELECT sum(n.se_relation) AS amount FROM nations n WHERE n.nation_id = $nation_id
+EOSQL;
+    $rs = onelinequery($sql);
+    $resources[$nation_id] += array('se' => $rs['amount']);
+
+    # get funds
+    $sql=<<<EOSQL
+    SELECT sum(n.funds) AS amount FROM nations n WHERE n.nation_id = $nation_id
+EOSQL;
+    $rs = onelinequery($sql);
+    $resources[$nation_id] += array('funds' => $rs['amount']);
 
     # get resource stockpiles per nation owned
     $sql=<<<EOSQL
