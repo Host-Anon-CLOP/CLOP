@@ -46,7 +46,7 @@ EOFORM;
     }
 
 echo <<<EOFORM
-    <td style="text-align: right;">{$value}</td>
+    <td style="text-align: right;">{$value}</td><td>$resources[$key][0]</td>
     </tr>
 EOFORM;
 # subsequent td are format: <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
