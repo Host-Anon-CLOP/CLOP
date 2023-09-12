@@ -1042,9 +1042,24 @@ EOSQL;
 }
 //// WAR
 
-
-if (date("G") == 0 || date("G") == 12) {
+# all ticks on test are war ticks
+if ( (date("G") == 0 || date("G") == 12) || (strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) ) {
 $hour = date("H");
+
+# no travel time on test
+if (strpos($_ENV["DOMAIN_URL"], "test.4clop") !== false) {
+$sql=<<<EOSQL
+SELECT fg.forcegroup_id FROM forcegroups fg
+LEFT JOIN nations n ON fg.location_id = n.nation_id
+LEFT JOIN nations n2 ON fg.destination_id = n2.nation_id
+WHERE fg.departuredate IS NOT NULL AND (
+(n.region = n2.region AND fg.attack_mission = 0) OR
+(n2.region AND fg.attack_mission = 1) OR
+(fg.attack_mission = 0) OR
+(fg.attack_mission = 1)
+)
+EOSQL;
+} else {
 $sql=<<<EOSQL
 SELECT fg.forcegroup_id FROM forcegroups fg
 LEFT JOIN nations n ON fg.location_id = n.nation_id
@@ -1056,6 +1071,8 @@ WHERE fg.departuredate IS NOT NULL AND (
 (fg.departuredate < DATE_SUB(CONCAT(CURDATE(), ' {$hour}:00:00'), INTERVAL 48 HOUR) AND fg.attack_mission = 1)
 )
 EOSQL;
+}
+
 $sth = $GLOBALS['mysqli']->query($sql);
 while ($rs = mysqli_fetch_array($sth)) {
     $sql=<<<EOSQL
