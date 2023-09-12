@@ -43,6 +43,17 @@ echo <<<EOFORM
 <tr><td></td><td style="text-align: left;">Funds</td><td>1</td></tr>
 EOFORM;
 
+# get nlr rep per nation
+echo <<<EOFORM
+    <tr><td></td>
+EOFORM;
+foreach ($empirenations as $nation_id => $nation_name) {
+    echo <<<EOFORM
+    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['nlr']}</span></td>
+EOFORM;
+}
+
+# iterate all nations, and all resources per nation
 foreach ($all_resources_list as $resource_id => $resource_name) {
 echo <<<EOFORM
     <tr>
