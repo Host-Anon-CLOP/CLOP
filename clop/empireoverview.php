@@ -35,6 +35,12 @@ EOFORM;
       <tbody>
 EOFORM;
 
+echo <<<EOFORM
+<tr><td></td><td style="text-align: left;">Satisfaction</td><td>1</td></tr>
+<tr><td></td><td style="text-align: left;">NLR Rep</td><td>1</td></tr>
+<tr><td></td><td style="text-align: left;">SE Rep</td><td>1</td></tr>
+<tr><td></td><td style="text-align: left;">Funds</td><td>1</td></tr>
+EOFORM;
 
 foreach ($all_resources_list as $resource_id => $resource_name) {
 echo <<<EOFORM
