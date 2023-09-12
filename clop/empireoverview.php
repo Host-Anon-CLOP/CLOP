@@ -36,22 +36,18 @@ EOFORM;
       <tbody>
 EOFORM;
 
+# get satisfaction per nation
 echo <<<EOFORM
-<tr><td></td><td style="text-align: left;">Satisfaction</td><td>1</td></tr>
-<tr><td></td><td style="text-align: left;">NLR Rep</td><td>1</td></tr>
-<tr><td></td><td style="text-align: left;">SE Rep</td><td>1</td></tr>
-<tr><td></td><td style="text-align: left;">Funds</td><td>1</td></tr>
-EOFORM;
-
-# get nlr rep per nation
-echo <<<EOFORM
-    <tr><td></td>
+    <tr><td></td><td style="text-align: left;">Satisfaction</td>
 EOFORM;
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['nlr']}</span></td>
+    <td style="text-align: left;"><span class="text-success">{$resources[$nation_id]['satisfaction']}</span></td>
 EOFORM;
 }
+echo <<<EOFORM
+    </tr>
+EOFORM;
 
 # iterate all nations, and all resources per nation
 foreach ($all_resources_list as $resource_id => $resource_name) {

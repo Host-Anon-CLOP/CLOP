@@ -26,29 +26,14 @@ while ($rs = mysqli_fetch_array($sth)) {
     $resources += array($rs['nation_id'] => array());
 }
 
-# get nlr / se / sat / funds per nation
 
-
-$sql=<<<EOSQL
-SELECT sum(n.se_relation) AS amount, 'SE' as Item FROM nations n
-WHERE n.nation_id = @nation
-EOSQL;
-
-$sql=<<<EOSQL
-SELECT sum(n.satisfaction) AS amount, 'Sat' as Item FROM nations n
-WHERE n.nation_id = @nation
-EOSQL;
-
-$sql=<<<EOSQL
-SELECT sum(n.funds) AS amount, 'Funds' as Item FROM nations n
-WHERE n.nation_id = @nation
-EOSQL;
+# sum(n.se_relation) sum(n.nlr_relation)  sum(n.funds)
 
 
 foreach ($empirenations as $nation_id => $nation_name) {
-    # get nlr rep
+    # get satisfaction
     $sql=<<<EOSQL
-    SELECT sum(n.nlr_relation) AS amount FROM nations n WHERE n.nation_id = $nation_id
+    SELECT sum(n.satisfaction) AS amount FROM nations n WHERE n.nation_id = $nation_id
 EOSQL;
     $rs = onelinequery($sql);
     $resources[$nation_id] += array('nlr' => $rs['amount']);
