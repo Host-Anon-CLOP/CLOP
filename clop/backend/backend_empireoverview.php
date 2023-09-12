@@ -1,5 +1,6 @@
 <?php
 include_once("allfunctions.php");
+$nationinfo = needsnation();
 $all_resources_list = array();
 $empirenations = array();
 $resources = array();
