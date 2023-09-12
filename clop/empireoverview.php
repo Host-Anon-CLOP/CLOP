@@ -15,7 +15,7 @@ EOFORM;
 
 foreach ($all_resources_list as $key => $value) {
 echo <<<EOFORM
-<tr><td>$all_resources_list[1]</td><td>$all_resources_list[0]</td></tr>
+<tr><td>$all_resources_list[$key]</td><td>$all_resources_list[$value]</td></tr>
 EOFORM;
 }
 
