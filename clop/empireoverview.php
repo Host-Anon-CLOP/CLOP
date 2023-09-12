@@ -19,7 +19,7 @@ EOFORM;
 EOFORM;
         }
         echo <<<EOFORM
-        <td style="text-align: right;">Resource</td>
+        <td style="text-align: left;">Resource</td>
 EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
@@ -47,7 +47,7 @@ EOFORM;
     }
 
 echo <<<EOFORM
-    <td style="text-align: right;">{$resource_name}</td>
+    <td style="text-align: left;">{$resource_name}</td>
 EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
