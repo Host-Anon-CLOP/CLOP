@@ -123,7 +123,7 @@ if ($total > 0) {
 } else {
     $displaycolor = "text-danger";
 }
-$displaytotal = commas($total)
+$displaytotal = commas($total);
 echo <<<EOFORM
 <td style="text-align: left;"><span class="{$displaycolor}">{$displaytotal}</span></td></tr>
 EOFORM;
@@ -167,7 +167,7 @@ if ($total > 0) {
 } else {
     $displaycolor = "text-danger";
 }
-$displaytotal = commas($total)
+$displaytotal = commas($total);
 echo <<<EOFORM
 <td style="text-align: left;"><span class="{$displaycolor}">{$displaytotal}</span></td></tr>
 EOFORM;
