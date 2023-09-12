@@ -6,16 +6,16 @@ include("header.php");
 
 
 
-
-
 echo <<<EOFORM
-<li><a><form action="" method="post"><select name="switchnation_id" onclick='this.form.submit()'>
-<option value="2">testuser2</option>
-</select></form></a></li>
+<a role="button" aria-label="submit form" href="javascript:void(0)" onclick="document.querySelector('form').submit()">Submit</a>
 EOFORM;
 
+echo <<<EOFORM
+<li><a><form action="" method="post"><select name="switchnation_id" onclick='this.form.submit()'><option value="2">testuser2</option></select></form></a></li>
+EOFORM;
 
-
+# <li><a><form action="" method="post"><select name="switchnation_id" onclick='this.form.submit()'><option value="2">testuser2</option></select></form></a></li>
+# <td><a href="viewnation.php?nation_id={$attack['attackerid']}">{$attack['attackername']}</a></td>
 
 
 
