@@ -59,6 +59,8 @@ EOFORM;
 
 echo <<<EOFORM
     </tr>
+    </tbody>
+    </table>
 EOFORM;
 }
 
