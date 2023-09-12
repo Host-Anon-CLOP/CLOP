@@ -51,7 +51,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_key => $nation_value) {
     echo <<<EOFORM
-    <td>$resources[$nation_key][$resource_key]</td>
+    <td>{$resources[$nation_key]}</td>
 EOFORM;
 }
  
