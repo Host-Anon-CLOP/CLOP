@@ -14,7 +14,7 @@ EOFORM;
 }
 
 echo <<<EOFORM
-<td>$empirenations[testuser2]</td>
+<td>$empirenations["testuser2"]</td>
 EOFORM;
 
 /*
