@@ -11,10 +11,11 @@ echo <<<EOFORM
      <table class="table">
       <thead>
         <tr>
+        
 EOFORM;
         if (!$nationinfo['hideicons']) {
             echo <<<EOFORM
-            <td></td>
+              <td></td>
 EOFORM;
         }
         echo <<<EOFORM
@@ -23,7 +24,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td style="text-align: center;"><span class="text-success">{$nation_name}</span></td>
+    <td style="text-align: center;">{$nation_name}</td>
 EOFORM;
 }
 
