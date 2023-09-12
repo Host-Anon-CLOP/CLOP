@@ -23,7 +23,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td>$nation_name</td>
+    <td style="text-align: center;"><span class="text-success">{$nation_name}</span></td>
 EOFORM;
 }
 
