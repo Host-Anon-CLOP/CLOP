@@ -7,7 +7,7 @@ include("header.php");
 
 
 echo <<<EOFORM
-<form action="" method="post"><button name="switchnation_id" type="submit" value="2">HTML</button></form>
+<form action="" method="post"><button name="switchnation_id" type="submit" value="2">testuser2</button></form>
 EOFORM;
 
 echo <<<EOFORM
