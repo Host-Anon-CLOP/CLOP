@@ -22,17 +22,18 @@ $sth = $GLOBALS['mysqli']->query($sql);
 
 while ($rs = mysqli_fetch_array($sth)) {
     $empirenations += array($rs['nation_id'] => $rs['name']);
+    $resources += array(rs['nation_id'])
 }
 
 # get resource stockpiles per nation owned
-foreach ($empirenations as $key => $value) {
+foreach ($empirenations as $nation_id => $nation_name) {
 $sql=<<<EOSQL
-SELECT resource_id, amount from resources WHERE nation_id = '{$key}'
+SELECT resource_id, amount from resources WHERE nation_id = '{$nation_id}'
 EOSQL;
     $sth = $GLOBALS['mysqli']->query($sql);
 
     while ($rs = mysqli_fetch_array($sth)) {
-        $resources += array($key => array($rs['resource_id'] => $rs['amount']));
+        $resources[$nation_id] += array($rs['resource_id'] => $rs['amount']);
         }
     }
 ?>
