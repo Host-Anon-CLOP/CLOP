@@ -36,7 +36,7 @@ foreach ($empirenations as $nation_id => $nation_name) {
     SELECT sum(n.satisfaction) AS amount FROM nations n WHERE n.nation_id = $nation_id
 EOSQL;
     $rs = onelinequery($sql);
-    $resources[$nation_id] += array('nlr' => $rs['amount']);
+    $resources[$nation_id] += array('satisfaction' => $rs['amount']);
 
     # get resource stockpiles per nation owned
     $sql=<<<EOSQL
