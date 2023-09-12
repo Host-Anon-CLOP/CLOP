@@ -13,8 +13,8 @@ echo <<<EOFORM
         <tr>
 EOFORM;
         if (!$nationinfo['hideicons']) {
-        echo <<<EOFORM
-          <td></td>
+            echo <<<EOFORM
+            <td></td>
 EOFORM;
         }
         echo <<<EOFORM
@@ -23,7 +23,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-<td>$nation_name</td>
+    <td>$nation_name</td>
 EOFORM;
 }
 
@@ -51,7 +51,7 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     echo <<<EOFORM
-    <td>{$resources[$nation_id][$resource_id]}</td>
+    <td style="text-align: center;"><span class="text-success">{$resources[$nation_id][$resource_id]}</span></td>
 EOFORM;
 }
  
@@ -59,8 +59,6 @@ EOFORM;
 echo <<<EOFORM
     </tr>
 EOFORM;
-# subsequent td are format: <td style="text-align: center;"><span class="text-success">{$displayaffected}</span></td>
-
 }
 
 /*
