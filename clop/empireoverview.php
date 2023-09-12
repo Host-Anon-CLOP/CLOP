@@ -92,6 +92,7 @@ EOFORM;
 
 # iterate all nations, and all resources per nation
 foreach ($all_resources_list as $resource_id => $resource_name) {
+$total = 0;
 echo <<<EOFORM
     <tr>
 EOFORM;
@@ -107,6 +108,7 @@ echo <<<EOFORM
 EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
+    $total = $total + $resources[$nation_id][$resource_id];
     echo <<<EOFORM
     <td style="text-align: left;"><span class="text-success">{$resources[$nation_id][$resource_id]}</span></td>
 EOFORM;
@@ -114,7 +116,7 @@ EOFORM;
  
 
 echo <<<EOFORM
-    </tr>
+<td style="text-align: left;"><span class="text-success">{$total}</span></td></tr>
 EOFORM;
 }
 
