@@ -4,7 +4,7 @@ $extratitle = "Top Message - ";
 include("header.php");
 
 echo <<<EOFORM
-<table>
+<table class="table table-striped table-bordered">
 EOFORM;
 
 foreach ($topmessages as $message) {

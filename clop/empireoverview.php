@@ -4,16 +4,16 @@ $extratitle = "Empire Overview - ";
 include("header.php");
 
 echo <<<EOFORM
-<table>
+<table class="table table-striped table-bordered"><tr>
 EOFORM;
 
-foreach ($empirenations as $nation_id) {
+foreach ($empirenations as $key => $value) {
     echo <<<EOFORM
-<tr><td>$nation_id</tr></td>
+<td>$value</td>
 EOFORM;
 }
 
-
+/*
 # Global Resources
 echo <<<EOFORM
 <div class="row">
@@ -81,6 +81,7 @@ EOFORM;
     </tr>
 EOFORM;
 }
+*/
 
 include("footer.php");
 ?>
