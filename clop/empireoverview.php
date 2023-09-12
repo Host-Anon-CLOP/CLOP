@@ -3,6 +3,25 @@ include("backend/backend_empireoverview.php");
 $extratitle = "Empire Overview - ";
 include("header.php");
 
+
+
+
+
+
+echo <<<EOFORM
+<li><a><form action="" method="post"><select name="switchnation_id" onclick='this.form.submit()'>
+<option value="2">testuser2</option>
+</select></form></a></li>
+EOFORM;
+
+
+
+
+
+
+
+
+
 echo <<<EOFORM
 <div class="row">
   <div class="col-md-6">
