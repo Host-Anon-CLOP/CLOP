@@ -18,12 +18,7 @@ EOFORM;
 EOFORM;
         }
         echo <<<EOFORM
-          <td style="text-align: right;">Resource</td>
-          <td>ticks/total/net</td>
-        </tr>
-      </thead>
-      <tbody>
-      <tr>
+        <td style="text-align: right;">Resource</td>
 EOFORM;
 
 foreach ($empirenations as $key => $value) {
@@ -31,6 +26,13 @@ foreach ($empirenations as $key => $value) {
 <td>$value</td>
 EOFORM;
 }
+
+        echo <<<EOFORM
+        </tr>
+      </thead>
+      <tbody>
+EOFORM;
+
 
 foreach ($all_resources_list as $key => $value) {
 echo <<<EOFORM
