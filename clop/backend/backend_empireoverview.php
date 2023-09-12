@@ -28,7 +28,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 # get resource stockpiles per nation owned
 foreach ($empirenations as $nation_id => $nation_name) {
 $sql=<<<EOSQL
-SELECT resource_id, amount from resources WHERE nation_id = '{$nation_id}'
+SELECT resource_id, amount from resources WHERE nation_id = $nation_id
 EOSQL;
     $sth = $GLOBALS['mysqli']->query($sql);
 
