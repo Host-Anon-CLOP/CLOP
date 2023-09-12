@@ -13,9 +13,16 @@ foreach ($empirenations as $key => $value) {
 EOFORM;
 }
 
+#current key is nation id. change to nation name and add arrays for each resource, value, and ticks-worth
 echo <<<EOFORM
 <td>$empirenations[2]</td>
 EOFORM;
+
+foreach ($empirenations as $key => $value) {
+echo <<<EOFORM
+<tr><td>$all_resources_list[1]</td><td>$all_resources_list[0]</td></tr>
+EOFORM;
+}
 
 /*
 # Global Resources
