@@ -24,7 +24,7 @@ EOFORM;
       </thead>
       <tbody>
       <tr>
-EOFORM
+EOFORM;
 
 foreach ($empirenations as $key => $value) {
     echo <<<EOFORM
