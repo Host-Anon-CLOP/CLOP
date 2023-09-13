@@ -103,10 +103,10 @@ EOFORM;
 $total = 0;
 foreach ($empirenations as $nation_id => $nation_name) {
     $total = $total + $resources[$nation_id]['funds'];
-    if ($resources[$nation_id]['funds'] > 0) {
-        $displaycolor = "text-success";
-    } else if ($resources[$nation_id]['funds'] == 0) {
+    if ($resources[$nation_id]['funds'] > 500000000) {
         $displaycolor = "text-warning";
+    } else if ($resources[$nation_id]['funds'] > 0) {
+        $displaycolor = "text-success";
     } else {
         $displaycolor = "text-danger";
     }
@@ -147,10 +147,10 @@ EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
     $total = $total + $resources[$nation_id][$resource_id];
-    if ($resources[$nation_id][$resource_id] > 0) {
-        $displaycolor = "text-success";
-    } else if ($resources[$nation_id][$resource_id] == 0) {
+    if ($resources[$nation_id][$resource_id] > 50000) {
         $displaycolor = "text-warning";
+    } else if ($resources[$nation_id][$resource_id] > 0) {
+        $displaycolor = "text-success";
     } else {
         $displaycolor = "text-danger";
     }
