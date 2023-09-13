@@ -11,6 +11,7 @@ function truncate($text, $chars = 10) {
     return $text;
 }
 
+echo <<<EOFORM
 <style>
 button[name="switchnation_id"] {
   white-space: nowrap; /* Prevent wrapping i.e. force to a single line */
@@ -20,8 +21,6 @@ button[name="switchnation_id"] {
 }
 </style>
 
-
-echo <<<EOFORM
 <div class="row">
   <div class="col-md-6">
    <div class="panel panel-default">
