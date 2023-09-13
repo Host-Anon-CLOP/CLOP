@@ -32,7 +32,7 @@ EOFORM;
 EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
-    $nation_name = truncate($nation_name)
+    $nation_name = truncate($nation_name);
     echo <<<EOFORM
     <td style="text-align: left;"><form action="overview.php" method="post"><button name="switchnation_id" type="submit" value="{$nation_id}">{$nation_name}</button></form></td>
 EOFORM;
