@@ -11,6 +11,15 @@ function truncate($text, $chars = 10) {
     return $text;
 }
 
+<style>
+button[name="switchnation_id"] {
+  white-space: nowrap; /* Prevent wrapping i.e. force to a single line */
+  text-overflow: ellipsis; /* ellipsis where text gets cut off */
+  overflow-x: hidden; /* Required for prior two to work */
+  width: 80px; /* Or however wide you want the columns to be */
+}
+</style>
+
 
 echo <<<EOFORM
 <div class="row">
