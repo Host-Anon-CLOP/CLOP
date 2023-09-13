@@ -3,6 +3,14 @@ include("backend/backend_empireoverview.php");
 $extratitle = "Empire Overview - ";
 include("header.php");
 
+function truncate($text, $chars = 10) {
+    if (strlen($text) <= $chars) {
+        return $text;
+    }
+    $text = substr($text,0,$chars);
+    return $text;
+}
+
 
 echo <<<EOFORM
 <div class="row">
@@ -24,6 +32,7 @@ EOFORM;
 EOFORM;
 
 foreach ($empirenations as $nation_id => $nation_name) {
+    $nation_name = truncate($nation_name)
     echo <<<EOFORM
     <td style="text-align: left;"><form action="overview.php" method="post"><button name="switchnation_id" type="submit" value="{$nation_id}">{$nation_name}</button></form></td>
 EOFORM;
