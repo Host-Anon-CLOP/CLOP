@@ -7,7 +7,7 @@ include("header.php");
 #$displaytype = "ticksworth"
 $displaytype = "net"
 
-if $displaytype == "net" {
+if ($displaytype == "net") {
     $display_resource_type = "Resources - Net"
 } else if ($displaytype == "ticksworth") {
     $display_resource_type = "Resources - Ticks Worth"
@@ -123,7 +123,7 @@ EOFORM;
 $total = 0;
 
 
-if $displaytype == "net" {
+if ($displaytype == "net") {
     # net for funds - get gdp minus taxes
     foreach ($empirenations as $nation_id => $nation_name) {
         $total = $total + $resources[$nation_id]['funds'];
