@@ -139,8 +139,8 @@ if ($displaytype == "net") {
         echo <<<EOFORM
         <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
-*/
     }
+    */
 } else if ($displaytype == "ticksworth") {
     # do nothing as no relevant ticksworth for funds
 } else {
