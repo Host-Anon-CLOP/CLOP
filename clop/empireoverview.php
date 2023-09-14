@@ -134,6 +134,7 @@ if ($displaytype == "net") {
     EOFORM;
     }
 } else if ($displaytype == "ticksworth") {
+    $total = 0;
     # do nothing as no relevant ticksworth for funds
 } else {
     # stockpiles - funds per nation
