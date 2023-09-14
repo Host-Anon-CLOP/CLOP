@@ -131,10 +131,9 @@ if ($displaytype == "net") {
         $displayamount = commas($resources[$nation_id]['funds']);
         echo <<<EOFORM
         <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
-    EOFORM;
+EOFORM;
     }
 } else if ($displaytype == "ticksworth") {
-    $total = 0;
     # do nothing as no relevant ticksworth for funds
 } else {
     # stockpiles - funds per nation
@@ -150,7 +149,7 @@ if ($displaytype == "net") {
         $displayamount = commas($resources[$nation_id]['funds']);
         echo <<<EOFORM
         <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
-    EOFORM;
+EOFORM;
     }
 }
 
