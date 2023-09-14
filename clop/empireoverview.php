@@ -116,15 +116,22 @@ echo <<<EOFORM
     <td></td></tr>
 EOFORM;
 
-# get funds per nation
-echo <<<EOFORM
+# get funds per nation, or gdp if net
+if ($displaytype == "net") {
+    echo <<<EOFORM
+        <tr><td></td><td style="text-align: left;">GDP</td>
+EOFORM;
+} else if ($displaytype == "stockpiles") {
+    echo <<<EOFORM
     <tr><td></td><td style="text-align: left;">Funds</td>
 EOFORM;
+}
 $total = 0;
 
 
 if ($displaytype == "net") {
     # net for funds - get gdp minus taxes
+    /*
     foreach ($empirenations as $nation_id => $nation_name) {
         $total = $total + $resources[$nation_id]['funds'];
         $displaycolor = "text-success";
@@ -132,6 +139,7 @@ if ($displaytype == "net") {
         echo <<<EOFORM
         <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
 EOFORM;
+*/
     }
 } else if ($displaytype == "ticksworth") {
     # do nothing as no relevant ticksworth for funds
