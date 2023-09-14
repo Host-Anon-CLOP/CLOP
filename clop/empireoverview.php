@@ -3,6 +3,18 @@ include("backend/backend_empireoverview.php");
 $extratitle = "Empire Overview - ";
 include("header.php");
 
+#$displaytype = "stockpiles"
+#$displaytype = "ticksworth"
+$displaytype = "net"
+
+if $displaytype == "net" {
+    $display_resource_type = "Resources - Net"
+} else if ($displaytype == "ticksworth") {
+    $display_resource_type = "Resources - Ticks Worth"
+} else {
+    $display_resource_type = "Resources - Stockpiles"
+}
+
 echo <<<EOFORM
 <style>
 button[name="switchnation_id"] {
@@ -16,7 +28,7 @@ button[name="switchnation_id"] {
 <div class="row">
   <div class="col-md-6">
    <div class="panel panel-default">
-     <div class="panel-heading">Resources - Stockpiles</div>
+     <div class="panel-heading">$display_resource_type</div>
      <table class="table">
       <thead>
         <tr>
@@ -109,19 +121,36 @@ echo <<<EOFORM
     <tr><td></td><td style="text-align: left;">Funds</td>
 EOFORM;
 $total = 0;
-foreach ($empirenations as $nation_id => $nation_name) {
-    $total = $total + $resources[$nation_id]['funds'];
-    if ($resources[$nation_id]['funds'] > 500000000) {
-        $displaycolor = "text-warning";
-    } else if ($resources[$nation_id]['funds'] > 0) {
+
+
+if $displaytype == "net" {
+    # net for funds - get gdp minus taxes
+    foreach ($empirenations as $nation_id => $nation_name) {
+        $total = $total + $resources[$nation_id]['funds'];
         $displaycolor = "text-success";
-    } else {
-        $displaycolor = "text-danger";
+        $displayamount = commas($resources[$nation_id]['funds']);
+        echo <<<EOFORM
+        <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
+    EOFORM;
     }
-    $displayamount = commas($resources[$nation_id]['funds']);
-    echo <<<EOFORM
-    <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
-EOFORM;
+} else if ($displaytype == "ticksworth") {
+    # do nothing as no relevant ticksworth for funds
+} else {
+    # stockpiles - funds per nation
+    foreach ($empirenations as $nation_id => $nation_name) {
+        $total = $total + $resources[$nation_id]['funds'];
+        if ($resources[$nation_id]['funds'] > 500000000) {
+            $displaycolor = "text-warning";
+        } else if ($resources[$nation_id]['funds'] > 0) {
+            $displaycolor = "text-success";
+        } else {
+            $displaycolor = "text-danger";
+        }
+        $displayamount = commas($resources[$nation_id]['funds']);
+        echo <<<EOFORM
+        <td style="text-align: left;"><span class="{$displaycolor}">{$displayamount}</span></td>
+    EOFORM;
+    }
 }
 
 if ($total > 0) {
