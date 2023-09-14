@@ -5,14 +5,14 @@ include("header.php");
 
 #$displaytype = "stockpiles"
 #$displaytype = "ticksworth"
-$displaytype = "net"
+$displaytype = "net";
 
 if ($displaytype == "net") {
-    $display_resource_type = "Resources - Net"
+    $display_resource_type = "Resources - Net";
 } else if ($displaytype == "ticksworth") {
-    $display_resource_type = "Resources - Ticks Worth"
+    $display_resource_type = "Resources - Ticks Worth";
 } else {
-    $display_resource_type = "Resources - Stockpiles"
+    $display_resource_type = "Resources - Stockpiles";
 }
 
 echo <<<EOFORM
