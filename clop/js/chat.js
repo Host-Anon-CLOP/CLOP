@@ -48,14 +48,15 @@ var chat_XMLHttp_add = new XMLHttpRequest();
 var chat_XMLHttp_get = new XMLHttpRequest();
 function addmessage()
 {
-  alert('horse pussy');
   if (!document.getElementById('message').value || chat_XMLHttp_add.readyState % 4) return;
+  alert('adding message');
   chat_XMLHttp_add.open("get", "addmessage.php?message="+encodeURIComponent(document.getElementById('message').value)+"&token="+encodeURIComponent(document.getElementById('token').value));
   chat_XMLHttp_add.send(null);
   chat_XMLHttp_add.onreadystatechange = function()
   {
     if(chat_XMLHttp_add.readyState == 4 && chat_XMLHttp_add.status == 200)
     {
+      alert('getting message');
       getmessages(true);
     }
   }
