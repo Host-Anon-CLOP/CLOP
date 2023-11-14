@@ -1,12 +1,16 @@
 <?php
 include ("backend/minimal.php");
+echo "addmessage php - start";
+
 if ($_SESSION['user_id'] && ($_GET['message'] != "") && ($_GET['token'] == $_SESSION["token_chat"])) {
+    echo "addmessage php - select start";
 	$mysql['message'] = $GLOBALS['mysqli']->real_escape_string($_GET['message']);
     $sql=<<<EOSQL
     SELECT message_id FROM chat WHERE user_id = '{$_SESSION['user_id']}' AND posted > DATE_SUB(NOW(), INTERVAL 1 SECOND)
 EOSQL;
     $rs = onelinequery($sql);
     if (!$rs['message_id']) {
+    echo "addmessage php - insert start";
 	$sql=<<<EOSQL
 	INSERT INTO chat SET message = '{$mysql['message']}', posted = NOW(), user_id = '{$_SESSION['user_id']}'
 EOSQL;
@@ -17,4 +21,5 @@ EOSQL;
 	$GLOBALS['mysqli']->query($sql);
     }
 }
+echo "addmessage php - end";
 ?>
