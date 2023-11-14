@@ -48,6 +48,7 @@ var chat_XMLHttp_add = new XMLHttpRequest();
 var chat_XMLHttp_get = new XMLHttpRequest();
 function addmessage()
 {
+  console.log('horsepussytest');
   if (!document.getElementById('message').value || chat_XMLHttp_add.readyState % 4) return;
   chat_XMLHttp_add.open("get", "addmessage.php?message="+encodeURIComponent(document.getElementById('message').value)+"&token="+encodeURIComponent(document.getElementById('token').value));
   chat_XMLHttp_add.send(null);

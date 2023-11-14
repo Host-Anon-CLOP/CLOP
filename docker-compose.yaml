@@ -25,6 +25,7 @@ services:
       - "./elements/tables without data.sql:/docker-entrypoint-initdb.d/05-elements.sql"
 
     # NOTE: mariadb image 10.0.20 doesn't support initdb, so manually connect to the container and run the following:
+    # docker exec -it clop-mariadb-1 bash
     # mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/01-dbs.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/02-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/03-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/04-elements.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/05-elements.sql
 
   adminer:
