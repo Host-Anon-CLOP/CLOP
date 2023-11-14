@@ -49,7 +49,8 @@ var chat_XMLHttp_get = new XMLHttpRequest();
 function addmessage()
 {
   if (!document.getElementById('message').value || chat_XMLHttp_add.readyState % 4) return;
-  alert('adding message');
+  alert('message:' + encodeURIComponent(document.getElementById('message').value));
+  alert('token:' + encodeURIComponent(document.getElementById('token').value));
   chat_XMLHttp_add.open("get", "addmessage.php?message="+encodeURIComponent(document.getElementById('message').value)+"&token="+encodeURIComponent(document.getElementById('token').value));
   chat_XMLHttp_add.send(null);
   chat_XMLHttp_add.onreadystatechange = function()
