@@ -57,7 +57,6 @@ function addmessage()
   {
     if(chat_XMLHttp_add.readyState == 4 && chat_XMLHttp_add.status == 200)
     {
-      alert('getting message');
       getmessages(true);
     }
   }

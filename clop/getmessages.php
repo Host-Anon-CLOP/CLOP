@@ -1,6 +1,6 @@
 <?php
 include ("backend/minimal.php");
-if ($_GET['token'] == $_SESSION["token_chat"]) {
+// if ($_GET['token'] == $_SESSION["token_chat"]) {
     if ($_SESSION['user_id']) {
     $sql=<<<EOSQL
 UPDATE users SET lastactive = NOW() WHERE user_id = {$_SESSION['user_id']}
@@ -33,9 +33,9 @@ EOFORM;
     } else {
 		http_response_code(304);
 	}
-} else {
-    echo <<<EOFORM
-Log in to chat, and only have one chat window open at a time!
-EOFORM;
-}
+// } else {
+//     echo <<<EOFORM
+// Log in to chat, and only have one chat window open at a time!
+// EOFORM;
+// }
 ?>
