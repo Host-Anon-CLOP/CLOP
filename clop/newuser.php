@@ -52,9 +52,9 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
     <label for="nationdescription">Nation Description</label>
     <textarea class="form-control" id="nationdescription" name="nationdescription">{$display['nationdescription']}</textarea>
   </div>
-  
+
   <div>
-  <center>Census</center>
+  <center>EXISTING NATIONS:</center>
   <table class="table table-striped table-bordered">
   <tr><th>REGION:</th><th>NORTH</th><th>CENTRAL</th><th>SOUTH</th><th>TOTAL</th></tr>
   <tr><th>Burrozil:</th><th>$census_burrozil_north</th><th>$census_burrozil_central</th><th>$census_burrozil_south</th><th>$census_burrozil_total</th></tr>
@@ -64,6 +64,7 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
   </table>
   </div>
 
+  Your Nation:
   <div class="form-group">
     <label for="region">Region</label>
     <select name="region">
