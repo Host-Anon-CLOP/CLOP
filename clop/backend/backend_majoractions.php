@@ -131,7 +131,7 @@ EOSQL;
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed to Alicorn Elite. This has happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed to Alicorn Elite. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
                 $infos[] = "You have switched to Alicorn Elite. This happened in all your nations. Check this page to see what you will need for the next step of ascension.";
@@ -191,10 +191,10 @@ EOSQL;
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed to Transponyism. This has happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed to Transponyism. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-                $infos[] = "You have switched to Transponyism. Check this page to see what you will need for the final step of ascension.";
+                $infos[] = "You have switched to Transponyism. This happened in all your nations. Check this page to see what you will need for the final step of ascension.";
 				$nationinfo['government'] = "Transponyism";
             }
         }
@@ -422,7 +422,7 @@ EOSQL;
 				$sql="UPDATE nations SET government = 'Democracy', satisfaction = satisfaction - 2000 WHERE user_id = '{$_SESSION['user_id']}'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government revered from Independence to Democracy. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government revered from Independence to Democracy. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -444,7 +444,7 @@ EOSQL;
 					$GLOBALS['mysqli']->query($sql);
 				}
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government revered from Decentralized to Democracy. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government revered from Decentralized to Democracy. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -505,7 +505,7 @@ EOSQL;
 				$sql="UPDATE nations SET government = 'Repression' WHERE user_id = '{$_SESSION['user_id']}'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government reverted from Authoritarianism to Repression. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government revered from Authoritarianism to Repression. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -521,7 +521,7 @@ EOSQL;
 				$sql="UPDATE nations SET government = 'Repression' WHERE user_id = '{$_SESSION['user_id']}'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government reverted from Oppression to Repression. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government revered from Oppression to Repression. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -591,7 +591,7 @@ EOSQL;
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed to Decentralization. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed to Decentralization. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -620,7 +620,7 @@ EOSQL;
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed from Repression to Authoritarianism. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed from Repression to Authoritarianism. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -682,7 +682,7 @@ EOSQL;
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed to Oppression. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed to Oppression. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
@@ -771,7 +771,7 @@ EOSQL;
 			}
 			$GLOBALS['mysqli']->query($sql);
 			$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed to Solar Vassal. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed to Solar Vassal. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			header("Location: overview.php");
@@ -825,7 +825,7 @@ EOSQL;
 			}
 			$GLOBALS['mysqli']->query($sql);
 			$sql = <<<EOSQL
-INSERT INTO reports SET report = 'Government changed to Lunar Client. This happened in all your nations', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+INSERT INTO reports (report, nation_id, time) select 'Government changed to Lunar Client. This happened in all your nations.' as 'report', nation_id, NOW() as 'time' from nations where user_id = '{$_SESSION['user_id']}'
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			header("Location: overview.php");
