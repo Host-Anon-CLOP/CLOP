@@ -230,6 +230,7 @@ INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.alliance_id = '{$allianceinfo['alliance_id']}' AND u.stasismode = 0";
 $rs = onelinequery($sql);
 $alliancegdp = $rs['gdp'];
+$displaygdp = commas($alliancegdp);
 
 }
 ?>
