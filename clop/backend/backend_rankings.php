@@ -32,7 +32,7 @@ WHERE u.stasismode = 0 AND u.user_id != 1
 ORDER BY age DESC, creationdate ASC, nation_id ASC
 LIMIT {$limit}, 20
 EOSQL;
-} else {
+} else if ($_GET['mode'] == "gdp") {
     $sql=<<<EOSQL
 SELECT COUNT(*) AS count FROM nations n INNER JOIN users u ON u.user_id = n.user_id WHERE u.stasismode = 0 AND u.user_id != 1
 EOSQL;
@@ -42,6 +42,15 @@ $sqlcount = onelinequery($sql);
 SELECT u.flag, n.name, n.nation_id, n.region, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1
+ORDER BY gdp_last_turn DESC, nation_id ASC
+LIMIT {$limit}, 20
+EOSQL;
+} else if ($_GET['mode'] == "allianceless") {
+$mode = "allianceless";
+$sql=<<<EOSQL
+SELECT u.flag, n.name, n.nation_id, n.region, n.government, n.economy, n.gdp_last_turn FROM nations n
+INNER JOIN users u ON u.user_id = n.user_id
+WHERE u.stasismode = 0 AND u.user_id != 1 AND u.alliance_id = 0
 ORDER BY gdp_last_turn DESC, nation_id ASC
 LIMIT {$limit}, 20
 EOSQL;

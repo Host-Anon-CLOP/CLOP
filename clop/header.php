@@ -272,12 +272,11 @@ echo <<<EOFORM
 
   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
       <ul class="dropdown-menu">
-          <li><a href="search.php">Search</a></li>
-          <li><a href="rankings.php?mode=statues">Statues</a></li>
-          <li><a href="rankings.php?mode=longevity">Longevity</a></li>
-          <li><a href="empirerankings.php">Empire Size</a></li>
-          <li><a href="ascensions.php">Ascensions</a></li>
-          <li><a href="graveyard.php">Graveyard</a></li>
+          <li><a href="search.php">Search User or Nation</a></li>
+          <li><a href="rankings.php?mode=allianceless">Allianceless Players</a></li>
+          <li><a href="rankings.php?mode=burrozil">Burrozils</a></li>
+          <li><a href="rankings.php?mode=saddle">Saddle Arabians</a></li>
+          <li><a href="rankings.php?mode=przewalskia">Przewalskia</a></li>
       </ul>
       </li>
 

@@ -14,11 +14,16 @@ EOFORM;
     $secondcolumn =<<<EOFORM
 Age</th><th>Creation Date
 EOFORM;
-} else {
+} else if ($mode == "gdp") {
     $topline = <<<EOFORM
 <center>These rankings are only for GDP made from factories and satisfaction! There are plenty of other ways to make money in &gt;CLOP. Take these rankings with a grain of salt.</center>
 EOFORM;
     $secondcolumn = "GDP Last Turn";
+} else if ($mode == "allianceless") {
+    $topline = <<<EOFORM
+<center>These are the players without an alliance.</center>
+EOFORM;
+    $secondcolumn = "Nation";
 }
 echo <<<EOFORM
 {$topline}
@@ -41,7 +46,7 @@ $flaghtml = "";
         $sortby =<<<EOFORM
 {$nation['age']}</td><td>{$nation['creationdate']}
 EOFORM;
-    } else {
+    } else if ($mode == "gdp") {
         $sortby = $nation['gdp_last_turn'];
     }
     $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
