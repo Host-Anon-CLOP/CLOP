@@ -28,7 +28,9 @@ EOFORM;
     $topline = <<<EOFORM
 <center>These are the $mode nations.</center>
 EOFORM;
-    $secondcolumn = "User";
+    $secondcolumn =<<<EOFORM
+User</th><th>Subregion
+EOFORM;
 }
 echo <<<EOFORM
 {$topline}
