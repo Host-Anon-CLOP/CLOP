@@ -130,7 +130,11 @@ EOSQL;
                 $GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
-                $infos[] = "You have switched to Alicorn Elite. Check this page to see what you will need for the next step of ascension.";
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Alicorn Elite. This has happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+$GLOBALS['mysqli']->query($sql);
+                $infos[] = "You have switched to Alicorn Elite. This happened in all your nations. Check this page to see what you will need for the next step of ascension.";
                 $nationinfo['government'] = "Alicorn Elite";
             }
         }
@@ -185,6 +189,10 @@ EOSQL;
                 $sql = "UPDATE resources SET amount = amount + 2 WHERE nation_id = '{$_SESSION['nation_id']}' AND resource_id = '76'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
+				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Transponyism. This has happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 				$GLOBALS['mysqli']->query($sql);
                 $infos[] = "You have switched to Transponyism. Check this page to see what you will need for the final step of ascension.";
 				$nationinfo['government'] = "Transponyism";
@@ -352,6 +360,10 @@ EOSQL;
 UPDATE nations SET satisfaction = 1000 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Loose Despotism.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+				$GLOBALS['mysqli']->query($sql);
 			}
 			header("Location: overview.php");
 			exit;
@@ -393,6 +405,10 @@ EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Democracy.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
 			}
@@ -404,6 +420,10 @@ EOSQL;
 				$sql="UPDATE nations SET funds = funds - 5000000 WHERE nation_id = '{$_SESSION['nation_id']}'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql="UPDATE nations SET government = 'Democracy', satisfaction = satisfaction - 2000 WHERE user_id = '{$_SESSION['user_id']}'";
+				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government revered from Independence to Democracy. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
@@ -420,6 +440,10 @@ EOSQL;
 				if ($nationinfo['satisfaction'] > 1500) {
 					$sql=<<<EOSQL
 UPDATE nations SET satisfaction = 1500 WHERE nation_id = '{$_SESSION['nation_id']}'
+EOSQL;
+					$GLOBALS['mysqli']->query($sql);
+					$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government revered from Decentralized to Democracy. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
 EOSQL;
 					$GLOBALS['mysqli']->query($sql);
 				}
@@ -464,6 +488,10 @@ EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Repression.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
 			}
@@ -476,6 +504,10 @@ EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$sql="UPDATE nations SET government = 'Repression' WHERE user_id = '{$_SESSION['user_id']}'";
 				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government reverted from Authoritarianism to Repression. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
 			}
@@ -487,6 +519,10 @@ EOSQL;
 				$sql="UPDATE nations SET funds = funds - 20000000 WHERE nation_id = '{$_SESSION['nation_id']}'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql="UPDATE nations SET government = 'Repression' WHERE user_id = '{$_SESSION['user_id']}'";
+				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government reverted from Oppression to Repression. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
@@ -506,6 +542,10 @@ EOSQL;
 			}
 			if (empty($errors)) {
 				$sql="UPDATE nations SET government = 'Independence', funds = funds - 20000000 WHERE nation_id = '{$_SESSION['nation_id']}'";
+				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+				INSERT INTO reports SET report = 'Government changed to Independence.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+				EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
@@ -550,6 +590,10 @@ EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Decentralization. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
 			}
@@ -574,6 +618,10 @@ EOSQL;
 				$sql= "UPDATE resources SET amount = amount - 70 WHERE nation_id = '{$_SESSION['nation_id']}' AND resource_id = '10'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
+				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed from Repression to Authoritarianism. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
@@ -633,6 +681,10 @@ EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				$sql = "DELETE FROM resources WHERE amount = 0";
 				$GLOBALS['mysqli']->query($sql);
+				$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Oppression. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
 			}
@@ -662,6 +714,10 @@ EOSQL;
 		if (!$errors) {
 			$sql=<<<EOSQL
 UPDATE nations SET satisfaction = satisfaction - 500, economy = 'Poorly Defined', active_economy = 1, funds = funds - 1000000 WHERE nation_id = '{$_SESSION['nation_id']}'
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
+			$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Economy changed to Poorly Defined', nation_id = '{$_SESSION['nation_id']}', time = NOW()
 EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			header("Location: overview.php");
@@ -714,6 +770,10 @@ EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 			}
 			$GLOBALS['mysqli']->query($sql);
+			$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Solar Vassal. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
 			header("Location: overview.php");
 			exit;
 		}
@@ -763,6 +823,10 @@ UPDATE nations SET satisfaction = 1250 WHERE nation_id = '{$_SESSION['nation_id'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 			}
+			$GLOBALS['mysqli']->query($sql);
+			$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Government changed to Lunar Client. This happened in all your nations', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			header("Location: overview.php");
 			exit;
@@ -824,6 +888,10 @@ EOSQL;
             $GLOBALS['mysqli']->query($sql);
             $sql = "DELETE FROM resources WHERE amount = 0";
             $GLOBALS['mysqli']->query($sql);
+			$sql = <<<EOSQL
+INSERT INTO reports SET report = 'Economy changed to {$name}', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
+			$GLOBALS['mysqli']->query($sql);
             header("Location: overview.php");
             exit;
 		}
