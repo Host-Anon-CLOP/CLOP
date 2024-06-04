@@ -53,8 +53,12 @@ $flaghtml = "";
 EOFORM;
     } else if ($mode == "gdp") {
         $sortby = $nation['gdp_last_turn'];
-    } else {
+    } else if ($mode == "allianceless") {
         $sortby = $nation['username'];
+    } else {
+        $sortby =<<<EOFORM
+{$nation['username']}</td><td>{$nation['subregion']}
+EOFORM;
     }
     $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
     $icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");
