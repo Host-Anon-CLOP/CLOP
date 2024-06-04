@@ -77,7 +77,7 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
 			{$subregionlist}
 		</select>
   </div>
-<input type="submit" onclick="return" class="btn btn-success" value="Join >CLOP"/>
+<input type="submit" onclick="if (document.getElementsByName('region')[0].options[document.getElementsByName('region')[0].selectedIndex].text == 'Przewalskia') return; else return confirm('no u');" class="btn btn-success" value="Join >CLOP"/>
 </form>
 EOFORM;
 include("footer.php");
