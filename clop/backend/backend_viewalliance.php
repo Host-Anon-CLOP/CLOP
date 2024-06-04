@@ -232,4 +232,6 @@ WHERE u.alliance_id = '{$allianceinfo['alliance_id']}' AND u.stasismode = 0
 GROUP BY u.alliance_id";
 $rs = onelinequery($sql);
 $alliancegdp = $rs['Qty'];
+
+}
 ?>
