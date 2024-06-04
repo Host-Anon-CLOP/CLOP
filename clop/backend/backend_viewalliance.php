@@ -227,7 +227,7 @@ while ($rs = mysqli_fetch_array($sth)) {
 # Get GDP
 $sql = "SELECT sum(n.gdp_last_turn) AS gdp FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
-WHERE u.alliance_id = '{$allianceinfo['alliance_id']}' AND u.stasismode = 0;"
+WHERE u.alliance_id = '{$allianceinfo['alliance_id']}' AND u.stasismode = 0";
 $rs = onelinequery($sql);
 $alliancegdp = $rs['gdp'];
 
