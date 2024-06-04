@@ -57,7 +57,7 @@ EOFORM;
         $sortby = $nation['username'];
     } else {
         $sortby =<<<EOFORM
-{$nation['username']}</td><td>{$nation['subregion']}
+{$nation['username']}</td><td>{$subregiontypes[$nation['subregion']]}
 EOFORM;
     }
     $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");

@@ -1,5 +1,7 @@
 <?php
 include_once("allfunctions.php");
+$subregiontypes = array(0 => "", 1 => "North ", 2 => "Central ", 3 => "South ");
+
 $mysql['page'] = (int)$_GET['page'];
 if (!$mysql['page']) {
     $mysql['page'] = 1;
