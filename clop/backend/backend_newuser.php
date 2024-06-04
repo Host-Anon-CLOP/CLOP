@@ -28,6 +28,88 @@ EOSQL;
             $errors[] = "This IP belongs to a public system, such as a school or a library. You can play from here, but to prevent easy multi abuse, new users have to make accounts at home.";
         }
     }
+
+# Census
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_burrozil_north = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_zebrica_north = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_saddle_north = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_prze_north = onelinequery($sql)['COUNT(*)'];
+
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_burrozil_central = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_zebrica_central = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_saddle_central = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_prze_central = onelinequery($sql)['COUNT(*)'];
+
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_burrozil_south = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_zebrica_south = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_saddle_south = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_prze_south = onelinequery($sql)['COUNT(*)'];
+
+$census_burrozil_total = $census_burrozil_north + $census_burrozil_central + $census_burrozil_south;
+$census_saddle_total = $census_saddle_north + $census_saddle_central + $census_saddle_south;
+$census_zebrica_total = $census_zebrica_north + $census_zebrica_central + $census_zebrica_south;
+$census_prze_total = $census_prze_north + $census_prze_central + $census_prze_south;
+
 $baseregions = array();
 $baseregions[1] = "Saddle Arabia";
 $baseregions[2] = "Zebrica";
