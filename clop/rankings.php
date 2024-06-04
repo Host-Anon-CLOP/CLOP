@@ -70,7 +70,7 @@ echo <<<EOFORM
 EOFORM;
     } else {
 echo <<<EOFORM
-<tr><td style="width:25px">{$flaghtml}</td><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a></td><td>{$sortby}</td><td>{$nation['government']}</td><td>{$nation['economy']}</td></tr>
+<tr><td style="width:25px">{$flaghtml}</td><td><a href="viewnation.php?nation_id={$nation['nation_id']}">{$nation['name']} (<img src="images/icons/{$icontypes[$nation['region']]}.png"/>{$regiontypes[$nation['region']]})</a></td><td><a href="viewuser.php?user_id={$nation['user_id']}">{$sortby}</td><td>{$nation['government']}</td><td>{$nation['economy']}</td></tr>
 EOFORM;
     }
 }
