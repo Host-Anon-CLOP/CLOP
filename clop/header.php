@@ -275,6 +275,7 @@ echo <<<EOFORM
           <li><a href="search.php">Search User or Nation</a></li>
           <li><a href="rankings.php?mode=allianceless">Allianceless Players</a></li>
           <li><a href="rankings.php?mode=burrozil">Burrozils</a></li>
+          <li><a href="rankings.php?mode=zebrica">Zebricas</a></li>
           <li><a href="rankings.php?mode=saddle">Saddle Arabians</a></li>
           <li><a href="rankings.php?mode=przewalskia">Przewalskia</a></li>
       </ul>

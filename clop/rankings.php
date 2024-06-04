@@ -24,6 +24,11 @@ EOFORM;
 <center>These are the nations without an alliance.</center>
 EOFORM;
     $secondcolumn = "User";
+} else {
+    $topline = <<<EOFORM
+<center>These are the $mode nations.</center>
+EOFORM;
+    $secondcolumn = "User";
 }
 echo <<<EOFORM
 {$topline}
@@ -48,7 +53,7 @@ $flaghtml = "";
 EOFORM;
     } else if ($mode == "gdp") {
         $sortby = $nation['gdp_last_turn'];
-    } else if ($mode == "allianceless") {
+    } else {
         $sortby = $nation['username'];
     }
     $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
