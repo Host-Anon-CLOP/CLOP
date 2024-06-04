@@ -544,8 +544,8 @@ EOSQL;
 				$sql="UPDATE nations SET government = 'Independence', funds = funds - 20000000 WHERE nation_id = '{$_SESSION['nation_id']}'";
 				$GLOBALS['mysqli']->query($sql);
 				$sql = <<<EOSQL
-				INSERT INTO reports SET report = 'Government changed to Independence.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
-				EOSQL;
+INSERT INTO reports SET report = 'Government changed to Independence.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
