@@ -15,7 +15,7 @@ services:
       - 127.0.0.1:3307:3306
     environment:
       - MYSQL_DATABASE=clopus_clop
-      - MYSQL_ROOT_PASSWORD=${MYSQL_PASS}
+      - MYSQL_ROOT_PASSWORD=horsepussy@2468
     volumes:
       - ./docker/mariadb:/var/lib/mysql
       - ./dbs.sql:/docker-entrypoint-initdb.d/01-dbs.sql
@@ -47,8 +47,8 @@ services:
       docker-php-ext-enable mysqli &&
       exec apache2-foreground"
     environment:
-      MYSQL_PASS: ${MYSQL_PASS}
-      DOMAIN_URL: ${DOMAIN_URL}
+      MYSQL_PASS: horsepussy@2468
+      DOMAIN_URL: test.4clop.com
 
   caddy:
     image: caddy:2-alpine
@@ -62,7 +62,7 @@ services:
       - 80:80
       - 443:443
     environment:
-      DOMAIN_URL: ${DOMAIN_URL}
+      DOMAIN_URL: test.4clop.com
 
 #  socat:
 #    image: alpine/socat
