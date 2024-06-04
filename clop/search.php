@@ -13,11 +13,11 @@ Search individual User or Nation:
 
 Search by Category:
 <br>
-<input type="submit" name="allianceless" value="Unallied Players" class="btn btn-success btn-sm"/>
-<input type="submit" name="prze" value="Prze" class="btn btn-success btn-sm"/>
-<input type="submit" name="zeb" value="Zebs" class="btn btn-success btn-sm"/>
-<input type="submit" name="saddle" value="Saddles" class="btn btn-success btn-sm"/>
-<input type="submit" name="burro" value="Burros" class="btn btn-success btn-sm"/>
+<input type="submit" name="Allianceless" value="Allianceless" class="btn btn-success btn-sm"/>
+<input type="submit" name="Burrozil" value="Burrozil" class="btn btn-success btn-sm"/>
+<input type="submit" name="Saddle " value="Saddle " class="btn btn-success btn-sm"/>
+<input type="submit" name="Zebrica" value="Zebrica" class="btn btn-success btn-sm"/>
+<input type="submit" name="Przewalskia" value="Przewalskia" class="btn btn-success btn-sm"/>
 
 </form></center>
 EOFORM;
