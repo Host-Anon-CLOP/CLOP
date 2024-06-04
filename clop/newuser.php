@@ -77,7 +77,7 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
 			{$subregionlist}
 		</select>
   </div>
-<input type="submit" class="btn btn-success" value="Join >CLOP"/>
+<input type="submit" onclick="return confirm('Really be a colossal faggot? Prze are typically only needed 1 per alliance, at most')" class="btn btn-success" value="Join >CLOP"/>
 </form>
 EOFORM;
 include("footer.php");
