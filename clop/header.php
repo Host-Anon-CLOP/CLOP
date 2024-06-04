@@ -229,7 +229,8 @@ echo <<<EOFORM
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nation <b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><a href="overview.php">Overview</a></li>
+    <li><a href="overview.php">Overview</a></li>
+      <li><a href="empireoverview.php">Empire Overview</a></li>
       <li><a href="reports.php">Reports</a></li>
       <li><a href="actions.php">Actions</a></li>
       <li><a href="favoriteactions.php">Favorite Actions</a></li>
