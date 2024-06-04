@@ -53,7 +53,7 @@ $sql=<<<EOSQL
 SELECT u.flag, u.username, n.name, n.nation_id, n.region, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1 AND u.alliance_id = 0
-ORDER BY gdp_last_turn DESC, nation_id ASC
+ORDER BY gdp_last_turn DESC, nation_id ASC, user_id ASC
 LIMIT {$limit}, 20
 EOSQL;
 } else if ($_GET['mode'] == "burrozil") {
@@ -62,7 +62,7 @@ $sql=<<<EOSQL
 SELECT u.flag, u.username, n.name, n.nation_id, n.region, n.subregion, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1 AND n.region = 3
-ORDER BY gdp_last_turn DESC, nation_id ASC
+ORDER BY gdp_last_turn DESC, nation_id ASC, user_id ASC
 LIMIT {$limit}, 20
 EOSQL;
 } else if ($_GET['mode'] == "zebrica") {
@@ -71,7 +71,7 @@ $sql=<<<EOSQL
 SELECT u.flag, u.username, n.name, n.nation_id, n.region, n.subregion, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1 AND n.region = 2
-ORDER BY gdp_last_turn DESC, nation_id ASC
+ORDER BY gdp_last_turn DESC, nation_id ASC, user_id ASC
 LIMIT {$limit}, 20
 EOSQL;
 } else if ($_GET['mode'] == "saddle") {
@@ -80,7 +80,7 @@ $sql=<<<EOSQL
 SELECT u.flag, u.username, n.name, n.nation_id, n.region, n.subregion, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1 AND n.region = 1
-ORDER BY gdp_last_turn DESC, nation_id ASC
+ORDER BY gdp_last_turn DESC, nation_id ASC, user_id ASC
 LIMIT {$limit}, 20
 EOSQL;
 } else if ($_GET['mode'] == "przewalskia") {
@@ -89,7 +89,7 @@ $sql=<<<EOSQL
 SELECT u.flag, u.username, n.name, n.nation_id, n.region, n.subregion, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1 AND n.region = 4
-ORDER BY gdp_last_turn DESC, nation_id ASC
+ORDER BY gdp_last_turn DESC, nation_id ASC, user_id ASC
 LIMIT {$limit}, 20
 EOSQL;
 }
