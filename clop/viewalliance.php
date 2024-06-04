@@ -100,6 +100,8 @@ EOFORM;
         </tr>
         </thead>
         <tbody>
+        <td style="text-align: center;"><span class="text-success">{$alliancegdp}</span></td>
+        
 EOFORM;
 foreach($allianceaffectedresources as $name => $amount) {
 if (!$allianceresources[$name]) $allianceresources[$name] = 0;
