@@ -360,11 +360,11 @@ EOSQL;
 UPDATE nations SET satisfaction = 1000 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-				$sql = <<<EOSQL
+			}
+			$sql = <<<EOSQL
 INSERT INTO reports SET report = 'Government changed to Loose Despotism.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
 EOSQL;
 				$GLOBALS['mysqli']->query($sql);
-			}
 			header("Location: overview.php");
 			exit;
 		}
@@ -442,11 +442,11 @@ EOSQL;
 UPDATE nations SET satisfaction = 1500 WHERE nation_id = '{$_SESSION['nation_id']}'
 EOSQL;
 					$GLOBALS['mysqli']->query($sql);
-					$sql = <<<EOSQL
+				}
+				$sql = <<<EOSQL
 INSERT INTO reports SET report = 'Government revered from Decentralized to Democracy. This happened in all your nations.', nation_id = '{$_SESSION['nation_id']}', time = NOW()
 EOSQL;
-					$GLOBALS['mysqli']->query($sql);
-				}
+				$GLOBALS['mysqli']->query($sql);
 				header("Location: overview.php");
 				exit;
 			}
