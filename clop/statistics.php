@@ -33,7 +33,7 @@ echo <<<EOFORM
 <tr><th>Burrozil:</th><th>$census_burrozil_north</th><th>$census_burrozil_central</th><th>$census_burrozil_south</th><th>$census_burrozil_total</th></tr>
 <tr><th>Zebrica:</th><th>$census_zebrica_north</th><th>$census_zebrica_central</th><th>$census_zebrica_south</th><th>$census_zebrica_total</th></tr>
 <tr><th>Saddle Arabia:</th><th>$census_saddle_north</th><th>$census_saddle_central</th><th>$census_saddle_south</th><th>$census_saddle_total</th></tr>
-<tr><th>Przewalskia :</th><th>$census_prze_north</th><th>$census_prze_central</th><th>$census_prze_south</th><th>$census_prze_total</th></tr>
+<tr><th>Przewalskia:</th><th>$census_prze_north</th><th>$census_prze_central</th><th>$census_prze_south</th><th>$census_prze_total</th></tr>
 </table>
 EOFORM;
 
