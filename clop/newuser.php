@@ -52,9 +52,8 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
     <label for="nationdescription">Nation Description</label>
     <textarea class="form-control" id="nationdescription" name="nationdescription">{$display['nationdescription']}</textarea>
   </div>
+  
   <div>
-  # Census
-  echo <<<EOFORM
   <center>Census</center>
   <table class="table table-striped table-bordered">
   <tr><th>REGION:</th><th>NORTH</th><th>CENTRAL</th><th>SOUTH</th><th>TOTAL</th></tr>
@@ -63,7 +62,6 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
   <tr><th>Saddle Arabia:</th><th>$census_saddle_north</th><th>$census_saddle_central</th><th>$census_saddle_south</th><th>$census_saddle_total</th></tr>
   <tr><th>Przewalskia:</th><th>$census_prze_north</th><th>$census_prze_central</th><th>$census_prze_south</th><th>$census_prze_total</th></tr>
   </table>
-  EOFORM;
   </div>
 
   <div class="form-group">
