@@ -77,7 +77,7 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
 			{$subregionlist}
 		</select>
   </div>
-<input type="submit" onclick="if (document.getElementsByName('region')[0].options[document.getElementsByName('region')[0].selectedIndex].text == 'Przewalskia') return confirm('Do you really want to be a colossal faggot? Prze are typically only needed 1 per alliance, at most. Only choose this nation type if you know what you are doing.'); else return;" class="btn btn-success" value="Join >CLOP"/>
+<input type="submit" onclick="if (document.getElementsByName('region')[0].options[document.getElementsByName('region')[0].selectedIndex].text == 'Przewalskia') return confirm('Do you really want to be a colossal faggot?\nPrze are typically only needed 1 per alliance, at most. Only choose this nation type if you know what you are doing.'); else return;" class="btn btn-success" value="Join >CLOP"/>
 </form>
 EOFORM;
 include("footer.php");
