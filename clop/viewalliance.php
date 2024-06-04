@@ -104,7 +104,8 @@ EOFORM;
         <td style="text-align: right;">GDP</td>
         <td style="text-align: center;"><span class="text-success"></span></td>
         <td style="text-align: center;"><span class="text-danger"></span></td>
-        <td style="text-align: center;"><span class="text-success">{$alliancegdp}</span></td>
+        <td style="text-align: center;"><span class="text-danger"></span></td>
+        <td style="text-align: center;"><span class="text-success">{$alliancegdp[0]}</span></td>
         </tr>     
 EOFORM;
 foreach($allianceaffectedresources as $name => $amount) {
