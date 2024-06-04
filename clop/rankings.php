@@ -21,14 +21,14 @@ EOFORM;
     $secondcolumn = "GDP Last Turn";
 } else if ($mode == "allianceless") {
     $topline = <<<EOFORM
-<center>These are the players without an alliance.</center>
+<center>These are the nations without an alliance.</center>
 EOFORM;
-    $secondcolumn = "Nation";
+    $secondcolumn = "User";
 }
 echo <<<EOFORM
 {$topline}
 <table class="table table-striped table-bordered">
-<tr><th style="width:25px"></th><th>Name</th><th>{$secondcolumn}</th><th>Government</th><th>Economy</th></tr>
+<tr><th style="width:25px"></th><th>Nation</th><th>{$secondcolumn}</th><th>Government</th><th>Economy</th></tr>
 EOFORM;
 foreach ($nations as $nation) {
 if ($nation['flag'] && ($_SESSION['hideflags'] == 0)) {
@@ -48,6 +48,8 @@ $flaghtml = "";
 EOFORM;
     } else if ($mode == "gdp") {
         $sortby = $nation['gdp_last_turn'];
+    } else if ($mode == "allianceless") {
+        $sortby = $nation['username'];
     }
     $regiontypes = array(0 => "The Heavily Fortified Island of Admin", 1 => "Saddle Arabia", 2 => "Zebrica", 3 => "Burrozil", 4 => "Przewalskia");
     $icontypes = array(0 => "Drugs", 1 => "Oil", 2 => "Copper", 3 => "Apples", 4 => "Machinery Parts");

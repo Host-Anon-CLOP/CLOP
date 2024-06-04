@@ -48,7 +48,7 @@ EOSQL;
 } else if ($_GET['mode'] == "allianceless") {
 $mode = "allianceless";
 $sql=<<<EOSQL
-SELECT u.flag, n.name, n.nation_id, n.region, n.government, n.economy, n.gdp_last_turn FROM nations n
+SELECT u.flag, u.username, n.name, n.nation_id, n.region, n.government, n.economy, n.gdp_last_turn FROM nations n
 INNER JOIN users u ON u.user_id = n.user_id
 WHERE u.stasismode = 0 AND u.user_id != 1 AND u.alliance_id = 0
 ORDER BY gdp_last_turn DESC, nation_id ASC
