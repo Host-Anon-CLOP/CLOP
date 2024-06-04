@@ -8,11 +8,6 @@ if ($_SESSION['user_id']) {
 <center><form action="viewalliance.php" method="post"><input type="hidden" name="token_viewalliance" value="{$_SESSION['token_viewalliance']}"/>
 <input type="hidden" name="alliance_id" value="{$allianceinfo['alliance_id']}"/>
 EOFORM;
-
-ECHO "HERE";
-ECHO $alliancegdp;
-ECHO "HERE END";
-
     if (!$useralliance['alliance_id']) {
         if ($allianceinfo['alliancerequested']) {
         $buttons .=<<<EOFORM
