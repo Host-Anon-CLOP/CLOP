@@ -269,7 +269,18 @@ echo <<<EOFORM
   {$nationline}
   <li><a>Server time: {$currenttime}</a></li>
   <li><a>Next tick: <span class="text-danger" id="countdown">{$countdowntimer}</span></a></li>
-  <li><a href="search.php">Search</a></li>
+
+  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+          <li><a href="search.php">Search</a></li>
+          <li><a href="rankings.php?mode=statues">Statues</a></li>
+          <li><a href="rankings.php?mode=longevity">Longevity</a></li>
+          <li><a href="empirerankings.php">Empire Size</a></li>
+          <li><a href="ascensions.php">Ascensions</a></li>
+          <li><a href="graveyard.php">Graveyard</a></li>
+      </ul>
+      </li>
+
   <li><a href="statistics.php">Stats</a></li>
   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Rankings <b class="caret"></b></a>
   <ul class="dropdown-menu">
