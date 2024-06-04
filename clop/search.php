@@ -12,6 +12,7 @@ Search individual User or Nation:
 <br>
 
 Search by Category:
+<br>
 <input type="submit" name="allianceless" value="Unallied Players" class="btn btn-success btn-sm"/>
 <input type="submit" name="prze" value="Prze" class="btn btn-success btn-sm"/>
 <input type="submit" name="zeb" value="Zebs" class="btn btn-success btn-sm"/>
