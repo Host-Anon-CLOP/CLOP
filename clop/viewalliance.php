@@ -8,6 +8,11 @@ if ($_SESSION['user_id']) {
 <center><form action="viewalliance.php" method="post"><input type="hidden" name="token_viewalliance" value="{$_SESSION['token_viewalliance']}"/>
 <input type="hidden" name="alliance_id" value="{$allianceinfo['alliance_id']}"/>
 EOFORM;
+
+ECHO "HERE";
+ECHO $alliancegdp;
+ECHO "HERE END";
+
     if (!$useralliance['alliance_id']) {
         if ($allianceinfo['alliancerequested']) {
         $buttons .=<<<EOFORM
@@ -105,7 +110,7 @@ EOFORM;
         <td style="text-align: center;"><span class="text-success"></span></td>
         <td style="text-align: center;"><span class="text-danger"></span></td>
         <td style="text-align: center;"><span class="text-danger"></span></td>
-        <td style="text-align: center;"><span class="text-success">{$alliancegdp[0]}</span></td>
+        <td style="text-align: center;"><span class="text-success">{$alliancegdp}</span></td>
         </tr>     
 EOFORM;
 foreach($allianceaffectedresources as $name => $amount) {
