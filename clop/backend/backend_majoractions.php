@@ -66,8 +66,8 @@ EOSQL;
 		}
         if (!$errors) {
 			$sql = <<<EOSQL
-			INSERT INTO reports SET report = 'Nation name changed from $nationinfo['name'] to $newname', nation_id = '{$_SESSION['nation_id']}', time = NOW()
-			EOSQL;
+INSERT INTO reports SET report = 'Nation name changed from $nationinfo['name'] to $newname', nation_id = '{$_SESSION['nation_id']}', time = NOW()
+EOSQL;
 			$GLOBALS['mysqli']->query($sql);
 			$sql = "UPDATE nations SET funds = funds - {$newnameprice}, name = '{$newname}', satisfaction = satisfaction - 500 WHERE nation_id = '{$_SESSION['nation_id']}'";
 			$GLOBALS['mysqli']->query($sql);
