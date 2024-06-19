@@ -1,6 +1,5 @@
 <?php
 include_once("allfunctions.php");
-$elementsmysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "clopus_elements");
 if ($_SESSION['user_id']) {
     $errors[] = "The \"multiple accounts will get you banned\" thing isn't a joke. Don't do it.";
 }
@@ -190,11 +189,6 @@ if (!empty($_POST)) {
     if ($rs['count'] > 0) {
         $errors[] = "Due to the potential for faggotry, we're not going to let you make your username someone else's nation name.";
     }
-    $sql = "SELECT COUNT(*) AS count FROM users WHERE username = '{$mysql['realusername']}'";
-	$rs = mysqli_fetch_array($GLOBALS['elementsmysqli']->query($sql));
-	if ($rs['count'] > 0) {
-		$errors[] = "Username already exists in the sequel.";
-	}
     if (empty($errors)) {
         $passwordhash = sha1($mysql['password'] . "saltlick"); //I'm fully aware that this is shit, thanks
         $mysql['remote_addr2'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);        
