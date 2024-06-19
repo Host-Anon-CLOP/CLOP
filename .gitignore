@@ -1,3 +1,4 @@
 docker/
 issue_cert_localhost.lock
-data/
+caddy/caddy/certificates/
+data/caddy/caddy/

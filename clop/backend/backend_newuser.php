@@ -1,6 +1,5 @@
 <?php
 include_once("allfunctions.php");
-$elementsmysqli = new mysqli("mariadb", "root", $_ENV["MYSQL_PASS"], "clopus_elements");
 if ($_SESSION['user_id']) {
     $errors[] = "The \"multiple accounts will get you banned\" thing isn't a joke. Don't do it.";
 }
@@ -28,6 +27,88 @@ EOSQL;
             $errors[] = "This IP belongs to a public system, such as a school or a library. You can play from here, but to prevent easy multi abuse, new users have to make accounts at home.";
         }
     }
+
+# Census
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_burrozil_north = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_zebrica_north = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_saddle_north = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND n.subregion = "1" AND u.stasismode = 0;
+EOSQL;
+$census_prze_north = onelinequery($sql)['COUNT(*)'];
+
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_burrozil_central = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_zebrica_central = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_saddle_central = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND n.subregion = "2" AND u.stasismode = 0;
+EOSQL;
+$census_prze_central = onelinequery($sql)['COUNT(*)'];
+
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "3" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_burrozil_south = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "2" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_zebrica_south = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "1" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_saddle_south = onelinequery($sql)['COUNT(*)'];
+$sql=<<<EOSQL
+SELECT COUNT(*) FROM nations n
+INNER JOIN users u ON n.user_id = u.user_id
+WHERE n.region = "4" AND n.subregion = "3" AND u.stasismode = 0;
+EOSQL;
+$census_prze_south = onelinequery($sql)['COUNT(*)'];
+
+$census_burrozil_total = $census_burrozil_north + $census_burrozil_central + $census_burrozil_south;
+$census_saddle_total = $census_saddle_north + $census_saddle_central + $census_saddle_south;
+$census_zebrica_total = $census_zebrica_north + $census_zebrica_central + $census_zebrica_south;
+$census_prze_total = $census_prze_north + $census_prze_central + $census_prze_south;
+
 $baseregions = array();
 $baseregions[1] = "Saddle Arabia";
 $baseregions[2] = "Zebrica";
@@ -108,14 +189,12 @@ if (!empty($_POST)) {
     if ($rs['count'] > 0) {
         $errors[] = "Due to the potential for faggotry, we're not going to let you make your username someone else's nation name.";
     }
-    $sql = "SELECT COUNT(*) AS count FROM users WHERE username = '{$mysql['realusername']}'";
-	$rs = mysqli_fetch_array($GLOBALS['elementsmysqli']->query($sql));
-	if ($rs['count'] > 0) {
-		$errors[] = "Username already exists in the sequel.";
-	}
     if (empty($errors)) {
         $passwordhash = sha1($mysql['password'] . "saltlick"); //I'm fully aware that this is shit, thanks
-        $sql = "INSERT INTO users (username, password, email, creation_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}')";
+        $mysql['remote_addr2'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['REMOTE_ADDR']);        
+        $mysql['forwarded'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED']);
+        $mysql['forwarded_for'] = $GLOBALS['mysqli']->real_escape_string($_SERVER['HTTP_X_FORWARDED_FOR']);
+        $sql = "INSERT INTO users (username, password, email, creation_ip, creation_ip2, creation_forwarded_ip, creation_forwarded_for_ip) VALUES ('{$mysql['realusername']}', '{$passwordhash}', '{$mysql['asdf']}', '{$_SERVER['REMOTE_ADDR']}', '{$mysql['remote_addr2']}', '{$mysql['forwarded']}', '{$mysql['forwarded_for']}')";
         $GLOBALS['mysqli']->query($sql);
         $sql = "SELECT user_id FROM users WHERE username ='{$mysql['realusername']}'";
         $rs = onelinequery($sql);

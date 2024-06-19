@@ -52,6 +52,19 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
     <label for="nationdescription">Nation Description</label>
     <textarea class="form-control" id="nationdescription" name="nationdescription">{$display['nationdescription']}</textarea>
   </div>
+
+  <div>
+  <center>EXISTING NATIONS:</center>
+  <table class="table table-striped table-bordered">
+  <tr><th>REGION:</th><th>NORTH</th><th>CENTRAL</th><th>SOUTH</th><th>TOTAL</th></tr>
+  <tr><th>Burrozil:</th><th>$census_burrozil_north</th><th>$census_burrozil_central</th><th>$census_burrozil_south</th><th>$census_burrozil_total</th></tr>
+  <tr><th>Zebrica:</th><th>$census_zebrica_north</th><th>$census_zebrica_central</th><th>$census_zebrica_south</th><th>$census_zebrica_total</th></tr>
+  <tr><th>Saddle Arabia:</th><th>$census_saddle_north</th><th>$census_saddle_central</th><th>$census_saddle_south</th><th>$census_saddle_total</th></tr>
+  <tr><th>Przewalskia:</th><th>$census_prze_north</th><th>$census_prze_central</th><th>$census_prze_south</th><th>$census_prze_total</th></tr>
+  </table>
+  </div>
+
+  Your Nation:
   <div class="form-group">
     <label for="region">Region</label>
     <select name="region">
@@ -64,7 +77,7 @@ Leave this field blank (stops crawler spambots) <input name="username" maxlength
 			{$subregionlist}
 		</select>
   </div>
-<input type="submit" class="btn btn-success" value="Join >CLOP"/>
+<input type="submit" onclick="if (document.getElementsByName('region')[0].options[document.getElementsByName('region')[0].selectedIndex].text == 'Przewalskia') return confirm('Do you really want to be a colossal faggot? Prze are typically only needed 1 per alliance, at most. Only choose this nation type if you know what you are doing.'); else return;" class="btn btn-success" value="Join >CLOP"/>
 </form>
 EOFORM;
 include("footer.php");

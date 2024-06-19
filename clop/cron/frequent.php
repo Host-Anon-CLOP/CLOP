@@ -102,16 +102,16 @@ while ($rs = mysqli_fetch_array($sth)) {
     $disabled = 0;
     $envirodamage = 0;
     $envirocleaners = 0;
-	if ($rs['funds'] > 500000000) {
-		$tax = ceil(($rs['funds'] - 500000000)/500);
-		$displaytax = commas($tax);
-		$messages[] = "Inflation has taken away {$displaytax} bits.";
-		$sql=<<<EOSQL
-UPDATE nations SET funds = funds - {$tax}
-WHERE nation_id = {$rs['nation_id']}
-EOSQL;
-		$GLOBALS['mysqli']->query($sql);
-	}
+// 	if ($rs['funds'] > 500000000) {
+// 		$tax = ceil(($rs['funds'] - 500000000)/500);
+// 		$displaytax = commas($tax);
+// 		$messages[] = "Inflation has taken away {$displaytax} bits.";
+// 		$sql=<<<EOSQL
+// UPDATE nations SET funds = funds - {$tax}
+// WHERE nation_id = {$rs['nation_id']}
+// EOSQL;
+// 		$GLOBALS['mysqli']->query($sql);
+// 	}
     if (date("G") == 0) {
         $sql=<<<EOSQL
 UPDATE nations SET age = age + 1

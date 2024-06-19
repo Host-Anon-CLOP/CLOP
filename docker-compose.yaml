@@ -1,4 +1,4 @@
-version: "3"
+#version: "3"
 networks:
   default:
   internal:
@@ -7,9 +7,12 @@ networks:
 
 services:
   mariadb:
-    image: mariadb:10.0.20
+    image: hostanon/clop:mariadb-10.0.20
     networks:
       - internal
+      - default
+    ports:
+      - 127.0.0.1:3307:3306
       - default
     ports:
       - 127.0.0.1:3307:3306
@@ -21,13 +24,12 @@ services:
       - ./dbs.sql:/docker-entrypoint-initdb.d/01-dbs.sql
       - "./clop/tables with data.sql:/docker-entrypoint-initdb.d/02-clop.sql"
       - "./clop/tables without data.sql:/docker-entrypoint-initdb.d/03-clop.sql"
-      - "./elements/tables with data.sql:/docker-entrypoint-initdb.d/04-elements.sql"
-      - "./elements/tables without data.sql:/docker-entrypoint-initdb.d/05-elements.sql"
+
     # NOTE: mariadb image 10.0.20 doesn't support initdb, so manually connect to the container and run the following:
-    # mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/01-dbs.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/02-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/03-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/04-elements.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/05-elements.sql
+    # mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/01-dbs.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/02-clop.sql && mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD clopus_clop < ./docker-entrypoint-initdb.d/03-clop.sql
 
   adminer:
-    image: adminer:4.8.1-standalone
+    image: hostanon/clop:adminer-4.8.1-standalone
     networks:
       - default
       - internal
@@ -35,7 +37,7 @@ services:
       - 127.0.0.1:8080:8080
 
   apache-php:
-    image: php:5.4-apache
+    image: hostanon/clop:php-5.4-apache
     networks:
       - internal
       - default
@@ -51,7 +53,8 @@ services:
       DOMAIN_URL: test.4clop.com
 
   caddy:
-    image: caddy:2-alpine
+    image: hostanon/clop:caddy-2-alpine
+    container_name: clop-caddy-oldclop-1
     networks:
       - internal
       - default
@@ -64,12 +67,12 @@ services:
     environment:
       DOMAIN_URL: test.4clop.com
 
-#  socat:
-#    image: alpine/socat
-#    networks:
-#      - default
-#      - internal
-#    ports:
-#      - 0.0.0.0:443:8081
-#      - 0.0.0.0:80:8081
-#    command: tcp-listen:8081,fork,reuseaddr tcp-connect:apache-php:80
+  # socat:
+  #  image: alpine/socat
+  #  networks:
+  #    - default
+  #    - internal
+  #  ports:
+  #    - 0.0.0.0:443:8081
+  #    - 0.0.0.0:80:8081
+  #  command: tcp-listen:8081,fork,reuseaddr tcp-connect:apache-php:80
