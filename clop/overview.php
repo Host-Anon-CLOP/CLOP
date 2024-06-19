@@ -103,7 +103,6 @@ EOFORM;
           <tr><td style="text-align: right;">Satisfaction</td><td><span class="{$satColor}">{$nationinfo['satisfaction']}</span> (<span class="{$satColor2}">{$satperturn}</span> per tick)</td></tr>
           <tr><td style="text-align: right;">GDP</td><td><span class="text-success">{$displaygdp}</span> bits per tick</td></tr>
           <tr><td style="text-align: right;">Funds</td><td><span class="text-success">{$displayfunds}</span> bits</td></tr>
-          <tr><td style="text-align: right;">Inflation Loss</td><td><span class="{$taxclass}">{$displaytax}</span> bits per tick</td></tr>
         </tbody>
       </table>
     </div>

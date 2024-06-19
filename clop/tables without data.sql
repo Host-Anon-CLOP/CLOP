@@ -463,8 +463,10 @@ CREATE TABLE IF NOT EXISTS `graveyard` (
 --
 
 CREATE TABLE IF NOT EXISTS `logins` (
+  `username` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `ip` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
+  `ip2` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `forwarded` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `forwarded_for` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `logindate` datetime NOT NULL,
@@ -608,7 +610,8 @@ CREATE TABLE IF NOT EXISTS `resources` (
 
 CREATE TABLE IF NOT EXISTS `topmessage` (
   `message` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -624,6 +627,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `alliance_id` int(10) unsigned NOT NULL,
   `creation_ip` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_ip2` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_forwarded_ip` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_forwarded_for_ip` varchar(46) COLLATE utf8_unicode_ci NOT NULL,
   `donator` tinyint(1) NOT NULL,
   `stasisdate` datetime DEFAULT NULL,
   `stasismode` tinyint(1) NOT NULL DEFAULT '0',
@@ -637,7 +643,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `lastactive` datetime DEFAULT NULL,
   `flag` tinytext COLLATE utf8_unicode_ci NOT NULL,
-  `alliance_messages_last_checked` datetime NOT NULL,
+  `alliance_messages_last_checked` datetime NOT NULL DEFAULT '2023-05-24 22:14:09',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

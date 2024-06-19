@@ -149,8 +149,13 @@ echo <<<EOFORM
 EOFORM;
 }
 echo <<<EOFORM
+<<<<<<< HEAD
 <center><span id="topmessage">{$topmessage}</span></center>
 <center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/thread/39723279" target="_new_win">/MLP/ Thread</a> | <a href="https://discord.gg/TbmQ5R4zJn" target="_new_win">Discord</a> | <a href="https://irc.4clop.com" target="_new_win">IRC</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
+=======
+<center><span id="topmessage"><a href="topmessage.php">{$topmessage}</a></span></center>
+<center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/catalog#s=4clop" target="_new_win">/MLP/ Thread</a> | <a href="https://irc.4clop.com" target="_new_win">IRC Chat (join without a password initially)</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
+>>>>>>> main
 EOFORM;
 if ($errors) {
     $errormessages.=<<<EOFORM
@@ -229,7 +234,8 @@ echo <<<EOFORM
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nation <b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><a href="overview.php">Overview</a></li>
+    <li><a href="overview.php">Overview</a></li>
+      <li><a href="empireoverview.php">Empire Overview</a></li>
       <li><a href="reports.php">Reports</a></li>
       <li><a href="actions.php">Actions</a></li>
       <li><a href="favoriteactions.php">Favorite Actions</a></li>
@@ -269,7 +275,18 @@ echo <<<EOFORM
   {$nationline}
   <li><a>Server time: {$currenttime}</a></li>
   <li><a>Next tick: <span class="text-danger" id="countdown">{$countdowntimer}</span></a></li>
-  <li><a href="search.php">Search</a></li>
+
+  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+          <li><a href="search.php">Search User or Nation</a></li>
+          <li><a href="rankings.php?mode=allianceless">Allianceless Players</a></li>
+          <li><a href="rankings.php?mode=burrozil">Burrozils</a></li>
+          <li><a href="rankings.php?mode=zebrica">Zebricas</a></li>
+          <li><a href="rankings.php?mode=saddle">Saddle Arabians</a></li>
+          <li><a href="rankings.php?mode=przewalskia">Przewalskia</a></li>
+      </ul>
+      </li>
+
   <li><a href="statistics.php">Stats</a></li>
   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Rankings <b class="caret"></b></a>
   <ul class="dropdown-menu">
