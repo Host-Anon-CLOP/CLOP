@@ -149,13 +149,8 @@ echo <<<EOFORM
 EOFORM;
 }
 echo <<<EOFORM
-<<<<<<< HEAD
-<center><span id="topmessage">{$topmessage}</span></center>
-<center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/thread/39723279" target="_new_win">/MLP/ Thread</a> | <a href="https://discord.gg/TbmQ5R4zJn" target="_new_win">Discord</a> | <a href="https://irc.4clop.com" target="_new_win">IRC</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
-=======
 <center><span id="topmessage"><a href="topmessage.php">{$topmessage}</a></span></center>
 <center>&gt;4CLOP Community: <a href="https://boards.4channel.org/mlp/catalog#s=4clop" target="_new_win">/MLP/ Thread</a> | <a href="https://irc.4clop.com" target="_new_win">IRC Chat (join without a password initially)</a> | <a href="https://github.com/ergochat/ergo/blob/stable/docs/USERGUIDE.md#account-registration" target="_new_win">IRC Guide</a> &nbsp;&nbsp;&nbsp;&nbsp;</center>
->>>>>>> main
 EOFORM;
 if ($errors) {
     $errormessages.=<<<EOFORM
