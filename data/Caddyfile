@@ -1,5 +1,5 @@
 # passed in as environment variable on the EC2 instance in .bash_profile add the line: export DOMAIN_URL="4clop.com"
-# can also use localhost for local development. in windows this is 'setx DOMAIN_URL=localhost'
+# can also use localhost for local development. in windows this is 'set DOMAIN_URL=localhost'
 {$DOMAIN_URL}
 reverse_proxy apache-php:80 {
 header_up X-Real-IP {remote_host}
