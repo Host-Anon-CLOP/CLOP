@@ -47,8 +47,19 @@ EOFORM;
 } else {
 $flaghtml = "";
 }
+
+if ($member['stasismode'] == 0) {
+$stasishtml =<<<EOFORM
+{$member['username']}
+EOFORM;
+} else {
+$stasishtml =<<<EOFORM
+<i>{$member['username']} (Stasis)</i>
+EOFORM;
+}
+
 echo <<<EOFORM
-<tr><td style="width:25px">{$flaghtml}</td><td><a href="viewuser.php?user_id={$member['user_id']}">{$member['username']}</a></td><td>
+<tr><td style="width:25px">{$flaghtml}</td><td><a href="viewuser.php?user_id={$member['user_id']}">{$stasishtml}</a></td><td>
 EOFORM;
     if ($nations[$member['user_id']]) {
         $displaynations = array();

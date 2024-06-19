@@ -131,7 +131,7 @@ EOSQL;
 	}
 	}
     $sql=<<<EOSQL
-	SELECT user_id, flag, username FROM users WHERE alliance_id = '{$mysql['alliance_id']}' ORDER BY username
+	SELECT user_id, flag, username, stasismode FROM users WHERE alliance_id = '{$mysql['alliance_id']}' ORDER BY username
 EOSQL;
 	$sth = $GLOBALS['mysqli']->query($sql);
 	while ($rs = mysqli_fetch_array($sth)) {
