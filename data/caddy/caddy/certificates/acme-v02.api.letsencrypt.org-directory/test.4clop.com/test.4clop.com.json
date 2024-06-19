@@ -1,0 +1,9 @@
+{
+	"sans": [
+		"test.4clop.com"
+	],
+	"issuer_data": {
+		"url": "https://acme-v02.api.letsencrypt.org/acme/cert/04eb4927d47158dc4d7217296263cd031748",
+		"ca": "https://acme-v02.api.letsencrypt.org/directory"
+	}
+}
