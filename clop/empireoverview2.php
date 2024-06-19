@@ -1,6 +1,6 @@
 <?php
-include("backend/backend_empireoverview.php");
-$extratitle = "Empire Overview STOCK - ";
+include("backend/backend_empireoverview2.php");
+$extratitle = "Empire Overview NET - ";
 include("header.php");
 
 echo <<<EOFORM
@@ -16,7 +16,7 @@ button[name="switchnation_id"] {
 <div class="row">
   <div class="col-md-6">
    <div class="panel panel-default">
-     <div class="panel-heading">Resources - Stockpiles</div>
+     <div class="panel-heading">Resources - Net</div>
      <table class="table">
       <thead>
         <tr>
@@ -38,7 +38,7 @@ EOFORM;
 }
 
 echo <<<EOFORM
-<td>TOTAL<br>STOCKS</td></tr></thead><tbody>
+<td>TOTAL<br>NET</td></tr></thead><tbody>
 EOFORM;
 
 # get satisfaction per nation

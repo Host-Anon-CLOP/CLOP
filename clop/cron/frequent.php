@@ -1614,25 +1614,25 @@ DELETE FROM forcegroups WHERE forcegroup_id NOT IN (SELECT forcegroup_id FROM fo
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-$sql=<<<EOSQL
-DELETE FROM messages WHERE sent < DATE_SUB(NOW(), INTERVAL 4 WEEK) AND fromuser != 0
-EOSQL;
-$GLOBALS['mysqli']->query($sql);
+// $sql=<<<EOSQL
+// DELETE FROM messages WHERE sent < DATE_SUB(NOW(), INTERVAL 4 WEEK) AND fromuser != 0
+// EOSQL;
+// $GLOBALS['mysqli']->query($sql);
 
-$sql=<<<EOSQL
-DELETE FROM messages WHERE sent < DATE_SUB(NOW(), INTERVAL 12 WEEK)
-EOSQL;
-$GLOBALS['mysqli']->query($sql);
+// $sql=<<<EOSQL
+// DELETE FROM messages WHERE sent < DATE_SUB(NOW(), INTERVAL 12 WEEK)
+// EOSQL;
+// $GLOBALS['mysqli']->query($sql);
 
-$sql=<<<EOSQL
-DELETE FROM alliance_messages WHERE posted < DATE_SUB(NOW(), INTERVAL 4 WEEK)
-EOSQL;
-$GLOBALS['mysqli']->query($sql);
+// $sql=<<<EOSQL
+// DELETE FROM alliance_messages WHERE posted < DATE_SUB(NOW(), INTERVAL 4 WEEK)
+// EOSQL;
+// $GLOBALS['mysqli']->query($sql);
 
-$sql=<<<EOSQL
-DELETE FROM logins WHERE logindate < DATE_SUB(NOW(), INTERVAL 3 DAY)
-EOSQL;
-$GLOBALS['mysqli']->query($sql);
+// $sql=<<<EOSQL
+// DELETE FROM logins WHERE logindate < DATE_SUB(NOW(), INTERVAL 3 DAY)
+// EOSQL;
+// $GLOBALS['mysqli']->query($sql);
 
 $sql=<<<EOSQL
 UPDATE users SET stasismode = 1
@@ -1641,8 +1641,8 @@ AND lastactive < DATE_SUB(NOW(), INTERVAL 3 DAY) OR lastactive IS NULL
 EOSQL;
 $GLOBALS['mysqli']->query($sql);
 
-$sql=<<<EOSQL
-DELETE FROM news WHERE posted < DATE_SUB(NOW(), INTERVAL 4 WEEK)
-EOSQL;
-$GLOBALS['mysqli']->query($sql);
+// $sql=<<<EOSQL
+// DELETE FROM news WHERE posted < DATE_SUB(NOW(), INTERVAL 4 WEEK)
+// EOSQL;
+// $GLOBALS['mysqli']->query($sql);
 ?>

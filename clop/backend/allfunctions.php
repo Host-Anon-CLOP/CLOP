@@ -69,6 +69,33 @@ EOSQL;
         }
     }
 }
+function needsspecificnation($nation_id) {
+    $sql=<<<EOSQL
+    SELECT n.*, u.alliance_id, u.seesecrets, u.stasismode, u.hideicons, u.hideflags FROM nations n INNER JOIN users u ON u.user_id = n.user_id
+    WHERE u.user_id = {$_SESSION['user_id']} AND n.nation_id = '{$nation_id}'
+EOSQL;
+    $rs = onelinequery($sql);
+    if (!$rs) {
+        $sql=<<<EOSQL
+        SELECT nation_id FROM nations WHERE user_id = {$_SESSION['user_id']}
+EOSQL;
+        $rs2 = onelinequery($sql);
+        if ($rs2['nation_id']) {
+            $nation_id = $rs2['nation_id'];
+            header("Location: messages.php");
+            exit;
+        } else {
+            unset($nation_id);
+            header("Location: nonation.php");
+            exit;
+        }
+    } else if ($rs['stasismode']) {
+        header("Location: userinfo.php");
+        exit;
+    } else {
+        return $rs;
+    }
+}
 function needsuser() {
     if (!$_SESSION['user_id']) {
 		header("Location: index.php");

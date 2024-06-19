@@ -1,6 +1,6 @@
 <?php
-if ( (strpos($_ENV["DOMAIN_URL"], "test.4clop") !== true ) or (strpos($_ENV["DOMAIN_URL"], "localhost") !== true ) ) {
 require_once("backend/allfunctions.php");
+if ( (strpos($_ENV["DOMAIN_URL"], "test.4clop") !== true ) or (strpos($_ENV["DOMAIN_URL"], "localhost") !== true ) ) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $attackerData = [];
@@ -467,7 +467,6 @@ foreach ($forcetypes as $key => $value) {
     echo "<tr><td>" . $key . "</td><td>" . $Defenders_Initial_{$key} . " </td><td>" . $Defenders_Died_{$key} . "</td><td>" . $Defenders_Remaining_{$key} . "</td></tr>";
 }
 echo "</table></div>";
-
 }
 } else {
 	echo "Warcalc not available on main server as a security precaution. See test.4clop.com/huge-ovipositor.html";
