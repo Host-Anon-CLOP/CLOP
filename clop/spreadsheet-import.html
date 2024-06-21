@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spreadsheet Import</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var exportData;
+
+        function importRows(attackOrDefend) {
+            // Check if any data provided
+            var text = document.getElementById("txtImport").value;
+            if (text.trim().length == 0)
+                return;
+    
+            try {
+                // Split the text into individual lines
+                var parsedResults = "";
+                var parsedResultsDisabled = "";
+                var textLines = text.split(/\r?\n|\r/); 
+
+                const businessArray = ["Basic Copper Mine", "Mechanized Copper Mine", "Gem Mine", "Tungsten Mine", "NEWLINE", "Basic Apple Orchard", "Mechanized Apple Farm", "Coffee Farm", "Drug Farm", "NEWLINE", "Basic Oil Well", "Mechanized Oil Well", "Oil Fracker", "NEWLINE", "Cider Production Facility", "Energy Collector", "Oil Combustion Facility", "Gasoline Combustion Facility", "Gasoline Refinery", "Plastics Factory", "Przewalskian Plastics Factory", "Toy Factory", "NEWLINE", "Bakery", "Bar", "Coffee Shop", "Statue", "Toy and Candy Shop", "Video Arcade", "Mall", "NEWLINE", "Basic Factory", "Advanced Factory", "DNA Extraction Facility", "Barracks", "NEWLINE", "Moon Worship Center", "Sun Worship Center", "NEWLINE", "Lunar Environmental Facility", "Solar Environmental Facility", "Forbidden Research Facility", "Alicornification Facility"];
+                //assume not found and set 0, which will get overwritten if found
+                var businessCount = 0;
+                var businessCountDisabled = 0;
+
+                businessArray.forEach(addBusiness);
+                const displayParsedResults = parsedResults + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" + "\n" + parsedResultsDisabled;
+                console.log("FINISHED");
+
+                function addBusiness(item) {
+                businessCount = 0;
+                businessCountDisabled = 0;
+
+                if (item != "Basic Copper Mine") {
+                    parsedResults = parsedResults + "\n";
+                }
+                
+                if ( (item != "Basic Copper Mine") && (item != "Lunar Environmental Facility") && (item != "Solar Environmental Facility") && (item != "Alicornification Facility") ) {
+                    parsedResultsDisabled = parsedResultsDisabled + "\n";
+                }
+
+                // we are already checking each business in order. now we need to find the relevant line
+                for(var line = 0; line < textLines.length; line++){
+                    if (item == "NEWLINE") {
+                        break;
+                    }
+                    else if ((item == "Plastics Factory") && (textLines[line].indexOf("Przewalskian Plastics Factory") !== -1)) {
+                            continue;
+                        }
+                    
+                    else if ((item == "Bar") && (textLines[line].indexOf("Barracks") !== -1) && (textLines[line].indexOf("Barding") !== -1)) {
+                            continue;
+                        }
+                    
+                    else if (item == "Energy Collector") {
+                        if (textLines[line].indexOf("Solar Collector") !== -1) {
+                            businessCount = Number(businessCount) + Number(textLines[line].match(/[0-9]+/)[0]);
+                        }
+                        if (textLines[line].indexOf("Tidal Generator") !== -1) {
+                            businessCount = Number(businessCount) + Number(textLines[line].match(/[0-9]+/)[0]);
+                        }
+                    }
+                    else if (textLines[line].indexOf(item) !== -1) {
+                        if (textLines[line].indexOf("disabled)") !== -1) {
+                            businessCount = textLines[line].match(/[0-9]+/)[0];
+
+                            businessCountDisabledSplit = textLines[line].split("(");
+                            businessCountDisabled = businessCountDisabledSplit[1].match(/[0-9]+/)[0];
+                            parsedResults = parsedResults + businessCount;
+                            if ( (item != "Lunar Environmental Facility") && (item != "Solar Environmental Facility") ) {
+                                parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
+                            }
+                            break;
+                        } else {
+                            businessCount = textLines[line].match(/[0-9]+/)[0];
+                            businessCountDisabled = 0;
+                            parsedResults = parsedResults + businessCount;
+                            if ( (item != "Lunar Environmental Facility") && (item != "Solar Environmental Facility") ) {
+                                parsedResultsDisabled = parsedResultsDisabled + businessCountDisabled;
+                            }
+                            break;
+                        }
+                    }
+                }
+                console.log("item:" + item + " biz:" + businessCount + " disabled:" + businessCountDisabled);
+                if (item == "Energy Collector") {
+                        parsedResults = parsedResults + businessCount;
+                }
+                }
+                document.getElementById("txtImport").value = displayParsedResults;
+            }
+            catch(err) {
+                console.log(err);
+                alert("Error Found.")
+            }
+        }
+
+        $(document).ready(function() {
+            // Import rows on bbutton click
+            $('#btnImportAttackers').on("click", () => importRows.call(this, "attacker"));
+        });
+    </script>
+</head>
+<body>
+        <div class="importRegion">
+            <h2>Import data for Spreadsheet</h2>
+            <div class="importButtons">
+                <input type="button" id="btnImportAttackers" value="Import Data" title="Import data for the Spreadsheet" />
+            </div>
+            <textarea id="txtImport"></textarea>
+        </div>
+</body>
+</html>
